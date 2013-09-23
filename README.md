@@ -1,0 +1,1 @@
+这个项目用来练习Google Adwords Api的，由于Api调用比较耗时，使用了httpsqs消息队列发起请求。
