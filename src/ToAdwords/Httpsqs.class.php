@@ -23,7 +23,7 @@ $result = $httpsqs->synctime($num); //9. Change the interval to sync updated con
 ----------------------------------------------------------------------------------------------------------------
 */
 
-class httpsqs
+class Httpsqs
 {
 	public $httpsqs_host;
 	public $httpsqs_port;

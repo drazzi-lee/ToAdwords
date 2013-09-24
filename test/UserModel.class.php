@@ -1,8 +1,8 @@
 <?php
 
-require_once 'init.php';
-
 class UserModel extends Model{
+
+	protected $connection = 'mysql://root:qjklw@localhost:3306/toadwords';
 
 	public function getCustomerId($uid){
 		if(!$uid){
