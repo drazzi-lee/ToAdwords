@@ -10,7 +10,7 @@ use ToAdwords\CampaignAdapter;
  * 此模型为虚拟类，模型实例化时并不产生实际数据连接。
  */
 class CampaignModel{
-	private CampaignAdapter $campaignAdapter;
+	private $campaignAdapter;
 
 	public function __construct(){
 		$this->campaignAdapter = new CampaignAdapter();

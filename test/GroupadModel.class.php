@@ -5,7 +5,7 @@ require_once('src/ToAdwords/bootstrap.inc.php');
 use ToAdwords\AdGroupAdAdapter;
 
 class GroupadModel{
-	private AdGrupAdAdapter $adGroupAdAdapter;
+	private $adGroupAdAdapter;
 
 	public function __construct(){
 		$this->adGroupAdAdapter = new AdGrupAdAdapter();
