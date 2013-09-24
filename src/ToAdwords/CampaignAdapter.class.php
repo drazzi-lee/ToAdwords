@@ -3,6 +3,7 @@
 namespace ToAdwords;
 
 use ToAdwords\AdwordsAdapter;
+use ToAdwords\CustomerAdapter;
 
 /**
  * 广告系列
@@ -38,8 +39,9 @@ class CampaignAdapter extends AdwordsAdapter{
 			return $this->result;
 		}
 		
+		$customer = new CustomerAdapter();
 		$data['last_action'] = self::ACTION_CREATE;
-		$data['customer_id'] = D('Adwords/User')->getCustomerId($data['idclick_uid']);
+		$data['customer_id'] = $customer->getCustomerId($data['idclick_uid']);
 		$data['sync_status'] = self::SYNC_STATUS_RECEIVE;
 		
 		if($this->add($data)){

@@ -7,13 +7,12 @@
  * 
  * Li Pengfei <lipengfei@izptec.com>
  */
+namespace ToAdwords;
 
-if(!isset(PHP_VERSION_ID) || PHP_VERSION_ID < 50300){
+if(!defined('PHP_VERSION_ID') || PHP_VERSION_ID < 50300){
 	trigger_error('此ToAdwords扩展模块在低于5.3版本运行可能出现未知错误', E_USER_ERROR);
 	die();
 }
-
-namespace ToAdwords;
 
 function load($namespace){
 	$splitpath = explode('\\', $namespace);
