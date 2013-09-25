@@ -22,6 +22,7 @@ $result = $httpsqs->synctime($num); //9. Change the interval to sync updated con
 ?>
 ----------------------------------------------------------------------------------------------------------------
 */
+namespace ToAdwords\Util;
 
 class Httpsqs
 {

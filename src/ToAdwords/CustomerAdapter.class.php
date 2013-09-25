@@ -3,6 +3,8 @@
 namespace ToAdwords;
 
 use ToAdwords\AdwordsAdapter;
+use \PDO;
+use \AdWordsUser;
 
 /**
  * 用户
@@ -14,11 +16,23 @@ class CustomerAdapter extends AdwordsAdapter{
 	private $fieldIdclickObjectId = 'idclick_uid';
 	
 	public function getCustomerId($uid){
-		if(!$uid){
-			return NULL;
+		if(empty($uid)){
+			return FALSE;
 		}
 		
-		return '5572928024';
+		$sql = "SELECT {$this->fieldAdwordsObjectId},{$this->fieldIdclickObjectId} FROM `{$this->tableName}` WHERE {$this->fieldIdclickObjectId}=:uid LIMIT 1";
+		echo $sql;exit;
+		$stmt = $this->dbh->prepare($sql);
+		$stmt->bindValue(':uid', $uid, PDO::PARAM_INT);
+		$stmt->execute();
+		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		if(!empty($rows[0]['adwords_customerid'])){
+			return $rows[0]['adwords_customerid'];
+		} else if(!empty($rows)){
+			//create adwords account and getCustomerId.
+			$adwordsCustomerId = $this->_createCustomer($uid);
+		}
 
 		/*
 		$condition = array(

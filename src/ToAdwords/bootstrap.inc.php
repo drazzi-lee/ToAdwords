@@ -14,6 +14,9 @@ if(!defined('PHP_VERSION_ID') || PHP_VERSION_ID < 50300){
 	die();
 }
 
+define('TOADWORDS_LOG_PATH', dirname(__FILE__).DIRECTORY_SEPARATOR.'Log'.DIRECTORY_SEPARATOR);
+define('TOADWORDS_LOG_RECORD', TRUE);
+
 function load($namespace){
 	$splitpath = explode('\\', $namespace);
 	$path = '';

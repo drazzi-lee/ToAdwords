@@ -4,6 +4,7 @@ namespace ToAdwords;
 
 use ToAdwords\AdwordsAdapter;
 use ToAdwords\CustomerAdapter;
+use ToAdwords\Util\Log;
 
 /**
  * 广告系列
@@ -33,6 +34,7 @@ class CampaignAdapter extends AdwordsAdapter{
 	 * @return array $result
 	 */
 	public function create(array $data){
+		Log::write('test information', __method__);
 		if(self::IS_CHECK_DATA && !$this->_checkData($data, self::ACTION_CREATE)){
 			$this->result['status'] = -1;
 			$this->result['description'] = self::DESC_DATA_CHECK_FAILURE;
