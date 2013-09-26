@@ -10,39 +10,23 @@ use \AdWordsUser;
  * 用户
  */
 class CustomerAdapter extends AdwordsAdapter{
-	private $tableName = 'customer';
+	protected $tableName = 'customer';
 	
-	private $fieldAdwordsObjectId = 'adwords_customerid';
-	private $fieldIdclickObjectId = 'idclick_uid';
+	protected $fieldAdwordsObjectId = 'adwords_customerid';
+	protected $fieldIdclickObjectId = 'idclick_uid';
 	
 	public function getCustomerId($uid){
 		if(empty($uid)){
 			return FALSE;
 		}
-		
-		$sql = "SELECT {$this->fieldAdwordsObjectId},{$this->fieldIdclickObjectId} FROM `{$this->tableName}` WHERE {$this->fieldIdclickObjectId}=:uid LIMIT 1";
-		echo $sql;exit;
-		$stmt = $this->dbh->prepare($sql);
-		$stmt->bindValue(':uid', $uid, PDO::PARAM_INT);
-		$stmt->execute();
-		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-		if(!empty($rows[0]['adwords_customerid'])){
-			return $rows[0]['adwords_customerid'];
-		} else if(!empty($rows)){
-			//create adwords account and getCustomerId.
-			$adwordsCustomerId = $this->_createCustomer($uid);
-		}
+		$userRow = $this->getOne($this->fieldAdwordsObjectId.','.$this->fieldIdclickObjectId, $this->fieldIdclickObjectId.'='.$uid);
 
-		/*
-		$condition = array(
-			'idclick_uid' 	=> $uid,
-		);
-		$userRow = $this->where($condition)->find();
 		if(!empty($userRow['adwords_customerid'])){
 			return $userRow['adwords_customerid'];
 		} else if(!empty($userRow)) {
-			$adwordsCustomerId = $this->_createCustomer($uid);
+
+			/* $adwordsCustomerId = $this->_createCustomer($uid);
 			$data = array(
 				'adwords_customerid'	=> $adwordsCustomerId,
 				'last_action'			=> 'CREATE',
@@ -52,9 +36,9 @@ class CustomerAdapter extends AdwordsAdapter{
 				Log::write('更新数据失败' . $this->getLastSql()
 					. ' ## adwords_customerid: ' . $adwordsCustomerId);
 			}
-			return $adwordsCustomerId;
+			return $adwordsCustomerId; */
 		} else {
-			$adwordsCustomerId = $this->_createCustomer($uid);
+			/* $adwordsCustomerId = $this->_createCustomer($uid);
 			$data = array(
 				'idclick_uid'			=> $uid,
 				'adwords_customerid'	=> $adwordsCustomerId,
@@ -65,8 +49,8 @@ class CustomerAdapter extends AdwordsAdapter{
 				Log::write('添加数据失败' . $this->getLastSql()
 					. ' ## adwords_customerid: ' . $adwordsCustomerId);
 			}
-			return $adwordsCustomerId;
-		}*/
+			return $adwordsCustomerId; */
+		}
 	}
 	
 	private function _createCustomer($uid){

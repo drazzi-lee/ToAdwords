@@ -7,6 +7,7 @@ require_once 'Adapter.interface.php';
 use ToAdwords\Adapter;
 use \PDO;
 use \PDOException;
+use \Exception;
 
 abstract class AdwordsAdapter implements Adapter{
 	/**
@@ -36,10 +37,9 @@ abstract class AdwordsAdapter implements Adapter{
 	const DESC_DATA_PROCESS_SUCCESS = '成功处理了所有数据';
 	const DESC_DATA_PROCESS_WARNING = '执行完毕，有部分数据未正常处理：：';
 	
-	const PDO_DSN = 'mysql:dbname=toadwords;host=127.0.0.1;charset=utf8';
-	const PDO_USER = 'root';
-	const PDO_PASS = 'qjklw';
-	
+	/**
+	 * 数据库操作相关设置
+	 */
 	protected $dbh = null;
 	
 	/**
@@ -64,7 +64,7 @@ abstract class AdwordsAdapter implements Adapter{
 	
 	public function __construct(){
 		try {
-			$this->dbh = new PDO(self::PDO_DSN, self::PDO_USER, self::PDO_PASS);
+			$this->dbh = new PDO(TOADWORDS_DSN, TOADWORDS_USER, TOADWORDS_PASS);
 			$this->dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 			$this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		} catch (PDOException $e){
@@ -72,6 +72,77 @@ abstract class AdwordsAdapter implements Adapter{
 		} catch (Exception $e){
 			trigger_error('未知错误，实例化'.__CLASS__.'失败。', E_USER_ERROR);
 		}
+	}
+	
+	/**
+	 * Get only one row from table.
+	 * 
+	 * This method returns a one-dimensional array.
+	 *
+	 * @param string $fields: $fields = 'id,name,gender';
+	 * @param string $conditions: $conditions = 'id=1234 AND name="Bob"';
+	 * @return array $row
+	 */
+	protected function getOne($fields='*', $conditions){
+		$result = $this->getRows($fields, $conditions, 1);
+		return $result[0];
+	}
+	
+	/**
+	 * Get rows from current table.
+	 * 
+	 * This method returns a two-dimensional array.
+	 *
+	 * @param string $fields: $fields = 'id,name,gender';
+	 * @param string $conditions: $conditions = 'id=1234 AND name="Bob"';
+	 * @return array $rows
+	 */
+	protected function getRows($fields='*', $conditions, $limit = '1000'){
+		$sql = 'SELECT '.$fields.' FROM `'.$this->tableName.'`';	
+		$preparedParams = array();
+		
+		if(!empty($conditions)){
+			$preparedConditions = $this->prepareConditions($conditions);
+			$sql .= ' WHERE '.$preparedConditions['preparedWhere'];
+			$preparedParams = $preparedConditions['preparedParams'];
+		}
+		
+		if(!is_numeric($limit)){
+			$limit = (int)$limit;
+			trigger_error('limit只能为数字，已自动转换', E_USER_NOTICE);
+		}
+		$sql .= ' LIMIT '.$limit;
+		
+		$statement = $this->dbh->prepare($sql);
+		$statement->execute($preparedParams);
+		return $statement->fetchAll(PDO::FETCH_ASSOC);	
+	}
+	
+	/**
+	 * Prepare conditions to sql-parsed condition and params.
+	 *
+	 * @param string $conditions: $conditions = 'id=1234 AND name="Bob"';
+	 * @return array $preparedConditions: array( 
+	 *					'preparedWhere' 	=> 'WHERE id=:id AND name=:name',
+	 *					'preparedParams'	=> array(':id' => '1234', ':name' => 'Bob'),
+	 *				);
+	 */
+	protected function prepareConditions($conditions){
+		if(empty($conditions)){
+			return NULL;
+		}
+		$preparedWhere = preg_replace('/(\w+)(>|=|<)(\S+)/', '$1$2:$1', $conditions);
+		$conditionsArray = preg_grep('/(\w+)(>|=|<)(\S+)/', preg_split('/(\s+)/', $conditions));
+		$preparedParams = array();
+		foreach($conditionsArray as $condition){			
+			$conditionSplited = explode('=', $condition);
+			$preparedParams[':'.$conditionSplited[0]] = $conditionSplited[1];
+		}
+		if(0 == count($preparedParams)){
+			throw new Exception('解析查询条件失败，请检查是否符合语法');
+			return NULL;
+		}
+		return array('preparedWhere' => $preparedWhere, 'preparedParams' => $preparedParams);
 	}
 	
 	/**
