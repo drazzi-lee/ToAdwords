@@ -45,7 +45,7 @@ class CampaignAdapter extends AdwordsAdapter{
 		$data['last_action'] = self::ACTION_CREATE;
 		$data['customer_id'] = $customer->getCustomerId($data['idclick_uid']);
 		$data['sync_status'] = self::SYNC_STATUS_RECEIVE;
-		
+		exit;
 		if($this->add($data)){
 			$this->processed++;
 			$this->result['success']++;

@@ -8,6 +8,7 @@ use ToAdwords\Adapter;
 use \PDO;
 use \PDOException;
 use \Exception;
+use ToAdwords\Util\Log;
 
 abstract class AdwordsAdapter implements Adapter{
 	/**
@@ -41,6 +42,7 @@ abstract class AdwordsAdapter implements Adapter{
 	 * 数据库操作相关设置
 	 */
 	protected $dbh = null;
+	protected $fieldSyncStatus = 'sync_status';
 	
 	/**
 	 * 处理结果
@@ -68,9 +70,19 @@ abstract class AdwordsAdapter implements Adapter{
 			$this->dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 			$this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		} catch (PDOException $e){
-			trigger_error('数据库连接错误，实例化'.__CLASS__.'失败。', E_USER_ERROR);
+			if(ENVIRONMENT == 'development'){
+				trigger_error('数据库连接错误，实例化'.__CLASS__.'失败。', E_USER_ERROR);
+			} else {
+				Log::write('数据库连接错误，实例化'.__CLASS__.'失败。', __METHOD__);
+				trigger_error('A system error occurred.', E_USER_WARNING);				
+			}
 		} catch (Exception $e){
-			trigger_error('未知错误，实例化'.__CLASS__.'失败。', E_USER_ERROR);
+			if(ENVIRONMENT == 'development'){
+				trigger_error('未知错误，实例化'.__CLASS__.'失败。', E_USER_ERROR);
+			} else {
+				Log::write('未知错误，实例化'.__CLASS__.'失败。', __METHOD__);
+				trigger_error('A system error occurred.', E_USER_WARNING);
+			}
 		}
 	}
 	
@@ -109,7 +121,8 @@ abstract class AdwordsAdapter implements Adapter{
 		
 		if(!is_numeric($limit)){
 			$limit = (int)$limit;
-			trigger_error('limit只能为数字，已自动转换', E_USER_NOTICE);
+			if(ENVIRONMENT == 'development')
+				trigger_error('limit只能为数字，已自动转换', E_USER_NOTICE);
 		}
 		$sql .= ' LIMIT '.$limit;
 		
@@ -139,10 +152,66 @@ abstract class AdwordsAdapter implements Adapter{
 			$preparedParams[':'.$conditionSplited[0]] = $conditionSplited[1];
 		}
 		if(0 == count($preparedParams)){
-			throw new Exception('解析查询条件失败，请检查是否符合语法');
+			if('ENVIRONMENT' == 'development')
+				trigger_error('解析查询条件失败，请检查是否符合语法', E_USER_WARNING);
 			return NULL;
 		}
 		return array('preparedWhere' => $preparedWhere, 'preparedParams' => $preparedParams);
+	}
+	
+	
+	/**
+	 * 更新ObjectId对应的数据表同步状态
+	 *
+	 * @param string $status: SYNC_STATUS_QUEUE等
+	 * @param string $objectId: ID，可能为idclickId,adwords_customerId
+	 * @param string $objectType: type, 可能为'IDCLICK','ADWORDS'
+	 * @return boolean: TRUE, FALSE
+	 */
+	public function updateSyncStatus($status, $objectId, $objectType){
+		try{
+			$sql = 'UPDATE `'.$this->tableName.'` SET sync_status=:sync_status';
+			$preparedParams = array();
+			
+			if(!in_array($status, array(self::SYNC_STATUS_QUEUE, self::SYNC_STATUS_RECEIVE,
+					self::SYNC_STATUS_SYNCED, self::SYNC_STATUS_ERROR))){
+				throw new Exception('SYNC_STATUS未被允许的同步状态类型::'.$status);
+			} else {
+				$preparedParams[':sync_status'] = $status;
+			}			
+			
+			if(!in_array($objectType, array('IDCLICK','ADWORDS'))){
+				throw new Exception('ObjectType未被允许的ID类型::'.$objectType);
+			} else {
+				switch($objectType){
+					case 'IDCLICK':
+						$sql .= ' WHERE '.$this->fieldIdclickObjectId.'=:'.$this->fieldIdclickObjectId;
+						$preparedParams[':'.$this->fieldIdclickObjectId] = $objectId;
+						break;
+					case 'ADWORDS':
+						$sql .= ' WHERE '.$this->fieldAdwordsObjectId.'=:'.$this->fieldAdwordsObjectId;
+						$preparedParams[':'.$this->fieldAdwordsObjectId] = $objectId;
+						break;
+				}
+			}
+			
+			$statement = $this->dbh->prepare($sql);
+			return $statement->execute($preparedParams);
+		} catch (PDOException $e){
+			if(ENVIRONMENT == 'development'){
+				trigger_error('数据库错误，更新'.$this->tableName.'表sync_status失败，objectId为'.$objectId.' Type:'.$objectType.'  ####'.$e->getMessage(), E_USER_ERROR);
+			} else {
+				Log::write('更新'.$this->tableName.'表sync_status失败，objectId为'.$objectId.' Type:'.$objectType.'  ####'.$e->getMessage(), __METHOD__);				
+			}
+			return FALSE;
+		} catch (Exception $e){
+			if(ENVIRONMENT == 'development'){
+				trigger_error('更新'.$this->tableName.'表sync_status失败::'.$e->getMessage(), E_USER_ERROR);
+			} else {
+				Log::write('更新'.$this->tableName.'表sync_status失败::'.$e->getMessage(), __METHOD__);				
+			}
+			return FALSE;
+		}
 	}
 	
 	/**
