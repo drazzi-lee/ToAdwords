@@ -9,12 +9,15 @@ use \PDO;
 use \PDOException;
 use \Exception;
 use ToAdwords\Util\Log;
+use ToAdwords\CustomerAdapter;
+use ToAdwords\Exceptions\DependencyException;
+use ToAdwords\Exceptions\SyncStatusException;
 
 abstract class AdwordsAdapter implements Adapter{
 	/**
 	 * 是否检查数据完整性
 	 */
-	const IS_CHECK_DATA = TRUE;
+	const IS_CHECK_DATA = FALSE;
 	
 	/**
 	 * 数据执行动作定义
@@ -96,8 +99,8 @@ abstract class AdwordsAdapter implements Adapter{
 	 * @return array $row
 	 */
 	protected function getOne($fields='*', $conditions){
-		$result = $this->getRows($fields, $conditions, 1);
-		return $result[0];
+		$statement = $this->select($fields, $conditions, 1);
+		return $statement->fetch(PDO::FETCH_ASSOC);
 	}
 	
 	/**
@@ -110,6 +113,11 @@ abstract class AdwordsAdapter implements Adapter{
 	 * @return array $rows
 	 */
 	protected function getRows($fields='*', $conditions, $limit = '1000'){
+		$statement = $this->select($fields, $conditions, $limit);
+		return $statement->fetchAll(PDO::FETCH_ASSOC);	
+	}
+	
+	protected function select($fields='*', $conditions, $limit = '1000'){
 		$sql = 'SELECT '.$fields.' FROM `'.$this->tableName.'`';	
 		$preparedParams = array();
 		
@@ -128,7 +136,7 @@ abstract class AdwordsAdapter implements Adapter{
 		
 		$statement = $this->dbh->prepare($sql);
 		$statement->execute($preparedParams);
-		return $statement->fetchAll(PDO::FETCH_ASSOC);	
+		return $statement;	
 	}
 	
 	/**
@@ -215,6 +223,88 @@ abstract class AdwordsAdapter implements Adapter{
 	}
 	
 	/**
+	 * 获取IDCLICK与ADWORDS对照信息
+	 *
+	 * 同时返回同步状态信息，以便后续处理。
+	 *
+	 * @param string $objectId:根据IDCLICK类型决定此ID表示
+	 * @param string $objectType:ID类型，可为'IDCLICK','ADWORDS'
+	 * @return array: NULL | array()
+	 */
+	protected function getAdapteInfo($objectId, $objectType){
+		switch($objectType){
+			case 'IDCLICK':
+				return $this->getOne($this->fieldAdwordsObjectId.','.$this->fieldIdclickObjectId
+							.',sync_status', $this->fieldIdclickObjectId.'='.$objectId);
+				break;
+			case 'ADWORDS':
+				return $this->getOne($this->fieldAdwordsObjectId.','.$this->fieldIdclickObjectId
+							.',sync_status', $this->fieldAdwordsObjectId.'='.$objectId);
+				break;
+		}		
+	}
+	
+	/**
+	 * 在IDCLICK与ADWORDS的ID之间转换
+	 *
+	 * 此方法一般在子类使用，需要子类的fieldAdwordsObjectId, fieldIdclickObjectId
+	 * 暂支持IDCLICK到ADWORDS单向转换
+	 *
+	 * @param string $objectId: 根据IDCLICK类型决定此ID表示
+	 * @param string $objectType: ID类型，可为'IDCLICK','ADWORDS'
+	 */
+	protected function getAdaptedId($objectId, $objectType = 'IDCLICK'){
+		if('IDCLICK' !== $objectType){
+			if(ENVIRONMENT == 'development')
+				trigger_error('尚未支持的objectType类型，返回FALSE。objectType::'.$objectType.' METHOD::'.__METHOD__, E_USER_WARNING);
+			return FALSE;
+		}
+		
+		if(empty($objectId)){
+			if(ENVIRONMENT == 'development')
+				trigger_error('由于objectId为空，转换对应ID被积极拒绝，返回FALSE。METHOD::'.__METHOD__, E_USER_WARNING);
+			return FALSE;
+		}
+		if(!is_numeric($objectId)){
+			$objectId = (int)$objectId;
+			if(ENVIRONMENT == 'development')
+				trigger_error('objectId只能为数字，已自动转换::objectId '.$objectId.' | objectType '.$objectType.'METHOD::'.__METHOD__, E_USER_NOTICE);
+		}
+		//@TODO 使用throw Exception取代trigger_error，或者使用set_error_handler
+		$row = $this->getAdapteInfo($objectId, $objectType);
+		if(!empty($row)){
+			switch($row[$this->fieldSyncStatus]){
+				case self::SYNC_STATUS_SYNCED:
+					if(empty($row[$this->fieldAdwordsObjectId])) {
+						if(ENVIRONMENT == 'development'){
+							trigger_error('发现一条异常信息，已同步状态但是没有ADWORDS对应信息objectId为'.$objectId.' '.__METHOD__, E_USER_ERROR);
+						} else {
+							Log::write('发现一条异常信息，已同步状态但是没有ADWORDS对应信息objectId为'.$objectId, __METHOD__);
+						}
+					}
+					return $userRow[$this->fieldAdwordsObjectId];
+					break;
+				case self::SYNC_STATUS_QUEUE:
+					if(empty($row[$this->fieldAdwordsObjectId])){
+						//如果获取的ID为空，且状态为QUEUE，则发送一条更新本数据表对应ADWORDS_ID的消息
+					}
+					return TRUE;
+					break;
+				//case self::SYNC_STATUS_RECEIVE:
+				//case self::SYNC_STATUS_ERROR:
+				default:
+					throw new SyncStatusException("发现一条异常的错误状态[{$row[$this->fieldSyncStatus]}]");
+			}
+		} else {
+			if($this instanceof CustomerAdapter){
+				return $this->insertOne($objectId);
+			} else {
+				throw new DependencyException('还没有创建上级依赖，请先创建上级对象:'.get_class($this));
+			}
+		}
+	}
+	
+	/**
 	 * Check whether the data comlete.
 	 * 
 	 * @param array $data
@@ -267,6 +357,9 @@ abstract class AdwordsAdapter implements Adapter{
 	 * 整合执行结果
 	 */
 	protected function _generateResult(){
+		if($this->result['status'] = -1){
+			return $this->result;
+		}
 		if($this->processed == $this->result['success']){
 			$this->result['status'] = 1;
 			$this->result['description'] = self::DESC_DATA_PROCESS_SUCCESS . "，共有{$this->result['success']}条。";

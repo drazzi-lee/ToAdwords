@@ -10,10 +10,10 @@ use ToAdwords\Util\Log;
  * 广告系列
  */
 class CampaignAdapter extends AdwordsAdapter{
-	private $tableName = 'campaign';
+	protected $tableName = 'campaign';
 	
-	private $fieldAdwordsObjectId = 'campaign_id';
-	private $fieldIdclickObjectId = 'idclick_planid';
+	protected $fieldAdwordsObjectId = 'campaign_id';
+	protected $fieldIdclickObjectId = 'idclick_planid';
 	
 	/**
 	 * 添加广告计划
@@ -43,9 +43,10 @@ class CampaignAdapter extends AdwordsAdapter{
 		
 		$customer = new CustomerAdapter();
 		$data['last_action'] = self::ACTION_CREATE;
-		$data['customer_id'] = $customer->getCustomerId($data['idclick_uid']);
+		$data['customer_id'] = $customer->getAdaptedId($data['idclick_uid']);
 		$data['sync_status'] = self::SYNC_STATUS_RECEIVE;
-		exit;
+		dump($this);exit;
+		
 		if($this->add($data)){
 			$this->processed++;
 			$this->result['success']++;
@@ -160,5 +161,9 @@ class CampaignAdapter extends AdwordsAdapter{
 			$this->result['failure']++;
 		}
 		return $this->_generateResult();		
+	}
+	
+	private function _insertOne($idclickPlanId, $data){
+	
 	}
 }

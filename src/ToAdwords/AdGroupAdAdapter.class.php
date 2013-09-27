@@ -3,6 +3,9 @@
 namespace ToAdwords;
 
 use ToAdwords\AdwordsAdapter;
+use ToAdwords\AdGroupAdapter;
+use ToAdwords\Exceptions\DependencyException;
+use ToAdwords\Exceptions\SyncStatusException;
 
 /**
  * 广告
@@ -36,15 +39,25 @@ class AdGroupAdAdapter extends AdwordsAdapter{
 			return $this->result;
 		}
 		
+		$adGroupAdapter = new AdGroupAdapter();
 		$data['last_action'] = self::ACTION_CREATE;
-		if($this->add($data)){
+		try{
+			$data['adgroup_id'] = $adGroupAdapter->getAdaptedId($data['idclick_groupid']);
+		} catch (DependencyException $e){
+			$this->result['status'] = -1;
+			$this->result['description'] = $e->getMessage();
+			return $this->_generateResult();
+		} catch (SyncStatusException $e){
+			echo $e->getMessage();exit;
+		}
+		/* if($this->add($data)){
 			$this->processed++;
 			$this->result['success']++;
 			//$this->_queuePut($data);
 		} else {
 			$this->processed++;
 			$this->result['failure']++;
-		}
+		} */
 		return $this->_generateResult();	
 	}
 	

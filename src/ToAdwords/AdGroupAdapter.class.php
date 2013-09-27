@@ -3,15 +3,18 @@
 namespace ToAdwords;
 
 use ToAdwords\AdwordsAdapter;
+use ToAdwords\CampaignAdapter;
+use ToAdwords\Exceptions\DependencyException;
+use ToAdwords\Exceptions\SyncStatusException;
 
 /**
  * 广告组
  */
 class AdGroupAdapter extends AdwordsAdapter{
-	private $tableName = 'adgroup';
+	protected $tableName = 'adgroup';
 	
-	private $fieldAdwordsObjectId = 'adgroup_id';
-	private $fieldIdclickObjectId = 'idclick_groupid';
+	protected $fieldAdwordsObjectId = 'adgroup_id';
+	protected $fieldIdclickObjectId = 'idclick_groupid';
 	
 	/**
 	 * 添加广告组
@@ -34,12 +37,22 @@ class AdGroupAdapter extends AdwordsAdapter{
 			return $this->result;
 		}
 		
+		$campaignAdapter = new CampaignAdapter();
+		try{
+			$data['campaign_id'] = $campaignAdapter->getAdaptedId($data['idclick_planid']);
+		} catch (DependencyException $e){
+			$this->result['status'] = -1;
+			$this->result['description'] = $e->getMessage();
+			return $this->_generateResult();
+		} catch (SyncStatusException $e){
+			echo $e->getMessage();
+		}
 		$conditions = array(
 					'idclick_groupid' => $data['idclick_groupid'],
 				);
 		$data['last_action'] = self::ACTION_CREATE;
 		$data['keywords'] = $this->_arrayToString($data['keywords']);
-		if($this->add($data)){
+		/* if($this->add($data)){
 			$this->processed++;
 			$this->result['success']++;
 			//$this->_queuePut($data);
@@ -47,7 +60,7 @@ class AdGroupAdapter extends AdwordsAdapter{
 			$this->processed++;
 			$this->result['failure']++;
 		}
-		return $this->_generateResult();	
+		return $this->_generateResult(); */	
 	}
 	
 	/**
@@ -67,7 +80,7 @@ class AdGroupAdapter extends AdwordsAdapter{
 		if(self::IS_CHECK_DATA && !$this->_checkData($data, 'UPDATE')){
 			$this->result['status'] = -1;
 			$this->result['description'] = self::DESC_DATA_CHECK_FAILURE;
-			return $this->result;
+			return $this->_generateResult();
 		}
 		
 		$conditions = array(
@@ -94,7 +107,7 @@ class AdGroupAdapter extends AdwordsAdapter{
 		if(self::IS_CHECK_DATA && !$this->_checkData($data, 'DELETE')){
 			$this->result['status'] = -1;
 			$this->result['description'] = self::DESC_DATA_CHECK_FAILURE;
-			return $this->result;
+			return $this->_generateResult();
 		}
 		
 		$conditions = array(
