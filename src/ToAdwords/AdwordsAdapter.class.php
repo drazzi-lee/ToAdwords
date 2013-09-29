@@ -5,6 +5,9 @@ namespace ToAdwords;
 require_once 'Adapter.interface.php';
 
 use ToAdwords\Adapter;
+use ToAdwords\BaseObject;
+use ToAdwords\AdwordsObject\AdwordsBase;
+use ToAdwords\IdclickObject\IdclickBase;
 use \PDO;
 use \PDOException;
 use \Exception;
@@ -12,6 +15,7 @@ use ToAdwords\Util\Log;
 use ToAdwords\CustomerAdapter;
 use ToAdwords\Exceptions\DependencyException;
 use ToAdwords\Exceptions\SyncStatusException;
+use ToAdwords\Exceptions\DataCheckException;
 
 abstract class AdwordsAdapter implements Adapter{
 	/**
@@ -67,6 +71,9 @@ abstract class AdwordsAdapter implements Adapter{
 			);
 	protected $processed = 0;
 	
+	/**
+	 * 此构造过程一般被接口层直接调用，需要内部直接处理异常。
+	 */
 	public function __construct(){
 		try {
 			$this->dbh = new PDO(TOADWORDS_DSN, TOADWORDS_USER, TOADWORDS_PASS);
@@ -92,7 +99,8 @@ abstract class AdwordsAdapter implements Adapter{
 	/**
 	 * Get only one row from table.
 	 * 
-	 * This method returns a one-dimensional array.
+	 * This method returns a one-dimensional array. PDO::FETCH_ASSOC: returns an array
+	 * indexed by column name as returned in your result set.
 	 *
 	 * @param string $fields: $fields = 'id,name,gender';
 	 * @param string $conditions: $conditions = 'id=1234 AND name="Bob"';
@@ -106,10 +114,12 @@ abstract class AdwordsAdapter implements Adapter{
 	/**
 	 * Get rows from current table.
 	 * 
-	 * This method returns a two-dimensional array.
+	 * This method returns a two-dimensional array. PDO::FETCH_ASSOC: returns an array
+	 * indexed by column name as returned in your result set.
 	 *
 	 * @param string $fields: $fields = 'id,name,gender';
 	 * @param string $conditions: $conditions = 'id=1234 AND name="Bob"';
+	 * @param int,string $limit : default 1000
 	 * @return array $rows
 	 */
 	protected function getRows($fields='*', $conditions, $limit = '1000'){
@@ -117,6 +127,14 @@ abstract class AdwordsAdapter implements Adapter{
 		return $statement->fetchAll(PDO::FETCH_ASSOC);	
 	}
 	
+	/**
+	 * A wrapper for easy to use select
+	 *
+	 * @param string $fields: $fields = 'id,name,gender';
+	 * @param string $conditions: $conditions = 'id=1234 AND name="Bob"';
+	 * @param int,string $limit : default 1000
+	 * @return PDO::Statement $statement
+	 */
 	protected function select($fields='*', $conditions, $limit = '1000'){
 		$sql = 'SELECT '.$fields.' FROM `'.$this->tableName.'`';	
 		$preparedParams = array();
@@ -172,54 +190,32 @@ abstract class AdwordsAdapter implements Adapter{
 	 * 更新ObjectId对应的数据表同步状态
 	 *
 	 * @param string $status: SYNC_STATUS_QUEUE等
-	 * @param string $objectId: ID，可能为idclickId,adwords_customerId
-	 * @param string $objectType: type, 可能为'IDCLICK','ADWORDS'
+	 * @param BaseObject $object:
 	 * @return boolean: TRUE, FALSE
+	 * @throw PDOException,DataCheckException
 	 */
-	public function updateSyncStatus($status, $objectId, $objectType){
-		try{
-			$sql = 'UPDATE `'.$this->tableName.'` SET sync_status=:sync_status';
-			$preparedParams = array();
-			
-			if(!in_array($status, array(self::SYNC_STATUS_QUEUE, self::SYNC_STATUS_RECEIVE,
-					self::SYNC_STATUS_SYNCED, self::SYNC_STATUS_ERROR))){
-				throw new Exception('SYNC_STATUS未被允许的同步状态类型::'.$status);
-			} else {
-				$preparedParams[':sync_status'] = $status;
-			}			
-			
-			if(!in_array($objectType, array('IDCLICK','ADWORDS'))){
-				throw new Exception('ObjectType未被允许的ID类型::'.$objectType);
-			} else {
-				switch($objectType){
-					case 'IDCLICK':
-						$sql .= ' WHERE '.$this->fieldIdclickObjectId.'=:'.$this->fieldIdclickObjectId;
-						$preparedParams[':'.$this->fieldIdclickObjectId] = $objectId;
-						break;
-					case 'ADWORDS':
-						$sql .= ' WHERE '.$this->fieldAdwordsObjectId.'=:'.$this->fieldAdwordsObjectId;
-						$preparedParams[':'.$this->fieldAdwordsObjectId] = $objectId;
-						break;
-				}
-			}
-			
-			$statement = $this->dbh->prepare($sql);
-			return $statement->execute($preparedParams);
-		} catch (PDOException $e){
-			if(ENVIRONMENT == 'development'){
-				trigger_error('数据库错误，更新'.$this->tableName.'表sync_status失败，objectId为'.$objectId.' Type:'.$objectType.'  ####'.$e->getMessage(), E_USER_ERROR);
-			} else {
-				Log::write('更新'.$this->tableName.'表sync_status失败，objectId为'.$objectId.' Type:'.$objectType.'  ####'.$e->getMessage(), __METHOD__);				
-			}
-			return FALSE;
-		} catch (Exception $e){
-			if(ENVIRONMENT == 'development'){
-				trigger_error('更新'.$this->tableName.'表sync_status失败::'.$e->getMessage(), E_USER_ERROR);
-			} else {
-				Log::write('更新'.$this->tableName.'表sync_status失败::'.$e->getMessage(), __METHOD__);				
-			}
-			return FALSE;
+	public function updateSyncStatus($status, BaseObject $object){
+		$sql = 'UPDATE `'.$this->tableName.'` SET sync_status=:sync_status';
+		$preparedParams = array();
+		
+		if(!in_array($status, array(self::SYNC_STATUS_QUEUE, self::SYNC_STATUS_RECEIVE,
+				self::SYNC_STATUS_SYNCED, self::SYNC_STATUS_ERROR))){
+			throw new DataCheckException('SYNC_STATUS未被允许的同步状态类型::'.$status);
+		} else {
+			$preparedParams[':sync_status'] = $status;
+		}			
+		
+		if($object instanceof IdclickBase){
+			$sql .= ' WHERE '.$this->fieldIdclickObjectId.'=:'.$this->fieldIdclickObjectId;
+			$preparedParams[':'.$this->fieldIdclickObjectId] = $object->getId();
 		}
+		if($object instanceof AdwordsBase){
+			$sql .= ' WHERE '.$this->fieldAdwordsObjectId.'=:'.$this->fieldAdwordsObjectId;
+			$preparedParams[':'.$this->fieldAdwordsObjectId] = $object->getId();
+		}
+		
+		$statement = $this->dbh->prepare($sql);
+		return $statement->execute($preparedParams);		
 	}
 	
 	/**
@@ -227,21 +223,17 @@ abstract class AdwordsAdapter implements Adapter{
 	 *
 	 * 同时返回同步状态信息，以便后续处理。
 	 *
-	 * @param string $objectId:根据IDCLICK类型决定此ID表示
-	 * @param string $objectType:ID类型，可为'IDCLICK','ADWORDS'
+	 * @param BaseObject $object: AdwordsObject | IdclickObject
 	 * @return array: NULL | array()
+	 * @throw PDOException
 	 */
-	protected function getAdapteInfo($objectId, $objectType){
-		switch($objectType){
-			case 'IDCLICK':
-				return $this->getOne($this->fieldAdwordsObjectId.','.$this->fieldIdclickObjectId
-							.',sync_status', $this->fieldIdclickObjectId.'='.$objectId);
-				break;
-			case 'ADWORDS':
-				return $this->getOne($this->fieldAdwordsObjectId.','.$this->fieldIdclickObjectId
-							.',sync_status', $this->fieldAdwordsObjectId.'='.$objectId);
-				break;
-		}		
+	protected function getAdapteInfo(BaseObject $object){
+		if($object instanceof IdclickObject)
+			return $this->getOne($this->fieldAdwordsObjectId.','.$this->fieldIdclickObjectId
+						.',sync_status', $this->fieldIdclickObjectId.'='.$objectId);
+		if($object instanceof AdwordsObject)
+			return $this->getOne($this->fieldAdwordsObjectId.','.$this->fieldIdclickObjectId
+						.',sync_status', $this->fieldAdwordsObjectId.'='.$objectId);
 	}
 	
 	/**
@@ -250,37 +242,22 @@ abstract class AdwordsAdapter implements Adapter{
 	 * 此方法一般在子类使用，需要子类的fieldAdwordsObjectId, fieldIdclickObjectId
 	 * 暂支持IDCLICK到ADWORDS单向转换
 	 *
-	 * @param string $objectId: 根据IDCLICK类型决定此ID表示
-	 * @param string $objectType: ID类型，可为'IDCLICK','ADWORDS'
+	 * @param BaseObject $object: AdwordsObject | IdclickObject
+	 * @return int
 	 */
-	protected function getAdaptedId($objectId, $objectType = 'IDCLICK'){
-		if('IDCLICK' !== $objectType){
-			if(ENVIRONMENT == 'development')
-				trigger_error('尚未支持的objectType类型，返回FALSE。objectType::'.$objectType.' METHOD::'.__METHOD__, E_USER_WARNING);
-			return FALSE;
+	protected function getAdaptedId($object){
+		if(!$object instanceof IdclickBase){
+			throw new DataCheckException('尚未支持的objectType类型，返回FALSE。object::'
+														.get_class($object).' METHOD::'.__METHOD__);
 		}
 		
-		if(empty($objectId)){
-			if(ENVIRONMENT == 'development')
-				trigger_error('由于objectId为空，转换对应ID被积极拒绝，返回FALSE。METHOD::'.__METHOD__, E_USER_WARNING);
-			return FALSE;
-		}
-		if(!is_numeric($objectId)){
-			$objectId = (int)$objectId;
-			if(ENVIRONMENT == 'development')
-				trigger_error('objectId只能为数字，已自动转换::objectId '.$objectId.' | objectType '.$objectType.'METHOD::'.__METHOD__, E_USER_NOTICE);
-		}
-		//@TODO 使用throw Exception取代trigger_error，或者使用set_error_handler
-		$row = $this->getAdapteInfo($objectId, $objectType);
+		$row = $this->getAdapteInfo($object);
 		if(!empty($row)){
 			switch($row[$this->fieldSyncStatus]){
 				case self::SYNC_STATUS_SYNCED:
 					if(empty($row[$this->fieldAdwordsObjectId])) {
-						if(ENVIRONMENT == 'development'){
-							trigger_error('发现一条异常信息，已同步状态但是没有ADWORDS对应信息objectId为'.$objectId.' '.__METHOD__, E_USER_ERROR);
-						} else {
-							Log::write('发现一条异常信息，已同步状态但是没有ADWORDS对应信息objectId为'.$objectId, __METHOD__);
-						}
+						throw new SyncStatusException('发现一条异常信息，已同步状态但是没有ADWORDS
+								对应信息IdclickId为'.$object->getId().' 对象：'.get_class($object));
 					}
 					return $userRow[$this->fieldAdwordsObjectId];
 					break;
@@ -293,7 +270,8 @@ abstract class AdwordsAdapter implements Adapter{
 				//case self::SYNC_STATUS_RECEIVE:
 				//case self::SYNC_STATUS_ERROR:
 				default:
-					throw new SyncStatusException("发现一条异常的错误状态[{$row[$this->fieldSyncStatus]}]");
+					throw new SyncStatusException('发现一条异常的错误状态，对象:'.get_class($object).
+																	'  objectId'.$object->getId());
 			}
 		} else {
 			if($this instanceof CustomerAdapter){
@@ -302,42 +280,6 @@ abstract class AdwordsAdapter implements Adapter{
 				throw new DependencyException('还没有创建上级依赖，请先创建上级对象:'.get_class($this));
 			}
 		}
-	}
-	
-	/**
-	 * Check whether the data comlete.
-	 * 
-	 * @param array $data
-	 * @param string $process
-	 * @return boolean
-	 */
-	protected function _checkData(array $data, $process){
-		if(empty($data) || empty($process)){
-			return FALSE;
-		}
-		switch($process){
-			case 'CREATE':
-				if(empty($data['idclick_planid']) || empty($data['idclick_uid'])
-						|| empty($data['campaign_name'])){
-					return FALSE;
-				}
-				break;
-			case 'UPDATE':
-				if(empty($data['idclick_planid']) || empty($data['idclick_uid'])){
-					return FALSE;
-				}
-				break;
-			case 'DELETE':
-				if(empty($data['idclick_planid'])){
-					return FALSE;
-				}
-				break;
-			default:
-				return FALSE;
-		}
-		
-		//...check data
-		return TRUE;	
 	}
 	
 	/**
@@ -388,13 +330,5 @@ abstract class AdwordsAdapter implements Adapter{
 		include_once 'httpsqs_client.php'; 
 		$httpsqs = new httpsqs('192.168.6.14', '1218', 'mypass123', 'utf-8');
 		return $httpsqs->put('adwords', $message);
-	}
-	
-	/**
-	 * 转换Idclick对象为Adwords对象	 *
-	 */
-	public function getAdapter(IdclickObject $idclickObject){
-		//$message = 
-	
 	}
 }

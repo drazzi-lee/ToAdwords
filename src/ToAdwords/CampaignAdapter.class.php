@@ -5,6 +5,12 @@ namespace ToAdwords;
 use ToAdwords\AdwordsAdapter;
 use ToAdwords\CustomerAdapter;
 use ToAdwords\Util\Log;
+use ToAdwords\IdclickObject\Member;
+use ToAdwords\Exceptions\DataCheckException;
+use ToAdwords\Exceptions\SyncStatusException;
+use \Exception;
+use \PDOException;
+
 
 /**
  * 广告系列
@@ -34,20 +40,30 @@ class CampaignAdapter extends AdwordsAdapter{
 	 * @return array $result
 	 */
 	public function create(array $data){
-		Log::write('test information', __method__);
 		if(self::IS_CHECK_DATA && !$this->_checkData($data, self::ACTION_CREATE)){
 			$this->result['status'] = -1;
 			$this->result['description'] = self::DESC_DATA_CHECK_FAILURE;
 			return $this->result;
 		}
 		
-		$customer = new CustomerAdapter();
-		$data['last_action'] = self::ACTION_CREATE;
-		$data['customer_id'] = $customer->getAdaptedId($data['idclick_uid']);
-		$data['sync_status'] = self::SYNC_STATUS_RECEIVE;
-		dump($this);exit;
+		try{
+			$customerAdapter = new CustomerAdapter();
+			$idclickMember = new Member($data['idclick_uid']);
+			$data['last_action'] = self::ACTION_CREATE;
+			$data['customer_id'] = $customerAdapter->getAdaptedId($idclickMember);
+			$data['sync_status'] = self::SYNC_STATUS_RECEIVE;
+			
+		} catch (PDOException $e){
+			
+		} catch (DataCheckException $e){
 		
-		if($this->add($data)){
+		} catch (SyncStatusException $e){
+		
+		} catch (Exception $e){
+		
+		}
+		
+		/* if($this->add($data)){
 			$this->processed++;
 			$this->result['success']++;
 			if($this->_queuePut(self::ACTION_CREATE, $data)){
@@ -62,7 +78,7 @@ class CampaignAdapter extends AdwordsAdapter{
 		} else {
 			$this->processed++;
 			$this->result['failure']++;
-		}		
+		}	 */	
 		
 		/**
 		 * 同步Google Adwords

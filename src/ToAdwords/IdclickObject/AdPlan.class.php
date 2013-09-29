@@ -1,10 +1,9 @@
 <?php
 
 namespace ToAdwords\IdclickObject;
+use ToAdwords\IdclickObject\IdclickBase;
 
-use \ToAdwords\IdclickObject\Base as Base;
-
-class AdPlan extends Base{
+class AdPlan extends IdclickBase{
 	
 
 }

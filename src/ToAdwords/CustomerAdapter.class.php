@@ -5,6 +5,7 @@ namespace ToAdwords;
 use ToAdwords\AdwordsAdapter;
 use ToAdwords\Util\Log;
 use ToAdwords\Message;
+use ToAdwords\IdclickObject\Member;
 use \PDO;
 use \PDOException;
 use \AdWordsUser;
@@ -30,14 +31,16 @@ class CustomerAdapter extends AdwordsAdapter{
 	 * @return boolean: TRUE, FALSE
 	 */
 	protected function insertOne($idclickUid){
-		$sql = 'INSERT INTO `'.$this->tableName.'` ('.$this->fieldIdclickObjectId.',last_action) VALUES (:'.$this->fieldIdclickObjectId.', :last_action)';
+		$sql = 'INSERT INTO `'.$this->tableName.'` ('.$this->fieldIdclickObjectId.',last_action)
+						VALUES (:'.$this->fieldIdclickObjectId.', :last_action)';
 		try{
 			$this->dbh->beginTransaction();			
 			$statement = $this->dbh->prepare($sql);
 			$statement->bindValue(':'.$this->fieldIdclickObjectId, $idclickUid, PDO::PARAM_STR);
 			$statement->bindValue(':last_action', self::ACTION_CREATE, PDO::PARAM_STR);
+			$member = new Member($idclickUid);
 			if($statement->execute() && $this->_createMessageAndPut($idclickUid)
-					&& $this->updateSyncStatus(self::SYNC_STATUS_QUEUE, $idclickUid, 'IDCLICK')){
+					&& $this->updateSyncStatus(self::SYNC_STATUS_QUEUE, $member)){
 				$this->dbh->commit();
 				return TRUE;
 			} else {
@@ -47,9 +50,11 @@ class CustomerAdapter extends AdwordsAdapter{
 		} catch (PDOException $e){
 			$this->dbh->rollBack();
 			if(ENVIRONMENT == 'development'){
-				trigger_error('在Customer表新插入一行失败，事务已回滚，idclick_uid为'.$idclickUid.' ==》'.$e->getMessage(), E_USER_ERROR);
+				trigger_error('在Customer表新插入一行失败，事务已回滚，idclick_uid为'.$idclickUid
+									.' ==》'.$e->getMessage(), E_USER_ERROR);
 			} else {
-				Log::write('在Customer表新插入一行失败，事务已回滚，idclick_uid为'.$idclickUid.' ==》'.$e->getMessage(), __METHOD__);					
+				Log::write('在Customer表新插入一行失败，事务已回滚，idclick_uid为'.$idclickUid
+									.' ==》'.$e->getMessage(), __METHOD__);					
 			}
 			return FALSE;
 		}
