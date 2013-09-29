@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2013-09-29 14:54:09
+Date: 2013-09-29 18:30:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -74,17 +74,17 @@ DROP TABLE IF EXISTS `campaign`;
 CREATE TABLE `campaign` (
   `idclick_planid` int(10) NOT NULL,
   `idclick_uid` int(10) NOT NULL,
-  `campaign_id` bigint(10) DEFAULT '0' COMMENT 'Google广告系列ID',
+  `campaign_id` bigint(10) DEFAULT NULL COMMENT 'Google广告系列ID',
   `customer_id` bigint(10) DEFAULT NULL,
   `campaign_name` varchar(128) NOT NULL COMMENT '用户ID',
   `languages` varchar(200) NOT NULL COMMENT '投放网页语言',
   `areas` varchar(200) NOT NULL COMMENT 'geo target, 投放地域',
   `bidding_type` smallint(4) NOT NULL,
   `budget_amount` decimal(10,2) NOT NULL COMMENT '广告系列出价，以天为单位，adwords需要大于等于1',
-  `delivery_method` enum('ACCELERATED','STANDARD') DEFAULT 'ACCELERATED' COMMENT 'CampaignService.Budget#period',
+  `delivery_method` enum('ACCELERATED','STANDARD') NOT NULL DEFAULT 'ACCELERATED' COMMENT 'CampaignService.Budget#period',
   `max_cpc` decimal(10,2) NOT NULL,
   `campaign_status` enum('ACTIVE','PAUSE','DELETE') NOT NULL DEFAULT 'ACTIVE',
-  `last_action` enum('CREATE','UPDATE','DELETE') NOT NULL,
+  `last_action` enum('CREATE','UPDATE','DELETE') NOT NULL DEFAULT 'CREATE',
   `sync_status` enum('QUEUE','SYNCED','ERROR','RECEIVE') NOT NULL DEFAULT 'RECEIVE' COMMENT '在队列中，已同步，同步出错',
   PRIMARY KEY (`idclick_planid`,`idclick_uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -92,7 +92,16 @@ CREATE TABLE `campaign` (
 -- ----------------------------
 -- Records of campaign
 -- ----------------------------
-INSERT INTO campaign VALUES ('12345', '441', '0', '5572928024', 'campaign_name #523976704166f', '10031,10032', '10031,10032', '1', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
+INSERT INTO campaign VALUES ('12357', '519', '0', '1', 'campaign_name #5247e4ffd9a45', '10031,10032', '10031,10032', '1', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
+INSERT INTO campaign VALUES ('15477', '520', '0', '1', 'campaign_name #5247e53a0e075', '10031,10032', '10031,10032', '1', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
+INSERT INTO campaign VALUES ('51487', '521', '0', '1', 'campaign_name #5247e5a83da2d', '10031,10032', '10031,10032', '1', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
+INSERT INTO campaign VALUES ('51549', '522', '0', '1', 'campaign_name #5247e5e66b88d', '10031,10032', '10031,10032', '1', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
+INSERT INTO campaign VALUES ('51550', '522', '0', '1', 'campaign_name #5247e5f109255', '10031,10032', '10031,10032', '1', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
+INSERT INTO campaign VALUES ('51551', '522', '0', '1', 'campaign_name #5247e5f6eea35', '10031,10032', '10031,10032', '1', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
+INSERT INTO campaign VALUES ('51552', '522', '0', '1', 'campaign_name #5247e5fb0116d', '10031,10032', '10031,10032', '1', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
+INSERT INTO campaign VALUES ('51553', '522', '0', '1', 'campaign_name #5247e5fedbd6d', '10031,10032', '10031,10032', '1', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
+INSERT INTO campaign VALUES ('51554', '523', '0', '1', 'campaign_name #5247e605e9ffd', '10031,10032', '10031,10032', '1', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
+INSERT INTO campaign VALUES ('51555', '523', '0', '1', 'campaign_name #5247e60a0f015', '10031,10032', '10031,10032', '1', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
 
 -- ----------------------------
 -- Table structure for `customer`
@@ -124,3 +133,7 @@ INSERT INTO customer VALUES ('516', null, 'CREATE', 'QUEUE', '0', '0');
 INSERT INTO customer VALUES ('517', null, 'CREATE', 'QUEUE', '0', '0');
 INSERT INTO customer VALUES ('518', null, 'CREATE', 'QUEUE', '0', '0');
 INSERT INTO customer VALUES ('519', null, 'CREATE', 'QUEUE', '0', '0');
+INSERT INTO customer VALUES ('520', null, 'CREATE', 'QUEUE', '0', '0');
+INSERT INTO customer VALUES ('521', null, 'CREATE', 'QUEUE', '0', '0');
+INSERT INTO customer VALUES ('522', null, 'CREATE', 'QUEUE', '0', '0');
+INSERT INTO customer VALUES ('523', null, 'CREATE', 'QUEUE', '0', '0');
