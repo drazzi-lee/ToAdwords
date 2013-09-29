@@ -1,8 +1,9 @@
 <?php
 
-namespace ToAdwords;
+namespace ToAdwords\Util;
 
 use \Exception;
+use ToAdwords\Util\Log;
 
 class Message{
 	private static $operators = array('CREATE', 'UPDATE', 'DELETE');
@@ -17,22 +18,25 @@ class Message{
 		if(in_array($module, self::$modules)){			
 			$this->module = $module;
 		} else {
-			throw new Exception('尚未支持的模块::'.$module);
+			throw new MessageException('尚未支持的模块::'.$module);
 		}
 		if(in_array($action, self::$operators)){
 			$this->action = $action;
 		} else {
-			throw new Exception('未被允许的操作::'.$action);
+			throw new MessageException('未被允许的操作::'.$action);
 		}
 		$this->information = $information;
 		$this->needRecheck = $needRecheck;
 	}
 	
 	public function __toString(){
-		return '[消息] 模块：'.$this->module.' | 动作：'.$this->action.' | 消息内容：'.var_dump($information);
+		$info = print_r($this->information, true);
+		return '[消息] 模块：'.$this->module.' | 动作：'.$this->action
+							.' | 消息内容：'.$info;
 	}
 	
 	public function put(){
+		Log::write($this, __METHOD__);
 		return TRUE;
 	}
 	

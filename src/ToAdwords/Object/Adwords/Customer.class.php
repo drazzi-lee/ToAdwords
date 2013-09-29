@@ -2,6 +2,7 @@
 
 namespace ToAdwords\Object\Adwords;
 use ToAdwords\Object\Adwords\AdwordsBase;
+use ToAdwords\Exceptions\DataCheckException;
 
 class Customer extends AdwordsBase{
 	/**

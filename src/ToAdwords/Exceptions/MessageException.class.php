@@ -4,6 +4,6 @@ namespace ToAdwords\Exceptions;
 
 use \Exception;
 
-class DependencyException extends Exception{
+class MessageException extends Exception{
 
 }

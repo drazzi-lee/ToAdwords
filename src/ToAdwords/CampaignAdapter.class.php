@@ -5,10 +5,13 @@ namespace ToAdwords;
 use ToAdwords\AdwordsAdapter;
 use ToAdwords\CustomerAdapter;
 use ToAdwords\Util\Log;
+use ToAdwords\Util\Message;
 use ToAdwords\Object\Idclick\Member;
+use ToAdwords\Object\Idclick\AdPlan;
 use ToAdwords\Exceptions\DataCheckException;
 use ToAdwords\Exceptions\SyncStatusException;
 use ToAdwords\Exceptions\DependencyException;
+use ToAdwords\Exceptions\MessageException;
 use \Exception;
 use \PDOException;
 
@@ -18,6 +21,7 @@ use \PDOException;
  */
 class CampaignAdapter extends AdwordsAdapter{
 	protected $tableName = 'campaign';
+	protected $moduleName = 'Campaign';
 	
 	protected $adwordsObjectIdField = 'campaign_id';
 	protected $idclickObjectIdField = 'idclick_planid';
@@ -47,15 +51,17 @@ class CampaignAdapter extends AdwordsAdapter{
 			return $this->result;
 		}
 		
-		try{
-			
+		try{			
 			$customerAdapter = new CustomerAdapter();
 			$idclickMember = new Member($data['idclick_uid']);
 			$data['last_action'] = self::ACTION_CREATE;
 			$data['customer_id'] = $customerAdapter->getAdaptedId($idclickMember);
-			$data['sync_status'] = self::SYNC_STATUS_RECEIVE;
 			
-			var_dump($data);exit;
+			if($this->insertOne($data)){
+				$this->processed++;
+				$this->result['success']++;
+				$this->result['description'] = '广告计划添加成功';
+			}
 			return $this->_generateResult();
 		} catch (PDOException $e){
 			echo $e->getMessage();
@@ -67,48 +73,6 @@ class CampaignAdapter extends AdwordsAdapter{
 			echo $e->getMessage();
 		} catch (Exception $e){
 			echo $e->getMessage();
-		}
-		
-		/* if($this->add($data)){
-			$this->processed++;
-			$this->result['success']++;
-			if($this->_queuePut(self::ACTION_CREATE, $data)){
-				$conditions = array (
-					'idclick_planid' => $data ['idclick_planid'] 
-				);
-				$status = array (
-					'sync_status' => self::SYNC_STATUS_QUEUE 
-				);
-				$this->where($conditions)->save($status);
-			}
-		} else {
-			$this->processed++;
-			$this->result['failure']++;
-		}	 */	
-		
-		/**
-		 * 同步Google Adwords
-		 * 
-		 * 仅限DEMO版需要，正式版需要从消息队列中获取数据。
-		 */
-		if(false){
-			try{			
-				$user = new AdwordsUser();
-				$user->SetClientCustomerId($data['customer_id']);
-				$user->LogAll();
-				
-				//暂不同步。
-				$campaignId = $this->_createAdwordsCampaign($user, $data);
-				if(!empty($campaignId)){
-					$campaignAdwordsData = array(
-								'campaign_id'	=> $campaignId,
-								'sync_status'	=> self::SYNC_STATUS_SYNCED,
-							);
-					$this->where($conditions)->save($campaignAdwordsData);
-				}		
-			} catch (Exception $e) {
-				Log::write('请求Google Adwords Api出错：' . $e->getMessage());
-			}
 		}
 	}
 	
@@ -170,7 +134,6 @@ class CampaignAdapter extends AdwordsAdapter{
 		$newStatus = array(
 					'campaign_status'	=> 'DELETE',
 					'last_action'		=> self::ACTION_DELETE,
-					'sync_status'		=> self::SYNC_STATUS_RECEIVE,
 				);
 		
 		if(FALSE !== $this->where($conditions)->save($newStatus)){
@@ -183,7 +146,82 @@ class CampaignAdapter extends AdwordsAdapter{
 		return $this->_generateResult();		
 	}
 	
-	private function _insertOne($idclickPlanId, $data){
-	
+	/**
+	 * 插入新广告系列记录
+	 */
+	private function insertOne($data){
+		$fields = $this->_arrayToString(array_keys($data));
+		$preparedPlaceholders = $this->_arrayToSpecialString(array_keys($data));
+		$preparedParams = array_combine(explode(',',$preparedPlaceholders), array_values($data));
+		$sql = 'INSERT INTO `'.$this->tableName.'` ('.$fields.') VALUES ('.$preparedPlaceholders.')';
+		try{
+			$campaignRow = $this->getOne('idclick_planid','idclick_planid='.$data['idclick_planid']);
+			if(!empty($campaignRow)){
+				throw new DataCheckException('广告计划已存在，idclick_planid为.'.$data['idclick_planid']);
+			}
+			$this->dbh->beginTransaction();			
+			$statement = $this->dbh->prepare($sql);
+			$adPlan = new AdPlan($data['idclick_planid']);
+			if($statement->execute($preparedParams) && $this->_createMessageAndPut($data)
+					&& $this->updateSyncStatus(self::SYNC_STATUS_QUEUE, $adPlan)){
+				$this->dbh->commit();
+				return TRUE;
+			} else {
+				throw new Exception('顺序执行插表、发送消息、更新同步状态为QUEUE出错。');
+			}
+		} catch (DataCheckException $e){
+			$this->result['status'] = -1;
+			$this->result['description'] = '数据验证未通过。'.$e->getMessage();
+			return FALSE;
+		} catch (MessageException $e){
+			$this->result['status'] = -1;
+			$this->result['description'] = '消息过程异常：'.$e->getMessage();
+			return FALSE;
+		} catch (PDOException $e){
+			$this->dbh->rollBack();
+			$this->result['status'] = -1;
+			$this->result['description'] = '在Campaign表新插入一行失败，事务已回滚，idclick_planid为'.$data['idclick_planid']
+									.' ==》'.$e->getMessage();
+			Log::write('在Campaign表新插入一行失败，事务已回滚，idclick_planid为'.$data['idclick_planid']
+									.' ==》'.$e->getMessage(), __METHOD__);	
+			return FALSE;
+		} catch (Exception $e){
+			$this->dbh->rollBack();
+			$this->result['status'] = -1;
+			$this->result['description'] = $e->getMessage();
+			return FALSE;
+		}
 	}
+	
+	/**
+	 * 构建消息并推送至消息队列
+	 *
+	 *
+	 */
+	private function _createMessageAndPut($data){
+		$information = $data;
+		$message = new Message($this->moduleName, self::ACTION_CREATE, $information);
+		return $message->put();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

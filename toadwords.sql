@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2013-09-26 18:03:56
+Date: 2013-09-29 14:54:09
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,7 +37,8 @@ CREATE TABLE `adgroup` (
 -- ----------------------------
 -- Records of adgroup
 -- ----------------------------
-INSERT INTO adgroup VALUES ('123456', '441', '12345', 'group_name2', '0', null, null, 'keywords3,keywords2,keywords1', '201.00', 'DELETE', 'RECEIVE', 'DELETE');
+INSERT INTO adgroup VALUES ('12313', '443', '43141', 'group_name3', '0', null, null, 'keywords3,keywords2', '301.00', 'CREATE', 'RECEIVE', 'ACTIVE');
+INSERT INTO adgroup VALUES ('123456', '441', '12345', 'group_name2', '0', '6516584', null, 'keywords3,keywords2,keywords1', '201.00', 'DELETE', 'RECEIVE', 'DELETE');
 
 -- ----------------------------
 -- Table structure for `adgroupad`
@@ -110,5 +111,16 @@ CREATE TABLE `customer` (
 -- ----------------------------
 -- Records of customer
 -- ----------------------------
-INSERT INTO customer VALUES ('441', '5572928024', 'CREATE', 'RECEIVE', '0', '0');
+INSERT INTO customer VALUES ('441', '5572928024', 'CREATE', 'SYNCED', '0', '0');
 INSERT INTO customer VALUES ('442', '1235154143', 'CREATE', 'RECEIVE', '0', '0');
+INSERT INTO customer VALUES ('443', '1235154143', 'CREATE', 'SYNCED', '0', '0');
+INSERT INTO customer VALUES ('445', '123', 'CREATE', 'RECEIVE', '0', '0');
+INSERT INTO customer VALUES ('449', '0', 'CREATE', 'QUEUE', '0', '0');
+INSERT INTO customer VALUES ('480', null, 'CREATE', 'QUEUE', '0', '0');
+INSERT INTO customer VALUES ('481', null, 'CREATE', 'RECEIVE', '0', '0');
+INSERT INTO customer VALUES ('482', null, 'CREATE', 'QUEUE', '0', '0');
+INSERT INTO customer VALUES ('512', null, 'CREATE', 'QUEUE', '0', '0');
+INSERT INTO customer VALUES ('516', null, 'CREATE', 'QUEUE', '0', '0');
+INSERT INTO customer VALUES ('517', null, 'CREATE', 'QUEUE', '0', '0');
+INSERT INTO customer VALUES ('518', null, 'CREATE', 'QUEUE', '0', '0');
+INSERT INTO customer VALUES ('519', null, 'CREATE', 'QUEUE', '0', '0');

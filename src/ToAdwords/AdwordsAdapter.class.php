@@ -180,7 +180,7 @@ abstract class AdwordsAdapter implements Adapter{
 		}
 		if(0 == count($preparedParams)){
 			if('ENVIRONMENT' == 'development')
-				trigger_error('解析查询条件失败，请检查是否符合语法', E_USER_WARNING);
+				throw new DataCheckException('解析查询条件失败，请检查是否符合语法'.__METHOD__);
 			return NULL;
 		}
 		return array('preparedWhere' => $preparedWhere, 'preparedParams' => $preparedParams);
@@ -196,7 +196,7 @@ abstract class AdwordsAdapter implements Adapter{
 	 * @throw PDOException,DataCheckException
 	 */
 	public function updateSyncStatus($status, Base $object){
-		$sql = 'UPDATE `'.$this->tableName.'` SET sync_status=:sync_status';
+		$sql = 'UPDATE `'.$this->tableName.'` SET sync_status=:sync_status';		
 		$preparedParams = array();
 		
 		if(!in_array($status, array(self::SYNC_STATUS_QUEUE, self::SYNC_STATUS_RECEIVE,
@@ -214,7 +214,6 @@ abstract class AdwordsAdapter implements Adapter{
 			$sql .= ' WHERE '.$this->adwordsObjectIdField.'=:'.$this->adwordsObjectIdField;
 			$preparedParams[':'.$this->adwordsObjectIdField] = $object->getId();
 		}
-		
 		$statement = $this->dbh->prepare($sql);
 		return $statement->execute($preparedParams);		
 	}
@@ -298,19 +297,26 @@ abstract class AdwordsAdapter implements Adapter{
 		return implode(',', $array);
 	}
 	
+	protected function _arrayToSpecialString(array $array){
+		return ':'.implode(',:', $array);
+	}
+	
 	/**
-	 * 整合执行结果
+	 * Generate process result.
 	 */
 	protected function _generateResult(){
-		if($this->result['status'] = -1){
+		
+		if($this->result['status'] == -1){
 			return $this->result;
 		}
 		if($this->processed == $this->result['success']){
 			$this->result['status'] = 1;
-			$this->result['description'] = self::DESC_DATA_PROCESS_SUCCESS . "，共有{$this->result['success']}条。";
+			$this->result['description'] = self::DESC_DATA_PROCESS_SUCCESS 
+									. "，共有{$this->result['success']}条。";
 		} else {
 			$this->result['status'] = 0;
-			$this->result['description'] = self::DESC_DATA_PROCESS_WARNING . "，成功{$this->result['success']}条，失败{$this->result['failure']}条。";
+			$this->result['description'] = self::DESC_DATA_PROCESS_WARNING 
+				. "，成功{$this->result['success']}条，失败{$this->result['failure']}条。";
 		}
 		return $this->result;
 	}
