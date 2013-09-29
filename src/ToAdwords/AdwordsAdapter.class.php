@@ -5,9 +5,10 @@ namespace ToAdwords;
 require_once 'Adapter.interface.php';
 
 use ToAdwords\Adapter;
-use ToAdwords\BaseObject;
-use ToAdwords\AdwordsObject\AdwordsBase;
-use ToAdwords\IdclickObject\IdclickBase;
+use ToAdwords\Object\Base;
+use ToAdwords\Object\Adwords\AdwordsBase;
+use ToAdwords\Object\Idclick\Member;
+use ToAdwords\Object\Idclick\IdclickBase;
 use \PDO;
 use \PDOException;
 use \Exception;
@@ -190,11 +191,11 @@ abstract class AdwordsAdapter implements Adapter{
 	 * 更新ObjectId对应的数据表同步状态
 	 *
 	 * @param string $status: SYNC_STATUS_QUEUE等
-	 * @param BaseObject $object:
+	 * @param Base $object:
 	 * @return boolean: TRUE, FALSE
 	 * @throw PDOException,DataCheckException
 	 */
-	public function updateSyncStatus($status, BaseObject $object){
+	public function updateSyncStatus($status, Base $object){
 		$sql = 'UPDATE `'.$this->tableName.'` SET sync_status=:sync_status';
 		$preparedParams = array();
 		
@@ -206,12 +207,12 @@ abstract class AdwordsAdapter implements Adapter{
 		}			
 		
 		if($object instanceof IdclickBase){
-			$sql .= ' WHERE '.$this->fieldIdclickObjectId.'=:'.$this->fieldIdclickObjectId;
-			$preparedParams[':'.$this->fieldIdclickObjectId] = $object->getId();
+			$sql .= ' WHERE '.$this->idclickObjectIdField.'=:'.$this->idclickObjectIdField;
+			$preparedParams[':'.$this->idclickObjectIdField] = $object->getId();
 		}
 		if($object instanceof AdwordsBase){
-			$sql .= ' WHERE '.$this->fieldAdwordsObjectId.'=:'.$this->fieldAdwordsObjectId;
-			$preparedParams[':'.$this->fieldAdwordsObjectId] = $object->getId();
+			$sql .= ' WHERE '.$this->adwordsObjectIdField.'=:'.$this->adwordsObjectIdField;
+			$preparedParams[':'.$this->adwordsObjectIdField] = $object->getId();
 		}
 		
 		$statement = $this->dbh->prepare($sql);
@@ -223,29 +224,31 @@ abstract class AdwordsAdapter implements Adapter{
 	 *
 	 * 同时返回同步状态信息，以便后续处理。
 	 *
-	 * @param BaseObject $object: AdwordsObject | IdclickObject
+	 * @param Base $object: AdwordsObject | IdclickObject
 	 * @return array: NULL | array()
 	 * @throw PDOException
 	 */
-	protected function getAdapteInfo(BaseObject $object){
-		if($object instanceof IdclickObject)
-			return $this->getOne($this->fieldAdwordsObjectId.','.$this->fieldIdclickObjectId
-						.',sync_status', $this->fieldIdclickObjectId.'='.$objectId);
-		if($object instanceof AdwordsObject)
-			return $this->getOne($this->fieldAdwordsObjectId.','.$this->fieldIdclickObjectId
-						.',sync_status', $this->fieldAdwordsObjectId.'='.$objectId);
+	public function getAdapteInfo(Base $object){
+		if($object instanceof IdclickBase){
+			return $this->getOne($this->adwordsObjectIdField.','.$this->idclickObjectIdField
+						.',sync_status', $this->idclickObjectIdField.'='.$object->getId());
+		}
+		if($object instanceof AdwordsBase){
+			return $this->getOne($this->adwordsObjectIdField.','.$this->idclickObjectIdField
+						.',sync_status', $this->adwordsObjectIdField.'='.$object->getId());
+		}
 	}
 	
 	/**
 	 * 在IDCLICK与ADWORDS的ID之间转换
 	 *
-	 * 此方法一般在子类使用，需要子类的fieldAdwordsObjectId, fieldIdclickObjectId
+	 * 此方法一般在子类使用，需要子类的adwordsObjectIdField, idclickObjectIdField
 	 * 暂支持IDCLICK到ADWORDS单向转换
 	 *
-	 * @param BaseObject $object: AdwordsObject | IdclickObject
+	 * @param Base $object: AdwordsObject | IdclickObject
 	 * @return int
 	 */
-	protected function getAdaptedId($object){
+	public function getAdaptedId(Base $object){
 		if(!$object instanceof IdclickBase){
 			throw new DataCheckException('尚未支持的objectType类型，返回FALSE。object::'
 														.get_class($object).' METHOD::'.__METHOD__);
@@ -255,14 +258,14 @@ abstract class AdwordsAdapter implements Adapter{
 		if(!empty($row)){
 			switch($row[$this->fieldSyncStatus]){
 				case self::SYNC_STATUS_SYNCED:
-					if(empty($row[$this->fieldAdwordsObjectId])) {
+					if(empty($row[$this->adwordsObjectIdField])) {
 						throw new SyncStatusException('发现一条异常信息，已同步状态但是没有ADWORDS
 								对应信息IdclickId为'.$object->getId().' 对象：'.get_class($object));
 					}
-					return $userRow[$this->fieldAdwordsObjectId];
+					return $row[$this->adwordsObjectIdField];
 					break;
 				case self::SYNC_STATUS_QUEUE:
-					if(empty($row[$this->fieldAdwordsObjectId])){
+					if(empty($row[$this->adwordsObjectIdField])){
 						//如果获取的ID为空，且状态为QUEUE，则发送一条更新本数据表对应ADWORDS_ID的消息
 					}
 					return TRUE;
@@ -274,8 +277,8 @@ abstract class AdwordsAdapter implements Adapter{
 																	'  objectId'.$object->getId());
 			}
 		} else {
-			if($this instanceof CustomerAdapter){
-				return $this->insertOne($objectId);
+			if($object instanceof Member){
+				return $this->insertOne($object->getId());
 			} else {
 				throw new DependencyException('还没有创建上级依赖，请先创建上级对象:'.get_class($this));
 			}

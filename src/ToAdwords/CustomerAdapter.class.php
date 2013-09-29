@@ -4,8 +4,8 @@ namespace ToAdwords;
 
 use ToAdwords\AdwordsAdapter;
 use ToAdwords\Util\Log;
-use ToAdwords\Message;
-use ToAdwords\IdclickObject\Member;
+use ToAdwords\Util\Message;
+use ToAdwords\Object\Idclick\Member;
 use \PDO;
 use \PDOException;
 use \AdWordsUser;
@@ -19,8 +19,8 @@ class CustomerAdapter extends AdwordsAdapter{
 	protected $tableName = 'customer';
 	protected $moduleName = 'Customer';
 	
-	protected $fieldAdwordsObjectId = 'adwords_customerid';
-	protected $fieldIdclickObjectId = 'idclick_uid';
+	protected $adwordsObjectIdField = 'adwords_customerid';
+	protected $idclickObjectIdField = 'idclick_uid';
 	
 	/**
 	 * 插入新用户记录
@@ -31,12 +31,12 @@ class CustomerAdapter extends AdwordsAdapter{
 	 * @return boolean: TRUE, FALSE
 	 */
 	protected function insertOne($idclickUid){
-		$sql = 'INSERT INTO `'.$this->tableName.'` ('.$this->fieldIdclickObjectId.',last_action)
-						VALUES (:'.$this->fieldIdclickObjectId.', :last_action)';
+		$sql = 'INSERT INTO `'.$this->tableName.'` ('.$this->idclickObjectIdField.',last_action)
+						VALUES (:'.$this->idclickObjectIdField.', :last_action)';
 		try{
 			$this->dbh->beginTransaction();			
 			$statement = $this->dbh->prepare($sql);
-			$statement->bindValue(':'.$this->fieldIdclickObjectId, $idclickUid, PDO::PARAM_STR);
+			$statement->bindValue(':'.$this->idclickObjectIdField, $idclickUid, PDO::PARAM_STR);
 			$statement->bindValue(':last_action', self::ACTION_CREATE, PDO::PARAM_STR);
 			$member = new Member($idclickUid);
 			if($statement->execute() && $this->_createMessageAndPut($idclickUid)

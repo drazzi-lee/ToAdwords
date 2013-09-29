@@ -1,7 +1,7 @@
 <?php
 
-namespace ToAdwords\AdwordsObject;
-use ToAdwords\AdwordsObject\AdwordsBase;
+namespace ToAdwords\Object\Adwords;
+use ToAdwords\Object\Adwords\AdwordsBase;
 
 class Customer extends AdwordsBase{
 	/**

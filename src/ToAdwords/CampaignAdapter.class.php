@@ -5,9 +5,10 @@ namespace ToAdwords;
 use ToAdwords\AdwordsAdapter;
 use ToAdwords\CustomerAdapter;
 use ToAdwords\Util\Log;
-use ToAdwords\IdclickObject\Member;
+use ToAdwords\Object\Idclick\Member;
 use ToAdwords\Exceptions\DataCheckException;
 use ToAdwords\Exceptions\SyncStatusException;
+use ToAdwords\Exceptions\DependencyException;
 use \Exception;
 use \PDOException;
 
@@ -18,8 +19,8 @@ use \PDOException;
 class CampaignAdapter extends AdwordsAdapter{
 	protected $tableName = 'campaign';
 	
-	protected $fieldAdwordsObjectId = 'campaign_id';
-	protected $fieldIdclickObjectId = 'idclick_planid';
+	protected $adwordsObjectIdField = 'campaign_id';
+	protected $idclickObjectIdField = 'idclick_planid';
 	
 	/**
 	 * 添加广告计划
@@ -39,28 +40,33 @@ class CampaignAdapter extends AdwordsAdapter{
 	 * 		);
 	 * @return array $result
 	 */
-	public function create(array $data){
-		if(self::IS_CHECK_DATA && !$this->_checkData($data, self::ACTION_CREATE)){
+	public function create(array $data){		
+		if(self::IS_CHECK_DATA && !$this->_checkData($data, self::ACTION_CREATE)){		
 			$this->result['status'] = -1;
 			$this->result['description'] = self::DESC_DATA_CHECK_FAILURE;
 			return $this->result;
 		}
 		
 		try{
+			
 			$customerAdapter = new CustomerAdapter();
 			$idclickMember = new Member($data['idclick_uid']);
 			$data['last_action'] = self::ACTION_CREATE;
 			$data['customer_id'] = $customerAdapter->getAdaptedId($idclickMember);
 			$data['sync_status'] = self::SYNC_STATUS_RECEIVE;
 			
+			var_dump($data);exit;
+			return $this->_generateResult();
 		} catch (PDOException $e){
-			
+			echo $e->getMessage();
 		} catch (DataCheckException $e){
-		
+			echo $e->getMessage();
 		} catch (SyncStatusException $e){
-		
+			echo $e->getMessage();
+		} catch (DependencyException $e){
+			echo $e->getMessage();
 		} catch (Exception $e){
-		
+			echo $e->getMessage();
 		}
 		
 		/* if($this->add($data)){
@@ -104,8 +110,6 @@ class CampaignAdapter extends AdwordsAdapter{
 				Log::write('请求Google Adwords Api出错：' . $e->getMessage());
 			}
 		}
-		
-		return $this->_generateResult();
 	}
 	
 	/**

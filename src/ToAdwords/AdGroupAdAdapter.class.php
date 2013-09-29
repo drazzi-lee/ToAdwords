@@ -4,6 +4,7 @@ namespace ToAdwords;
 
 use ToAdwords\AdwordsAdapter;
 use ToAdwords\AdGroupAdapter;
+use ToAdwords\Object\Idclick\AdGroup;
 use ToAdwords\Exceptions\DependencyException;
 use ToAdwords\Exceptions\SyncStatusException;
 
@@ -13,8 +14,8 @@ use ToAdwords\Exceptions\SyncStatusException;
 class AdGroupAdAdapter extends AdwordsAdapter{
 	private $tableName = 'adgroupad';
 	
-	private $fieldAdwordsObjectId = 'ad_id';
-	private $fieldIdclickObjectId = 'idclick_adid';
+	private $adwordsObjectIdField = 'ad_id';
+	private $idclickObjectIdField = 'idclick_adid';
 	
 	/**
 	 * 添加广告
@@ -39,10 +40,12 @@ class AdGroupAdAdapter extends AdwordsAdapter{
 			return $this->result;
 		}
 		
-		$adGroupAdapter = new AdGroupAdapter();
-		$data['last_action'] = self::ACTION_CREATE;
 		try{
-			$data['adgroup_id'] = $adGroupAdapter->getAdaptedId($data['idclick_groupid']);
+			$adGroupAdapter = new AdGroupAdapter();
+			$adGroup = new AdGroup($data['idclick_groupid']);
+			$data['last_action'] = self::ACTION_CREATE;
+		
+			$data['adgroup_id'] = $adGroupAdapter->getAdaptedId($adGroup);
 		} catch (DependencyException $e){
 			$this->result['status'] = -1;
 			$this->result['description'] = $e->getMessage();

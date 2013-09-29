@@ -13,8 +13,8 @@ use ToAdwords\Exceptions\SyncStatusException;
 class AdGroupAdapter extends AdwordsAdapter{
 	protected $tableName = 'adgroup';
 	
-	protected $fieldAdwordsObjectId = 'adgroup_id';
-	protected $fieldIdclickObjectId = 'idclick_groupid';
+	protected $adwordsObjectIdField = 'adgroup_id';
+	protected $idclickObjectIdField = 'idclick_groupid';
 	
 	/**
 	 * 添加广告组

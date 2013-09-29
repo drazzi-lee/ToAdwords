@@ -1,8 +1,8 @@
 <?php
 
-namespace ToAdwords;
+namespace ToAdwords\Object;
 
-abstract class BaseObject{
+abstract class Base{
 	public $name;
 
 	protected $id;

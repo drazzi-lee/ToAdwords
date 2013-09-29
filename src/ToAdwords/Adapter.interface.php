@@ -2,10 +2,12 @@
 
 namespace ToAdwords;
 
+use ToAdwords\Object\Base;
+
 interface Adapter{
 
-	/**
-	 * 转换Idclick对象为Adwords对象
-	 */
-	public function getAdapter(IdclickObject $idclickObject);
+	public function getAdapteInfo(Base $object);
+	
+	public function getAdaptedId(Base $object);
+	
 }
