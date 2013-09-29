@@ -184,8 +184,49 @@ abstract class AdwordsAdapter implements Adapter{
 			return NULL;
 		}
 		return array('preparedWhere' => $preparedWhere, 'preparedParams' => $preparedParams);
+	}	
+	
+	/**
+	 * 向数据表插入一条信息
+	 * @TODO 根据CampaignAdapter->insertOne抽象方法
+	 * @param array $data: 插入内容
+	 * @return boolean: TRUE, FALSE
+	 * @throw PDOException,DataCheckException
+	 */
+	public function insertOne($data){
+	
 	}
 	
+	/**
+	 * 更新数据表某条信息
+	 *
+	 * @param string $uniqueId: 当前操作表唯一ID字段值
+	 * @param array $data: 更新内容
+	 * @return boolean: TRUE, FALSE
+	 * @throw PDOException,DataCheckException
+	 */
+	public function updateOne($uniqueId, array $data){
+		$sql = 'UPDATE `'.$this->tableName.'` SET sync_status=:sync_status';		
+		$preparedParams = array();
+		
+		if(!in_array($status, array(self::SYNC_STATUS_QUEUE, self::SYNC_STATUS_RECEIVE,
+				self::SYNC_STATUS_SYNCED, self::SYNC_STATUS_ERROR))){
+			throw new DataCheckException('SYNC_STATUS未被允许的同步状态类型::'.$status);
+		} else {
+			$preparedParams[':sync_status'] = $status;
+		}			
+		
+		if($object instanceof IdclickBase){
+			$sql .= ' WHERE '.$this->idclickObjectIdField.'=:'.$this->idclickObjectIdField;
+			$preparedParams[':'.$this->idclickObjectIdField] = $object->getId();
+		}
+		if($object instanceof AdwordsBase){
+			$sql .= ' WHERE '.$this->adwordsObjectIdField.'=:'.$this->adwordsObjectIdField;
+			$preparedParams[':'.$this->adwordsObjectIdField] = $object->getId();
+		}
+		$statement = $this->dbh->prepare($sql);
+		return $statement->execute($preparedParams);		
+	}	
 	
 	/**
 	 * 更新ObjectId对应的数据表同步状态

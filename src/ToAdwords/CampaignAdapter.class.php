@@ -26,6 +26,24 @@ class CampaignAdapter extends AdwordsAdapter{
 	protected $adwordsObjectIdField = 'campaign_id';
 	protected $idclickObjectIdField = 'idclick_planid';
 	
+	protected $dataCheckFilter = array(
+				'CREATE'	=> array(
+					'requiredFields'	=> array(
+						'idclick_planid','idclick_uid','campaign_name','languages',
+						'areas','bidding_type','budget_amount','max_cpc',''
+					),
+					'prohibitedFields'	=> array('sync_status', 'last_action'),
+				),
+				'UPDATE'	=> array(
+					'requiredFields'	=> array('idclick_planid','idclick_uid'),
+					'prohibitedFields'	=> array('sync_status', 'last_action'),
+				),
+				'DELETE'	=> array(
+					'requiredFields'	=> array('idclick_planid','idclick_uid'),
+					'prohibitedFields'	=> array('sync_status', 'last_action'),
+				),
+			);
+	
 	/**
 	 * 添加广告计划
 	 *
@@ -54,8 +72,7 @@ class CampaignAdapter extends AdwordsAdapter{
 		try{			
 			$customerAdapter = new CustomerAdapter();
 			$idclickMember = new Member($data['idclick_uid']);
-			$data['last_action'] = self::ACTION_CREATE;
-			$data['customer_id'] = $customerAdapter->getAdaptedId($idclickMember);
+			$data['last_action'] = self::ACTION_UPDATE;
 			
 			if($this->insertOne($data)){
 				$this->processed++;
@@ -81,7 +98,7 @@ class CampaignAdapter extends AdwordsAdapter{
 	 *
 	 * @param array $data: 要添加的数据，数据结构为
 	 * 		$data = array(
-	 * 			'idclick_planid'	=> 12345,
+	 * 			'idclick_planid'	=> 12345, 
 	 * 			'idclick_uid'		=> 441,
 	 * 			'campaign_name'		=> 'campaign_name',
 	 *			'areas'				=> '10031, 10032',
@@ -105,6 +122,38 @@ class CampaignAdapter extends AdwordsAdapter{
 					'idclick_uid'		=> $data['idclick_uid'],
 				);
 		$newStatus = array_diff_key($data, $conditions);
+		
+		$deniedFields = array('campaign_id', 'customer_id', 'sync_status', 'last_action');		
+		foreach($deniedFields as $deniedField){
+			isset($newStatus[$deniedField]) ? unset($newStatus[$deniedField]) : TRUE;
+		}
+		
+		try{			
+			$customerAdapter = new CustomerAdapter();
+			$idclickMember = new Member($data['idclick_uid']);
+			$data['last_action'] = self::ACTION_CREATE;
+			
+			$data['customer_id'] = $customerAdapter->getAdaptedId($idclickMember);
+			if($data['customer_id'] === FALSE){
+				$this->result['status'] = -1;
+				$this->result['description'] = '内部错误，添加内置账户失败。idclick_uid'
+																.$idclickMember->getId();
+			}
+			
+			if($this->insertOne($data)){
+				$this->processed++;
+				$this->result['success']++;
+				$this->result['description'] = '广告计划添加成功';
+			}
+			return $this->_generateResult();
+		}
+		
+		$conditions = array(
+					'idclick_planid'	=> $data['idclick_planid'],
+					'idclick_uid'		=> $data['idclick_uid'],
+				);
+		$newStatus = array_diff_key($data, $conditions);
+		
 		$newStatus['last_action'] = self::ACTION_UPDATE;
 		//$newStatus['sync_status'] = self::SYNC_STATUS_RECEIVE;
 		if(FALSE !== $this->where($conditions)->save($newStatus)){
@@ -144,7 +193,7 @@ class CampaignAdapter extends AdwordsAdapter{
 			$this->result['failure']++;
 		}
 		return $this->_generateResult();		
-	}
+	}	
 	
 	/**
 	 * 插入新广告系列记录
@@ -162,7 +211,7 @@ class CampaignAdapter extends AdwordsAdapter{
 			$this->dbh->beginTransaction();			
 			$statement = $this->dbh->prepare($sql);
 			$adPlan = new AdPlan($data['idclick_planid']);
-			if($statement->execute($preparedParams) && $this->_createMessageAndPut($data)
+			if($statement->execute($preparedParams) && $this->_createMessageAndPut($data, self::ACTION_CREATE)
 					&& $this->updateSyncStatus(self::SYNC_STATUS_QUEUE, $adPlan)){
 				$this->dbh->commit();
 				return TRUE;
@@ -171,7 +220,7 @@ class CampaignAdapter extends AdwordsAdapter{
 			}
 		} catch (DataCheckException $e){
 			$this->result['status'] = -1;
-			$this->result['description'] = '数据验证未通过。'.$e->getMessage();
+			$this->result['description'] = '数据验证未通过：'.$e->getMessage();
 			return FALSE;
 		} catch (MessageException $e){
 			$this->result['status'] = -1;
@@ -193,17 +242,41 @@ class CampaignAdapter extends AdwordsAdapter{
 		}
 	}
 	
-	/**
-	 * 构建消息并推送至消息队列
-	 *
-	 *
-	 */
-	private function _createMessageAndPut($data){
-		$information = $data;
-		$message = new Message($this->moduleName, self::ACTION_CREATE, $information);
-		return $message->put();
+	private function updateOne($idclickPlanid, $idclickUid, $data){
+		$fields = $this->_arrayToString(array_keys($data));
+		$preparedPlaceholders = $this->_arrayToSpecialString(array_keys($data));
+		$preparedParams = array_combine(explode(',',$preparedPlaceholders), array_values($data));
+		$sql = 'UPDATE `'.$this->tableName.'` ('.$fields.') VALUES ('.$preparedPlaceholders.')';
+		try{
+			$campaignRow = $this->getOne('idclick_planid','idclick_planid='.$data['idclick_planid']);
+			if(!empty($campaignRow)){
+				throw new DataCheckException('广告计划已存在，idclick_planid为.'.$data['idclick_planid']);
+			}
+			$this->dbh->beginTransaction();			
+			$statement = $this->dbh->prepare($sql);
+			$adPlan = new AdPlan($data['idclick_planid']);
+			if($statement->execute($preparedParams) && $this->_createMessageAndPut($data, self::ACTION_CREATE)
+					&& $this->updateSyncStatus(self::SYNC_STATUS_QUEUE, $adPlan)){
+				$this->dbh->commit();
+				return TRUE;
+			} else {
+				throw new Exception('顺序执行插表、发送消息、更新同步状态为QUEUE出错。');
+			}
+		}
 	}
 	
+	private function deleteOne($idclickPlanid, $idclickUid){
+	
+	}
+	
+	/**
+	 * 构建消息并推送至消息队列
+	 */
+	private function _createMessageAndPut($data, $action){
+		$information = $data;
+		$message = new Message($this->moduleName, $action, $information);
+		return $message->put();
+	}
 	
 	
 	
