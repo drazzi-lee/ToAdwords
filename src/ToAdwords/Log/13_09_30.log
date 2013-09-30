@@ -55,3 +55,89 @@
     [idclick_planid] => 15477
 )
 
+[ 2013-09-30T12:43:39+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 123456
+    [idclick_planid] => 51549
+    [idclick_uid] => 441
+    [adgroup_name] => group_name
+    [keywords] => Array
+        (
+            [0] => keywords1
+            [1] => keywords2
+        )
+
+    [budget_amount] => 200
+    [campaign_id] => 1
+)
+
+[ 2013-09-30T12:44:47+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 79640
+    [idclick_planid] => 51549
+    [idclick_uid] => 441
+    [adgroup_name] => group_name
+    [keywords] => Array
+        (
+            [0] => keywords1
+            [1] => keywords2
+        )
+
+    [budget_amount] => 200
+    [campaign_id] => 1
+)
+
+[ 2013-09-30T12:48:23+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 79641
+    [idclick_planid] => 51549
+    [idclick_uid] => 441
+    [adgroup_name] => group_name
+    [keywords] => keywords1,keywords2
+    [budget_amount] => 200
+    [campaign_id] => 1
+)
+
+[ 2013-09-30T12:48:52+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 79642
+    [idclick_planid] => 51549
+    [idclick_uid] => 441
+    [adgroup_name] => group_name
+    [keywords] => keywords1,keywords2
+    [budget_amount] => 200
+    [campaign_id] => 1
+)
+
+[ 2013-09-30T12:49:52+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：AdGroup | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_groupid] => 123456
+    [idclick_uid] => 441
+    [adgroup_name] => group_name2
+    [keywords] => keywords1,keywords2
+    [budget_amount] => 202
+    [last_action] => UPDATE
+)
+
+[ 2013-09-30T12:50:45+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：AdGroup | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_groupid] => 79642
+    [idclick_uid] => 441
+    [adgroup_name] => group_name2
+    [keywords] => keywords1,keywords2
+    [budget_amount] => 400
+    [last_action] => UPDATE
+)
+
+[ 2013-09-30T12:51:05+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：AdGroup | 动作：DELETE | 消息内容：Array
+(
+    [last_action] => DELETE
+    [idclick_groupid] => 123456
+)
+
+[ 2013-09-30T12:51:08+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：AdGroup | 动作：DELETE | 消息内容：Array
+(
+    [last_action] => DELETE
+    [idclick_groupid] => 123456
+)
+

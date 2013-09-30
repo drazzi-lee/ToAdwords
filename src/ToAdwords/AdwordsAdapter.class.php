@@ -9,14 +9,17 @@ use ToAdwords\Object\Base;
 use ToAdwords\Object\Adwords\AdwordsBase;
 use ToAdwords\Object\Idclick\Member;
 use ToAdwords\Object\Idclick\IdclickBase;
-use \PDO;
-use \PDOException;
-use \Exception;
 use ToAdwords\Util\Log;
+use ToAdwords\Util\Message;
 use ToAdwords\CustomerAdapter;
 use ToAdwords\Exceptions\DependencyException;
 use ToAdwords\Exceptions\SyncStatusException;
 use ToAdwords\Exceptions\DataCheckException;
+use ToAdwords\Exceptions\MessageException;
+
+use \PDO;
+use \PDOException;
+use \Exception;
 
 abstract class AdwordsAdapter implements Adapter{
 	/**
@@ -374,8 +377,7 @@ abstract class AdwordsAdapter implements Adapter{
 	/**
 	 * Generate process result.
 	 */
-	protected function generateResult(){
-		
+	protected function generateResult(){		
 		if($this->result['status'] == -1){
 			return $this->result;
 		}
@@ -389,6 +391,15 @@ abstract class AdwordsAdapter implements Adapter{
 				. "，成功{$this->result['success']}条，失败{$this->result['failure']}条。";
 		}
 		return $this->result;
+	}
+	
+	/**
+	 * 构建消息并推送至消息队列
+	 */
+	protected function createMessageAndPut(array $data, $action){
+		$information = $data;
+		$message = new Message($this->moduleName, $action, $information);
+		return $message->put();
 	}
 	
 	/**

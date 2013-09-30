@@ -8,10 +8,11 @@ use ToAdwords\Util\Log;
 use ToAdwords\Util\Message;
 use ToAdwords\Object\Idclick\Member;
 use ToAdwords\Object\Idclick\AdPlan;
-use ToAdwords\Exceptions\DataCheckException;
-use ToAdwords\Exceptions\SyncStatusException;
 use ToAdwords\Exceptions\DependencyException;
+use ToAdwords\Exceptions\SyncStatusException;
+use ToAdwords\Exceptions\DataCheckException;
 use ToAdwords\Exceptions\MessageException;
+
 use \Exception;
 use \PDOException;
 
@@ -62,25 +63,24 @@ class CampaignAdapter extends AdwordsAdapter{
 	 * 		);
 	 * @return array $result
 	 */
-	public function create(array $data){		
-		if(self::IS_CHECK_DATA && !$this->_checkData($data, self::ACTION_CREATE)){		
-			$this->result['status'] = -1;
-			$this->result['description'] = self::DESC_DATA_CHECK_FAILURE;
-			return $this->result;
-		}
-		
-		try{			
+	public function create(array $data){
+		try{
+			if(self::IS_CHECK_DATA && !$this->_checkData($data, self::ACTION_CREATE)){		
+				throw new DataCheckException(self::DESC_DATA_CHECK_FAILURE);
+			}
+			
+			$campaignRow = $this->getOne('idclick_planid','idclick_planid='.$data['idclick_planid']);
+			if(!empty($campaignRow)){
+				throw new DataCheckException('广告计划已存在，idclick_planid为'.$data['idclick_planid']);
+			}
+			
 			$customerAdapter = new CustomerAdapter();
 			$idclickMember = new Member($data['idclick_uid']);
 			$data['customer_id'] = $customerAdapter->getAdaptedId($idclickMember);
 			
-			$campaignRow = $this->getOne('idclick_planid','idclick_planid='.$data['idclick_planid']);
-			if(!empty($campaignRow)){
-				throw new DataCheckException('广告计划已存在，idclick_planid为.'.$data['idclick_planid']);
-			}
 			$this->dbh->beginTransaction();
 			$adPlan = new AdPlan($data['idclick_planid']);
-			if($this->insertOne($data) && $this->_createMessageAndPut($data, self::ACTION_CREATE)
+			if($this->insertOne($data) && $this->createMessageAndPut($data, self::ACTION_CREATE)
 					&& $this->updateSyncStatus(self::SYNC_STATUS_QUEUE, $adPlan)){
 				$this->dbh->commit();
 				$this->processed++;
@@ -105,13 +105,15 @@ class CampaignAdapter extends AdwordsAdapter{
 		}catch (PDOException $e){
 			$this->dbh->rollBack();
 			$this->result['status'] = -1;
-			$this->result['description'] = '在Campaign表新插入一行失败，事务已回滚，idclick_planid为'.$data['idclick_planid']
+			$this->result['description'] = '数据表新插入一行失败，事务已回滚，idclick_planid为'.$data['idclick_planid']
 									.' ==》'.$e->getMessage();
-			Log::write('在Campaign表新插入一行失败，事务已回滚，idclick_planid为'.$data['idclick_planid']
+			Log::write('数据表新插入一行失败，事务已回滚，idclick_planid为'.$data['idclick_planid']
 									.' ==》'.$e->getMessage(), __METHOD__);	
 			return $this->generateResult();
 		} catch (Exception $e){
-			$this->dbh->rollBack();
+			if($this->dbh->inTransaction()){
+				$this->dbh->rollBack();
+			}
 			$this->result['status'] = -1;
 			$this->result['description'] = $e->getMessage();
 			return $this->generateResult();
@@ -135,14 +137,17 @@ class CampaignAdapter extends AdwordsAdapter{
 	 * 		);
 	 * @return array $result
 	 */
-	public function update(array $data){
-		if(self::IS_CHECK_DATA && !$this->_checkData($data, 'UPDATE')){
-			$this->result['status'] = -1;
-			$this->result['description'] = self::DESC_DATA_CHECK_FAILURE;
-			return $this->result;
-		}
-		
+	public function update(array $data){		
 		try{
+			if(self::IS_CHECK_DATA && !$this->_checkData($data, self::ACTION_CREATE)){		
+				throw new DataCheckException(self::DESC_DATA_CHECK_FAILURE);
+			}
+			
+			$campaignRow = $this->getOne('idclick_planid','idclick_planid='.$data['idclick_planid']);
+			if(empty($campaignRow)){
+				throw new DataCheckException('广告计划未找到，idclick_planid为'.$data['idclick_planid']);
+			}
+			
 			$data['last_action'] = isset($data['last_action']) ? $data['last_action'] : self::ACTION_UPDATE;
 			$conditions = 'idclick_planid='.$data['idclick_planid'];
 			$conditionsArray = array(
@@ -150,15 +155,9 @@ class CampaignAdapter extends AdwordsAdapter{
 					);
 			$newData = array_diff_key($data, $conditionsArray);
 			
-			//检查广告计划是否存在
-			$campaignRow = $this->getOne('idclick_planid','idclick_planid='.$data['idclick_planid']);
-			if(empty($campaignRow)){
-				throw new DataCheckException('广告计划未找到，idclick_planid为.'.$data['idclick_planid']);
-			}
-			
 			$this->dbh->beginTransaction();
 			$adPlan = new AdPlan($data['idclick_planid']);
-			if($this->updateOne($conditions, $newData) && $this->_createMessageAndPut($data, self::ACTION_UPDATE)
+			if($this->updateOne($conditions, $newData) && $this->createMessageAndPut($data, $data['last_action'])
 					&& $this->updateSyncStatus(self::SYNC_STATUS_QUEUE, $adPlan)){
 				$this->dbh->commit();
 				$this->processed++;
@@ -183,13 +182,15 @@ class CampaignAdapter extends AdwordsAdapter{
 		} catch (PDOException $e){
 			$this->dbh->rollBack();
 			$this->result['status'] = -1;
-			$this->result['description'] = '在Campaign表操作失败，事务已回滚，idclick_planid为'.$data['idclick_planid']
+			$this->result['description'] = '数据表操作失败，事务已回滚，idclick_planid为'.$data['idclick_planid']
 									.' ==》'.$e->getMessage();
-			Log::write('在Campaign表操作失败，事务已回滚，idclick_planid为'.$data['idclick_planid']
+			Log::write('数据表操作失败，事务已回滚，idclick_planid为'.$data['idclick_planid']
 									.' ==》'.$e->getMessage(), __METHOD__);	
 			return $this->generateResult();
 		} catch (Exception $e){
-			$this->dbh->rollBack();
+			if($this->dbh->inTransaction()){
+				$this->dbh->rollBack();
+			}
 			$this->result['status'] = -1;
 			$this->result['description'] = $e->getMessage();
 			return $this->generateResult();
@@ -214,13 +215,5 @@ class CampaignAdapter extends AdwordsAdapter{
 		return $this->update($infoForRemove);
 	}
 	
-	/**
-	 * 构建消息并推送至消息队列
-	 */
-	private function _createMessageAndPut(array $data, $action){
-		$information = $data;
-		$message = new Message($this->moduleName, $action, $information);
-		return $message->put();
-	}
-	
+		
 }
