@@ -138,12 +138,12 @@ abstract class AdwordsAdapter implements Adapter{
 	 */
 	protected function select($fields='*', $conditions, $limit = '1000'){
 		$sql = 'SELECT '.$fields.' FROM `'.$this->tableName.'`';	
-		$preparedParams = array();
+		$paramValues = array();
 		
 		if(!empty($conditions)){
-			$preparedConditions = $this->prepareConditions($conditions);
-			$sql .= ' WHERE '.$preparedConditions['preparedWhere'];
-			$preparedParams = $preparedConditions['preparedParams'];
+			$preparedConditions = $this->prepareSelect($conditions);
+			$sql .= ' WHERE '.$preparedConditions['placeHolders'];
+			$paramValues = $preparedConditions['paramValues'];
 		}
 		
 		if(!is_numeric($limit)){
@@ -154,7 +154,7 @@ abstract class AdwordsAdapter implements Adapter{
 		$sql .= ' LIMIT '.$limit;
 		
 		$statement = $this->dbh->prepare($sql);
-		$statement->execute($preparedParams);
+		$statement->execute($paramValues);
 		return $statement;	
 	}
 	
@@ -163,28 +163,66 @@ abstract class AdwordsAdapter implements Adapter{
 	 *
 	 * @param string $conditions: $conditions = 'id=1234 AND name="Bob"';
 	 * @return array $preparedConditions: array( 
-	 *					'preparedWhere' 	=> 'WHERE id=:id AND name=:name',
-	 *					'preparedParams'	=> array(':id' => '1234', ':name' => 'Bob'),
+	 *					'placeHolders' 	=> 'WHERE id=:id AND name=:name',
+	 *					'paramValues'	=> array(':id' => '1234', ':name' => 'Bob'),
 	 *				);
 	 */
-	protected function prepareConditions($conditions){
+	protected function prepareSelect($conditions){
 		if(empty($conditions)){
 			return NULL;
 		}
-		$preparedWhere = preg_replace('/(\w+)(>|=|<)(\S+)/', '$1$2:$1', $conditions);
+		$placeHolders = preg_replace('/(\w+)(>|=|<)(\S+)/', '$1$2:$1', $conditions);
 		$conditionsArray = preg_grep('/(\w+)(>|=|<)(\S+)/', preg_split('/(\s+)/', $conditions));
-		$preparedParams = array();
+		$paramValues = array();
 		foreach($conditionsArray as $condition){			
 			$conditionSplited = explode('=', $condition);
-			$preparedParams[':'.$conditionSplited[0]] = $conditionSplited[1];
+			$paramValues[':'.$conditionSplited[0]] = $conditionSplited[1];
 		}
-		if(0 == count($preparedParams)){
+		if(0 == count($paramValues)){
 			if('ENVIRONMENT' == 'development')
 				throw new DataCheckException('解析查询条件失败，请检查是否符合语法'.__METHOD__);
 			return NULL;
 		}
-		return array('preparedWhere' => $preparedWhere, 'preparedParams' => $preparedParams);
-	}	
+		return array('placeHolders' => $placeHolders, 'paramValues' => $paramValues);
+	}
+
+	/**
+	 * 根据当前类型准备PlaceHolder和Params
+	 *
+	 * @param array $data: 当前需要操作的数据信息
+	 */
+	protected function prepareInsert($data){
+		$fieldsCombine = $this->arrayToString(array_keys($data));
+		$placeHolders = $this->arrayToSpecialString(array_keys($data));
+		$paramValues = array_combine(explode(',',$placeHolders), array_values($data));
+		return array(
+			'placeHolders' => array(
+				'value'=>$placeHolders,
+				'field'=>$fieldsCombine
+			),
+			'paramValues' => $paramValues
+		);
+	}
+	
+	/**
+	 *
+	 * @param string $conditions
+	 */
+	protected function prepareUpdate($data, $conditions){
+		$where = $this->prepareSelect($conditions);
+		$placeHoldersArray = array();
+		$paramValuesData = array();
+		foreach($data as $key => $value){
+			$placeHoldersArray[] = $key.'=:'.$key;
+			$paramValuesData[':'.$key] = $value;
+		}
+		$placeHolders = $this->arrayToString($placeHoldersArray);
+		$paramValues = array_merge($where['paramValues'], $paramValuesData);
+		return array(
+			'placeHolders' 		=> $placeHolders,
+			'placeHoldersWhere' => $where['placeHolders'],
+			'paramValues' 		=> $paramValues);
+	}
 	
 	/**
 	 * 向数据表插入一条信息
@@ -194,38 +232,30 @@ abstract class AdwordsAdapter implements Adapter{
 	 * @throw PDOException,DataCheckException
 	 */
 	public function insertOne($data){
-	
+		$preparedInsert = $this->prepareInsert($data);
+		$sql = 'INSERT INTO `' . $this->tableName.'`'
+				. ' (' . $preparedInsert['placeHolders']['field'] . ')'
+				. ' VALUES (' .$preparedInsert['placeHolders']['value'] . ')';
+		$statement = $this->dbh->prepare($sql);
+		return $statement->execute($preparedInsert['paramValues']);
 	}
 	
 	/**
 	 * 更新数据表某条信息
 	 *
-	 * @param string $uniqueId: 当前操作表唯一ID字段值
+	 * @param string $conditions: 更新条件，一般为unique_id=123形式
 	 * @param array $data: 更新内容
 	 * @return boolean: TRUE, FALSE
 	 * @throw PDOException,DataCheckException
 	 */
-	public function updateOne($uniqueId, array $data){
-		$sql = 'UPDATE `'.$this->tableName.'` SET sync_status=:sync_status';		
-		$preparedParams = array();
+	public function updateOne($conditions, array $data){
+		$preparedUpdates = $this->prepareUpdate($data, $conditions);
 		
-		if(!in_array($status, array(self::SYNC_STATUS_QUEUE, self::SYNC_STATUS_RECEIVE,
-				self::SYNC_STATUS_SYNCED, self::SYNC_STATUS_ERROR))){
-			throw new DataCheckException('SYNC_STATUS未被允许的同步状态类型::'.$status);
-		} else {
-			$preparedParams[':sync_status'] = $status;
-		}			
+		$sql = 'UPDATE `' . $this->tableName . '` SET '. $preparedUpdates['placeHolders']
+							. ' WHERE ' . $preparedUpdates['placeHoldersWhere'];	
 		
-		if($object instanceof IdclickBase){
-			$sql .= ' WHERE '.$this->idclickObjectIdField.'=:'.$this->idclickObjectIdField;
-			$preparedParams[':'.$this->idclickObjectIdField] = $object->getId();
-		}
-		if($object instanceof AdwordsBase){
-			$sql .= ' WHERE '.$this->adwordsObjectIdField.'=:'.$this->adwordsObjectIdField;
-			$preparedParams[':'.$this->adwordsObjectIdField] = $object->getId();
-		}
 		$statement = $this->dbh->prepare($sql);
-		return $statement->execute($preparedParams);		
+		return $statement->execute($preparedUpdates['paramValues']);		
 	}	
 	
 	/**
@@ -299,7 +329,7 @@ abstract class AdwordsAdapter implements Adapter{
 			switch($row[$this->fieldSyncStatus]){
 				case self::SYNC_STATUS_SYNCED:
 					if(empty($row[$this->adwordsObjectIdField])) {
-						throw new SyncStatusException('发现一条异常信息，已同步状态但是没有ADWORDS
+						throw new SyncStatusException('已同步状态但是没有ADWORDS
 								对应信息IdclickId为'.$object->getId().' 对象：'.get_class($object));
 					}
 					return $row[$this->adwordsObjectIdField];
@@ -313,12 +343,11 @@ abstract class AdwordsAdapter implements Adapter{
 				//case self::SYNC_STATUS_RECEIVE:
 				//case self::SYNC_STATUS_ERROR:
 				default:
-					throw new SyncStatusException('发现一条异常的错误状态，对象:'.get_class($object).
-																	'  objectId'.$object->getId());
+					throw new SyncStatusException('对象:'.get_class($object).' objectId'.$object->getId());
 			}
 		} else {
 			if($object instanceof Member){
-				return $this->insertOne($object->getId());
+				return $this->create($object->getId());
 			} else {
 				throw new DependencyException('还没有创建上级依赖，请先创建上级对象:'.get_class($this));
 			}
@@ -334,18 +363,18 @@ abstract class AdwordsAdapter implements Adapter{
 	 * @param array $array
 	 * @return string
 	 */
-	protected function _arrayToString(array $array){
+	protected function arrayToString(array $array){
 		return implode(',', $array);
 	}
 	
-	protected function _arrayToSpecialString(array $array){
+	protected function arrayToSpecialString(array $array){
 		return ':'.implode(',:', $array);
 	}
 	
 	/**
 	 * Generate process result.
 	 */
-	protected function _generateResult(){
+	protected function generateResult(){
 		
 		if($this->result['status'] == -1){
 			return $this->result;
@@ -368,7 +397,7 @@ abstract class AdwordsAdapter implements Adapter{
 	 * @param string $action: self::ACTION_CREATE ACTION_UPDATE ACTION_DELETE
 	 * @param array $data
 	 */
-	protected function _queuePut($action, array $data) {
+	protected function queuePut($action, array $data) {
 	
 		// put data to queue.
 		$message_combine = array(

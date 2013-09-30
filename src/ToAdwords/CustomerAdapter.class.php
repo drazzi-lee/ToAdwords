@@ -30,16 +30,14 @@ class CustomerAdapter extends AdwordsAdapter{
 	 * @param string $idclickUid: Idclick用户ID
 	 * @return boolean: TRUE, FALSE
 	 */
-	protected function insertOne($idclickUid){
+	protected function create($idclickUid){
 		$sql = 'INSERT INTO `'.$this->tableName.'` ('.$this->idclickObjectIdField.',last_action)
 						VALUES (:'.$this->idclickObjectIdField.', :last_action)';
 		try{
-			$this->dbh->beginTransaction();			
-			$statement = $this->dbh->prepare($sql);
-			$statement->bindValue(':'.$this->idclickObjectIdField, $idclickUid, PDO::PARAM_STR);
-			$statement->bindValue(':last_action', self::ACTION_CREATE, PDO::PARAM_STR);
+			$this->dbh->beginTransaction();
 			$member = new Member($idclickUid);
-			if($statement->execute() && $this->_createMessageAndPut($idclickUid)
+			if($this->insertOne(array('idclick_uid' => $idclickUid)) 
+					&& $this->_createMessageAndPut($idclickUid)
 					&& $this->updateSyncStatus(self::SYNC_STATUS_QUEUE, $member)){
 				$this->dbh->commit();
 				return TRUE;
@@ -50,11 +48,19 @@ class CustomerAdapter extends AdwordsAdapter{
 		} catch (PDOException $e){
 			$this->dbh->rollBack();
 			if(ENVIRONMENT == 'development'){
-				trigger_error('在Customer表新插入一行失败，事务已回滚，idclick_uid为'.$idclickUid
-									.' ==》'.$e->getMessage(), E_USER_ERROR);
+				echo '在Customer表新插入一行失败，事务已回滚，idclick_uid为'.$idclickUid
+									.' ==》'.$e->getMessage();
 			} else {
 				Log::write('在Customer表新插入一行失败，事务已回滚，idclick_uid为'.$idclickUid
 									.' ==》'.$e->getMessage(), __METHOD__);					
+			}
+			return FALSE;
+		} catch (Exception $e){
+			$this->dbh->rollBack();
+			if(ENVIRONMENT == 'development'){
+				echo $e->getMessage();
+			} else {
+				Log::write($e->getMessage(), __METHOD__);					
 			}
 			return FALSE;
 		}

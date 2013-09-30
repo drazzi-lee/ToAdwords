@@ -12,7 +12,7 @@ class Message{
 	private $module;
 	private $action;
 	private $information;
-	private $needRecheck;
+	private $needRecheck; //消息中暂不需要这一信息，方案是取出消息阶段自动对上级依赖关系进行检查。
 
 	public function __construct($module, $action, array $information, array $needRecheck = array()){
 		if(in_array($module, self::$modules)){			
