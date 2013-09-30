@@ -45,6 +45,28 @@ class CampaignAdapter extends AdwordsAdapter{
 			);
 	
 	/**
+	 * 封装update create为run方法供thrift使用
+	 */
+	public function run(array $data){
+		try{
+			if(empty($data['idclick_planid']) || empty($data['idclick_uid'])){
+				throw new DataCheckException('基本数据缺失。idclick_uid及idclick_planid为必需。');
+			}
+			
+			$campaignRow = $this->getOne('idclick_planid','idclick_planid='.$data['idclick_planid']);
+			if(!empty($campaignRow)){
+				return $this->update($data);
+			} else {
+				return $this->create($data);
+			}
+		} catch (DataCheckException $e){
+			$this->result['status'] = -1;
+			$this->result['description'] = '数据验证未通过：'.$e->getMessage();
+			return $this->generateResult();
+		}
+	}
+	
+	/**
 	 * 添加广告计划
 	 *
 	 * @param array $data: 要添加的数据，数据结构为

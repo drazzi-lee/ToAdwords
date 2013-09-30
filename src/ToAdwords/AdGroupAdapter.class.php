@@ -43,6 +43,28 @@ class AdGroupAdapter extends AdwordsAdapter{
 			);
 	
 	/**
+	 * 封装update create为run方法供thrift使用
+	 */
+	public function run(array $data){
+		try{
+			if(empty($data['idclick_groupid']) || empty($data['idclick_planid'])){
+				throw new DataCheckException('基本数据缺失，idclick_planid及idclick_groupid为必需。');
+			}
+			
+			$adGroupRow = $this->getOne('idclick_groupid','idclick_groupid='.$data['idclick_groupid']);
+			if(!empty($adGroupRow)){
+				return $this->update($data);
+			} else {
+				return $this->create($data);
+			}
+		} catch (DataCheckException $e){
+			$this->result['status'] = -1;
+			$this->result['description'] = '数据验证未通过：'.$e->getMessage();
+			return $this->generateResult();
+		}
+	}
+	
+	/**
 	 * 添加广告组
 	 *
 	 * @param array $data: 要添加的数据，数据结构为
