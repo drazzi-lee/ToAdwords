@@ -9,7 +9,7 @@
 
 2. 配置src/ToAdwords/bootstrap.inc.php；
 3. 编写外部脚本，调用Adapter；
-	`require_once('src/ToAdwords/bootstrap.inc.php');
+	require_once('src/ToAdwords/bootstrap.inc.php');
 
-	use ToAdwords\CampaignAdapter;`
+	use ToAdwords\CampaignAdapter;
 
