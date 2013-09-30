@@ -17,8 +17,8 @@ class TestAction{
 	
 	public function createCampaign(){
 		$data = array(
-				'idclick_planid' => 12345,
-				'idclick_uid' => 512,
+				'idclick_planid' => 51556,
+				'idclick_uid' => 523,
 				'campaign_name' => 'campaign_name #' . uniqid(),
 				'areas' => '10031,10032',
 				'languages' => '10031,10032',
@@ -33,7 +33,7 @@ class TestAction{
 	
 	public function deleteCampaign(){
 		$data = array (
-				'idclick_planid' => 12345,
+				'idclick_planid' => 15477,
 		);
 		$campaignModel = new CampaignModel();
 		var_dump($campaignModel->deleteCampaign($data));
@@ -41,9 +41,8 @@ class TestAction{
 	
 	public function updateCampaign(){
 		$data = array (
-				'idclick_planid' => 12345,
-				'idclick_uid'	 => 441,
-				'budget_amount'		=> 32333,
+				'idclick_planid' => 51556,
+				'budget_amount'		=> 32334,
 				'campaign_status'	=> 'ACTIVE',
 		);
 		$campaignModel = new CampaignModel();
@@ -119,6 +118,8 @@ class TestAction{
 		var_dump($groupAd->deleteAd($data));
 	}
 }
+header('Content-Type: text/html;charset=utf-8');
+header("Cache-Control: private, no-cache, no-store, proxy-revalidate, no-transform");
 echo '<pre>';
 $testAction = new TestAction();
-$testAction->createAd();
+$testAction->deleteCampaign();
