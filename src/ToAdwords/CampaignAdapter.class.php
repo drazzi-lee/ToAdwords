@@ -8,7 +8,6 @@ use ToAdwords\Util\Log;
 use ToAdwords\Util\Message;
 use ToAdwords\Object\Idclick\Member;
 use ToAdwords\Object\Idclick\AdPlan;
-use ToAdwords\Exceptions\DependencyException;
 use ToAdwords\Exceptions\SyncStatusException;
 use ToAdwords\Exceptions\DataCheckException;
 use ToAdwords\Exceptions\MessageException;
@@ -197,23 +196,17 @@ class CampaignAdapter extends AdwordsAdapter{
 		}	
 	}
 	
-	/**
-	 * 删除广告计划
-	 * @param array $data
-	 */
 	public function delete(array $data){
 		if(self::IS_CHECK_DATA && !$this->_checkData($data, 'DELETE')){
 			$this->result['status'] = -1;
 			$this->result['description'] = self::DESC_DATA_CHECK_FAILURE;
-			return $this->result;
+			return $this->_generateResult();
 		}
 		
 		$infoForRemove = array();
 		$infoForRemove['last_action'] = self::ACTION_DELETE;
-		$infoForRemove['idclick_planid'] = $data['idclick_planid'];
+		$infoForRemove[$this->idclickObjectIdField] = $data[$this->idclickObjectIdField];
 		
 		return $this->update($infoForRemove);
 	}
-	
-		
 }

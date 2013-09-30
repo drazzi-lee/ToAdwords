@@ -22,12 +22,12 @@ class GroupModel{
 	 * @param array $data: 要添加的数据，数据结构为
 	 * 		$data = array(
 	 *			'idclick_groupid'	=> 123456,
-	 * 			'idclick_planid'	=> 12345,
-	 * 			'idclick_uid'		=> 441,			
+	 * 			'idclick_planid'	=> 12345,		
 	 *			'adgroup_name'		=> 'group_name',
 	 *			'keywords'			=> array('keywords1', 'keywords2'),
 	 *			'budget_amount'		=> 200.00,	
 	 * 		);
+	 *		注意：创建时父级依赖idclick_planid为必需
 	 * @return array $result
 	 */
 	public function createAdgroup($data){

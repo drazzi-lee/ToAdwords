@@ -5,7 +5,6 @@ namespace ToAdwords;
 use ToAdwords\AdwordsAdapter;
 use ToAdwords\CampaignAdapter;
 use ToAdwords\Util\Log;
-
 use ToAdwords\Object\Idclick\AdPlan;
 use ToAdwords\Object\Idclick\AdGroup;
 use ToAdwords\Exceptions\DependencyException;
@@ -52,7 +51,11 @@ class AdGroupAdapter extends AdwordsAdapter{
 			}
 			
 			$campaignAdapter = new CampaignAdapter();
-			$adPlan = new AdPlan($data['idclick_planid']);
+			$campaignRow = $campaignAdapter->getOne('idclick_planid', 'idclick_planid='.$data['idclick_planid']);
+			if(empty($campaignRow)){
+				throw new DependencyException('父级依赖还未添加，父级对象IdclickPlanId为'.$data['idclick_planid']);
+			}
+			$adPlan = new AdPlan($data['idclick_planid']);			
 			$data['campaign_id'] = $campaignAdapter->getAdaptedId($adPlan);
 			
 			$this->dbh->beginTransaction();
@@ -71,6 +74,10 @@ class AdGroupAdapter extends AdwordsAdapter{
 			$this->result['status'] = -1;
 			$this->result['description'] = '数据验证未通过：'.$e->getMessage();
 			return $this->generateResult();
+		} catch (DependencyException $e){
+			$this->result['status'] = -1;
+			$this->result['description'] = '依赖关系错误：'.$e->getMessage();
+			return $this->generateResult();		
 		} catch (MessageException $e){
 			$this->result['status'] = -1;
 			$this->result['description'] = '消息过程异常：'.$e->getMessage();
@@ -135,7 +142,7 @@ class AdGroupAdapter extends AdwordsAdapter{
 				$this->dbh->commit();
 				$this->processed++;
 				$this->result['success']++;
-				$this->result['description'] = '广告计划操作成功';
+				$this->result['description'] = '广告计划'.$data['last_action'].'操作成功';
 				return $this->generateResult();
 			} else {
 				throw new Exception('顺序操作数据表、发送消息、更新同步状态为QUEUE出错。');
@@ -179,7 +186,7 @@ class AdGroupAdapter extends AdwordsAdapter{
 		
 		$infoForRemove = array();
 		$infoForRemove['last_action'] = self::ACTION_DELETE;
-		$infoForRemove['idclick_groupid'] = $data['idclick_groupid'];
+		$infoForRemove[$this->idclickObjectIdField] = $data[$this->idclickObjectIdField];
 		
 		return $this->update($infoForRemove);
 	}

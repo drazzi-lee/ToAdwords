@@ -16,8 +16,7 @@ class GroupadModel{
 	 *
 	 * @param array $data: 要添加的数据，数据结构为
 	 * 		$data = array(
-	 * 			'idclick_adid'		=> 12345,
-	 * 			'idclick_uid'		=> 441,			
+	 * 			'idclick_adid'		=> 12345,		
 	 *			'idclick_groupid'	=> 123456,
 	 *			'ad_headline'		=> 'headline',
 	 *			'ad_description1'	=> 'description1',
@@ -25,6 +24,7 @@ class GroupadModel{
 	 *			'ad_url'			=> 'http://www.izptec.com/go.php',
 	 *			'ad_displayurl'		=> 'http://www.izptec.com/',
 	 * 		);
+	 *		注意：创建时父级依赖idclick_groupid为必需
 	 * @return array $result
 	 */
 	public function createAd(array $data){
@@ -37,7 +37,6 @@ class GroupadModel{
 	 * @param array $data: 要更新的数据，数据结构为
 	 * 		$data = array(
 	 * 			'idclick_adid'		=> 12345,
-	 * 			'idclick_groupid'	=> 123456,
 	 *			'ad_headline'		=> 'headline', //可选
 	 *			'ad_description1'	=> 'description1', //可选
 	 *			'ad_description2'	=> 'description2', //可选
@@ -56,7 +55,6 @@ class GroupadModel{
 	 * @param array $data: 要删除的数据，数据结构为
 	 * 		$data = array(
 	 * 			'idclick_adid'		=> 12345,
-	 * 			'idclick_groupid'	=> 123456,
 	 *			'ad_headline'		=> 'headline', //可选
 	 *			'ad_description1'	=> 'description1', //可选
 	 *			'ad_description2'	=> 'description2', //可选

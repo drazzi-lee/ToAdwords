@@ -32,6 +32,7 @@ class CampaignModel{
 	 *			'max_cpc'			=> 2.00,
 	 *			'campaign_status'	=> 'ACTIVE',
 	 * 		);
+	 * 		注意：创建时父级依赖idclick_uid为必需
 	 * @return array $result
 	 */
 	public function createCampaign(array $data){
