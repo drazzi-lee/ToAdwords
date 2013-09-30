@@ -4,7 +4,7 @@
 
 - 这个项目还在开发中，部分功能缺失或存在较大BUG。
 
-###How To Use
+###如何使用
 1. 使用toadwords.sql创建MySQL数据库；
 
 2. 配置src/ToAdwords/bootstrap.inc.php；
