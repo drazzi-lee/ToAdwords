@@ -30,17 +30,17 @@ class CampaignAdapter extends AdwordsAdapter{
 				'CREATE'	=> array(
 					'requiredFields'	=> array(
 						'idclick_planid','idclick_uid','campaign_name','languages',
-						'areas','bidding_type','budget_amount','max_cpc',''
+						'areas','bidding_type','budget_amount','max_cpc'
 					),
-					'prohibitedFields'	=> array('sync_status', 'last_action'),
+					'prohibitedFields'	=> array('sync_status','campaign_id','customer_id'),
 				),
 				'UPDATE'	=> array(
 					'requiredFields'	=> array('idclick_planid'),
-					'prohibitedFields'	=> array('sync_status', 'last_action'),
+					'prohibitedFields'	=> array('sync_status','campaign_id','customer_id'),
 				),
 				'DELETE'	=> array(
 					'requiredFields'	=> array('idclick_planid'),
-					'prohibitedFields'	=> array('sync_status', 'last_action'),
+					'prohibitedFields'	=> array('sync_status','campaign_id','customer_id'),
 				),
 			);
 	
@@ -64,7 +64,7 @@ class CampaignAdapter extends AdwordsAdapter{
 	 */
 	public function create(array $data){
 		try{
-			if(self::IS_CHECK_DATA && !$this->_checkData($data, self::ACTION_CREATE)){		
+			if(self::IS_CHECK_DATA && !$this->checkData($data, self::ACTION_CREATE)){		
 				throw new DataCheckException(self::DESC_DATA_CHECK_FAILURE);
 			}
 			
@@ -138,7 +138,7 @@ class CampaignAdapter extends AdwordsAdapter{
 	 */
 	public function update(array $data){		
 		try{
-			if(self::IS_CHECK_DATA && !$this->_checkData($data, self::ACTION_CREATE)){		
+			if(self::IS_CHECK_DATA && !$this->checkData($data, self::ACTION_UPDATE)){		
 				throw new DataCheckException(self::DESC_DATA_CHECK_FAILURE);
 			}
 			
@@ -196,8 +196,25 @@ class CampaignAdapter extends AdwordsAdapter{
 		}	
 	}
 	
+	/**
+	 * 更新广告计划
+	 *
+	 * @param array $data: 要添加的数据，数据结构为
+	 * 		$data = array(
+	 * 			'idclick_planid'	=> 12345, 
+	 * 			'idclick_uid'		=> 441,
+	 * 			'campaign_name'		=> 'campaign_name',
+	 *			'areas'				=> '10031, 10032',
+	 *			'languages'			=> '10031, 10032',
+	 *			'bidding_type'		=> 1,
+	 *			'budget_amount'		=> 200.00,
+	 *			'delivery_method'	=> 'ACCELERATED',
+	 *			'max_cpc'			=> 2.00,
+	 * 		);
+	 * @return array $result
+	 */
 	public function delete(array $data){
-		if(self::IS_CHECK_DATA && !$this->_checkData($data, 'DELETE')){
+		if(self::IS_CHECK_DATA && !$this->checkData($data, self::ACTION_DELETE)){
 			$this->result['status'] = -1;
 			$this->result['description'] = self::DESC_DATA_CHECK_FAILURE;
 			return $this->_generateResult();
@@ -206,7 +223,7 @@ class CampaignAdapter extends AdwordsAdapter{
 		$infoForRemove = array();
 		$infoForRemove['last_action'] = self::ACTION_DELETE;
 		$infoForRemove[$this->idclickObjectIdField] = $data[$this->idclickObjectIdField];
-		
+
 		return $this->update($infoForRemove);
 	}
 }

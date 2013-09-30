@@ -258,3 +258,43 @@
     [adgroup_id] => 1
 )
 
+[ 2013-09-30T15:35:13+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 51556
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-09-30T15:35:17+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 51556
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-09-30T15:35:31+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 15477
+    [last_action] => UPDATE
+)
+
+[ 2013-09-30T15:36:32+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 15477
+    [last_action] => UPDATE
+)
+
+[ 2013-09-30T15:47:58+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：DELETE | 消息内容：Array
+(
+    [last_action] => DELETE
+    [idclick_planid] => 15477
+)
+
+[ 2013-09-30T15:48:06+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：DELETE | 消息内容：Array
+(
+    [last_action] => DELETE
+    [idclick_planid] => 15477
+)
+

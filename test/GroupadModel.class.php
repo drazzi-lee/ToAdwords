@@ -25,7 +25,14 @@ class GroupadModel{
 	 *			'ad_displayurl'		=> 'http://www.izptec.com/',
 	 * 		);
 	 *		注意：创建时父级依赖idclick_groupid为必需
-	 * @return array $result
+	 * @return <array> $result:
+	 *		$result = array(
+	 *			'status'	=> 1,	//1：成功；0：失败或者部分失败
+	 *									-1: 提供参数不完整或解析失败
+	 *			'success'	=> 7,	//成功更新的内容计数
+	 *			'failure'	=> 0	//如果status不为1，则failure有计数
+	 *			'description'	=> 文字描述
+	 *		);
 	 */
 	public function createAd(array $data){
 		return $this->adGroupAdAdapter->create($data);
@@ -43,7 +50,14 @@ class GroupadModel{
 	 *			'ad_url'			=> 'http://www.izptec.com/go.php', //可选
 	 *			'ad_displayurl'		=> 'http://www.izptec.com/', //可选
 	 * 		);
-	 * @return array $result
+	 * @return <array> $result:
+	 *		$result = array(
+	 *			'status'	=> 1,	//1：成功；0：失败或者部分失败
+	 *									-1: 提供参数不完整或解析失败
+	 *			'success'	=> 7,	//成功更新的内容计数
+	 *			'failure'	=> 0	//如果status不为1，则failure有计数
+	 *			'description'	=> 文字描述
+	 *		);
 	 */	
 	public function updateAd(array $data){
 		return $this->adGroupAdAdapter->update($data);
@@ -61,7 +75,14 @@ class GroupadModel{
 	 *			'ad_url'			=> 'http://www.izptec.com/go.php', //可选
 	 *			'ad_displayurl'		=> 'http://www.izptec.com/', //可选
 	 * 		);
-	 * @return array $result
+	 * @return <array> $result:
+	 *		$result = array(
+	 *			'status'	=> 1,	//1：成功；0：失败或者部分失败
+	 *									-1: 提供参数不完整或解析失败
+	 *			'success'	=> 7,	//成功更新的内容计数
+	 *			'failure'	=> 0	//如果status不为1，则failure有计数
+	 *			'description'	=> 文字描述
+	 *		);
 	 */
 	public function deleteAd(array $data){
 		return $this->adGroupAdAdapter->delete($data);

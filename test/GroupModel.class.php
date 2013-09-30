@@ -28,7 +28,14 @@ class GroupModel{
 	 *			'budget_amount'		=> 200.00,	
 	 * 		);
 	 *		注意：创建时父级依赖idclick_planid为必需
-	 * @return array $result
+	 * @return <array> $result:
+	 *		$result = array(
+	 *			'status'	=> 1,	//1：成功；0：失败或者部分失败
+	 *									-1: 提供参数不完整或解析失败
+	 *			'success'	=> 7,	//成功更新的内容计数
+	 *			'failure'	=> 0	//如果status不为1，则failure有计数
+	 *			'description'	=> 文字描述
+	 *		);
 	 */
 	public function createAdgroup($data){
 		return $this->adGroupAdapter->create($data);	
@@ -45,7 +52,14 @@ class GroupModel{
 	 *	   		'keywords'			=> array('keywords3', 'keywords2', 'keywords1'),
 	 *	   		'budget_amount'		=> 201.00,
 	 *	   );
-	 * @return array $result
+	 * @return <array> $result:
+	 *		$result = array(
+	 *			'status'	=> 1,	//1：成功；0：失败或者部分失败
+	 *									-1: 提供参数不完整或解析失败
+	 *			'success'	=> 7,	//成功更新的内容计数
+	 *			'failure'	=> 0	//如果status不为1，则failure有计数
+	 *			'description'	=> 文字描述
+	 *		);
 	 */	
 	public function updateAdgroup($data){
 		return $this->adGroupAdapter->update($data);
@@ -62,7 +76,14 @@ class GroupModel{
 	 *	   		'keywords'			=> array('keywords3', 'keywords2', 'keywords1'),
 	 *	   		'budget_amount'		=> 201.00,
 	 *	   );
-	 * @return array $result
+	 * @return <array> $result:
+	 *		$result = array(
+	 *			'status'	=> 1,	//1：成功；0：失败或者部分失败
+	 *									-1: 提供参数不完整或解析失败
+	 *			'success'	=> 7,	//成功更新的内容计数
+	 *			'failure'	=> 0	//如果status不为1，则failure有计数
+	 *			'description'	=> 文字描述
+	 *		);
 	 */
 	public function deleteAdgroup($data){
 		return $this->adGroupAdapter->delete($data);

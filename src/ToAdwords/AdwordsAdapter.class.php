@@ -25,7 +25,7 @@ abstract class AdwordsAdapter implements Adapter{
 	/**
 	 * 是否检查数据完整性
 	 */
-	const IS_CHECK_DATA = FALSE;
+	const IS_CHECK_DATA = TRUE;
 	
 	/**
 	 * 数据执行动作定义
@@ -400,25 +400,24 @@ abstract class AdwordsAdapter implements Adapter{
 		$information = $data;
 		$message = new Message($this->moduleName, $action, $information);
 		return $message->put();
-	}
+	}	
 	
 	/**
-	 * Put message in queue.
-	 * 
-	 * @param string $action: self::ACTION_CREATE ACTION_UPDATE ACTION_DELETE
-	 * @param array $data
+	 * 检查数据是否完整
+	 *
+	 * 根据当前模块配置的dataCheckFilter来进行验证，同时过滤掉不需要的字段。
 	 */
-	protected function queuePut($action, array $data) {
-	
-		// put data to queue.
-		$message_combine = array(
-					'module' 	=> 'CAMPAIGN',
-					'action' 	=> $action,
-					'data' 		=> $data,
-				);
-		$message = json_encode($message_combine);
-		include_once 'httpsqs_client.php'; 
-		$httpsqs = new httpsqs('192.168.6.14', '1218', 'mypass123', 'utf-8');
-		return $httpsqs->put('adwords', $message);
+	protected function checkData(&$data, $action){
+		$filter = $this->dataCheckFilter[$action];
+		foreach($filter['prohibitedFields'] as $item){
+			unset($data[$item]);
+		}		
+		foreach($filter['requiredFields'] as $item){
+			if(empty($data[$item])){
+				return FALSE;
+				break;
+			}
+		}
+		return TRUE;
 	}
 }

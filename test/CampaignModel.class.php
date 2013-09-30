@@ -33,7 +33,14 @@ class CampaignModel{
 	 *			'campaign_status'	=> 'ACTIVE',
 	 * 		);
 	 * 		注意：创建时父级依赖idclick_uid为必需
-	 * @return array $result
+	 * @return <array> $result:
+	 *		$result = array(
+	 *			'status'	=> 1,	//1：成功；0：失败或者部分失败
+	 *									-1: 提供参数不完整或解析失败
+	 *			'success'	=> 7,	//成功更新的内容计数
+	 *			'failure'	=> 0	//如果status不为1，则failure有计数
+	 *			'description'	=> 文字描述
+	 *		);
 	 */
 	public function createCampaign(array $data){
 		return $this->campaignAdapter->create($data);
@@ -54,7 +61,14 @@ class CampaignModel{
 	 *			'delivery_method'	=> 'ACCELERATED',
 	 *			'max_cpc'			=> 2.00,
 	 * 		);
-	 * @return array $result
+	 * @return <array> $result:
+	 *		$result = array(
+	 *			'status'	=> 1,	//1：成功；0：失败或者部分失败
+	 *									-1: 提供参数不完整或解析失败
+	 *			'success'	=> 7,	//成功更新的内容计数
+	 *			'failure'	=> 0	//如果status不为1，则failure有计数
+	 *			'description'	=> 文字描述
+	 *		);
 	 */
 	public function updateCampaign(array $data){
 		return $this->campaignAdapter->update($data);
@@ -75,7 +89,14 @@ class CampaignModel{
 	 *			'delivery_method'	=> 'ACCELERATED',
 	 *			'max_cpc'			=> 2.00,
 	 * 		);
-	 * @return array $result
+	 * @return <array> $result:
+	 *		$result = array(
+	 *			'status'	=> 1,	//1：成功；0：失败或者部分失败
+	 *									-1: 提供参数不完整或解析失败
+	 *			'success'	=> 7,	//成功更新的内容计数
+	 *			'failure'	=> 0	//如果status不为1，则failure有计数
+	 *			'description'	=> 文字描述
+	 *		);
 	 */
 	public function deleteCampaign(array $data){
 		return $this->campaignAdapter->delete($data);

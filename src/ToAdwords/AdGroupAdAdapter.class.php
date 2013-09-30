@@ -25,6 +25,23 @@ class AdGroupAdAdapter extends AdwordsAdapter{
 	protected $adwordsObjectIdField = 'ad_id';
 	protected $idclickObjectIdField = 'idclick_adid';
 	
+	protected $dataCheckFilter = array(
+				'CREATE'	=> array(
+					'requiredFields'	=> array(
+						'idclick_adid','idclick_groupid',
+					),
+					'prohibitedFields'	=> array('sync_status', 'ad_id', 'adgroup_id'),
+				),
+				'UPDATE'	=> array(
+					'requiredFields'	=> array('idclick_adid'),
+					'prohibitedFields'	=> array('sync_status', 'ad_id', 'adgroup_id'),
+				),
+				'DELETE'	=> array(
+					'requiredFields'	=> array('idclick_adid'),
+					'prohibitedFields'	=> array('sync_status', 'ad_id', 'adgroup_id'),
+				),
+			);
+	
 	/**
 	 * 添加广告
 	 *
@@ -43,7 +60,7 @@ class AdGroupAdAdapter extends AdwordsAdapter{
 	 */
 	public function create($data){
 		try{
-			if(self::IS_CHECK_DATA && !$this->_checkData($data, self::ACTION_CREATE)){		
+			if(self::IS_CHECK_DATA && !$this->checkData($data, self::ACTION_CREATE)){		
 				throw new DataCheckException(self::DESC_DATA_CHECK_FAILURE);
 			}
 			
@@ -123,7 +140,7 @@ class AdGroupAdAdapter extends AdwordsAdapter{
 	 */	
 	public function update($data){
 		try{
-			if(self::IS_CHECK_DATA && !$this->_checkData($data, self::ACTION_CREATE)){		
+			if(self::IS_CHECK_DATA && !$this->checkData($data, self::ACTION_UPDATE)){		
 				throw new DataCheckException(self::DESC_DATA_CHECK_FAILURE);
 			}
 			
@@ -182,7 +199,7 @@ class AdGroupAdAdapter extends AdwordsAdapter{
 	}
 	
 	public function delete(array $data){
-		if(self::IS_CHECK_DATA && !$this->_checkData($data, 'DELETE')){
+		if(self::IS_CHECK_DATA && !$this->checkData($data, self::ACTION_DELETE)){
 			$this->result['status'] = -1;
 			$this->result['description'] = self::DESC_DATA_CHECK_FAILURE;
 			return $this->_generateResult();
