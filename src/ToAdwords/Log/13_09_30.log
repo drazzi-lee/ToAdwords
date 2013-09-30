@@ -298,3 +298,230 @@
     [idclick_planid] => 15477
 )
 
+[ 2013-09-30T16:30:27+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 51556
+    [idclick_uid] => 523
+    [campaign_name] => campaign_name #524936a3db41c
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 1
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [last_action] => UPDATE
+)
+
+[ 2013-09-30T16:36:25+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 51556
+    [idclick_uid] => 523
+    [campaign_name] => campaign_name #5249380940681
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 1
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [last_action] => UPDATE
+)
+
+[ 2013-09-30T16:36:27+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 51556
+    [idclick_uid] => 523
+    [campaign_name] => campaign_name #5249380be2563
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 1
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [last_action] => UPDATE
+)
+
+[ 2013-09-30T16:36:28+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 51556
+    [idclick_uid] => 523
+    [campaign_name] => campaign_name #5249380c7ad5c
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 1
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [last_action] => UPDATE
+)
+
+[ 2013-09-30T16:36:28+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 51556
+    [idclick_uid] => 523
+    [campaign_name] => campaign_name #5249380cc1e32
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 1
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [last_action] => UPDATE
+)
+
+[ 2013-09-30T16:36:29+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 51556
+    [idclick_uid] => 523
+    [campaign_name] => campaign_name #5249380d1122d
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 1
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [last_action] => UPDATE
+)
+
+[ 2013-09-30T16:36:29+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 51556
+    [idclick_uid] => 523
+    [campaign_name] => campaign_name #5249380d4c77d
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 1
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [last_action] => UPDATE
+)
+
+[ 2013-09-30T16:36:29+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 51556
+    [idclick_uid] => 523
+    [campaign_name] => campaign_name #5249380d84a04
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 1
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [last_action] => UPDATE
+)
+
+[ 2013-09-30T16:36:29+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 51556
+    [idclick_uid] => 523
+    [campaign_name] => campaign_name #5249380dba57a
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 1
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [last_action] => UPDATE
+)
+
+[ 2013-09-30T16:36:29+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 51556
+    [idclick_uid] => 523
+    [campaign_name] => campaign_name #5249380ded5f7
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 1
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [last_action] => UPDATE
+)
+
+[ 2013-09-30T16:36:30+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 51556
+    [idclick_uid] => 523
+    [campaign_name] => campaign_name #5249380e2b87c
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 1
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [last_action] => UPDATE
+)
+
+[ 2013-09-30T16:36:30+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 51556
+    [idclick_uid] => 523
+    [campaign_name] => campaign_name #5249380e5c1e8
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 1
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [last_action] => UPDATE
+)
+
+[ 2013-09-30T16:36:30+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 51556
+    [idclick_uid] => 523
+    [campaign_name] => campaign_name #5249380e91d5e
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 1
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [last_action] => UPDATE
+)
+
+[ 2013-09-30T16:36:30+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 51556
+    [idclick_uid] => 523
+    [campaign_name] => campaign_name #5249380ec4ddb
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 1
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [last_action] => UPDATE
+)
+
+[ 2013-09-30T16:47:50+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Customer | 动作：CREATE | 消息内容：Array
+(
+    [idclick_uid] => 524
+)
+
+[ 2013-09-30T16:47:51+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 51557
+    [idclick_uid] => 524
+    [campaign_name] => campaign_name #52493ab6ebf96
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 1
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [customer_id] => 1
+)
+
+[ 2013-09-30T16:53:40+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：AdGroupAd | 动作：CREATE | 消息内容：Array
+(
+    [idclick_adid] => 12355
+    [idclick_groupid] => 79642
+    [ad_headline] => headline
+    [ad_description1] => description1
+    [ad_description2] => description2
+    [ad_url] => http://www.izptec.com/go.php
+    [ad_displayurl] => http://www.izptec.com/
+    [adgroup_id] => 1
+)
+

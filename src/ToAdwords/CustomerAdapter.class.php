@@ -68,8 +68,6 @@ class CustomerAdapter extends AdwordsAdapter{
 	
 	/**
 	 * 构建消息并推送至消息队列
-	 *
-	 *
 	 */
 	private function _createMessageAndPut($idclickUid){
 		$information = array('idclick_uid' => $idclickUid);
@@ -82,50 +80,13 @@ class CustomerAdapter extends AdwordsAdapter{
 			}
 		} catch (Exception $e){
 			if(ENVIRONMENT == 'development'){
-				trigger_error('在Customer表新插入一行失败，事务已回滚，idclick_uid为'.$idclickUid.'  ####'.$e->getMessage(), E_USER_ERROR);
+				trigger_error('在Customer表新插入一行失败，事务已回滚，idclick_uid为'.$idclickUid
+											. '  ####'.$e->getMessage(), E_USER_ERROR);
 			} else {
-				Log::write('创建新消息失败，idclick_uid为'.$idclickUid.'  ####'.$e->getMessage(), __METHOD__);				
+				Log::write('创建新消息失败，idclick_uid为' . $idclickUid . '  ####'
+											. $e->getMessage(), __METHOD__);				
 			}
 			return FALSE;
 		}
-	}
-	
-	private function _createCustomer($uid){
-		try{
-			$user = new AdWordsUser();
-			$user->LogAll();
-			return $this->_createAdAccount($user);
-		} catch (Exception $e){
-			Log::write('请求GOOGLE_ADWORDS创建CustomerId失败：'. $e->getMessage());
-		}
-	}
-
-	private function _createAdAccount(AdWordsUser $user){
-		// Get the service, which loads the required classes.
-		$managedCustomerService =
-			$user->GetService('ManagedCustomerService', ADWORDS_VERSION);
-
-		// Create customer.
-		$customer = new ManagedCustomer();
-		$customer->name = 'Account #' . uniqid();
-		$customer->currencyCode = 'CNY';
-		$customer->dateTimeZone = 'Asia/Shanghai';
-
-		// Create operation.
-		$operation = new ManagedCustomerOperation();
-		$operation->operator = 'ADD';
-		$operation->operand = $customer;
-
-		$operations = array($operation);
-
-		// Make the mutate request.
-		$result = $managedCustomerService->mutate($operations);
-
-		// Display result.
-		$customer = $result->value[0];
-		//printf("Account with customer ID '%s' was created.\n",
-		//	$customer->customerId);
-
-		return $customer->customerId;
 	}
 }

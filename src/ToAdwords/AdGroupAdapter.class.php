@@ -90,10 +90,6 @@ class AdGroupAdapter extends AdwordsAdapter{
 			}
 			
 			$campaignAdapter = new CampaignAdapter();
-			$campaignRow = $campaignAdapter->getOne('idclick_planid', 'idclick_planid='.$data['idclick_planid']);
-			if(empty($campaignRow)){
-				throw new DependencyException('父级依赖还未添加，父级对象IdclickPlanId为'.$data['idclick_planid']);
-			}
 			$adPlan = new AdPlan($data['idclick_planid']);			
 			$data['campaign_id'] = $campaignAdapter->getAdaptedId($adPlan);
 			
