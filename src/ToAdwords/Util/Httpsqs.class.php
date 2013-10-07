@@ -102,8 +102,8 @@ class Httpsqs
         {
             return false;
         }
-        $out = "POST ${query} HTTP/1.1\r\n";
-        $out .= "Host: ${host}\r\n";
+        $out = "POST {$query} HTTP/1.1\r\n";
+        $out .= "Host: {$this->httpsqs_host}\r\n";
         $out .= "Content-Length: " . strlen($body) . "\r\n";
         $out .= "Connection: close\r\n";
         $out .= "\r\n";

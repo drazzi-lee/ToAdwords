@@ -4,6 +4,7 @@ namespace ToAdwords\Util;
 
 use \Exception;
 use ToAdwords\Util\Log;
+use ToAdwords\Util\Httpsqs;
 
 class Message{
 	private static $operators = array('CREATE', 'UPDATE', 'DELETE');
@@ -38,41 +39,14 @@ class Message{
 	public function put(){
 		Log::write($this, __METHOD__);
 		
-		if(false){
-			// put data to queue.
-			$message_combine = array(
-					'module' 	=> $this->module,
-					'action' 	=> $this->action,
-					'data' 		=> $this->information,
-				);
-			$message = json_encode($message_combine);
-			include_once 'httpsqs_client.php'; 
-			$httpsqs = new httpsqs('192.168.6.14', '1218', 'mypass123', 'utf-8');
-			return $httpsqs->put('adwords', $message);
-		}
-		
-		return TRUE;
-	}
-	
-	
-	/**
-	 * Put message in queue.
-	 * 
-	 * @param string $action: self::ACTION_CREATE ACTION_UPDATE ACTION_DELETE
-	 * @param array $data
-	 */
-	protected function queuePut($action, array $data) {
-	
-		// put data to queue.
 		$message_combine = array(
-					'module' 	=> 'CAMPAIGN',
-					'action' 	=> $action,
-					'data' 		=> $data,
+				'module' 	=> $this->module,
+				'action' 	=> $this->action,
+				'data' 		=> $this->information,
 				);
 		$message = json_encode($message_combine);
-		include_once 'httpsqs_client.php'; 
-		$httpsqs = new httpsqs('192.168.6.14', '1218', 'mypass123', 'utf-8');
-		return $httpsqs->put('adwords', $message);
+		$httpsqs = new Httpsqs(HTTPSQS_HOST, HTTPSQS_PORT, HTTPSQS_AUTH);
+		return $httpsqs->put(HTTPSQS_QUEUE_COMMON, $message);
 	}
 	
 	public function getModule(){

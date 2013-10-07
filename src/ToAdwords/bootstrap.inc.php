@@ -24,7 +24,15 @@ define('TOADWORDS_LOG_RECORD', TRUE);
 //数据库配置
 define('TOADWORDS_DSN', 'mysql:dbname=toadwords;host=127.0.0.1;charset=utf8');
 define('TOADWORDS_USER', 'root');
-define('TOADWORDS_PASS', 'qjklw');
+define('TOADWORDS_PASS', 'qjklw4r');
+
+//消息队列配置
+define('HTTPSQS_HOST', 'localhost');
+define('HTTPSQS_PORT', '1218');
+define('HTTPSQS_AUTH', '123456');
+define('HTTPSQS_CHARSET', 'utf-8');
+define('HTTPSQS_QUEUE_COMMON', 'common');
+define('HTTPSQS_QUEUE_RETRY', 'retry');
 
 function load($namespace){
 	$splitpath = explode('\\', $namespace);
