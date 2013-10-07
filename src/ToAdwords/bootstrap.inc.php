@@ -24,7 +24,7 @@ define('TOADWORDS_LOG_RECORD', TRUE);
 //数据库配置
 define('TOADWORDS_DSN', 'mysql:dbname=toadwords;host=127.0.0.1;charset=utf8');
 define('TOADWORDS_USER', 'root');
-define('TOADWORDS_PASS', 'qjklw4r');
+define('TOADWORDS_PASS', '123456');
 
 //消息队列配置
 define('HTTPSQS_HOST', 'localhost');
