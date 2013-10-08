@@ -20,7 +20,7 @@ class MessageHandler{
 		$module = null;
 		$result = null;
 	
-		switch($message->module){
+		switch($message->getModule()){
 			case 'Customer':
 				$module = new Customer();	
 				break;
@@ -38,15 +38,15 @@ class MessageHandler{
 						.' 消息位置：'.$pos);
 		}
 		
-		switch($message->action){
+		switch($message->getAction()){
 			case 'CREATE':
-				$result = $module->create($message['data']);
+				$result = $module->create($message->getInformation());
 				break;
 			case 'UPDATE':
-				$result = $module->update($message['data']);
+				$result = $module->update($message->getInformation());
 				break;
 			case 'DELETE':
-				$result = $module->delete($message['data']);
+				$result = $module->delete($message->getInformation());
 				break;
 			default:
 				throw new MessageException('解析错误，不能识别的action::'.$message['action']
@@ -57,7 +57,8 @@ class MessageHandler{
 			$message_retry = $message;
 			$message_retry['error_count'] = 1;
 			$httpsqs->put(HTTPSQS_QUEUE_RETRY, json_encode($message_retry));			
-			throw new MessageException('发送消息失败，消息位置：'.$pos.' 消息内容：'.$data);
+			throw new MessageException('发送消息失败，消息位置：'.$pos.' 消息内容：'
+						.$data.' || 已进入重试队列');
 		}
 	}
 	

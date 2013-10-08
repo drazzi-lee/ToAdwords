@@ -1,90 +1,68 @@
 <?php
-
 namespace ToAdwords\Object\Adwords;
+
+require_once('init.php');
+
+use ToAdwords\CustomerAdapter;
 use ToAdwords\Object\Adwords\AdwordsBase;
-use ToAdwords\Exceptions\DataCheckException;
+use ToAdwords\Object\Idclick\Member;
+
+use \AdWordsUser;
+use \ManagedCustomer;
+use \ManagedCustomerOperation;
 
 class Customer extends AdwordsBase{
-	/**
-	 * @access public
-	 * @var string
-	 */
-	public $name;
 
-	/**
-	 * @access public
-	 * @var string
-	 */
-	public $companyName;
-
-	/**
-	* @access public
-	* @var integer
-	*/
-	public $customerId;
-
-	/**
-	 * @access public
-	 * @var boolean
-	 */
-	public $canManageClients;
-
-	/**
-	* @access public
-	* @var string
-	*/
-	public $currencyCode;
-
-	/**
-	* @access public
-	* @var string
-	*/
-	public $dateTimeZone;
-
-	/**
-	* @access public
-	* @var boolean
-	*/
-	public $testAccount;
+	public function __construct(){
 	
-	private function _createCustomer($uid){
+	
+	}
+	
+	public function create($data){
 		try{
 			$user = new AdWordsUser();
 			$user->LogAll();
-			return $this->_createAdAccount($user);
+			// Get the service, which loads the required classes.
+			$managedCustomerService =
+				$user->GetService('ManagedCustomerService', ADWORDS_VERSION);
+
+			// Create customer.
+			$customer = new ManagedCustomer();
+			$customer->name = 'Account #' . uniqid();
+			$customer->currencyCode = 'CNY';
+			$customer->dateTimeZone = 'Asia/Shanghai';
+
+			// Create operation.
+			$operation = new ManagedCustomerOperation();
+			$operation->operator = 'ADD';
+			$operation->operand = $customer;
+
+			$operations = array($operation);
+
+			// Make the mutate request.
+			$result = $managedCustomerService->mutate($operations);
+
+			// Display result.
+			$customer = $result->value[0];
+			//printf("Account with customer ID '%s' was created.\n",
+			//	$customer->customerId);
+
+			if(!empty($customer->customerId)){
+				$customerAdapter = new CustomerAdapter();
+				$member = new Member($data['idclick_uid']);
+				$customerAdapter->updateSyncStatus(CustomerAdapter::SYNC_STATUS_SYNCED, $member);
+			}
+			
 		} catch (Exception $e){
-			Log::write('请求GOOGLE_ADWORDS创建CustomerId失败：'. $e->getMessage());
+			Log::write('创建Customer失败：' . $e->getMessage(), __METHOD__);
 		}
 	}
-
-	private function _createAdAccount(AdWordsUser $user){
-		// Get the service, which loads the required classes.
-		$managedCustomerService =
-			$user->GetService('ManagedCustomerService', ADWORDS_VERSION);
-
-		// Create customer.
-		$customer = new ManagedCustomer();
-		$customer->name = 'Account #' . uniqid();
-		$customer->currencyCode = 'CNY';
-		$customer->dateTimeZone = 'Asia/Shanghai';
-
-		// Create operation.
-		$operation = new ManagedCustomerOperation();
-		$operation->operator = 'ADD';
-		$operation->operand = $customer;
-
-		$operations = array($operation);
-
-		// Make the mutate request.
-		$result = $managedCustomerService->mutate($operations);
-
-		// Display result.
-		$customer = $result->value[0];
-		//printf("Account with customer ID '%s' was created.\n",
-		//	$customer->customerId);
-
-		return $customer->customerId;
+	
+	public function update($data){
+	
 	}
 	
-
+	public function delete($data){
+	
+	}
 }

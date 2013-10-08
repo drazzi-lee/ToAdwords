@@ -106,6 +106,14 @@ class CampaignAdapter extends AdwordsAdapter{
 				unset($data['customer_id']);
 			}
 			
+			if(isset($data['bidding_type'])){
+				switch($data['bidding_type']){
+					case '0': $data['bidding_type'] = 'MANUAL_CPC'; break;
+					case '1': $data['bidding_type'] = 'BUDGET_OPTIMIZER'; break;
+					default: throw new DataCheckException('未知的bidding_type ##'.$data['bidding_type']);
+				}
+			}
+			
 			$this->dbh->beginTransaction();
 			$adPlan = new AdPlan($data['idclick_planid']);
 			if($this->insertOne($data) && $this->createMessageAndPut($data, self::ACTION_CREATE)
@@ -183,6 +191,14 @@ class CampaignAdapter extends AdwordsAdapter{
 					);
 			$newData = array_diff_key($data, $conditionsArray);
 			
+			if(isset($data['bidding_type'])){
+				switch($data['bidding_type']){
+					case '0': $data['bidding_type'] = 'MANUAL_CPC'; break;
+					case '1': $data['bidding_type'] = 'BUDGET_OPTIMIZER'; break;
+					default: throw new DataCheckException('未知的bidding_type ##'.$data['bidding_type']);
+				}
+			}
+			
 			$this->dbh->beginTransaction();
 			$adPlan = new AdPlan($data['idclick_planid']);
 			if($this->updateOne($conditions, $newData) && $this->createMessageAndPut($data, $data['last_action'])
@@ -232,13 +248,6 @@ class CampaignAdapter extends AdwordsAdapter{
 	 * 		$data = array(
 	 * 			'idclick_planid'	=> 12345, 
 	 * 			'idclick_uid'		=> 441,
-	 * 			'campaign_name'		=> 'campaign_name',
-	 *			'areas'				=> '10031, 10032',
-	 *			'languages'			=> '10031, 10032',
-	 *			'bidding_type'		=> 1,
-	 *			'budget_amount'		=> 200.00,
-	 *			'delivery_method'	=> 'ACCELERATED',
-	 *			'max_cpc'			=> 2.00,
 	 * 		);
 	 * @return array $result
 	 */

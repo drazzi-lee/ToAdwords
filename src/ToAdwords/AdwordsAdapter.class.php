@@ -413,7 +413,7 @@ abstract class AdwordsAdapter implements Adapter{
 			unset($data[$item]);
 		}		
 		foreach($filter['requiredFields'] as $item){
-			if(empty($data[$item])){
+			if(isset($data[$item])){
 				return FALSE;
 				break;
 			}

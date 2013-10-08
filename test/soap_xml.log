@@ -1,0 +1,152 @@
+[Oct 08 2013 17:45:51.000000 - ERROR] POST /api/adwords/mcm/v201306/ManagedCustomerService?access_token=ya29.AHES6ZT9abLGgNpcNeFK9jsBTnYBYkaOh_RfjQQVasQttik HTTP/1.1
+Host: adwords.google.com
+Connection: Keep-Alive
+User-Agent: PHP-SOAP/5.4.16, gzip
+Accept-Encoding: gzip, deflate
+Content-Encoding: gzip
+Content-Type: text/xml; charset=utf-8
+SOAPAction: ""
+Content-Length: 427
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://adwords.google.com/api/adwords/cm/v201306" xmlns:ns2="https://adwords.google.com/api/adwords/mcm/v201306">
+  <SOAP-ENV:Header>
+    <ns2:RequestHeader>
+      <ns1:developerToken>c6cnIFQ6BOI7SKjA0PCUvw</ns1:developerToken>
+      <ns1:userAgent>IZP Co.,Ltd. (AwApi-PHP/4.5.1, Common-PHP/5.0.0, PHP/5.4.16)</ns1:userAgent>
+    </ns2:RequestHeader>
+  </SOAP-ENV:Header>
+  <SOAP-ENV:Body>
+    <ns2:mutate>
+      <ns2:operations>
+        <ns1:operator>ADD</ns1:operator>
+        <ns2:operand>
+          <ns2:name>Account #5253d44a5f5b8</ns2:name>
+          <ns2:currencyCode>CNY</ns2:currencyCode>
+          <ns2:dateTimeZone>Asia/Shanghai</ns2:dateTimeZone>
+        </ns2:operand>
+      </ns2:operations>
+    </ns2:mutate>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+HTTP/1.1 500 Internal Server Error
+Content-Type: text/xml; charset=UTF-8
+Content-Encoding: gzip
+Date: Tue, 08 Oct 2013 09:45:51 GMT
+Expires: Tue, 08 Oct 2013 09:45:51 GMT
+Cache-Control: private, max-age=0
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+Content-Length: 542
+Server: GSE
+
+<?xml version="1.0"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <ResponseHeader xmlns:ns2="https://adwords.google.com/api/adwords/cm/v201306" xmlns="https://adwords.google.com/api/adwords/mcm/v201306">
+      <ns2:requestId>0004e837a254bf980aec46c700004141</ns2:requestId>
+      <ns2:serviceName>ManagedCustomerService</ns2:serviceName>
+      <ns2:methodName>mutate</ns2:methodName>
+      <ns2:operations>0</ns2:operations>
+      <ns2:responseTime>234</ns2:responseTime>
+    </ResponseHeader>
+  </soap:Header>
+  <soap:Body>
+    <soap:Fault>
+      <faultcode>soap:Server</faultcode>
+      <faultstring>[QuotaCheckError.INCOMPLETE_SIGNUP @ ; trigger:'&lt;null&gt;']</faultstring>
+      <detail>
+        <ApiExceptionFault xmlns="https://adwords.google.com/api/adwords/mcm/v201306" xmlns:ns2="https://adwords.google.com/api/adwords/cm/v201306">
+          <ns2:message>[QuotaCheckError.INCOMPLETE_SIGNUP @ ; trigger:'&lt;null&gt;']</ns2:message>
+          <ns2:ApplicationException.Type>ApiException</ns2:ApplicationException.Type>
+          <ns2:errors xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:QuotaCheckError">
+            <ns2:fieldPath/>
+            <ns2:trigger>&lt;null&gt;</ns2:trigger>
+            <ns2:errorString>QuotaCheckError.INCOMPLETE_SIGNUP</ns2:errorString>
+            <ns2:ApiError.Type>QuotaCheckError</ns2:ApiError.Type>
+            <ns2:reason>INCOMPLETE_SIGNUP</ns2:reason>
+          </ns2:errors>
+        </ApiExceptionFault>
+      </detail>
+    </soap:Fault>
+  </soap:Body>
+</soap:Envelope>
+
+[Oct 08 2013 17:56:02.000000 - ERROR] POST /api/adwords/mcm/v201306/ManagedCustomerService?access_token=ya29.AHES6ZSQloS318WpciQnyX4uSVIBHzHZNR7O0wZ7HD-eNLU HTTP/1.1
+Host: adwords.google.com
+Connection: Keep-Alive
+User-Agent: PHP-SOAP/5.4.16, gzip
+Accept-Encoding: gzip, deflate
+Content-Encoding: gzip
+Content-Type: text/xml; charset=utf-8
+SOAPAction: ""
+Content-Length: 427
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://adwords.google.com/api/adwords/cm/v201306" xmlns:ns2="https://adwords.google.com/api/adwords/mcm/v201306">
+  <SOAP-ENV:Header>
+    <ns2:RequestHeader>
+      <ns1:developerToken>c6cnIFQ6BOI7SKjA0PCUvw</ns1:developerToken>
+      <ns1:userAgent>IZP Co.,Ltd. (AwApi-PHP/4.5.1, Common-PHP/5.0.0, PHP/5.4.16)</ns1:userAgent>
+    </ns2:RequestHeader>
+  </SOAP-ENV:Header>
+  <SOAP-ENV:Body>
+    <ns2:mutate>
+      <ns2:operations>
+        <ns1:operator>ADD</ns1:operator>
+        <ns2:operand>
+          <ns2:name>Account #5253d6ad5884c</ns2:name>
+          <ns2:currencyCode>CNY</ns2:currencyCode>
+          <ns2:dateTimeZone>Asia/Shanghai</ns2:dateTimeZone>
+        </ns2:operand>
+      </ns2:operations>
+    </ns2:mutate>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+HTTP/1.1 500 Internal Server Error
+Content-Type: text/xml; charset=UTF-8
+Content-Encoding: gzip
+Date: Tue, 08 Oct 2013 09:56:02 GMT
+Expires: Tue, 08 Oct 2013 09:56:02 GMT
+Cache-Control: private, max-age=0
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+Content-Length: 542
+Server: GSE
+
+<?xml version="1.0"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <ResponseHeader xmlns:ns2="https://adwords.google.com/api/adwords/cm/v201306" xmlns="https://adwords.google.com/api/adwords/mcm/v201306">
+      <ns2:requestId>0004e837c6bf80980aec81c800007548</ns2:requestId>
+      <ns2:serviceName>ManagedCustomerService</ns2:serviceName>
+      <ns2:methodName>mutate</ns2:methodName>
+      <ns2:operations>0</ns2:operations>
+      <ns2:responseTime>132</ns2:responseTime>
+    </ResponseHeader>
+  </soap:Header>
+  <soap:Body>
+    <soap:Fault>
+      <faultcode>soap:Server</faultcode>
+      <faultstring>[QuotaCheckError.INCOMPLETE_SIGNUP @ ; trigger:'&lt;null&gt;']</faultstring>
+      <detail>
+        <ApiExceptionFault xmlns="https://adwords.google.com/api/adwords/mcm/v201306" xmlns:ns2="https://adwords.google.com/api/adwords/cm/v201306">
+          <ns2:message>[QuotaCheckError.INCOMPLETE_SIGNUP @ ; trigger:'&lt;null&gt;']</ns2:message>
+          <ns2:ApplicationException.Type>ApiException</ns2:ApplicationException.Type>
+          <ns2:errors xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns2:QuotaCheckError">
+            <ns2:fieldPath/>
+            <ns2:trigger>&lt;null&gt;</ns2:trigger>
+            <ns2:errorString>QuotaCheckError.INCOMPLETE_SIGNUP</ns2:errorString>
+            <ns2:ApiError.Type>QuotaCheckError</ns2:ApiError.Type>
+            <ns2:reason>INCOMPLETE_SIGNUP</ns2:reason>
+          </ns2:errors>
+        </ApiExceptionFault>
+      </detail>
+    </soap:Fault>
+  </soap:Body>
+</soap:Envelope>
+

@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 10.0.2.19
-Source Server Version : 50160
-Source Host           : 10.0.2.19:3306
+Source Server         : Local
+Source Server Version : 50612
+Source Host           : localhost:3306
 Source Database       : toadwords
 
 Target Server Type    : MYSQL
-Target Server Version : 50160
+Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2013-10-08 10:22:20
+Date: 2013-10-08 15:33:22
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -87,7 +87,7 @@ CREATE TABLE `campaign` (
   `campaign_name` varchar(128) NOT NULL COMMENT '用户ID',
   `languages` varchar(200) NOT NULL COMMENT '投放网页语言',
   `areas` varchar(200) NOT NULL COMMENT 'geo target, 投放地域',
-  `bidding_type` smallint(4) NOT NULL,
+  `bidding_type` enum('BUDGET_OPTIMIZER','MANUAL_CPC') NOT NULL DEFAULT 'BUDGET_OPTIMIZER',
   `budget_amount` decimal(10,2) NOT NULL COMMENT '广告系列出价，以天为单位，adwords需要大于等于1',
   `delivery_method` enum('ACCELERATED','STANDARD') NOT NULL DEFAULT 'ACCELERATED' COMMENT 'CampaignService.Budget#period',
   `max_cpc` decimal(10,2) NOT NULL,

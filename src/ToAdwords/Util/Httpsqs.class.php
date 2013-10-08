@@ -40,14 +40,17 @@ class Httpsqs
 	}
 
     public function http_get($query)
-    {
+    {		
+		$header = null;
+		$pos_value = null;
+		
         $socket = fsockopen($this->httpsqs_host, $this->httpsqs_port, $errno, $errstr, 5);
         if (!$socket)
         {
             return false;
         }
-        $out = "GET ${query} HTTP/1.1\r\n";
-        $out .= "Host: ${host}\r\n";
+        $out = "GET {$query} HTTP/1.1\r\n";
+        $out .= "Host: {$this->httpsqs_host}\r\n";
         $out .= "Connection: close\r\n";
         $out .= "\r\n";
         fwrite($socket, $out);
