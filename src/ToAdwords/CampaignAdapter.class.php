@@ -49,6 +49,10 @@ class CampaignAdapter extends AdwordsAdapter{
 	 */
 	public function run(array $data){
 		try{
+			if(ENVIRONMENT == 'development'){
+				Log::write('从AMC接口收到数据=========================\r\n'
+					.print_r($data, TRUE), __METHOD__);
+			}
 			if(empty($data['idclick_planid']) || empty($data['idclick_uid'])){
 				throw new DataCheckException('基本数据缺失。idclick_uid及idclick_planid为必需。');
 			}
@@ -98,6 +102,9 @@ class CampaignAdapter extends AdwordsAdapter{
 			$customerAdapter = new CustomerAdapter();
 			$idclickMember = new Member($data['idclick_uid']);
 			$data['customer_id'] = $customerAdapter->getAdaptedId($idclickMember);
+			if($data['customer_id'] === TRUE){
+				unset($data['customer_id']);
+			}
 			
 			$this->dbh->beginTransaction();
 			$adPlan = new AdPlan($data['idclick_planid']);
@@ -219,9 +226,9 @@ class CampaignAdapter extends AdwordsAdapter{
 	}
 	
 	/**
-	 * 更新广告计划
+	 * 删除广告计划
 	 *
-	 * @param array $data: 要添加的数据，数据结构为
+	 * @param array $data: 要删除的数据，数据结构为
 	 * 		$data = array(
 	 * 			'idclick_planid'	=> 12345, 
 	 * 			'idclick_uid'		=> 441,
@@ -236,6 +243,11 @@ class CampaignAdapter extends AdwordsAdapter{
 	 * @return array $result
 	 */
 	public function delete(array $data){
+		if(ENVIRONMENT == 'development'){
+			Log::write('从AMC接口收到数据=========================\r\n'
+				.print_r($data, TRUE), __METHOD__);
+		}
+		
 		if(self::IS_CHECK_DATA && !$this->checkData($data, self::ACTION_DELETE)){
 			$this->result['status'] = -1;
 			$this->result['description'] = self::DESC_DATA_CHECK_FAILURE;

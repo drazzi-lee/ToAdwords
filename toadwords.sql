@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : Local
-Source Server Version : 50612
-Source Host           : localhost:3306
+Source Server         : 10.0.2.19
+Source Server Version : 50160
+Source Host           : 10.0.2.19:3306
 Source Database       : toadwords
 
 Target Server Type    : MYSQL
-Target Server Version : 50612
+Target Server Version : 50160
 File Encoding         : 65001
 
-Date: 2013-09-30 14:41:22
+Date: 2013-10-08 10:22:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -52,7 +52,7 @@ CREATE TABLE `adgroupad` (
   `adgroup_id` bigint(10) DEFAULT NULL,
   `ad_headline` varchar(128) NOT NULL,
   `ad_description1` varchar(128) NOT NULL,
-  `ad_description2` varchar(128) NOT NULL,
+  `ad_description2` varchar(128) DEFAULT NULL,
   `ad_url` varchar(200) NOT NULL,
   `ad_displayurl` varchar(200) NOT NULL,
   `last_action` enum('CREATE','UPDATE','DELETE') NOT NULL DEFAULT 'CREATE',
@@ -100,17 +100,6 @@ CREATE TABLE `campaign` (
 -- ----------------------------
 -- Records of campaign
 -- ----------------------------
-INSERT INTO campaign VALUES ('12357', '519', '0', '1', 'campaign_name #5247e4ffd9a45', '10031,10032', '10031,10032', '1', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
-INSERT INTO campaign VALUES ('15477', '520', '0', '1', 'campaign_name #5247e53a0e075', '10031,10032', '10031,10032', '1', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'DELETE', 'QUEUE');
-INSERT INTO campaign VALUES ('51487', '521', '0', '1', 'campaign_name #5247e5a83da2d', '10031,10032', '10031,10032', '1', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
-INSERT INTO campaign VALUES ('51549', '522', '0', '1', 'campaign_name #5247e5e66b88d', '10031,10032', '10031,10032', '1', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
-INSERT INTO campaign VALUES ('51550', '522', '0', '1', 'campaign_name #5247e5f109255', '10031,10032', '10031,10032', '1', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
-INSERT INTO campaign VALUES ('51551', '522', '0', '1', 'campaign_name #5247e5f6eea35', '10031,10032', '10031,10032', '1', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
-INSERT INTO campaign VALUES ('51552', '522', '0', '1', 'campaign_name #5247e5fb0116d', '10031,10032', '10031,10032', '1', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
-INSERT INTO campaign VALUES ('51553', '522', '0', '1', 'campaign_name #5247e5fedbd6d', '10031,10032', '10031,10032', '1', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
-INSERT INTO campaign VALUES ('51554', '523', '0', '1', 'campaign_name #5247e605e9ffd', '10031,10032', '10031,10032', '1', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
-INSERT INTO campaign VALUES ('51555', '523', '0', '1', 'campaign_name #5247e60a0f015', '10031,10032', '10031,10032', '1', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
-INSERT INTO campaign VALUES ('51556', '523', null, '1', 'campaign_name #5248ea35d3e4e', '10031,10032', '10031,10032', '1', '32334.00', 'ACCELERATED', '10.00', 'ACTIVE', 'UPDATE', 'QUEUE');
 
 -- ----------------------------
 -- Table structure for `customer`
@@ -127,20 +116,3 @@ CREATE TABLE `customer` (
 -- ----------------------------
 -- Records of customer
 -- ----------------------------
-INSERT INTO customer VALUES ('441', '5572928024', 'CREATE', 'SYNCED');
-INSERT INTO customer VALUES ('442', '1235154143', 'CREATE', 'RECEIVE');
-INSERT INTO customer VALUES ('443', '1235154143', 'CREATE', 'SYNCED');
-INSERT INTO customer VALUES ('445', '123', 'CREATE', 'RECEIVE');
-INSERT INTO customer VALUES ('449', '0', 'CREATE', 'QUEUE');
-INSERT INTO customer VALUES ('480', null, 'CREATE', 'QUEUE');
-INSERT INTO customer VALUES ('481', null, 'CREATE', 'RECEIVE');
-INSERT INTO customer VALUES ('482', null, 'CREATE', 'QUEUE');
-INSERT INTO customer VALUES ('512', null, 'CREATE', 'QUEUE');
-INSERT INTO customer VALUES ('516', null, 'CREATE', 'QUEUE');
-INSERT INTO customer VALUES ('517', null, 'CREATE', 'QUEUE');
-INSERT INTO customer VALUES ('518', null, 'CREATE', 'QUEUE');
-INSERT INTO customer VALUES ('519', null, 'CREATE', 'QUEUE');
-INSERT INTO customer VALUES ('520', null, 'CREATE', 'QUEUE');
-INSERT INTO customer VALUES ('521', null, 'CREATE', 'QUEUE');
-INSERT INTO customer VALUES ('522', null, 'CREATE', 'QUEUE');
-INSERT INTO customer VALUES ('523', null, 'CREATE', 'QUEUE');

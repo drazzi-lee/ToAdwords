@@ -47,6 +47,10 @@ class AdGroupAdapter extends AdwordsAdapter{
 	 */
 	public function run(array $data){
 		try{
+			if(ENVIRONMENT == 'development'){
+				Log::write('从AMC接口收到数据=========================\r\n'
+					.print_r($data, TRUE), __METHOD__);
+			}
 			if(empty($data['idclick_groupid']) || empty($data['idclick_planid'])){
 				throw new DataCheckException('基本数据缺失，idclick_planid及idclick_groupid为必需。');
 			}
@@ -213,6 +217,10 @@ class AdGroupAdapter extends AdwordsAdapter{
 	}
 	
 	public function delete(array $data){
+		if(ENVIRONMENT == 'development'){
+			Log::write('从AMC接口收到数据=========================\r\n'
+				.print_r($data, TRUE), __METHOD__);
+		}
 		if(self::IS_CHECK_DATA && !$this->checkData($data, self::ACTION_DELETE)){
 			$this->result['status'] = -1;
 			$this->result['description'] = self::DESC_DATA_CHECK_FAILURE;

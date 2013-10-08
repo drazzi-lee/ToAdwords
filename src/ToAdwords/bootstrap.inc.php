@@ -53,7 +53,8 @@ function load($namespace){
 		}
 	}
 	if (!$firstword) {
-		$fullpath = __DIR__ . $path . DIRECTORY_SEPARATOR . $name . '.class.php';
+		$fullpath = dirname(__FILE__). DIRECTORY_SEPARATOR . $path . DIRECTORY_SEPARATOR 
+				. $name . '.class.php';
 		return include_once($fullpath);
 	}
 	return false;
@@ -63,6 +64,7 @@ function loadPath($absPath){
 	return include_once($absPath);
 }
 
+spl_autoload_unregister('Lite::autoload');
 spl_autoload_register(__NAMESPACE__.'\load');
 
 
