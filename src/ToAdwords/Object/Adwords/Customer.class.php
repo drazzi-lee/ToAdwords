@@ -13,6 +13,10 @@ use \ManagedCustomer;
 use \ManagedCustomerOperation;
 
 class Customer extends AdwordsBase{
+	
+	private $idclickUid;
+	private $adwordsCustomerId;
+	private $lastAction;
 
 	public function __construct(){
 	
