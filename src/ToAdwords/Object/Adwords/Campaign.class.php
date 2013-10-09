@@ -28,7 +28,7 @@ class Campaign extends AdwordsBase{
 	private $campaignStatus;	
 	private $lastAction;
 	
-	public function __construct($data){
+	public function __construct(){
 		
 	}
 	

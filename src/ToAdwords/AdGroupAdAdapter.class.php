@@ -89,8 +89,8 @@ class AdGroupAdAdapter extends AdwordsAdapter{
 	 */
 	public function create($data){
 		try{
-			if(self::IS_CHECK_DATA && !$this->checkData($data, self::ACTION_CREATE)){		
-				throw new DataCheckException(self::DESC_DATA_CHECK_FAILURE);
+			if(self::IS_CHECK_DATA){
+				$this->checkData($data, self::ACTION_CREATE);
 			}
 			
 			$adGroupAdRow = $this->getOne('idclick_adid','idclick_adid='.$data['idclick_adid']);
@@ -165,8 +165,8 @@ class AdGroupAdAdapter extends AdwordsAdapter{
 	 */	
 	public function update($data){
 		try{
-			if(self::IS_CHECK_DATA && !$this->checkData($data, self::ACTION_UPDATE)){		
-				throw new DataCheckException(self::DESC_DATA_CHECK_FAILURE);
+			if(self::IS_CHECK_DATA){
+				$this->checkData($data, self::ACTION_UPDATE);
 			}
 			
 			$adGroupAdRow = $this->getOne('idclick_adid,idclick_groupid','idclick_adid='
@@ -234,10 +234,14 @@ class AdGroupAdAdapter extends AdwordsAdapter{
 				.print_r($data, TRUE), __METHOD__);
 		}
 			
-		if(self::IS_CHECK_DATA && !$this->checkData($data, self::ACTION_DELETE)){
+		try{
+			if(self::IS_CHECK_DATA){
+				$this->checkData($data, self::ACTION_DELETE);
+			}
+		} catch (DataCheckException $e){
 			$this->result['status'] = -1;
-			$this->result['description'] = self::DESC_DATA_CHECK_FAILURE;
-			return $this->_generateResult();
+			$this->result['description'] = '数据验证未通过：'.$e->getMessage();
+			return $this->generateResult();
 		}
 		
 		$infoForRemove = array();

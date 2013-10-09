@@ -92,8 +92,8 @@ class CampaignAdapter extends AdwordsAdapter{
 	 */
 	public function create(array $data){
 		try{
-			if(self::IS_CHECK_DATA && !$this->checkData($data, self::ACTION_CREATE)){		
-				throw new DataCheckException(self::DESC_DATA_CHECK_FAILURE);
+			if(self::IS_CHECK_DATA){
+				$this->checkData($data, self::ACTION_CREATE);
 			}
 			
 			$campaignRow = $this->getOne('idclick_planid','idclick_planid='.$data['idclick_planid']);
@@ -177,8 +177,8 @@ class CampaignAdapter extends AdwordsAdapter{
 	 */
 	public function update(array $data){		
 		try{
-			if(self::IS_CHECK_DATA && !$this->checkData($data, self::ACTION_UPDATE)){		
-				throw new DataCheckException(self::DESC_DATA_CHECK_FAILURE);
+			if(self::IS_CHECK_DATA){
+				$this->checkData($data, self::ACTION_UPDATE);
 			}
 			
 			$campaignRow = $this->getOne('idclick_planid,idclick_uid', 
@@ -265,10 +265,14 @@ class CampaignAdapter extends AdwordsAdapter{
 				.print_r($data, TRUE), __METHOD__);
 		}
 		
-		if(self::IS_CHECK_DATA && !$this->checkData($data, self::ACTION_DELETE)){
+		try{
+			if(self::IS_CHECK_DATA){
+				$this->checkData($data, self::ACTION_DELETE);
+			}
+		} catch (DataCheckException $e){
 			$this->result['status'] = -1;
-			$this->result['description'] = self::DESC_DATA_CHECK_FAILURE;
-			return $this->_generateResult();
+			$this->result['description'] = '数据验证未通过：'.$e->getMessage();
+			return $this->generateResult();
 		}
 		
 		$infoForRemove = array();

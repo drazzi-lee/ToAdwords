@@ -423,22 +423,26 @@ abstract class AdwordsAdapter implements Adapter{
 	 * 检查数据是否完整
 	 *
 	 * 根据当前模块配置的dataCheckFilter来进行验证，同时过滤掉不需要的字段。
+	 *
+	 * @return void.
 	 */
 	protected function checkData(&$data, $action){
-		$checkedResult = TRUE;
 		$filter = $this->dataCheckFilter[$action];
-		foreach($filter['prohibitedFields'] as $item){
+		foreach($filter['prohibitedFields'] as $item){			
 			unset($data[$item]);
+			if(ENVIRONMENT == 'development'){
+				Log::write('[WARNING]检查到禁止设置的字段，字段：' 
+											. $item . ' #'. $data[$item], __METHOD__);
+			}
 		}		
 		foreach($filter['requiredFields'] as $item){
 			if(!isset($data[$item])){
-				$checkedResult = $checkedResult && FALSE;
 				if(ENVIRONMENT == 'development'){
 					Log::write('检查到不符合条件的数据，未设置：' . $item, __METHOD__);
 				}
+				throw new DataCheckException('检查到不符合条件的数据，未设置：' . $item);
 				break;
 			}
 		}
-		return $checkedResult;
 	}
 }
