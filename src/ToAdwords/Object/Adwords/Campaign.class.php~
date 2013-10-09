@@ -5,10 +5,8 @@ namespace ToAdwords\Object\Adwords;
 require_once('init.php');
 
 use ToAdwords\CampaignAdapter;
-use ToAdwords\CustomerAdapter;
 use ToAdwords\Object\Adwords\AdwordsBase;
 use ToAdwords\Object\Idclick\AdPlan;
-use ToAdwords\Object\Idclick\Member;
 
 use \AdWordsUser;
 
@@ -35,11 +33,6 @@ class Campaign extends AdwordsBase{
 	public function create($data){
 		try{
 			
-			if($this->customerId == 1 || empty($this->customerId)){
-				$customerAdapter = new CustomerAdapter;
-				$member = new Member($this->idclickUid);
-				$this->customerId = $customerAdapter->getAdaptedId($member);		
-			}
 		
 			$user = new AdWordsUser();
 			$user->SetClientCustomerId($clientCustomerId);

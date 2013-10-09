@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2013-10-08 15:33:22
+Date: 2013-10-09 17:37:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,19 +27,14 @@ CREATE TABLE `adgroup` (
   `keywords` varchar(200) NOT NULL,
   `budget_amount` decimal(10,2) NOT NULL COMMENT '广告组出价，以天为单位，adwords需要大于等于1',
   `last_action` enum('CREATE','UPDATE','DELETE') NOT NULL DEFAULT 'CREATE',
-  `sync_status` enum('QUEUE','SYNCED','ERROR','RECEIVE') NOT NULL DEFAULT 'RECEIVE' COMMENT '在队列中，已同步，同步出错',
   `adgroup_status` enum('ACTIVE','PAUSE','DELETE') NOT NULL DEFAULT 'ACTIVE',
+  `sync_status` enum('QUEUE','SYNCED','ERROR','RETRY','RECEIVE') NOT NULL DEFAULT 'RECEIVE' COMMENT '在队列中，已同步，同步出错',
   PRIMARY KEY (`idclick_groupid`,`idclick_planid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of adgroup
 -- ----------------------------
-INSERT INTO adgroup VALUES ('12313', '43141', '0', null, 'group_name3', 'keywords3,keywords2', '301.00', 'CREATE', 'RECEIVE', 'ACTIVE');
-INSERT INTO adgroup VALUES ('79640', '51549', '0', '1', 'group_name', 'Array', '200.00', 'CREATE', 'QUEUE', 'ACTIVE');
-INSERT INTO adgroup VALUES ('79641', '51549', '0', '1', 'group_name', 'keywords1,keywords2', '200.00', 'CREATE', 'QUEUE', 'ACTIVE');
-INSERT INTO adgroup VALUES ('79642', '51549', '0', '1', 'group_name2', 'keywords1,keywords2', '400.00', 'UPDATE', 'QUEUE', 'ACTIVE');
-INSERT INTO adgroup VALUES ('123456', '51549', '0', '1', 'group_name2', 'keywords1,keywords2', '202.00', 'DELETE', 'QUEUE', 'ACTIVE');
 
 -- ----------------------------
 -- Table structure for `adgroupad`
@@ -56,7 +51,7 @@ CREATE TABLE `adgroupad` (
   `ad_url` varchar(200) NOT NULL,
   `ad_displayurl` varchar(200) NOT NULL,
   `last_action` enum('CREATE','UPDATE','DELETE') NOT NULL DEFAULT 'CREATE',
-  `sync_status` enum('QUEUE','SYNCED','ERROR','RECEIVE') NOT NULL DEFAULT 'RECEIVE' COMMENT '在队列中，已同步，同步出错',
+  `sync_status` enum('QUEUE','SYNCED','ERROR','RETRY','RECEIVE') NOT NULL DEFAULT 'RECEIVE' COMMENT '在队列中，已同步，同步出错',
   `ad_status` enum('ACTIVE','PAUSE','DELETE') NOT NULL DEFAULT 'ACTIVE',
   PRIMARY KEY (`idclick_adid`,`idclick_groupid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -64,16 +59,6 @@ CREATE TABLE `adgroupad` (
 -- ----------------------------
 -- Records of adgroupad
 -- ----------------------------
-INSERT INTO adgroupad VALUES ('12345', '123456', '0', null, 'headline——l', 'description1....', 'description2....', 'http://www.izptec.com/go1.php', 'http://www.izptec.com/', 'DELETE', 'RECEIVE', 'ACTIVE');
-INSERT INTO adgroupad VALUES ('12346', '123456', '0', '1', 'headline', 'description1', 'description2', 'http://www.izptec.com/go.php', 'http://www.izptec.com/', 'CREATE', 'QUEUE', 'ACTIVE');
-INSERT INTO adgroupad VALUES ('12347', '123456', '0', '1', 'headline', 'description1', 'description2', 'http://www.izptec.com/go.php', 'http://www.izptec.com/', 'CREATE', 'QUEUE', 'ACTIVE');
-INSERT INTO adgroupad VALUES ('12348', '123456', '0', '1', 'headline', 'description1', 'description2', 'http://www.izptec.com/go.php', 'http://www.izptec.com/', 'CREATE', 'QUEUE', 'ACTIVE');
-INSERT INTO adgroupad VALUES ('12349', '123456', '0', '1', 'headline', 'description1', 'description2', 'http://www.izptec.com/go.php', 'http://www.izptec.com/', 'CREATE', 'QUEUE', 'ACTIVE');
-INSERT INTO adgroupad VALUES ('12350', '123456', '0', '1', 'headline', 'description1', 'description2', 'http://www.izptec.com/go.php', 'http://www.izptec.com/', 'CREATE', 'QUEUE', 'ACTIVE');
-INSERT INTO adgroupad VALUES ('12351', '123456', '0', '1', 'headline', 'description1', 'description2', 'http://www.izptec.com/go.php', 'http://www.izptec.com/', 'CREATE', 'QUEUE', 'ACTIVE');
-INSERT INTO adgroupad VALUES ('12352', '123456', '0', '1', 'headline', 'description1', 'description2', 'http://www.izptec.com/go.php', 'http://www.izptec.com/', 'CREATE', 'QUEUE', 'ACTIVE');
-INSERT INTO adgroupad VALUES ('12353', '123456', '0', '1', 'headline', 'description1', 'description2', 'http://www.izptec.com/go.php', 'http://www.izptec.com/', 'CREATE', 'QUEUE', 'ACTIVE');
-INSERT INTO adgroupad VALUES ('12354', '123456', '0', '1', 'headline', 'description1', 'description2', 'http://www.izptec.com/go.php', 'http://www.izptec.com/', 'CREATE', 'QUEUE', 'ACTIVE');
 
 -- ----------------------------
 -- Table structure for `campaign`
@@ -93,13 +78,14 @@ CREATE TABLE `campaign` (
   `max_cpc` decimal(10,2) NOT NULL,
   `campaign_status` enum('ACTIVE','PAUSE','DELETE') NOT NULL DEFAULT 'ACTIVE',
   `last_action` enum('CREATE','UPDATE','DELETE') NOT NULL DEFAULT 'CREATE',
-  `sync_status` enum('QUEUE','SYNCED','ERROR','RECEIVE') NOT NULL DEFAULT 'RECEIVE' COMMENT '在队列中，已同步，同步出错',
+  `sync_status` enum('QUEUE','SYNCED','ERROR','RETRY','RECEIVE') NOT NULL DEFAULT 'RECEIVE' COMMENT '在队列中，已同步，同步出错',
   PRIMARY KEY (`idclick_planid`,`idclick_uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of campaign
 -- ----------------------------
+INSERT INTO campaign VALUES ('16', '979', null, '5436784026', 'campaign_name #5255065dd46a4', '1001,1002', '2156', '', '500.00', 'ACCELERATED', '10.00', 'ACTIVE', 'UPDATE', 'QUEUE');
 
 -- ----------------------------
 -- Table structure for `customer`
@@ -109,10 +95,11 @@ CREATE TABLE `customer` (
   `idclick_uid` int(10) NOT NULL,
   `adwords_customerid` bigint(10) DEFAULT NULL,
   `last_action` enum('CREATE','UPDATE','DELETE') NOT NULL DEFAULT 'CREATE',
-  `sync_status` enum('QUEUE','SYNCED','ERROR','RECEIVE') NOT NULL DEFAULT 'RECEIVE' COMMENT '在队列中，已同步，同步出错',
+  `sync_status` enum('QUEUE','SYNCED','ERROR','RETRY','RECEIVE') NOT NULL DEFAULT 'RECEIVE' COMMENT '在队列中，已同步，同步出错',
   PRIMARY KEY (`idclick_uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of customer
 -- ----------------------------
+INSERT INTO customer VALUES ('978', '5436784026', 'CREATE', 'SYNCED');

@@ -41,6 +41,7 @@ abstract class AdwordsAdapter implements Adapter{
 	const SYNC_STATUS_QUEUE = 'QUEUE';
 	const SYNC_STATUS_SYNCED = 'SYNCED';
 	const SYNC_STATUS_ERROR = 'ERROR';	
+	const SYNC_STATUS_RETRY = 'RETRY';	
 	
 	/**
 	 * 结果描述文字定义
@@ -274,7 +275,7 @@ abstract class AdwordsAdapter implements Adapter{
 		$preparedParams = array();
 		
 		if(!in_array($status, array(self::SYNC_STATUS_QUEUE, self::SYNC_STATUS_RECEIVE,
-				self::SYNC_STATUS_SYNCED, self::SYNC_STATUS_ERROR))){
+				self::SYNC_STATUS_SYNCED, self::SYNC_STATUS_ERROR, self::SYNC_STATUS_RETRY))){
 			throw new DataCheckException('SYNC_STATUS未被允许的同步状态类型::'.$status);
 		} else {
 			$preparedParams[':sync_status'] = $status;

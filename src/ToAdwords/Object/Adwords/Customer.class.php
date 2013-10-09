@@ -59,7 +59,7 @@ class Customer extends AdwordsBase{
 			}
 			
 		} catch (Exception $e){
-			Log::write('创建Customer失败：' . $e->getMessage(), __METHOD__);
+			Log::write('创建ClientCustomer失败：' . $e->getMessage(), __METHOD__);
 		}
 	}
 	
