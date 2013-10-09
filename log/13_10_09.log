@@ -27,3 +27,40 @@
     [last_action] => UPDATE
 )
 
+[ 2013-10-09T11:05:21+08:00 ] ## [ERROR]捕捉到未定义异常：：{
+  "error" : "invalid_client"
+}
+[ 2013-10-09T11:07:37+08:00 ] ## [ERROR]捕捉到未定义异常：：{
+  "error" : "invalid_client"
+}
+[ 2013-10-09T11:09:44+08:00 ] ## 得到消息内容：Array
+(
+    [module] => Customer
+    [action] => CREATE
+    [data] => Array
+        (
+            [idclick_uid] => 441
+        )
+
+)
+
+[ 2013-10-09T11:09:49+08:00 ] ## [ERROR]捕捉到未定义异常：：{
+  "error" : "invalid_client"
+}
+[ 2013-10-09T11:10:44+08:00 ] ## 得到消息内容：Array
+(
+    [module] => Customer
+    [action] => CREATE
+    [data] => Array
+        (
+            [idclick_uid] => 441
+        )
+
+)
+
+[ 2013-10-09T11:10:48+08:00 ] ## [ERROR]捕捉到未定义异常：：{
+  "error" : "invalid_client"
+}
+[ 2013-10-09T11:11:48+08:00 ] ## 得到消息内容：
+[ 2013-10-09T11:12:01+08:00 ] ## 得到消息内容：
+[ 2013-10-09T11:12:53+08:00 ] ## 得到消息内容：

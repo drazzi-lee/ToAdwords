@@ -12,7 +12,7 @@ use \Exception;
 
 $httpsqs = new Httpsqs(HTTPSQS_HOST, HTTPSQS_PORT, HTTPSQS_AUTH);
 $queueCommon = HTTPSQS_QUEUE_COMMON;
-$logFile = TOADWORDS_LOG_PATH . 'daemon_common.log';
+Log::setPath(TOADWORDS_LOG_PATH . 'daemon_common' . DIRECTORY_SEPARATOR);
 
 while(true){
 	$result = $httpsqs->gets($queueCommon);
@@ -21,14 +21,15 @@ while(true){
 	if($data != 'HTTPSQS_GET_END' && $data != 'HTTPSQS_ERROR'){
 		try{
 			$dataDecode = json_decode($data, TRUE);	
+			Log::write('得到消息内容：'.print_r($dataDecode, TRUE), __METHOD__);
 			$message = new Message($dataDecode['module'], $dataDecode['action'], $dataDecode['data']);		
 			$messageHandler = new MessageHandler();		
 			$messageHandler->handle($message);
 			unset($dataDecode, $message, $messageHandler);
-		}  catch(MessageException $e) {
-			Log::write($e->getMessage(), __METHOD__, $logFile);
+		} catch(MessageException $e) {
+			Log::write('[ERROR]消息错误'.$e->getMessage(), __METHOD__);
 		} catch(Exception $e){
-			Log::write('捕捉到未定义异常：：'.$e->getMessage(), __METHOD__, $logFile);
+			Log::write('[ERROR]捕捉到未定义异常：：'.$e->getMessage(), __METHOD__);
 		}
 	} else {
 		unset($result, $pos, $data);

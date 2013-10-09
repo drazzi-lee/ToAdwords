@@ -1,0 +1,14 @@
+[ 2013-10-09T11:15:47+08:00 ] ## 得到消息内容：Array
+(
+    [module] => Customer
+    [action] => CREATE
+    [data] => Array
+        (
+            [idclick_uid] => 441
+        )
+
+)
+
+[ 2013-10-09T11:15:52+08:00 ] ## [ERROR]捕捉到未定义异常：：{
+  "error" : "invalid_client"
+}
