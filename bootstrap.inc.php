@@ -37,6 +37,10 @@ define('HTTPSQS_CHARSET', 'utf-8');
 define('HTTPSQS_QUEUE_COMMON', 'common');
 define('HTTPSQS_QUEUE_RETRY', 'retry');
 
+//处理结果返回格式
+//define('RESULT_FORMAT', 'ARRAY');
+define('RESULT_FORMAT', 'JSON');
+
 function load($namespace){
 	$splitpath = explode('\\', $namespace);
 	$path = TOADWORDS_SRC . DIRECTORY_SEPARATOR . 'ToAdwords';

@@ -383,7 +383,11 @@ abstract class AdwordsAdapter implements Adapter{
 				Log::write('[ERROR]数据验证失败，返回结果：\n' 
 								. print_r($this->result, TRUE), __METHOD__);
 			}
-			return $this->result;
+			if(RESULT_FORMAT == 'JSON'){
+				return json_encode($this->result);
+			} else {
+				return $this->result;
+			}
 		}
 		if($this->processed == $this->result['success']){
 			$this->result['status'] = 1;
@@ -398,7 +402,11 @@ abstract class AdwordsAdapter implements Adapter{
 			Log::write('[NOTICE]执行完成，返回结果：\n' 
 							. print_r($this->result, TRUE), __METHOD__);
 		}
-		return $this->result;
+		if(RESULT_FORMAT == 'JSON'){
+			return json_encode($this->result);
+		} else {
+			return $this->result;
+		}
 	}
 	
 	/**
