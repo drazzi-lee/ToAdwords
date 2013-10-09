@@ -212,3 +212,30 @@
     [failure] => 0
 )
 
+[ 2013-10-09T16:16:28+08:00 ] ## 检查到不符合条件的数据：ad_status #
+[ 2013-10-09T16:16:28+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [ERROR]数据验证失败，返回结果：\nArray
+(
+    [status] => -1
+    [description] => 数据验证未通过：提供数据不完整，请检查数据。
+    [success] => 0
+    [failure] => 0
+)
+
+[ 2013-10-09T16:17:27+08:00 ] #ToAdwords\AdwordsAdapter::checkData# 检查到不符合条件的数据：ad_status #
+[ 2013-10-09T16:17:27+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [ERROR]数据验证失败，返回结果：\nArray
+(
+    [status] => -1
+    [description] => 数据验证未通过：提供数据不完整，请检查数据。
+    [success] => 0
+    [failure] => 0
+)
+
+[ 2013-10-09T16:19:03+08:00 ] #ToAdwords\AdwordsAdapter::checkData# 检查到不符合条件的数据，未设置：ad_status
+[ 2013-10-09T16:19:03+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [ERROR]数据验证失败，返回结果：\nArray
+(
+    [status] => -1
+    [description] => 数据验证未通过：提供数据不完整，请检查数据。
+    [success] => 0
+    [failure] => 0
+)
+

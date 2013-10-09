@@ -433,7 +433,7 @@ abstract class AdwordsAdapter implements Adapter{
 			if(!isset($data[$item])){
 				$checkedResult = $checkedResult && FALSE;
 				if(ENVIRONMENT == 'development'){
-					Log::write('检查到不符合条件的数据：' . $item . ' #'$data[$item]);
+					Log::write('检查到不符合条件的数据，未设置：' . $item, __METHOD__);
 				}
 				break;
 			}
