@@ -1,0 +1,29 @@
+[ 2013-10-09T10:30:06+08:00 ] #ToAdwords\CampaignAdapter::run# 从AMC接口收到数据=========================\r\nArray
+(
+    [idclick_planid] => 16
+    [idclick_uid] => 978
+    [campaign_name] => campaign_name #5254bfae791a9
+    [areas] => 2156
+    [languages] => 1001,1002
+    [bidding_type] => 0
+    [budget_amount] => 500
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-10-09T10:30:06+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 16
+    [idclick_uid] => 978
+    [campaign_name] => campaign_name #5254bfae791a9
+    [areas] => 2156
+    [languages] => 1001,1002
+    [bidding_type] => MANUAL_CPC
+    [budget_amount] => 500
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
