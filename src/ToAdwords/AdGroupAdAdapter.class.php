@@ -167,9 +167,14 @@ class AdGroupAdAdapter extends AdwordsAdapter{
 				throw new DataCheckException(self::DESC_DATA_CHECK_FAILURE);
 			}
 			
-			$adGroupAdRow = $this->getOne('idclick_adid','idclick_adid='.$data['idclick_adid']);
+			$adGroupAdRow = $this->getOne('idclick_adid,idclick_groupid','idclick_adid='
+																		. $data['idclick_adid']);
 			if(empty($adGroupAdRow)){
 				throw new DataCheckException('广告已存在，idclick_adid为'.$data['idclick_adid']);
+			} else if($adGroupAdRow['idclick_groupid'] != $data['idclick_groupid']){
+				throw new DataCheckException('找到广告ID #' . $data['idclick_adid']
+						. '，但idclick_planid不符，提供的idclick_planid #' . $data['idclick_groupid']
+						. '  记录中的idclick_planid #' . $adGroupRow['idclick_groupid']);
 			}
 			
 			$data['last_action'] = isset($data['last_action']) ? $data['last_action'] : self::ACTION_UPDATE;

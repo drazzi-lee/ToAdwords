@@ -93,3 +93,77 @@
     [last_action] => UPDATE
 )
 
+[ 2013-10-09T15:13:59+08:00 ] #ToAdwords\CampaignAdapter::run# 从AMC接口收到数据=========================\r\nArray
+(
+    [idclick_planid] => 16
+    [idclick_uid] => 979
+    [campaign_name] => campaign_name #5255023752abc
+    [areas] => 2156
+    [languages] => 1001,1002
+    [bidding_type] => 0
+    [budget_amount] => 500
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-10-09T15:13:59+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 16
+    [idclick_uid] => 979
+    [campaign_name] => campaign_name #5255023752abc
+    [areas] => 2156
+    [languages] => 1001,1002
+    [bidding_type] => MANUAL_CPC
+    [budget_amount] => 500
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-10-09T15:13:59+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [NOTICE]执行完成，返回结果：\nArray
+(
+    [status] => 1
+    [description] => 成功处理了所有数据，共有1条。
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-10-09T15:14:17+08:00 ] #ToAdwords\CampaignAdapter::run# 从AMC接口收到数据=========================\r\nArray
+(
+    [idclick_planid] => 16
+    [idclick_uid] => 979
+    [campaign_name] => campaign_name #52550249de134
+    [areas] => 2156
+    [languages] => 1001,1002
+    [bidding_type] => 0
+    [budget_amount] => 500
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-10-09T15:14:17+08:00 ] #ToAdwords\Util\Message::put# [消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 16
+    [idclick_uid] => 979
+    [campaign_name] => campaign_name #52550249de134
+    [areas] => 2156
+    [languages] => 1001,1002
+    [bidding_type] => MANUAL_CPC
+    [budget_amount] => 500
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-10-09T15:14:17+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [NOTICE]执行完成，返回结果：\nArray
+(
+    [status] => 1
+    [description] => 成功处理了所有数据，共有1条。
+    [success] => 1
+    [failure] => 0
+)
+

@@ -179,10 +179,16 @@ class CampaignAdapter extends AdwordsAdapter{
 				throw new DataCheckException(self::DESC_DATA_CHECK_FAILURE);
 			}
 			
-			$campaignRow = $this->getOne('idclick_planid','idclick_planid='.$data['idclick_planid']);
+			$campaignRow = $this->getOne('idclick_planid,idclick_uid', 
+											'idclick_planid='.$data['idclick_planid']);
 			if(empty($campaignRow)){
-				throw new DataCheckException('广告计划未找到，idclick_planid为'.$data['idclick_planid']);
-			}
+				throw new DataCheckException('广告计划未找到，idclick_planid为'
+															.$data['idclick_planid']);
+			} else if($campaignRow['idclick_uid'] != $data['idclick_uid']){
+				throw new DataCheckException('找到广告计划ID #' . $data['idclick_planid']
+						. '，但idclick_uid不符，提供的idclick_uid #' . $data['idclick_uid']
+						. '  记录中的idclick_uid #' . $campaignRow['idclick_uid']);
+			}			
 			
 			$data['last_action'] = isset($data['last_action']) ? $data['last_action'] : self::ACTION_UPDATE;
 			$conditions = 'idclick_planid='.$data['idclick_planid'];
