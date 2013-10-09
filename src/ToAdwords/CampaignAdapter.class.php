@@ -26,8 +26,6 @@ class CampaignAdapter extends AdwordsAdapter{
 	protected $adwordsObjectIdField = 'campaign_id';
 	protected $idclickObjectIdField = 'idclick_planid';
 	
-	protected $statusField = 'campaign_status';
-	
 	protected $dataCheckFilter = array(
 				'CREATE'	=> array(
 					'requiredFields'	=> array(
@@ -37,11 +35,11 @@ class CampaignAdapter extends AdwordsAdapter{
 					'prohibitedFields'	=> array('sync_status','campaign_id','customer_id'),
 				),
 				'UPDATE'	=> array(
-					'requiredFields'	=> array('idclick_planid','idclick_uid','campaign_status'),
+					'requiredFields'	=> array('idclick_planid','idclick_uid'),
 					'prohibitedFields'	=> array('sync_status','campaign_id','customer_id'),
 				),
 				'DELETE'	=> array(
-					'requiredFields'	=> array('idclick_planid','idclick_uid','campaign_status'),
+					'requiredFields'	=> array('idclick_planid','idclick_uid'),
 					'prohibitedFields'	=> array('sync_status','campaign_id','customer_id'),
 				),
 			);
@@ -277,6 +275,7 @@ class CampaignAdapter extends AdwordsAdapter{
 		
 		$infoForRemove = array();
 		$infoForRemove['last_action'] = self::ACTION_DELETE;
+		$infoForRemove['campaign_status'] = 'DELETE';
 		$infoForRemove[$this->idclickObjectIdField] = $data[$this->idclickObjectIdField];
 
 		return $this->update($infoForRemove);

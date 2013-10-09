@@ -25,8 +25,6 @@ class AdGroupAdAdapter extends AdwordsAdapter{
 	protected $adwordsObjectIdField = 'ad_id';
 	protected $idclickObjectIdField = 'idclick_adid';
 	
-	protected $statusField = 'ad_status';
-	
 	protected $dataCheckFilter = array(
 				'CREATE'	=> array(
 					'requiredFields'	=> array(
@@ -246,6 +244,7 @@ class AdGroupAdAdapter extends AdwordsAdapter{
 		
 		$infoForRemove = array();
 		$infoForRemove['last_action'] = self::ACTION_DELETE;
+		$infoForRemove['ad_status'] = 'DELETE';
 		$infoForRemove[$this->idclickObjectIdField] = $data[$this->idclickObjectIdField];
 		
 		return $this->update($infoForRemove);
