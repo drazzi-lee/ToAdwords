@@ -99,7 +99,9 @@ class Httpsqs
     }
 
     public function http_post($query, $body)
-    {
+    {	
+		$header = null;
+		$pos_value = null;
         $socket = fsockopen($this->httpsqs_host, $this->httpsqs_port, $errno, $errstr, 1);
         if (!$socket)
         {
