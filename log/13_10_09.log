@@ -239,3 +239,11 @@
     [failure] => 0
 )
 
+[ 2013-10-09T16:24:13+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [ERROR]数据验证失败，返回结果：\nArray
+(
+    [status] => -1
+    [description] => 数据验证未通过：广告已存在，idclick_adid为14
+    [success] => 0
+    [failure] => 0
+)
+

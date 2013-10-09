@@ -187,9 +187,9 @@ class AdGroupAdAdapter extends AdwordsAdapter{
 			$newData = array_diff_key($data, $conditionsArray);
 			
 			$this->dbh->beginTransaction();
-			$adGroupAd = new AdGroupAd($data['idclick_adid']);
+			$ad = new Ad($data['idclick_adid']);
 			if($this->updateOne($conditions, $newData) && $this->createMessageAndPut($data, $data['last_action'])
-					&& $this->updateSyncStatus(self::SYNC_STATUS_QUEUE, $adGroupAd)){
+					&& $this->updateSyncStatus(self::SYNC_STATUS_QUEUE, $ad)){
 				$this->dbh->commit();
 				$this->processed++;
 				$this->result['success']++;
