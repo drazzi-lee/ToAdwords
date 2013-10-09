@@ -1,5 +1,5 @@
 <?php
-require_once '../src/ToAdwords/bootstrap.inc.php';
+require_once '../bootstrap.inc.php';
 
 use ToAdwords\Util\Log;
 use ToAdwords\Util\Httpsqs;
@@ -10,24 +10,25 @@ use ToAdwords\Exceptions\MessageException;
 use \Exception;
 
 $httpsqs = new Httpsqs(HTTPSQS_HOST, HTTPSQS_PORT, HTTPSQS_AUTH);
-$queue_common = HTTPSQS_QUEUE_COMMON;
+$queueCommon = HTTPSQS_QUEUE_COMMON;
+$logFile = TOADWORDS_LOG_PATH . 'daemon_common.log';
 
 
-$result = $httpsqs->gets($queue_common);
+$result = $httpsqs->gets($queueCommon);
 $pos = $result['pos'];
 $data = $result['data'];
 if($data != 'HTTPSQS_GET_END' && $data != 'HTTPSQS_ERROR'){
 	try{
-		$data_decode = json_decode($data, TRUE);
-		if($data_decode['module'] == 'Customer'){
-			$message = new Message($data_decode['module'], $data_decode['action'], $data_decode['data']);		
+		$dataDecode = json_decode($data, TRUE);
+		if($dataDecode['module'] == 'Customer'){	
+			$message = new Message($dataDecode['module'], $dataDecode['action'], $dataDecode['data']);		
 			$messageHandler = new MessageHandler();		
 			$messageHandler->handle($message);
-			unset($data_decode, $message, $messageHandler);
+			unset($dataDecode, $message, $messageHandler);
 		}		
 	} catch(MessageException $e) {
-		Log::write($e->getMessage(), __METHOD__, './daemon_common.log');
+		Log::write($e->getMessage(), __METHOD__, $logFile);
 	} catch(Exception $e){
-		Log::write('捕捉到未定义异常：：'.$e->getMessage(), __METHOD__, './daemon_common.log');
+		Log::write('捕捉到未定义异常：：'.$e->getMessage(), __METHOD__, $logFile);
 	}
 }

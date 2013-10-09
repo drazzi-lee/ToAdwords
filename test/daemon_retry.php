@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 
-require_once '../src/ToAdwords/bootstrap.inc.php';
+require_once '../bootstrap.inc.php';
 use ToAdwords\Util\Httpsqs;
 
 $httpsqs = new Httpsqs(HTTPSQS_HOST, HTTPSQS_PORT, HTTPSQS_AUTH);

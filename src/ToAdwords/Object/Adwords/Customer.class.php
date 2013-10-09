@@ -1,4 +1,5 @@
 <?php
+
 namespace ToAdwords\Object\Adwords;
 
 require_once('init.php');

@@ -1,15 +1,28 @@
 <?php
 
 namespace ToAdwords\Object\Adwords;
+
+require_once('init.php');
+
+use ToAdwords\CampaignAdapter;
 use ToAdwords\Object\Adwords\AdwordsBase;
-use ToAdwords\Exceptions\DataCheckException;
+use ToAdwords\Object\Idclick\AdPlan;
 
 class Campaign extends AdwordsBase{
-	public function __construct($id){
-		if((int)$id != 0){
-			$this->id = (int)$id;
-		} else {
-			throw new DataCheckException('$id只能为数字，实例化'.get_class($this).'失败');
-		}
+	public function __construct(){
+	
+	}
+	
+	public function create($data){
+	
+	
+	}
+	
+	public function update($data){
+	
+	}
+	
+	public function delete($data){
+	
 	}
 }
