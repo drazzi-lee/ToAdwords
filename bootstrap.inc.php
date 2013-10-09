@@ -17,8 +17,11 @@ if(!defined('PHP_VERSION_ID') || PHP_VERSION_ID < 50300){
 define('ENVIRONMENT', 'development');
 //define('ENVIRONMENT', 'production');
 
+define('TOADWORDS_ROOT', __DIR__);
+define('TOADWORDS_SRC', TOADWORDS_ROOT . DIRECTORY_SEPARATOR . 'src');
+
 //日志配置
-define('TOADWORDS_LOG_PATH', dirname(__FILE__).DIRECTORY_SEPARATOR.'Log'.DIRECTORY_SEPARATOR);
+define('TOADWORDS_LOG_PATH', TOADWORDS_ROOT . DIRECTORY_SEPARATOR . 'log'.DIRECTORY_SEPARATOR);
 define('TOADWORDS_LOG_RECORD', TRUE);
 
 //数据库配置
@@ -36,7 +39,7 @@ define('HTTPSQS_QUEUE_RETRY', 'retry');
 
 function load($namespace){
 	$splitpath = explode('\\', $namespace);
-	$path = '';
+	$path = TOADWORDS_SRC . DIRECTORY_SEPARATOR . 'ToAdwords';
 	$name = '';
 	$firstword = true;
 	for ($i = 0; $i < count($splitpath); $i++) {
@@ -53,7 +56,7 @@ function load($namespace){
 		}
 	}
 	if (!$firstword) {
-		$fullpath = dirname(__FILE__). DIRECTORY_SEPARATOR . $path . DIRECTORY_SEPARATOR 
+		$fullpath = $path . DIRECTORY_SEPARATOR 
 				. $name . '.class.php';
 		return include_once($fullpath);
 	}

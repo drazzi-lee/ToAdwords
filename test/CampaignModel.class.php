@@ -1,6 +1,6 @@
 <?php
 
-require_once('src/ToAdwords/bootstrap.inc.php');
+require_once('../bootstrap.inc.php');
 
 use ToAdwords\CampaignAdapter;
 
