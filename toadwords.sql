@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2013-10-09 17:37:04
+Date: 2013-10-09 18:35:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -52,7 +52,7 @@ CREATE TABLE `adgroupad` (
   `ad_displayurl` varchar(200) NOT NULL,
   `last_action` enum('CREATE','UPDATE','DELETE') NOT NULL DEFAULT 'CREATE',
   `sync_status` enum('QUEUE','SYNCED','ERROR','RETRY','RECEIVE') NOT NULL DEFAULT 'RECEIVE' COMMENT '在队列中，已同步，同步出错',
-  `ad_status` enum('ACTIVE','PAUSE','DELETE') NOT NULL DEFAULT 'ACTIVE',
+  `ad_status` enum('ACTIVE','PAUSE','DELETE') NOT NULL DEFAULT 'PAUSE',
   PRIMARY KEY (`idclick_adid`,`idclick_groupid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
