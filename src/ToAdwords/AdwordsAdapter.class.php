@@ -379,6 +379,10 @@ abstract class AdwordsAdapter implements Adapter{
 	 */
 	protected function generateResult(){		
 		if($this->result['status'] == -1){
+			if(ENVIRONMENT == 'development'){
+				Log::write('[ERROR]数据验证失败，返回结果：\n' 
+								. print_r($this->result, TRUE), __METHOD__);
+			}
 			return $this->result;
 		}
 		if($this->processed == $this->result['success']){
@@ -389,6 +393,10 @@ abstract class AdwordsAdapter implements Adapter{
 			$this->result['status'] = 0;
 			$this->result['description'] = self::DESC_DATA_PROCESS_WARNING 
 				. "，成功{$this->result['success']}条，失败{$this->result['failure']}条。";
+		}
+		if(ENVIRONMENT == 'development'){
+			Log::write('[NOTICE]执行完成，返回结果：\n' 
+							. print_r($this->result, TRUE), __METHOD__);
 		}
 		return $this->result;
 	}

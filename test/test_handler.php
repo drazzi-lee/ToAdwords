@@ -13,7 +13,6 @@ $httpsqs = new Httpsqs(HTTPSQS_HOST, HTTPSQS_PORT, HTTPSQS_AUTH);
 $queueCommon = HTTPSQS_QUEUE_COMMON;
 Log::setPath(TOADWORDS_LOG_PATH . 'daemon_common' . DIRECTORY_SEPARATOR);
 
-
 $result = $httpsqs->gets($queueCommon);
 $pos = $result['pos'];
 $data = $result['data'];
