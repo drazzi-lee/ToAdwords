@@ -45,7 +45,7 @@ abstract class AdwordsAdapter implements Adapter{
 	/**
 	 * 结果描述文字定义
 	 */
-	const DESC_DATA_CHECK_FAILURE = '提供数据不完整，请检查数据或设置IS_CHECK_DATA为FALSE';
+	const DESC_DATA_CHECK_FAILURE = '提供数据不完整，请检查数据。';
 	const DESC_DATA_PROCESS_SUCCESS = '成功处理了所有数据';
 	const DESC_DATA_PROCESS_WARNING = '执行完毕，有部分数据未正常处理：：';
 	
@@ -424,16 +424,20 @@ abstract class AdwordsAdapter implements Adapter{
 	 * 根据当前模块配置的dataCheckFilter来进行验证，同时过滤掉不需要的字段。
 	 */
 	protected function checkData(&$data, $action){
+		$checkedResult = TRUE;
 		$filter = $this->dataCheckFilter[$action];
 		foreach($filter['prohibitedFields'] as $item){
 			unset($data[$item]);
 		}		
 		foreach($filter['requiredFields'] as $item){
 			if(!isset($data[$item])){
-				return FALSE;
+				$checkedResult = $checkedResult && FALSE;
+				if(ENVIRONMENT == 'development'){
+					Log::write('检查到不符合条件的数据：' . $item . ' #'$data[$item]);
+				}
 				break;
 			}
 		}
-		return TRUE;
+		return $checkedResult;
 	}
 }

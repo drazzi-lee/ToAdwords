@@ -25,6 +25,8 @@ class AdGroupAdapter extends AdwordsAdapter{
 	protected $adwordsObjectIdField = 'adgroup_id';
 	protected $idclickObjectIdField = 'idclick_groupid';
 	
+	protected $statusField = 'adgroup_status';
+	
 	protected $dataCheckFilter = array(
 				'CREATE'	=> array(
 					'requiredFields'	=> array(
@@ -33,11 +35,11 @@ class AdGroupAdapter extends AdwordsAdapter{
 					'prohibitedFields'	=> array('sync_status', 'adgroup_id', 'campaign_id'),
 				),
 				'UPDATE'	=> array(
-					'requiredFields'	=> array('idclick_groupid'),
+					'requiredFields'	=> array('idclick_groupid','idclick_planid'),
 					'prohibitedFields'	=> array('sync_status', 'adgroup_id', 'campaign_id'),
 				),
 				'DELETE'	=> array(
-					'requiredFields'	=> array('idclick_groupid'),
+					'requiredFields'	=> array('idclick_groupid','idclick_planid'),
 					'prohibitedFields'	=> array('sync_status', 'adgroup_id', 'campaign_id'),
 				),
 			);
