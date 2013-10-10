@@ -428,11 +428,13 @@ abstract class AdwordsAdapter implements Adapter{
 	 */
 	protected function checkData(&$data, $action){
 		$filter = $this->dataCheckFilter[$action];
-		foreach($filter['prohibitedFields'] as $item){			
-			unset($data[$item]);
-			if(ENVIRONMENT == 'development'){
-				Log::write('[WARNING]检查到禁止设置的字段，字段：' 
-											. $item . ' #'. $data[$item], __METHOD__);
+		foreach($filter['prohibitedFields'] as $item){
+			if(isset($data[$item])){
+				if(ENVIRONMENT == 'development'){
+					Log::write('[WARNING]检查到禁止设置的字段，字段：' 
+												. $item . ' #'. $data[$item], __METHOD__);
+				}
+				unset($data[$item]);
 			}
 		}		
 		foreach($filter['requiredFields'] as $item){

@@ -141,10 +141,10 @@ class CampaignAdapter extends AdwordsAdapter{
 		}catch (PDOException $e){
 			$this->dbh->rollBack();
 			$this->result['status'] = -1;
-			$this->result['description'] = '数据表新插入一行失败，事务已回滚，idclick_planid为'.$data['idclick_planid']
-									.' ==》'.$e->getMessage();
-			Log::write('数据表新插入一行失败，事务已回滚，idclick_planid为'.$data['idclick_planid']
-									.' ==》'.$e->getMessage(), __METHOD__);	
+			$this->result['description'] = '数据表新插入一行失败，事务已回滚，idclick_planid为'
+									. $data['idclick_planid'] . ' ==》' . $e->getMessage();
+			Log::write('数据表新插入一行失败，事务已回滚，idclick_planid为'
+							. $data['idclick_planid'] . ' ==》'.$e->getMessage(), __METHOD__);	
 			return $this->generateResult();
 		} catch (Exception $e){
 			if($this->dbh->inTransaction()){
