@@ -1,0 +1,284 @@
+[Oct 10 2013 10:05:49.000000 - INFO] POST /api/adwords/mcm/v201306/ManagedCustomerService?access_token=ya29.AHES6ZSgvbAH10iFpoXUbf1nuuCLV4w2dPHTdB78nJOgD-j0 HTTP/1.1
+Host: adwords.google.com
+Connection: Keep-Alive
+User-Agent: PHP-SOAP/5.4.16, gzip
+Accept-Encoding: gzip, deflate
+Content-Encoding: gzip
+Content-Type: text/xml; charset=utf-8
+SOAPAction: ""
+Content-Length: 427
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://adwords.google.com/api/adwords/cm/v201306" xmlns:ns2="https://adwords.google.com/api/adwords/mcm/v201306">
+  <SOAP-ENV:Header>
+    <ns2:RequestHeader>
+      <ns1:developerToken>c6cnIFQ6BOI7SKjA0PCUvw</ns1:developerToken>
+      <ns1:userAgent>IZP Co.,Ltd. (AwApi-PHP/4.5.1, Common-PHP/5.0.0, PHP/5.4.16)</ns1:userAgent>
+    </ns2:RequestHeader>
+  </SOAP-ENV:Header>
+  <SOAP-ENV:Body>
+    <ns2:mutate>
+      <ns2:operations>
+        <ns1:operator>ADD</ns1:operator>
+        <ns2:operand>
+          <ns2:name>Account #52560b77c5e40</ns2:name>
+          <ns2:currencyCode>CNY</ns2:currencyCode>
+          <ns2:dateTimeZone>Asia/Shanghai</ns2:dateTimeZone>
+        </ns2:operand>
+      </ns2:operations>
+    </ns2:mutate>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=UTF-8
+Content-Encoding: gzip
+Date: Thu, 10 Oct 2013 02:05:49 GMT
+Expires: Thu, 10 Oct 2013 02:05:49 GMT
+Cache-Control: private, max-age=0
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+Content-Length: 411
+Server: GSE
+
+<?xml version="1.0"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <ResponseHeader xmlns:ns2="https://adwords.google.com/api/adwords/cm/v201306" xmlns="https://adwords.google.com/api/adwords/mcm/v201306">
+      <ns2:requestId>0004e85970c86fc00aa5134400004b75</ns2:requestId>
+      <ns2:serviceName>ManagedCustomerService</ns2:serviceName>
+      <ns2:methodName>mutate</ns2:methodName>
+      <ns2:operations>0</ns2:operations>
+      <ns2:responseTime>992</ns2:responseTime>
+    </ResponseHeader>
+  </soap:Header>
+  <soap:Body>
+    <mutateResponse xmlns="https://adwords.google.com/api/adwords/mcm/v201306" xmlns:ns2="https://adwords.google.com/api/adwords/cm/v201306">
+      <rval>
+        <value>
+          <name>Account #52560b77c5e40</name>
+          <login/>
+          <customerId>2537965153</customerId>
+          <canManageClients>false</canManageClients>
+          <currencyCode>CNY</currencyCode>
+          <dateTimeZone>Asia/Shanghai</dateTimeZone>
+        </value>
+      </rval>
+    </mutateResponse>
+  </soap:Body>
+</soap:Envelope>
+
+[Oct 10 2013 10:11:13.000000 - INFO] POST /api/adwords/mcm/v201306/ManagedCustomerService?access_token=ya29.AHES6ZQRHpYhw-tnUNPQPVndnD4jyHrTyMO5KRyOSq7WPAZ0 HTTP/1.1
+Host: adwords.google.com
+Connection: Keep-Alive
+User-Agent: PHP-SOAP/5.4.16, gzip
+Accept-Encoding: gzip, deflate
+Content-Encoding: gzip
+Content-Type: text/xml; charset=utf-8
+SOAPAction: ""
+Content-Length: 428
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://adwords.google.com/api/adwords/cm/v201306" xmlns:ns2="https://adwords.google.com/api/adwords/mcm/v201306">
+  <SOAP-ENV:Header>
+    <ns2:RequestHeader>
+      <ns1:developerToken>c6cnIFQ6BOI7SKjA0PCUvw</ns1:developerToken>
+      <ns1:userAgent>IZP Co.,Ltd. (AwApi-PHP/4.5.1, Common-PHP/5.0.0, PHP/5.4.16)</ns1:userAgent>
+    </ns2:RequestHeader>
+  </SOAP-ENV:Header>
+  <SOAP-ENV:Body>
+    <ns2:mutate>
+      <ns2:operations>
+        <ns1:operator>ADD</ns1:operator>
+        <ns2:operand>
+          <ns2:name>Account #52560cbb87c20</ns2:name>
+          <ns2:currencyCode>CNY</ns2:currencyCode>
+          <ns2:dateTimeZone>Asia/Shanghai</ns2:dateTimeZone>
+        </ns2:operand>
+      </ns2:operations>
+    </ns2:mutate>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=UTF-8
+Content-Encoding: gzip
+Date: Thu, 10 Oct 2013 02:11:13 GMT
+Expires: Thu, 10 Oct 2013 02:11:13 GMT
+Cache-Control: private, max-age=0
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+Content-Length: 411
+Server: GSE
+
+<?xml version="1.0"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <ResponseHeader xmlns:ns2="https://adwords.google.com/api/adwords/cm/v201306" xmlns="https://adwords.google.com/api/adwords/mcm/v201306">
+      <ns2:requestId>0004e8598415c8200aa4e603000038e4</ns2:requestId>
+      <ns2:serviceName>ManagedCustomerService</ns2:serviceName>
+      <ns2:methodName>mutate</ns2:methodName>
+      <ns2:operations>0</ns2:operations>
+      <ns2:responseTime>1172</ns2:responseTime>
+    </ResponseHeader>
+  </soap:Header>
+  <soap:Body>
+    <mutateResponse xmlns="https://adwords.google.com/api/adwords/mcm/v201306" xmlns:ns2="https://adwords.google.com/api/adwords/cm/v201306">
+      <rval>
+        <value>
+          <name>Account #52560cbb87c20</name>
+          <login/>
+          <customerId>3504859751</customerId>
+          <canManageClients>false</canManageClients>
+          <currencyCode>CNY</currencyCode>
+          <dateTimeZone>Asia/Shanghai</dateTimeZone>
+        </value>
+      </rval>
+    </mutateResponse>
+  </soap:Body>
+</soap:Envelope>
+
+[Oct 10 2013 10:17:04.000000 - INFO] POST /api/adwords/mcm/v201306/ManagedCustomerService?access_token=ya29.AHES6ZS0aBqxJih3qj-KfmKnlMgjh4b3iTwWRgQfmHjo0ktH HTTP/1.1
+Host: adwords.google.com
+Connection: Keep-Alive
+User-Agent: PHP-SOAP/5.4.16, gzip
+Accept-Encoding: gzip, deflate
+Content-Encoding: gzip
+Content-Type: text/xml; charset=utf-8
+SOAPAction: ""
+Content-Length: 427
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://adwords.google.com/api/adwords/cm/v201306" xmlns:ns2="https://adwords.google.com/api/adwords/mcm/v201306">
+  <SOAP-ENV:Header>
+    <ns2:RequestHeader>
+      <ns1:developerToken>c6cnIFQ6BOI7SKjA0PCUvw</ns1:developerToken>
+      <ns1:userAgent>IZP Co.,Ltd. (AwApi-PHP/4.5.1, Common-PHP/5.0.0, PHP/5.4.16)</ns1:userAgent>
+    </ns2:RequestHeader>
+  </SOAP-ENV:Header>
+  <SOAP-ENV:Body>
+    <ns2:mutate>
+      <ns2:operations>
+        <ns1:operator>ADD</ns1:operator>
+        <ns2:operand>
+          <ns2:name>Account #52560e19da470</ns2:name>
+          <ns2:currencyCode>CNY</ns2:currencyCode>
+          <ns2:dateTimeZone>Asia/Shanghai</ns2:dateTimeZone>
+        </ns2:operand>
+      </ns2:operations>
+    </ns2:mutate>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=UTF-8
+Content-Encoding: gzip
+Date: Thu, 10 Oct 2013 02:17:04 GMT
+Expires: Thu, 10 Oct 2013 02:17:04 GMT
+Cache-Control: private, max-age=0
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+Content-Length: 411
+Server: GSE
+
+<?xml version="1.0"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <ResponseHeader xmlns:ns2="https://adwords.google.com/api/adwords/cm/v201306" xmlns="https://adwords.google.com/api/adwords/mcm/v201306">
+      <ns2:requestId>0004e85998f7c2700aa5134400004b75</ns2:requestId>
+      <ns2:serviceName>ManagedCustomerService</ns2:serviceName>
+      <ns2:methodName>mutate</ns2:methodName>
+      <ns2:operations>0</ns2:operations>
+      <ns2:responseTime>1106</ns2:responseTime>
+    </ResponseHeader>
+  </soap:Header>
+  <soap:Body>
+    <mutateResponse xmlns="https://adwords.google.com/api/adwords/mcm/v201306" xmlns:ns2="https://adwords.google.com/api/adwords/cm/v201306">
+      <rval>
+        <value>
+          <name>Account #52560e19da470</name>
+          <login/>
+          <customerId>6787943218</customerId>
+          <canManageClients>false</canManageClients>
+          <currencyCode>CNY</currencyCode>
+          <dateTimeZone>Asia/Shanghai</dateTimeZone>
+        </value>
+      </rval>
+    </mutateResponse>
+  </soap:Body>
+</soap:Envelope>
+
+[Oct 10 2013 10:25:27.000000 - INFO] POST /api/adwords/mcm/v201306/ManagedCustomerService?access_token=ya29.AHES6ZQlohtkl3zAJdAYUhJWl6r-9cLNbkbF4m8I1hYVfy-9 HTTP/1.1
+Host: adwords.google.com
+Connection: Keep-Alive
+User-Agent: PHP-SOAP/5.4.16, gzip
+Accept-Encoding: gzip, deflate
+Content-Encoding: gzip
+Content-Type: text/xml; charset=utf-8
+SOAPAction: ""
+Content-Length: 428
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://adwords.google.com/api/adwords/cm/v201306" xmlns:ns2="https://adwords.google.com/api/adwords/mcm/v201306">
+  <SOAP-ENV:Header>
+    <ns2:RequestHeader>
+      <ns1:developerToken>c6cnIFQ6BOI7SKjA0PCUvw</ns1:developerToken>
+      <ns1:userAgent>IZP Co.,Ltd. (AwApi-PHP/4.5.1, Common-PHP/5.0.0, PHP/5.4.16)</ns1:userAgent>
+    </ns2:RequestHeader>
+  </SOAP-ENV:Header>
+  <SOAP-ENV:Body>
+    <ns2:mutate>
+      <ns2:operations>
+        <ns1:operator>ADD</ns1:operator>
+        <ns2:operand>
+          <ns2:name>Account #52561010b1818</ns2:name>
+          <ns2:currencyCode>CNY</ns2:currencyCode>
+          <ns2:dateTimeZone>Asia/Shanghai</ns2:dateTimeZone>
+        </ns2:operand>
+      </ns2:operations>
+    </ns2:mutate>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=UTF-8
+Content-Encoding: gzip
+Date: Thu, 10 Oct 2013 02:25:27 GMT
+Expires: Thu, 10 Oct 2013 02:25:27 GMT
+Cache-Control: private, max-age=0
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+Content-Length: 408
+Server: GSE
+
+<?xml version="1.0"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <ResponseHeader xmlns:ns2="https://adwords.google.com/api/adwords/cm/v201306" xmlns="https://adwords.google.com/api/adwords/mcm/v201306">
+      <ns2:requestId>0004e859b6f150200aa5134400004b75</ns2:requestId>
+      <ns2:serviceName>ManagedCustomerService</ns2:serviceName>
+      <ns2:methodName>mutate</ns2:methodName>
+      <ns2:operations>0</ns2:operations>
+      <ns2:responseTime>1184</ns2:responseTime>
+    </ResponseHeader>
+  </soap:Header>
+  <soap:Body>
+    <mutateResponse xmlns="https://adwords.google.com/api/adwords/mcm/v201306" xmlns:ns2="https://adwords.google.com/api/adwords/cm/v201306">
+      <rval>
+        <value>
+          <name>Account #52561010b1818</name>
+          <login/>
+          <customerId>6026516240</customerId>
+          <canManageClients>false</canManageClients>
+          <currencyCode>CNY</currencyCode>
+          <dateTimeZone>Asia/Shanghai</dateTimeZone>
+        </value>
+      </rval>
+    </mutateResponse>
+  </soap:Body>
+</soap:Envelope>
+

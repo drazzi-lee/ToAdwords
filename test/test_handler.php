@@ -23,11 +23,11 @@ if($data != 'HTTPSQS_GET_END' && $data != 'HTTPSQS_ERROR'){
 		if($dataDecode['module'] == 'Customer'){	
 			$message = new Message($dataDecode['module'], $dataDecode['action'], $dataDecode['data']);		
 			$messageHandler = new MessageHandler();		
-			$messageHandler->handle($message);
+			$messageHandler->handle($message, $httpsqs);
 			unset($dataDecode, $message, $messageHandler);
 		}		
 	} catch(MessageException $e) {
-		Log::write('[ERROR]消息错误'.$e->getMessage(), __METHOD__);
+		Log::write('[ERROR]消息错误：消息位置 #' . $pos . '，'.$e->getMessage(), __METHOD__);
 	} catch(Exception $e){
 		Log::write('[ERROR]捕捉到未定义异常：：'.$e->getMessage(), __METHOD__);
 	}

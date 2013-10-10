@@ -7,6 +7,7 @@ use ToAdwords\Object\Adwords\AdGroup;
 use ToAdwords\Object\Adwords\AdGroupAd;
 use ToAdwords\Util\Log;
 use ToAdwords\Util\Message;
+use ToAdwords\Util\Httpsqs;
 use ToAdwords\Exceptions\MessageException;
 
 /**
@@ -14,9 +15,8 @@ use ToAdwords\Exceptions\MessageException;
  *
  */
 class MessageHandler{
-	
 
-	public function handle(Message $message){
+	public function handle(Message $message, Httpsqs $httpsqs){
 		$module = null;
 		$result = null;
 	
@@ -54,11 +54,15 @@ class MessageHandler{
 		}
 		
 		if(!$result){
-			$message_retry = $message;
-			$message_retry['error_count'] = 1;
+			$message_retry = array(
+				'module'		=> $message->getModule(),
+				'action'		=> $message->getAction(),
+				'data'			=> $message->getInformation(),
+				'error_count'	=> 1,
+			);
 			$httpsqs->put(HTTPSQS_QUEUE_RETRY, json_encode($message_retry));			
-			throw new MessageException('发送消息失败，消息位置：'.$pos.' 消息内容：'
-						.$data.' || 已进入重试队列');
+			throw new MessageException('发送消息失败，消息内容：' 
+										. $message->getInformation() . ' || 已进入重试队列');
 		}
 	}
 	

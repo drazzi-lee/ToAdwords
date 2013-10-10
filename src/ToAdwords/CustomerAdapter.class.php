@@ -37,7 +37,7 @@ class CustomerAdapter extends AdwordsAdapter{
 			$this->dbh->beginTransaction();
 			$member = new Member($idclickUid);
 			if($this->insertOne(array('idclick_uid' => $idclickUid)) 
-					&& $this->_createMessageAndPut($idclickUid)
+					&& $this->createMessageAndPut(array('idclick_uid' => $idclickUid), self::ACTION_CREATE)
 					&& $this->updateSyncStatus(self::SYNC_STATUS_QUEUE, $member)){
 				$this->dbh->commit();
 				return TRUE;
@@ -61,30 +61,6 @@ class CustomerAdapter extends AdwordsAdapter{
 				echo $e->getMessage();
 			} else {
 				Log::write($e->getMessage(), __METHOD__);					
-			}
-			return FALSE;
-		}
-	}
-	
-	/**
-	 * 构建消息并推送至消息队列
-	 */
-	private function _createMessageAndPut($idclickUid){
-		$information = array('idclick_uid' => $idclickUid);
-		try{
-			$message = new Message($this->moduleName, self::ACTION_CREATE, $information);
-			if($message->put()){
-				return TRUE;
-			} else {
-				throw new Exception('新消息构建完毕，但插入失败，消息内容为：'.$message);
-			}
-		} catch (Exception $e){
-			if(ENVIRONMENT == 'development'){
-				trigger_error('在Customer表新插入一行失败，事务已回滚，idclick_uid为'.$idclickUid
-											. '  ####'.$e->getMessage(), E_USER_ERROR);
-			} else {
-				Log::write('创建新消息失败，idclick_uid为' . $idclickUid . '  ####'
-											. $e->getMessage(), __METHOD__);				
 			}
 			return FALSE;
 		}
