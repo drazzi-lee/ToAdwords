@@ -35,6 +35,13 @@ class Customer extends AdwordsBase{
 	 */
 	public function create(array $data){
 		try{
+			/**
+			 * 1、调取Google Adwords Api新建Customer；
+			 * 2、判断结果，新建成功则更新customer表中customerId字段，并置SYNC_STATUS为SYNCED. 返回
+			 *   TRUE.  【NOTICE】如果新建成功，更新数据库失败|更新状态失败，则日志报警或发信报警。
+			 * 返回TRUE; 如新建失败，则此次消息执行视为失败，返回FALSE。
+			 * == MessageHandler会将失败消息转入重试队列 ==
+			 */
 			$user = new AdWordsUser();
 			$user->LogAll();
 			// Get the service, which loads the required classes.

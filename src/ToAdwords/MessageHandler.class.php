@@ -61,8 +61,7 @@ class MessageHandler{
 				'error_count'	=> 1,
 			);
 			$httpsqs->put(HTTPSQS_QUEUE_RETRY, json_encode($message_retry));			
-			throw new MessageException('发送消息失败，消息内容：' 
-										. $message->getInformation() . ' || 已进入重试队列');
+			throw new MessageException('发送消息失败，消息内容：'.$message.' || 已进入重试队列');
 		}
 	}
 	

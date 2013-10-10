@@ -34,7 +34,15 @@ class Campaign extends AdwordsBase{
 	
 	public function create($data){
 		try{
-			
+			/**
+			 * 1、如果消息中没有有效customerId，则重新从数据库customer表中取得；如果此时无法从数据库
+			 *	customer表中取得，则此次消息执行失败，返回FALSE。
+			 * 2、已取得有效customerId，调取Google Adwords Api新建Campaign；
+			 * 3、判断结果，新建成功则更新campaign表中campaignId字段，并置SYNC_STATUS为SYNCED. 返回
+			 *   TRUE.  【NOTICE】如果新建成功，更新数据库失败|更新状态失败，则日志报警或发信报警。
+			 * 返回TRUE; 如新建失败，则此次消息执行视为失败，返回FALSE。
+			 * == MessageHandler会将失败消息转入重试队列 ==
+			 */
 			if($this->customerId == 1 || empty($this->customerId)){
 				$customerAdapter = new CustomerAdapter;
 				$member = new Member($this->idclickUid);
