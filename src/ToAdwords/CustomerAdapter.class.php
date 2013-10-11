@@ -16,11 +16,26 @@ use \Exception;
  * 用户
  */
 class CustomerAdapter extends AdwordsAdapter{
+    /**
+     * 当前数据操作需要的表名
+     */
 	protected $tableName = 'customer';
+
+    /**
+     * 当前操作模块名称
+     */
 	protected $moduleName = 'Customer';
 	
+    /**
+     * 当前操作对象在数据库中的字段名
+     */
 	protected $adwordsObjectIdField = 'adwords_customerid';
 	protected $idclickObjectIdField = 'idclick_uid';
+
+    /**
+     * 当前数据操作时需要的数据库对象
+     */
+    protected $database;
 	
 	/**
 	 * 插入新用户记录
