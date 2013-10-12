@@ -18,9 +18,17 @@ use ToAdwords\Util\Log;
 use \PDO;
 
 /**
- * BaseModel
+ * BaseModel, A Model Packaging database operations. 
  *
- * An abstract class, which defines some functions for common use.
+ * Provides a simple layer to operate database for actions from Adwords Adapter.
+ *
+ * It does:
+ *	1. checking whether an object is exists.
+ *	2. insert all kinds of object.
+ *	3. checking whether the parent object is exists.
+ *	4. update all kinds of object.
+ *	5. update parent object id.
+ *	6. update current object id and synchronous status. 
  */
 abstract class BaseModel{
 
@@ -239,9 +247,8 @@ abstract class BaseModel{
 		$sql = 'UPDATE `'.$this->tableName.'` SET sync_status=:sync_status';
 		$preparedParams = array();
 
-		if(!in_array($status, array(self::SYNC_STATUS_QUEUE, self::SYNC_STATUS_RECEIVE,
-				self::SYNC_STATUS_SYNCED, self::SYNC_STATUS_ERROR, self::SYNC_STATUS_RETRY))){
-			throw new DataCheckException('SYNC_STATUS未被允许的同步状态类型::'.$status);
+		if(!in_array($status, array('RECEIVE', 'QUEUE', 'SYNCED', 'ERROR', 'RETRY'))){
+			throw new DataCheckException('未定义的同步状态::'.$status);
 		} else {
 			$preparedParams[':sync_status'] = $status;
 		}
@@ -254,6 +261,7 @@ abstract class BaseModel{
 			$sql .= ' WHERE '.$this->adwordsObjectIdField.'=:'.$this->adwordsObjectIdField;
 			$preparedParams[':'.$this->adwordsObjectIdField] = $object->getId();
 		}
+
 		$statement = $this->dbh->prepare($sql);
 		$this->setLastSql($sql, $preparedParams);
 		return $statement->execute($preparedParams);
