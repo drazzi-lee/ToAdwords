@@ -1,41 +1,43 @@
 <?php
 
-namespace ToAdwords;
+namespace ToAdwords\Model;
 
-use ToAdwords\AdwordsAdapter;
-use ToAdwords\Util\Log;
-use ToAdwords\Util\Message;
-use ToAdwords\Object\Idclick\Member;
+use ToAdwords\BaseModel;
+
 use \PDO;
 use \PDOException;
-use \AdWordsUser;
 use \Exception;
 
 
 /**
- * 用户
+ * CustomerModel 
  */
-class CustomerAdapter extends AdwordsAdapter{
+class CustomerModel extends BaseModel{
     /**
      * 当前数据操作需要的表名
      */
 	protected $tableName = 'customer';
 
     /**
-     * 当前操作模块名称
-     */
-	protected $moduleName = 'Customer';
-	
-    /**
      * 当前操作对象在数据库中的字段名
      */
 	protected $adwordsObjectIdField = 'adwords_customerid';
 	protected $idclickObjectIdField = 'idclick_uid';
 
-    /**
-     * 当前数据操作时需要的数据库对象
-     */
-    protected $database;
+	/**
+	 * 新建用户
+	 *
+	 * @param string $idclickUid: Idclick用户ID
+	 * @return boolean: TRUE, FALSE
+	 */
+	public function create($idclickUid){
+		try{
+			return	$this->insertOne(array('idclick_uid' => $idclickUid));
+		} catch(PDOException $e){
+			Log::write('[ERROR] 数据操作失败：' . $e->getMessage(), __METHOD__);
+			throw new ModelException('[ERROR] 数据操作失败，上次Sql语句：' . $this->getLastSql()); 
+		}
+	}
 	
 	/**
 	 * 插入新用户记录
@@ -46,12 +48,10 @@ class CustomerAdapter extends AdwordsAdapter{
 	 * @return boolean: TRUE, FALSE
 	 */
 	protected function create($idclickUid){
-		$sql = 'INSERT INTO `'.$this->tableName.'` ('.$this->idclickObjectIdField.',last_action)
-						VALUES (:'.$this->idclickObjectIdField.', :last_action)';
 		try{
 			$this->dbh->beginTransaction();
 			$member = new Member($idclickUid);
-			if($this->insertOne(array('idclick_uid' => $idclickUid)) 
+			if($this->insertOne(array('idclick_uid' => $idclickUid, 'last_action' => 'CREATE')) 
 					&& $this->createMessageAndPut(array('idclick_uid' => $idclickUid), self::ACTION_CREATE)
 					&& $this->updateSyncStatus(self::SYNC_STATUS_QUEUE, $member)){
 				$this->dbh->commit();

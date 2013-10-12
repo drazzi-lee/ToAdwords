@@ -1,17 +1,61 @@
 <?php
 
+
+/**
+ * BaseModel.class.php
+ *
+ * Defines class BaseModel, parent class of Models.
+ *
+ * @author Li Pengfei
+ * @email drazzi.lee@gmail.com
+ * @version 1.0
+ */
 namespace ToAdwords\Model;
 
-use ToAdwords\Model\Driver\MysqlDb;
+use ToAdwords\Model\Driver\DbMysql;
 use ToAdwords\Util\Log;
 
+use \PDO;
+
+/**
+ * BaseModel
+ *
+ * An abstract class, which defines some functions for common use.
+ */
 abstract class BaseModel{
 
 	protected $tableName;
 	protected $dbh = null;
+	protected $lastSql;
 
 	public function __construct(){
-		$this->dbh = MysqlDb::getInstance();
+		$this->dbh = DbMysql::getInstance();
+	}
+
+
+	/**
+	 * Set Last Sql being executed.
+	 *
+	 * Only when PDO::Statement prepared with $sql, and Executed by an Array contains params.
+	 * 
+	 * @param string $sql: last prepared $sql, which is the PDO::prepare() 's param also.
+	 * @param array $preparedParams: An array contains params' value.
+	 * @return void.
+	 */
+	protected function setLastSql($sql, $preparedParams){
+		$indexed = $preparedParams == array_values($preparedParams);
+		foreach($preparedParams as $key => $value) {
+			if(is_string($value))
+				$value = "'$value'";
+			if($indexed)
+				$this->lastSql = preg_replace('/\?/', $value, $string, 1);
+			else
+				$this->lastSql = str_replace("$key", $value, $string);
+		}
+	}
+
+	protected function getLastSql(){
+		return $this->lastSql;
 	}
 
 	/**
@@ -73,6 +117,7 @@ abstract class BaseModel{
 
 		$statement = $this->dbh->prepare($sql);
 		$statement->execute($paramValues);
+		$this->setLastSql($sql, $paramValues);
 		return $statement;
 	}
 
@@ -159,6 +204,7 @@ abstract class BaseModel{
 				. ' (' . $preparedInsert['placeHolders']['field'] . ')'
 				. ' VALUES (' .$preparedInsert['placeHolders']['value'] . ')';
 		$statement = $this->dbh->prepare($sql);
+		$this->setLastSql($sql, $preparedInsert['paramValues'];
 		return $statement->execute($preparedInsert['paramValues']);
 	}
 
@@ -170,13 +216,14 @@ abstract class BaseModel{
 	 * @return boolean: TRUE, FALSE
 	 * @throw PDOException,DataCheckException
 	 */
-	public function updateOne($conditions, array $data){
+	protected function updateOne($conditions, array $data){
 		$preparedUpdates = $this->prepareUpdate($data, $conditions);
 
 		$sql = 'UPDATE `' . $this->tableName . '` SET '. $preparedUpdates['placeHolders']
 							. ' WHERE ' . $preparedUpdates['placeHoldersWhere'];
 
 		$statement = $this->dbh->prepare($sql);
+		$this->setLastSql($sql, $preparedUpdates['paramValues'];
 		return $statement->execute($preparedUpdates['paramValues']);
 	}
 
@@ -188,7 +235,7 @@ abstract class BaseModel{
 	 * @return boolean: TRUE, FALSE
 	 * @throw PDOException,DataCheckException
 	 */
-	public function updateSyncStatus($status, Base $object){
+	protected function updateSyncStatus($status, Base $object){
 		$sql = 'UPDATE `'.$this->tableName.'` SET sync_status=:sync_status';
 		$preparedParams = array();
 
@@ -208,6 +255,7 @@ abstract class BaseModel{
 			$preparedParams[':'.$this->adwordsObjectIdField] = $object->getId();
 		}
 		$statement = $this->dbh->prepare($sql);
+		$this->setLastSql($sql, $preparedParams);
 		return $statement->execute($preparedParams);
 	}
 
@@ -220,7 +268,7 @@ abstract class BaseModel{
 	 * @return array: NULL | array()
 	 * @throw PDOException
 	 */
-	public function getAdapteInfo(Base $object){
+	protected function getAdapteInfo(Base $object){
 		if($object instanceof IdclickBase){
 			return $this->getOne($this->adwordsObjectIdField.','.$this->idclickObjectIdField
 						.',sync_status', $this->idclickObjectIdField.'='.$object->getId());
@@ -240,7 +288,7 @@ abstract class BaseModel{
 	 * @param Base $object: AdwordsObject | IdclickObject
 	 * @return int
 	 */
-	public function getAdaptedId(Base $object){
+	protected function getAdaptedId(Base $object){
 		if(!$object instanceof IdclickBase){
 			throw new DataCheckException('尚未支持的objectType类型，返回FALSE。object::'
 														.get_class($object).' METHOD::'.__METHOD__);
