@@ -2,15 +2,13 @@
 require_once '../bootstrap.inc.php';
 
 use ToAdwords\Util\Log;
-use ToAdwords\Util\Httpsqs;
 use ToAdwords\Util\Message;
 use ToAdwords\MessageHandler;
 use ToAdwords\Exceptions\MessageException;
 
 use \Exception;
 
-$httpsqs = new Httpsqs(HTTPSQS_HOST, HTTPSQS_PORT, HTTPSQS_AUTH);
-$queueCommon = HTTPSQS_QUEUE_COMMON;
+$queueName = HTTPSQS_QUEUE_COMMON;
 Log::setPath(TOADWORDS_LOG_PATH . 'daemon_common' . DIRECTORY_SEPARATOR);
 
 $result = $httpsqs->gets($queueCommon);

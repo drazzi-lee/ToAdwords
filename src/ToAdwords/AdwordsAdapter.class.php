@@ -16,6 +16,7 @@ use ToAdwords\Exceptions\DependencyException;
 use ToAdwords\Exceptions\SyncStatusException;
 use ToAdwords\Exceptions\DataCheckException;
 use ToAdwords\Exceptions\MessageException;
+use ToAdwords\MessageHandler;
 
 use \PDO;
 use \PDOException;
@@ -403,6 +404,7 @@ abstract class AdwordsAdapter implements Adapter{
 			}
 		}
 
+		$this->result['status'] = 1;
 		if(ENVIRONMENT == 'development'){
 			Log::write("[NOTICE]执行完成，返回结果：\n"
 							. print_r($this->result, TRUE), __METHOD__);
@@ -418,9 +420,19 @@ abstract class AdwordsAdapter implements Adapter{
 	 * 构建消息并推送至消息队列
 	 */
 	protected function createMessageAndPut(array $data, $action){
-		$information = $data;
-		$message = new Message($this->moduleName, $action, $information);
-		return $message->put();
+		try{
+			$message = new Message();
+			$message->setModule($this->moduleName);
+			$message->setAction($action);
+			$message->setInformation($data);
+
+			$messageHandler = new MessageHandler();
+		 	$messageHandler->put($message);
+			return TRUE;
+		} catch(MessageException $e){
+			Log::write($e, __METHOD__);
+			return FALSE;
+		}
 	}
 
 	/**

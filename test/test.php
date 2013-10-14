@@ -17,7 +17,7 @@ class TestAction{
 	
 	public function createCampaign(){
 		$data = array(
-				'idclick_planid' => 51556,
+				'idclick_planid' => 51559,
 				'idclick_uid' => 523,
 				'campaign_name' => 'campaign_name #' . uniqid(),
 				'areas' => '10031,10032',
@@ -25,7 +25,8 @@ class TestAction{
 				'bidding_type' => 1,
 				'budget_amount' => 20000.00,
 				'delivery_method' => 'ACCELERATED',
-				'max_cpc' => 10.00 
+				'max_cpc' => 10.00, 
+				'campaign_status' => 'ACTIVE'
 		);
 		$campaignModel = new CampaignModel();
 		var_dump($campaignModel->createCampaign($data));
@@ -118,8 +119,5 @@ class TestAction{
 		var_dump($groupAd->deleteAd($data));
 	}
 }
-header('Content-Type: text/html;charset=utf-8');
-header("Cache-Control: private, no-cache, no-store, proxy-revalidate, no-transform");
-echo '<pre>';
 $testAction = new TestAction();
-$testAction->deleteCampaign();
+$testAction->createCampaign();
