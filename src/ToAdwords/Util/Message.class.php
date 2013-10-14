@@ -2,7 +2,7 @@
 
 namespace ToAdwords\Util;
 
-use ToAdwords\Exceptions\MessageException;
+use ToAdwords\Exception\MessageException;
 
 class Message{
 	private static $operators = array('CREATE', 'UPDATE', 'DELETE');

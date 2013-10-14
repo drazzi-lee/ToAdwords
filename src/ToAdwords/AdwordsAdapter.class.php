@@ -12,12 +12,12 @@ use ToAdwords\Object\Idclick\IdclickBase;
 use ToAdwords\Util\Log;
 use ToAdwords\Util\Message;
 use ToAdwords\CustomerAdapter;
-use ToAdwords\Exceptions\DependencyException;
-use ToAdwords\Exceptions\SyncStatusException;
-use ToAdwords\Exceptions\DataCheckException;
-use ToAdwords\Exceptions\MessageException;
+use ToAdwords\Exception\DependencyException;
+use ToAdwords\Exception\SyncStatusException;
+use ToAdwords\Exception\DataCheckException;
+use ToAdwords\Exception\MessageException;
 use ToAdwords\MessageHandler;
-use ToAdwords\Definitions\SyncStatus;
+use ToAdwords\Definition\SyncStatus;
 
 use \PDO;
 use \PDOException;
@@ -396,26 +396,6 @@ abstract class AdwordsAdapter implements Adapter{
 			return $this->result;
 		}
 	}
-
-	/**
-	 * 构建消息并推送至消息队列
-	 */
-	protected function createMessageAndPut(array $data, $action){
-		try{
-			$message = new Message();
-			$message->setModule($this->moduleName);
-			$message->setAction($action);
-			$message->setInformation($data);
-
-			$messageHandler = new MessageHandler();
-		 	$messageHandler->put($message, array($this, 'updateSyncStatus');
-			return TRUE;
-		} catch(MessageException $e){
-			Log::write($e, __METHOD__);
-			return FALSE;
-		}
-	}
-
 
 	/**
 	 * Check whether the data meets the requirements.

@@ -5,8 +5,8 @@ namespace ToAdwords;
 use ToAdwords\AdwordsAdapter;
 use ToAdwords\Util\Log;
 use ToAdwords\Util\Message;
-use ToAdwords\Object\Idclick\Member;
-use ToAdwords\Definitions\Operation;
+use ToAdwords\Model\CustomerModel;
+use ToAdwords\Definition\Operation;
 use \PDO;
 use \PDOException;
 use \AdWordsUser;
@@ -43,10 +43,21 @@ class CustomerAdapter extends AdwordsAdapter{
 	 */
 	protected function create($idclickUid){
 		try{
-			$member = new Member($idclickUid);
-			$this->insertOne(array('idclick_uid' => $idclickUid));
+			$customerModel = new CustomerModel();
+			$customerModel->insertOne(array('idclick_uid' => $idclickUid));
+
+			$message = new Message();
+			$message->setModule($this->moduleName);
+			$message->setAction(Operation::CREATE);
+			$message->setInformation($data);
+
+			$messageHandler = new MessageHandler();
+		 	$messageHandler->put($message, array($this, 'updateSyncStatus');
 			$this->createMessageAndPut(array('idclick_uid' => $idclickUid), Operation::ACTION_CREATE);
 			return TRUE;
+		} catch (MessageException $e){
+			Log::write('[MESSAGE_ERROR]'.$e->getMessage(), __METHOD__);	
+			return FALSE;
 		} catch (PDOException $e){
 			Log::write('在Customer表新插入一行失败，idclick_uid为'.$idclickUid
 									.' ==》'.$e->getMessage(), __METHOD__);					

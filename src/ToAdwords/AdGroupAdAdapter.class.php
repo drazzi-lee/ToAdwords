@@ -7,12 +7,12 @@ use ToAdwords\AdGroupAdapter;
 use ToAdwords\Util\Log;
 use ToAdwords\Object\Idclick\AdGroup;
 use ToAdwords\Object\Idclick\Ad;
-use ToAdwords\Exceptions\DependencyException;
-use ToAdwords\Exceptions\SyncStatusException;
-use ToAdwords\Exceptions\DataCheckException;
-use ToAdwords\Exceptions\MessageException;
-use ToAdwords\Definitions\SyncStatus;
-use ToAdwords\Definitions\Operation;
+use ToAdwords\Exception\DependencyException;
+use ToAdwords\Exception\SyncStatusException;
+use ToAdwords\Exception\DataCheckException;
+use ToAdwords\Exception\MessageException;
+use ToAdwords\Definition\SyncStatus;
+use ToAdwords\Definition\Operation;
 
 use \Exception;
 use \PDOException;

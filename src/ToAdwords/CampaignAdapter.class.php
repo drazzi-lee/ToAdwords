@@ -8,11 +8,11 @@ use ToAdwords\Util\Log;
 use ToAdwords\Util\Message;
 use ToAdwords\Object\Idclick\Member;
 use ToAdwords\Object\Idclick\AdPlan;
-use ToAdwords\Exceptions\SyncStatusException;
-use ToAdwords\Exceptions\DataCheckException;
-use ToAdwords\Exceptions\MessageException;
-use ToAdwords\Definitions\SyncStatus;
-use ToAdwords\Definitions\Operation;
+use ToAdwords\Exception\SyncStatusException;
+use ToAdwords\Exception\DataCheckException;
+use ToAdwords\Exception\MessageException;
+use ToAdwords\Definition\SyncStatus;
+use ToAdwords\Definition\Operation;
 
 use \Exception;
 use \PDOException;
