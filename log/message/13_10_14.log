@@ -1,0 +1,88 @@
+[ 2013-10-14T12:49:49+08:00 ] #ToAdwords\MessageHandler::put# [MESSAGE_PUT]「队列」#common 「内容」#[消息] 模块：Customer | 动作：CREATE | 消息内容：Array
+(
+    [idclick_uid] => 523
+)
+
+[ 2013-10-14T12:49:49+08:00 ] #ToAdwords\MessageHandler::put# [MESSAGE_PUT]「队列」#common 「内容」#[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 51556
+    [idclick_uid] => 523
+    [campaign_name] => campaign_name #525b77ed2616a
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-10-14T12:49:49+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [NOTICE]执行完成，返回结果：
+Array
+(
+    [status] => 
+    [description] => 广告计划添加成功
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-10-14T12:52:19+08:00 ] #ToAdwords\MessageHandler::put# [MESSAGE_PUT]「队列」#common 「内容」#[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 51557
+    [idclick_uid] => 523
+    [campaign_name] => campaign_name #525b78833259b
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-10-14T12:52:19+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [NOTICE]执行完成，返回结果：
+Array
+(
+    [status] => 
+    [description] => 广告计划添加成功
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-10-14T12:54:29+08:00 ] #ToAdwords\MessageHandler::put# [MESSAGE_PUT]「队列」#common 「内容」#[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 51558
+    [idclick_uid] => 523
+    [campaign_name] => campaign_name #525b790516f9f
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-10-14T12:54:29+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [NOTICE]执行完成，返回结果：
+Array
+(
+    [status] => 1
+    [description] => 广告计划添加成功
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-10-14T13:01:34+08:00 ] #ToAdwords\MessageHandler::put# [MESSAGE_PUT]「队列」#common 「内容」#[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 51559
+    [idclick_uid] => 523
+    [campaign_name] => campaign_name #525b7aaeb0ab0
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
