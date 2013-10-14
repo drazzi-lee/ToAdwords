@@ -18,8 +18,11 @@ class MessageHandler{
 
 	private $httpsqs;
 
+	private $lastLogPath;
+
 	public function __construct(){
 		$this->httpsqs = new Httpsqs(HTTPSQS_HOST, HTTPSQS_PORT, HTTPSQS_AUTH);
+		$this->lastLogPath = Log::getPath();
 		Log::setPath(TOADWORDS_LOG_PATH . 'message' . DIRECTORY_SEPARATOR);
 	}
 
@@ -131,6 +134,6 @@ class MessageHandler{
 	}
 
 	public function __destruct(){
-		Log::setPath(TOADWORDS_LOG_PATH);
+		Log::setPath($this->lastLogPath);
 	}
 }
