@@ -11,6 +11,8 @@ use ToAdwords\Exceptions\DependencyException;
 use ToAdwords\Exceptions\SyncStatusException;
 use ToAdwords\Exceptions\DataCheckException;
 use ToAdwords\Exceptions\MessageException;
+use ToAdwords\Definitions\SyncStatus;
+use ToAdwords\Definitions\Operation;
 
 use \Exception;
 use \PDOException;
@@ -88,7 +90,7 @@ class AdGroupAdAdapter extends AdwordsAdapter{
 	public function create($data){
 		try{
 			if(self::IS_CHECK_DATA){
-				$this->checkData($data, self::ACTION_CREATE);
+				$this->checkData($data, Operation::CREATE);
 			}
 			
 			$adGroupAdRow = $this->getOne('idclick_adid','idclick_adid='.$data['idclick_adid']);
@@ -102,8 +104,8 @@ class AdGroupAdAdapter extends AdwordsAdapter{
 			
 			$this->dbh->beginTransaction();
 			$ad = new Ad($data['idclick_adid']);
-			if($this->insertOne($data) && $this->createMessageAndPut($data, self::ACTION_CREATE)
-					&& $this->updateSyncStatus(self::SYNC_STATUS_QUEUE, $ad)){
+			if($this->insertOne($data) && $this->createMessageAndPut($data, Operation::CREATE)
+					&& $this->updateSyncStatus(SyncStatus::QUEUE, $ad)){
 				$this->dbh->commit();
 				$this->processed++;
 				$this->result['success']++;
@@ -164,7 +166,7 @@ class AdGroupAdAdapter extends AdwordsAdapter{
 	public function update($data){
 		try{
 			if(self::IS_CHECK_DATA){
-				$this->checkData($data, self::ACTION_UPDATE);
+				$this->checkData($data, Operation::UPDATE);
 			}
 			
 			$adGroupAdRow = $this->getOne('idclick_adid,idclick_groupid','idclick_adid='
@@ -177,7 +179,7 @@ class AdGroupAdAdapter extends AdwordsAdapter{
 						. '  记录中的idclick_planid #' . $adGroupRow['idclick_groupid']);
 			}
 			
-			$data['last_action'] = isset($data['last_action']) ? $data['last_action'] : self::ACTION_UPDATE;
+			$data['last_action'] = isset($data['last_action']) ? $data['last_action'] : Operation::UPDATE;
 			$conditions = 'idclick_adid='.$data['idclick_adid'];
 			$conditionsArray = array(
 						'idclick_adid'	=> $data['idclick_adid'],
@@ -187,7 +189,7 @@ class AdGroupAdAdapter extends AdwordsAdapter{
 			$this->dbh->beginTransaction();
 			$ad = new Ad($data['idclick_adid']);
 			if($this->updateOne($conditions, $newData) && $this->createMessageAndPut($data, $data['last_action'])
-					&& $this->updateSyncStatus(self::SYNC_STATUS_QUEUE, $ad)){
+					&& $this->updateSyncStatus(SyncStatus::QUEUE, $ad)){
 				$this->dbh->commit();
 				$this->processed++;
 				$this->result['success']++;
@@ -234,7 +236,7 @@ class AdGroupAdAdapter extends AdwordsAdapter{
 			
 		try{
 			if(self::IS_CHECK_DATA){
-				$this->checkData($data, self::ACTION_DELETE);
+				$this->checkData($data, Operation::DELETE);
 			}
 		} catch (DataCheckException $e){
 			$this->result['status'] = -1;
@@ -243,7 +245,7 @@ class AdGroupAdAdapter extends AdwordsAdapter{
 		}
 		
 		$infoForRemove = array();
-		$infoForRemove['last_action'] = self::ACTION_DELETE;
+		$infoForRemove['last_action'] = Operation::DELETE;
 		$infoForRemove['ad_status'] = 'DELETE';
 		$infoForRemove[$this->idclickObjectIdField] = $data[$this->idclickObjectIdField];
 		

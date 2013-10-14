@@ -17,32 +17,13 @@ use ToAdwords\Exceptions\SyncStatusException;
 use ToAdwords\Exceptions\DataCheckException;
 use ToAdwords\Exceptions\MessageException;
 use ToAdwords\MessageHandler;
+use ToAdwords\Definitions\SyncStatus;
 
 use \PDO;
 use \PDOException;
 use \Exception;
 
 abstract class AdwordsAdapter implements Adapter{
-	/**
-	 * 是否检查数据完整性
-	 */
-	const IS_CHECK_DATA = TRUE;
-
-	/**
-	 * 数据执行动作定义
-	 */
-	const ACTION_CREATE = 'CREATE';
-	const ACTION_UPDATE = 'UPDATE';
-	const ACTION_DELETE = 'DELETE';
-
-	/**
-	 * 数据同步状态定义
-	 */
-	const SYNC_STATUS_RECEIVE = 'RECEIVE';
-	const SYNC_STATUS_QUEUE   = 'QUEUE';
-	const SYNC_STATUS_SYNCED  = 'SYNCED';
-	const SYNC_STATUS_ERROR   = 'ERROR';
-	const SYNC_STATUS_RETRY   = 'RETRY';
 
 	/**
 	 * 结果描述文字定义
@@ -234,7 +215,7 @@ abstract class AdwordsAdapter implements Adapter{
 	 * @TODO 根据CampaignAdapter->insertOne抽象方法
 	 * @param array $data: 插入内容
 	 * @return boolean: TRUE, FALSE
-	 * @throw PDOException,DataCheckException
+	 * @throw PDOException
 	 */
 	public function insertOne($data){
 		$preparedInsert = $this->prepareInsert($data);
@@ -251,7 +232,7 @@ abstract class AdwordsAdapter implements Adapter{
 	 * @param string $conditions: 更新条件，一般为unique_id=123形式
 	 * @param array $data: 更新内容
 	 * @return boolean: TRUE, FALSE
-	 * @throw PDOException,DataCheckException
+	 * @throw PDOException
 	 */
 	public function updateOne($conditions, array $data){
 		$preparedUpdates = $this->prepareUpdate($data, $conditions);
@@ -267,29 +248,29 @@ abstract class AdwordsAdapter implements Adapter{
 	 * 更新ObjectId对应的数据表同步状态
 	 *
 	 * @param string $status: SYNC_STATUS_QUEUE等
-	 * @param Base $object:
 	 * @return boolean: TRUE, FALSE
 	 * @throw PDOException,DataCheckException
 	 */
-	public function updateSyncStatus($status, Base $object){
+	public function updateSyncStatus($status){
 		$sql = 'UPDATE `'.$this->tableName.'` SET sync_status=:sync_status';
 		$preparedParams = array();
 
-		if(!in_array($status, array(self::SYNC_STATUS_QUEUE, self::SYNC_STATUS_RECEIVE,
-				self::SYNC_STATUS_SYNCED, self::SYNC_STATUS_ERROR, self::SYNC_STATUS_RETRY))){
+		if(!in_array($status, array(SyncStatus::QUEUE, SyncStatus::RECEIVE,
+				SyncStatus::SYNCED, SyncStatus::ERROR, SyncStatus::RETRY))){
 			throw new DataCheckException('SYNC_STATUS未被允许的同步状态类型::'.$status);
 		} else {
 			$preparedParams[':sync_status'] = $status;
 		}
 
-		if($object instanceof IdclickBase){
-			$sql .= ' WHERE '.$this->idclickObjectIdField.'=:'.$this->idclickObjectIdField;
-			$preparedParams[':'.$this->idclickObjectIdField] = $object->getId();
-		}
+		$sql .= ' WHERE '.$this->idclickObjectIdField.'=:'.$this->idclickObjectIdField;
+		$preparedParams[':'.$this->idclickObjectIdField] = $object->getId();
+
+		/**
 		if($object instanceof AdwordsBase){
 			$sql .= ' WHERE '.$this->adwordsObjectIdField.'=:'.$this->adwordsObjectIdField;
 			$preparedParams[':'.$this->adwordsObjectIdField] = $object->getId();
-		}
+		}*/
+
 		$statement = $this->dbh->prepare($sql);
 		return $statement->execute($preparedParams);
 	}
@@ -332,21 +313,21 @@ abstract class AdwordsAdapter implements Adapter{
 		$row = $this->getAdapteInfo($object);
 		if(!empty($row)){
 			switch($row[$this->fieldSyncStatus]){
-				case self::SYNC_STATUS_SYNCED:
+				case SyncStatus::SYNCED:
 					if(empty($row[$this->adwordsObjectIdField])) {
 						throw new SyncStatusException('已同步状态但是没有ADWORDS
 								对应信息IdclickId为'.$object->getId().' 对象：'.get_class($object));
 					}
 					return $row[$this->adwordsObjectIdField];
 					break;
-				case self::SYNC_STATUS_QUEUE:
+				case SyncStatus::QUEUE:
 					if(empty($row[$this->adwordsObjectIdField])){
 						//如果获取的ID为空，且状态为QUEUE，则发送一条更新本数据表对应ADWORDS_ID的消息
 					}
 					return TRUE;
 					break;
-				//case self::SYNC_STATUS_RECEIVE:
-				//case self::SYNC_STATUS_ERROR:
+				//case SyncStatus::RECEIVE:
+				//case SyncStatus::ERROR:
 				default:
 					throw new SyncStatusException('对象:'.get_class($object).' objectId'.$object->getId());
 			}
@@ -427,7 +408,7 @@ abstract class AdwordsAdapter implements Adapter{
 			$message->setInformation($data);
 
 			$messageHandler = new MessageHandler();
-		 	$messageHandler->put($message);
+		 	$messageHandler->put($message, array($this, 'updateSyncStatus');
 			return TRUE;
 		} catch(MessageException $e){
 			Log::write($e, __METHOD__);
@@ -435,10 +416,12 @@ abstract class AdwordsAdapter implements Adapter{
 		}
 	}
 
+
 	/**
-	 * 检查数据是否完整
+	 * Check whether the data meets the requirements.
 	 *
-	 * 根据当前模块配置的dataCheckFilter来进行验证，同时过滤掉不需要的字段。
+	 * According to the current module's dataCheckFilter, verify that the data is valid, while
+	 * filtering out the fields prohibited.
 	 *
 	 * @return void.
 	 */
@@ -447,8 +430,8 @@ abstract class AdwordsAdapter implements Adapter{
 		foreach($filter['prohibitedFields'] as $item){
 			if(isset($data[$item])){
 				if(ENVIRONMENT == 'development'){
-					Log::write('[WARNING]检查到禁止设置的字段，字段：'
-												. $item . ' #'. $data[$item], __METHOD__);
+					Log::write('[WARNING] A prohibited fields found, Field #'
+												. $item . ' Value #'. $data[$item], __METHOD__);
 				}
 				unset($data[$item]);
 			}
@@ -456,9 +439,9 @@ abstract class AdwordsAdapter implements Adapter{
 		foreach($filter['requiredFields'] as $item){
 			if(!isset($data[$item])){
 				if(ENVIRONMENT == 'development'){
-					Log::write('检查到不符合条件的数据，未设置：' . $item, __METHOD__);
+					Log::write('[WARNING] Field #' . $item . ' is required.', __METHOD__);
 				}
-				throw new DataCheckException('检查到不符合条件的数据，未设置：' . $item);
+				throw new DataCheckException('[WARNING] Field #' . $item . ' is required.');
 				break;
 			}
 		}

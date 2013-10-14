@@ -12,8 +12,10 @@
  */
 namespace ToAdwords\Model;
 
+use ToAdwords\SyncStatus;
 use ToAdwords\Model\Driver\DbMysql;
 use ToAdwords\Util\Log;
+use ToAdwords\Exceptions\DataCheckException;
 
 use \PDO;
 
@@ -31,6 +33,17 @@ use \PDO;
  *	6. update current object id and synchronous status. 
  */
 abstract class BaseModel{
+	/**
+	 * 是否检查数据完整性
+	 */
+	const IS_CHECK_DATA = TRUE;
+
+	/**
+	 * 数据执行动作定义
+	 */
+	const ACTION_CREATE = 'CREATE';
+	const ACTION_UPDATE = 'UPDATE';
+	const ACTION_DELETE = 'DELETE';
 
 	protected $tableName;
 	protected $dbh = null;
@@ -52,17 +65,18 @@ abstract class BaseModel{
 	 */
 	protected function setLastSql($sql, $preparedParams){
 		$indexed = $preparedParams == array_values($preparedParams);
+		$this->lastSql = $sql;
 		foreach($preparedParams as $key => $value) {
 			if(is_string($value))
 				$value = "'$value'";
 			if($indexed)
-				$this->lastSql = preg_replace('/\?/', $value, $string, 1);
+				$this->lastSql = preg_replace('/\?/', $value, $this->lastSql, 1);
 			else
-				$this->lastSql = str_replace("$key", $value, $string);
+				$this->lastSql = str_replace("$key", $value, $this->lastSql);
 		}
 	}
 
-	protected function getLastSql(){
+	public function getLastSql(){
 		return $this->lastSql;
 	}
 
@@ -151,7 +165,7 @@ abstract class BaseModel{
 		}
 		if(0 == count($paramValues)){
 			if('ENVIRONMENT' == 'development')
-				throw new DataCheckException('解析查询条件失败，请检查是否符合语法'.__METHOD__);
+				throw new DataCheckException('Parsing conditions error, given #' . $conditions);
 			return NULL;
 		}
 		return array('placeHolders' => $placeHolders, 'paramValues' => $paramValues);
@@ -204,46 +218,52 @@ abstract class BaseModel{
 	 *
 	 * @param array $data: information for inserting.
 	 * @return boolean: TRUE, FALSE
-	 * @throw PDOException,DataCheckException
+	 * @throw PDOException, Datacheckexception;
 	 */
-	protected function insertOne($data){
+	public function insertOne($data){
+		if(self::IS_CHECK_DATA){
+			$this->checkData($data, self::ACTION_CREATE);
+		}
 		$preparedInsert = $this->prepareInsert($data);
 		$sql = 'INSERT INTO `' . $this->tableName.'`'
 				. ' (' . $preparedInsert['placeHolders']['field'] . ')'
 				. ' VALUES (' .$preparedInsert['placeHolders']['value'] . ')';
 		$statement = $this->dbh->prepare($sql);
-		$this->setLastSql($sql, $preparedInsert['paramValues'];
+		$this->setLastSql($sql, $preparedInsert['paramValues']);
 		return $statement->execute($preparedInsert['paramValues']);
 	}
 
 	/**
-	 * 更新数据表某条信息
+	 * Update one row in table.
 	 *
-	 * @param string $conditions: 更新条件，一般为unique_id=123形式
-	 * @param array $data: 更新内容
+	 * @param string $conditions: conditions where to updates, like string "unique_id=123".
+	 * @param array $data: data what need to updates.
 	 * @return boolean: TRUE, FALSE
-	 * @throw PDOException,DataCheckException
+	 * @throw PDOException, Datacheckexception;
 	 */
-	protected function updateOne($conditions, array $data){
+	public function updateOne($conditions, array $data){
+		if(self::IS_CHECK_DATA){
+			$this->checkData($data, self::ACTION_CREATE);
+		}
 		$preparedUpdates = $this->prepareUpdate($data, $conditions);
 
 		$sql = 'UPDATE `' . $this->tableName . '` SET '. $preparedUpdates['placeHolders']
 							. ' WHERE ' . $preparedUpdates['placeHoldersWhere'];
 
 		$statement = $this->dbh->prepare($sql);
-		$this->setLastSql($sql, $preparedUpdates['paramValues'];
+		$this->setLastSql($sql, $preparedUpdates['paramValues']);
 		return $statement->execute($preparedUpdates['paramValues']);
 	}
 
 	/**
-	 * 更新ObjectId对应的数据表同步状态
+	 * Update the synchronous status of object given.
 	 *
 	 * @param string $status: SYNC_STATUS_QUEUE等
 	 * @param Base $object:
 	 * @return boolean: TRUE, FALSE
-	 * @throw PDOException,DataCheckException
+	 * @throw PDOException
 	 */
-	protected function updateSyncStatus($status, Base $object){
+	public function updateSyncStatus($status, Base $object){
 		$sql = 'UPDATE `'.$this->tableName.'` SET sync_status=:sync_status';
 		$preparedParams = array();
 
@@ -287,50 +307,6 @@ abstract class BaseModel{
 		}
 	}
 
-	/**
-	 * 在IDCLICK与ADWORDS的ID之间转换
-	 *
-	 * 此方法一般在子类使用，需要子类的adwordsObjectIdField, idclickObjectIdField
-	 * 暂支持IDCLICK到ADWORDS单向转换
-	 *
-	 * @param Base $object: AdwordsObject | IdclickObject
-	 * @return int
-	 */
-	protected function getAdaptedId(Base $object){
-		if(!$object instanceof IdclickBase){
-			throw new DataCheckException('尚未支持的objectType类型，返回FALSE。object::'
-														.get_class($object).' METHOD::'.__METHOD__);
-		}
-
-		$row = $this->getAdapteInfo($object);
-		if(!empty($row)){
-			switch($row[$this->fieldSyncStatus]){
-				case self::SYNC_STATUS_SYNCED:
-					if(empty($row[$this->adwordsObjectIdField])) {
-						throw new SyncStatusException('已同步状态但是没有ADWORDS
-								对应信息IdclickId为'.$object->getId().' 对象：'.get_class($object));
-					}
-					return $row[$this->adwordsObjectIdField];
-					break;
-				case self::SYNC_STATUS_QUEUE:
-					if(empty($row[$this->adwordsObjectIdField])){
-						//如果获取的ID为空，且状态为QUEUE，则发送一条更新本数据表对应ADWORDS_ID的消息
-					}
-					return TRUE;
-					break;
-				//case self::SYNC_STATUS_RECEIVE:
-				//case self::SYNC_STATUS_ERROR:
-				default:
-					throw new SyncStatusException('对象:'.get_class($object).' objectId'.$object->getId());
-			}
-		} else {
-			if($object instanceof Member){
-				return $this->create($object->getId());
-			} else {
-				throw new DependencyException('还没有创建上级依赖，请先创建上级对象:'.get_class($this));
-			}
-		}
-	}
 
 	/**
 	 * Join array elements with comma.
@@ -350,9 +326,10 @@ abstract class BaseModel{
 	}
 
 	/**
-	 * 检查数据是否完整
+	 * Check whether the data meets the requirements.
 	 *
-	 * 根据当前模块配置的dataCheckFilter来进行验证，同时过滤掉不需要的字段。
+	 * According to the current module's dataCheckFilter, verify that the data is valid, while
+	 * filtering out the fields prohibited.
 	 *
 	 * @return void.
 	 */
@@ -361,8 +338,8 @@ abstract class BaseModel{
 		foreach($filter['prohibitedFields'] as $item){
 			if(isset($data[$item])){
 				if(ENVIRONMENT == 'development'){
-					Log::write('[WARNING]检查到禁止设置的字段，字段：'
-												. $item . ' #'. $data[$item], __METHOD__);
+					Log::write('[WARNING] A prohibited fields found, Field #'
+												. $item . ' Value #'. $data[$item], __METHOD__);
 				}
 				unset($data[$item]);
 			}
@@ -370,10 +347,18 @@ abstract class BaseModel{
 		foreach($filter['requiredFields'] as $item){
 			if(!isset($data[$item])){
 				if(ENVIRONMENT == 'development'){
-					Log::write('检查到不符合条件的数据，未设置：' . $item, __METHOD__);
+					Log::write('[WARNING] Field #' . $item . ' is required.', __METHOD__);
 				}
-				throw new DataCheckException('检查到不符合条件的数据，未设置：' . $item);
+				throw new DataCheckException('[WARNING] Field #' . $item . ' is required.');
 				break;
+			}
+		}
+		foreach($data as $key => $item){
+			if(is_array($item)){
+				$data[$key] = $this->arrayToString($item);
+				if(ENVIRONMENT == 'development'){
+					Log::write('[WARNING] Field #' . $item . ' Array to String conversion.', __METHOD__);
+				}
 			}
 		}
 	}

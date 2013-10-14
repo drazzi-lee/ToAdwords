@@ -11,6 +11,8 @@ use ToAdwords\Object\Idclick\AdPlan;
 use ToAdwords\Exceptions\SyncStatusException;
 use ToAdwords\Exceptions\DataCheckException;
 use ToAdwords\Exceptions\MessageException;
+use ToAdwords\Definitions\SyncStatus;
+use ToAdwords\Definitions\Operation;
 
 use \Exception;
 use \PDOException;
@@ -91,7 +93,7 @@ class CampaignAdapter extends AdwordsAdapter{
 	public function create(array $data){
 		try{
 			if(self::IS_CHECK_DATA){
-				$this->checkData($data, self::ACTION_CREATE);
+				$this->checkData($data, Operation::CREATE);
 			}
 			
 			$campaignRow = $this->getOne('idclick_planid','idclick_planid='.$data['idclick_planid']);
@@ -116,8 +118,8 @@ class CampaignAdapter extends AdwordsAdapter{
 			
 			$this->dbh->beginTransaction();
 			$adPlan = new AdPlan($data['idclick_planid']);
-			if($this->insertOne($data) && $this->createMessageAndPut($data, self::ACTION_CREATE)
-					&& $this->updateSyncStatus(self::SYNC_STATUS_QUEUE, $adPlan)){
+			if($this->insertOne($data) && $this->createMessageAndPut($data, Operation::CREATE)
+					&& $this->updateSyncStatus(SyncStatus::QUEUE, $adPlan)){
 				$this->dbh->commit();
 				$this->processed++;
 				$this->result['success']++;
@@ -176,7 +178,7 @@ class CampaignAdapter extends AdwordsAdapter{
 	public function update(array $data){		
 		try{
 			if(self::IS_CHECK_DATA){
-				$this->checkData($data, self::ACTION_UPDATE);
+				$this->checkData($data, Operation::UPDATE);
 			}
 			
 			$campaignRow = $this->getOne('idclick_planid,idclick_uid', 
@@ -190,7 +192,7 @@ class CampaignAdapter extends AdwordsAdapter{
 						. '  记录中的idclick_uid #' . $campaignRow['idclick_uid']);
 			}			
 			
-			$data['last_action'] = isset($data['last_action']) ? $data['last_action'] : self::ACTION_UPDATE;
+			$data['last_action'] = isset($data['last_action']) ? $data['last_action'] : Operation::UPDATE;
 			$conditions = 'idclick_planid='.$data['idclick_planid'];
 			$conditionsArray = array(
 						'idclick_planid'	=> $data['idclick_planid'],
@@ -208,7 +210,7 @@ class CampaignAdapter extends AdwordsAdapter{
 			$this->dbh->beginTransaction();
 			$adPlan = new AdPlan($data['idclick_planid']);
 			if($this->updateOne($conditions, $newData) && $this->createMessageAndPut($data, $data['last_action'])
-					&& $this->updateSyncStatus(self::SYNC_STATUS_QUEUE, $adPlan)){
+					&& $this->updateSyncStatus(SyncStatus::QUEUE, $adPlan)){
 				$this->dbh->commit();
 				$this->processed++;
 				$this->result['success']++;
@@ -265,7 +267,7 @@ class CampaignAdapter extends AdwordsAdapter{
 		
 		try{
 			if(self::IS_CHECK_DATA){
-				$this->checkData($data, self::ACTION_DELETE);
+				$this->checkData($data, Operation::DELETE);
 			}
 		} catch (DataCheckException $e){
 			$this->result['status'] = -1;
@@ -274,7 +276,7 @@ class CampaignAdapter extends AdwordsAdapter{
 		}
 		
 		$infoForRemove = array();
-		$infoForRemove['last_action'] = self::ACTION_DELETE;
+		$infoForRemove['last_action'] = Operation::DELETE;
 		$infoForRemove['campaign_status'] = 'DELETE';
 		$infoForRemove[$this->idclickObjectIdField] = $data[$this->idclickObjectIdField];
 

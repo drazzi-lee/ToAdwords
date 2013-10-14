@@ -6,6 +6,7 @@ use ToAdwords\AdwordsAdapter;
 use ToAdwords\Util\Log;
 use ToAdwords\Util\Message;
 use ToAdwords\Object\Idclick\Member;
+use ToAdwords\Definitions\Operation;
 use \PDO;
 use \PDOException;
 use \AdWordsUser;
@@ -32,11 +33,6 @@ class CustomerAdapter extends AdwordsAdapter{
 	protected $adwordsObjectIdField = 'adwords_customerid';
 	protected $idclickObjectIdField = 'idclick_uid';
 
-    /**
-     * 当前数据操作时需要的数据库对象
-     */
-    protected $database;
-	
 	/**
 	 * 插入新用户记录
 	 *
@@ -46,37 +42,17 @@ class CustomerAdapter extends AdwordsAdapter{
 	 * @return boolean: TRUE, FALSE
 	 */
 	protected function create($idclickUid){
-		$sql = 'INSERT INTO `'.$this->tableName.'` ('.$this->idclickObjectIdField.',last_action)
-						VALUES (:'.$this->idclickObjectIdField.', :last_action)';
 		try{
-			$this->dbh->beginTransaction();
 			$member = new Member($idclickUid);
-			if($this->insertOne(array('idclick_uid' => $idclickUid)) 
-					&& $this->createMessageAndPut(array('idclick_uid' => $idclickUid), self::ACTION_CREATE)
-					&& $this->updateSyncStatus(self::SYNC_STATUS_QUEUE, $member)){
-				$this->dbh->commit();
-				return TRUE;
-			} else {
-				$this->dbh->rollBack();
-				return FALSE;
-			}
+			$this->insertOne(array('idclick_uid' => $idclickUid));
+			$this->createMessageAndPut(array('idclick_uid' => $idclickUid), Operation::ACTION_CREATE);
+			return TRUE;
 		} catch (PDOException $e){
-			$this->dbh->rollBack();
-			if(ENVIRONMENT == 'development'){
-				echo '在Customer表新插入一行失败，事务已回滚，idclick_uid为'.$idclickUid
-									.' ==》'.$e->getMessage();
-			} else {
-				Log::write('在Customer表新插入一行失败，事务已回滚，idclick_uid为'.$idclickUid
+			Log::write('在Customer表新插入一行失败，idclick_uid为'.$idclickUid
 									.' ==》'.$e->getMessage(), __METHOD__);					
-			}
 			return FALSE;
 		} catch (Exception $e){
-			$this->dbh->rollBack();
-			if(ENVIRONMENT == 'development'){
-				echo $e->getMessage();
-			} else {
-				Log::write($e->getMessage(), __METHOD__);					
-			}
+			Log::write($e->getMessage(), __METHOD__);					
 			return FALSE;
 		}
 	}

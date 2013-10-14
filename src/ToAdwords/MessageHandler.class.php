@@ -89,10 +89,10 @@ class MessageHandler{
 			if(is_callable($callback)){
 				switch($queueName){
 					case HTTPSQS_QUEUE_COMMON:
-						call_user_func($callback, 'QUEUE');
+						call_user_func_array($callback, array('QUEUE'));
 						break;
 					case HTTPSQS_QUEUE_RETRY:
-						call_user_func($callback, 'RETRY');
+						call_user_func_array($callback, array('RETRY'));
 						break;
 					default:
 						throw new MessageException('[ERROR] 消息队列名错误，队列名：'
@@ -108,7 +108,7 @@ class MessageHandler{
 
 	public function get($callback = null, $queueName = HTTPSQS_QUEUE_COMMON){
 		if(is_callable($callback)){
-			call_user_func($callback, 'SENDING');
+			call_user_func_array($callback, array('SENDING'));
 		}
 
 		$result = $this->httpsqs->gets($queueName);
