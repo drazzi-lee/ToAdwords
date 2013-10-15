@@ -22,7 +22,6 @@ use \PDOException;
  * 广告系列
  */
 class CampaignAdapter extends AdwordsAdapter{
-	protected $tableName = 'campaign';
 	protected $moduleName = 'Campaign';
 	
 	protected $adwordsObjectIdField = 'campaign_id';
@@ -74,15 +73,18 @@ class CampaignAdapter extends AdwordsAdapter{
 	 */
 	public function create(array $data){
 		try{
-			if(self::IS_CHECK_DATA){
-				$this->checkData($data, Operation::CREATE);
-			}
-			
-			$customerAdapter = new CustomerAdapter();
-			$idclickMember = new Member($data['idclick_uid']);
-			$data['customer_id'] = $customerAdapter->getAdaptedId($idclickMember);
-			if($data['customer_id'] === TRUE){
-				unset($data['customer_id']);
+			$customerModel = new CustomerModel();
+			$customerInfo = $customerModel->getOne('idclick_uid='.$data['idclick_uid']);
+			if(empty($customerInfo)){
+				$customerAdapter = new CustomerAdapter();
+				if(!$customerAdapter->create($data['idclick_uid'])){
+					throw new Exception('[SYSTEM_ERROR] 创建用户失败，用户idclick_uid #'. $data['idclick_uid']);
+				}
+			} else {
+				$id = $customerInfo[$customerModel->$adwordsObjectIdField]
+				if($customerModel->isValidAdwordsId($id)){
+					$data['customer_id'] = $id;
+				}
 			}
 			
 			if(isset($data['bidding_type'])){
@@ -93,18 +95,18 @@ class CampaignAdapter extends AdwordsAdapter{
 				}
 			}
 			
-			$this->dbh->beginTransaction();
-			$adPlan = new AdPlan($data['idclick_planid']);
-			if($this->insertOne($data) && $this->createMessageAndPut($data, Operation::CREATE)
-					&& $this->updateSyncStatus(SyncStatus::QUEUE, $adPlan)){
-				$this->dbh->commit();
-				$this->processed++;
-				$this->result['success']++;
-				$this->result['description'] = '广告计划添加成功';
-				return $this->generateResult();
-			} else {
-				throw new Exception('顺序执行插表、发送消息、更新同步状态为QUEUE出错。');
-			}			
+			$campaignModel = new CampaignModel();
+			$campaignModel->insertOne($data);
+
+			$message = new Message();
+			$message->setModule($this->moduleName);
+			$message->setAction(Operation::CREATE);
+
+			$messageHandler = new MessageHandler();
+			$messageHandler->put($message, array($this, 'updateSyncStatus');
+
+			$this->result['description'] = '广告计划添加成功';
+			return $this->generateResult();
 		} catch (DataCheckException $e){
 			$this->result['status'] = -1;
 			$this->result['description'] = '数据验证未通过：'.$e->getMessage();
@@ -118,17 +120,13 @@ class CampaignAdapter extends AdwordsAdapter{
 			$this->result['description'] = '异常的同步状态：'.$e->getMessage();
 			return $this->generateResult();
 		}catch (PDOException $e){
-			$this->dbh->rollBack();
 			$this->result['status'] = -1;
-			$this->result['description'] = '数据表新插入一行失败，事务已回滚，idclick_planid为'
+			$this->result['description'] = '数据表新插入一行失败，idclick_planid为'
 									. $data['idclick_planid'] . ' ==》' . $e->getMessage();
 			Log::write('数据表新插入一行失败，事务已回滚，idclick_planid为'
 							. $data['idclick_planid'] . ' ==》'.$e->getMessage(), __METHOD__);	
 			return $this->generateResult();
 		} catch (Exception $e){
-			if($this->dbh->inTransaction()){
-				$this->dbh->rollBack();
-			}
 			$this->result['status'] = -1;
 			$this->result['description'] = $e->getMessage();
 			return $this->generateResult();
