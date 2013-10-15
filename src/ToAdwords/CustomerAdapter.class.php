@@ -53,7 +53,6 @@ class CustomerAdapter extends AdwordsAdapter{
 
 			$messageHandler = new MessageHandler();
 		 	$messageHandler->put($message, array($this, 'updateSyncStatus');
-			$this->createMessageAndPut(array('idclick_uid' => $idclickUid), Operation::ACTION_CREATE);
 			return TRUE;
 		} catch (MessageException $e){
 			Log::write('[MESSAGE_ERROR]'.$e->getMessage(), __METHOD__);	

@@ -426,4 +426,13 @@ abstract class AdwordsAdapter implements Adapter{
 			}
 		}
 	}
+
+	/**
+	 * Check whether the given primary id is exists in current table.
+	 * @TODO incomplete.
+	 */
+	protected function isExists($primaryId){
+		
+
+	}
 }

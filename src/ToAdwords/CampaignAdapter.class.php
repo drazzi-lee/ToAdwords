@@ -96,11 +96,6 @@ class CampaignAdapter extends AdwordsAdapter{
 				$this->checkData($data, Operation::CREATE);
 			}
 			
-			$campaignRow = $this->getOne('idclick_planid','idclick_planid='.$data['idclick_planid']);
-			if(!empty($campaignRow)){
-				throw new DataCheckException('广告计划已存在，idclick_planid为'.$data['idclick_planid']);
-			}
-			
 			$customerAdapter = new CustomerAdapter();
 			$idclickMember = new Member($data['idclick_uid']);
 			$data['customer_id'] = $customerAdapter->getAdaptedId($idclickMember);
