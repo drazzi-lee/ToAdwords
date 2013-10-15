@@ -362,4 +362,12 @@ abstract class BaseModel{
 			}
 		}
 	}
+
+	/**
+	 * Check whether the given primary id is exists in current table.
+	 * @TODO incomplete.
+	 */
+	protected function isExists($primaryId){
+		return FALSE;
+	}
 }

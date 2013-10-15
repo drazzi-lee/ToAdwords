@@ -33,12 +33,6 @@ abstract class AdwordsAdapter implements Adapter{
 	const DESC_DATA_PROCESS_WARNING = '执行完毕，有部分数据未正常处理：：';
 
 	/**
-	 * 数据库操作相关设置
-	 */
-	protected $dbh = null;
-	protected $fieldSyncStatus = 'sync_status';
-
-	/**
 	 * 处理结果
 	 *
 	 * $result = array(
@@ -58,30 +52,6 @@ abstract class AdwordsAdapter implements Adapter{
 			);
 	protected $processed = 0;
 
-	/**
-	 * 此构造过程一般被接口层直接调用，需要内部直接处理异常。
-	 */
-	public function __construct(){
-		try {
-			$this->dbh = new PDO(TOADWORDS_DSN, TOADWORDS_USER, TOADWORDS_PASS);
-			$this->dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-			$this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		} catch (PDOException $e){
-			if(ENVIRONMENT == 'development'){
-				trigger_error('数据库连接错误，实例化'.__CLASS__.'失败。', E_USER_ERROR);
-			} else {
-				Log::write('数据库连接错误，实例化'.__CLASS__.'失败。', __METHOD__);
-				trigger_error('A system error occurred.', E_USER_WARNING);
-			}
-		} catch (Exception $e){
-			if(ENVIRONMENT == 'development'){
-				trigger_error('未知错误，实例化'.__CLASS__.'失败。', E_USER_ERROR);
-			} else {
-				Log::write('未知错误，实例化'.__CLASS__.'失败。', __METHOD__);
-				trigger_error('A system error occurred.', E_USER_WARNING);
-			}
-		}
-	}
 
 	/**
 	 * Get only one row from table.
