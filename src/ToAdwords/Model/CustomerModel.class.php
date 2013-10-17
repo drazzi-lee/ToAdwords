@@ -9,9 +9,24 @@ use ToAdwords\BaseModel;
  */
 class CustomerModel extends BaseModel{
 
-	protected $tableName = 'customer';
+	protected static $tableName = 'customer';
+	protected static $moduleName = 'Customer';
 
-	protected $adwordsObjectIdField = 'adwords_customerid';
-	protected $idclickObjectIdField = 'idclick_uid';
+	protected static $adwordsObjectIdField = 'adwords_customerid';
+	protected static $idclickObjectIdField = 'idclick_uid';
 
+	protected static $dataCheckFilter = array(
+				'CREATE'	=> array(
+					'requiredFields'	=> array('idclick_uid'),
+					'prohibitedFields'	=> array('sync_status','customer_id'),
+				),
+				'UPDATE'	=> array(
+					'requiredFields'	=> array('idclick_uid'),
+					'prohibitedFields'	=> array('sync_status','customer_id'),
+				),
+				'DELETE'	=> array(
+					'requiredFields'	=> array('idclick_uid'),
+					'prohibitedFields'	=> array('sync_status','customer_id'),
+				),
+			);
 }

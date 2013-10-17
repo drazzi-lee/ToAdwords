@@ -3,7 +3,6 @@
 namespace ToAdwords;
 
 use ToAdwords\AdwordsAdapter;
-use ToAdwords\CustomerAdapter;
 use ToAdwords\Util\Log;
 use ToAdwords\Util\Message;
 use ToAdwords\Object\Idclick\Member;
@@ -26,6 +25,11 @@ class CampaignAdapter extends AdwordsAdapter{
 	
 	protected $adwordsObjectIdField = 'campaign_id';
 	protected $idclickObjectIdField = 'idclick_planid';
+
+	protected $dataModel;
+	protected $parentDataModel;
+
+	protected $parentAdapter;
 	
 	/**
 	 * 封装update create为run方法供thrift使用

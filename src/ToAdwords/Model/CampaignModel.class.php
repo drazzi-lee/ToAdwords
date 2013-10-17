@@ -5,13 +5,13 @@ namespace ToAdwords\Model;
 use ToAdwords\Model\BaseModel;
 
 class CampaignModel extends BaseModel{
-	protected $tableName = 'campaign';
-	protected $moduleName = 'Campaign';
+	protected static $tableName = 'campaign';
+	protected static $moduleName = 'Campaign';
 	
-	protected $adwordsObjectIdField = 'campaign_id';
-	protected $idclickObjectIdField = 'idclick_planid';
+	protected static $adwordsObjectIdField = 'campaign_id';
+	protected static $idclickObjectIdField = 'idclick_planid';
 	
-	protected $dataCheckFilter = array(
+	protected static $dataCheckFilter = array(
 				'CREATE'	=> array(
 					'requiredFields'	=> array(
 						'idclick_planid','idclick_uid','campaign_name','languages',

@@ -5,32 +5,16 @@ namespace ToAdwords;
 require_once 'Adapter.interface.php';
 
 use ToAdwords\Adapter;
-use ToAdwords\Object\Base;
-use ToAdwords\Object\Adwords\AdwordsBase;
-use ToAdwords\Object\Idclick\Member;
-use ToAdwords\Object\Idclick\IdclickBase;
 use ToAdwords\Util\Log;
 use ToAdwords\Util\Message;
 use ToAdwords\CustomerAdapter;
-use ToAdwords\Exception\DependencyException;
-use ToAdwords\Exception\SyncStatusException;
 use ToAdwords\Exception\DataCheckException;
-use ToAdwords\Exception\MessageException;
 use ToAdwords\MessageHandler;
 use ToAdwords\Definition\SyncStatus;
 
-use \PDO;
-use \PDOException;
 use \Exception;
 
 abstract class AdwordsAdapter implements Adapter{
-
-	/**
-	 * 结果描述文字定义
-	 */
-	const DESC_DATA_CHECK_FAILURE   = '提供数据不完整，请检查数据。';
-	const DESC_DATA_PROCESS_SUCCESS = '成功处理了所有数据';
-	const DESC_DATA_PROCESS_WARNING = '执行完毕，有部分数据未正常处理：：';
 
 	/**
 	 * 处理结果
@@ -52,262 +36,24 @@ abstract class AdwordsAdapter implements Adapter{
 			);
 	protected $processed = 0;
 
-
-	/**
-	 * Get only one row from table.
-	 *
-	 * This method returns a one-dimensional array. PDO::FETCH_ASSOC: returns an array
-	 * indexed by column name as returned in your result set.
-	 *
-	 * @param string $fields: $fields = 'id,name,gender';
-	 * @param string $conditions: $conditions = 'id=1234 AND name="Bob"';
-	 * @return array $row
-	 */
-	protected function getOne($fields='*', $conditions){
-		$statement = $this->select($fields, $conditions, 1);
-		return $statement->fetch(PDO::FETCH_ASSOC);
+	public function create($data){
+		//准备数据，检查数据完整性，过滤数据或者进行数据转换
+		//判断上级信赖是否创建
+		//插入数据
+		//发送数据至消息队列
 	}
 
-	/**
-	 * Get rows from current table.
-	 *
-	 * This method returns a two-dimensional array. PDO::FETCH_ASSOC: returns an array
-	 * indexed by column name as returned in your result set.
-	 *
-	 * @param string $fields: $fields = 'id,name,gender';
-	 * @param string $conditions: $conditions = 'id=1234 AND name="Bob"';
-	 * @param int,string $limit : default 1000
-	 * @return array $rows
-	 */
-	protected function getRows($fields='*', $conditions, $limit = '1000'){
-		$statement = $this->select($fields, $conditions, $limit);
-		return $statement->fetchAll(PDO::FETCH_ASSOC);
+	public function update($data){
+		//准备数据，检查数据完整性，过滤数据或者进行数据转换
+		//更新数据
+		//发送数据至消息队列
+
 	}
 
-	/**
-	 * A wrapper for easy to use select
-	 *
-	 * @param string $fields: $fields = 'id,name,gender';
-	 * @param string $conditions: $conditions = 'id=1234 AND name="Bob"';
-	 * @param int,string $limit : default 1000
-	 * @return PDO::Statement $statement
-	 */
-	protected function select($fields='*', $conditions, $limit = '1000'){
-		$sql = 'SELECT '.$fields.' FROM `'.$this->tableName.'`';
-		$paramValues = array();
-
-		if(!empty($conditions)){
-			$preparedConditions = $this->prepareSelect($conditions);
-			$sql .= ' WHERE '.$preparedConditions['placeHolders'];
-			$paramValues = $preparedConditions['paramValues'];
-		}
-
-		if(!is_numeric($limit)){
-			$limit = (int)$limit;
-			if(ENVIRONMENT == 'development')
-				trigger_error('limit只能为数字，已自动转换', E_USER_NOTICE);
-		}
-		$sql .= ' LIMIT '.$limit;
-
-		$statement = $this->dbh->prepare($sql);
-		$statement->execute($paramValues);
-		return $statement;
-	}
-
-	/**
-	 * Prepare conditions to sql-parsed condition and params.
-	 *
-	 * @param string $conditions: $conditions = 'id=1234 AND name="Bob"';
-	 * @return array $preparedConditions: array(
-	 *					'placeHolders' 	=> 'WHERE id=:id AND name=:name',
-	 *					'paramValues'	=> array(':id' => '1234', ':name' => 'Bob'),
-	 *				);
-	 */
-	protected function prepareSelect($conditions){
-		if(empty($conditions)){
-			return NULL;
-		}
-		$placeHolders = preg_replace('/(\w+)(>|=|<)(\S+)/', '$1$2:$1', $conditions);
-		$conditionsArray = preg_grep('/(\w+)(>|=|<)(\S+)/', preg_split('/(\s+)/', $conditions));
-		$paramValues = array();
-		foreach($conditionsArray as $condition){
-			$conditionSplited = explode('=', $condition);
-			$paramValues[':'.$conditionSplited[0]] = $conditionSplited[1];
-		}
-		if(0 == count($paramValues)){
-			if('ENVIRONMENT' == 'development')
-				throw new DataCheckException('解析查询条件失败，请检查是否符合语法'.__METHOD__);
-			return NULL;
-		}
-		return array('placeHolders' => $placeHolders, 'paramValues' => $paramValues);
-	}
-
-	/**
-	 * 根据当前类型准备PlaceHolder和Params
-	 *
-	 * @param array $data: 当前需要操作的数据信息
-	 */
-	protected function prepareInsert($data){
-		$fieldsCombine = $this->arrayToString(array_keys($data));
-		$placeHolders = $this->arrayToSpecialString(array_keys($data));
-		$paramValues = array_combine(explode(',',$placeHolders), array_values($data));
-		return array(
-			'placeHolders' => array(
-				'value'=>$placeHolders,
-				'field'=>$fieldsCombine
-			),
-			'paramValues' => $paramValues
-		);
-	}
-
-	/**
-	 *
-	 * @param string $conditions
-	 */
-	protected function prepareUpdate($data, $conditions){
-		$where = $this->prepareSelect($conditions);
-		$placeHoldersArray = array();
-		$paramValuesData = array();
-		foreach($data as $key => $value){
-			$placeHoldersArray[] = $key.'=:'.$key;
-			$paramValuesData[':'.$key] = $value;
-		}
-		$placeHolders = $this->arrayToString($placeHoldersArray);
-		$paramValues = array_merge($where['paramValues'], $paramValuesData);
-		return array(
-			'placeHolders' 		=> $placeHolders,
-			'placeHoldersWhere' => $where['placeHolders'],
-			'paramValues' 		=> $paramValues);
-	}
-
-	/**
-	 * 向数据表插入一条信息
-	 * @TODO 根据CampaignAdapter->insertOne抽象方法
-	 * @param array $data: 插入内容
-	 * @return boolean: TRUE, FALSE
-	 * @throw PDOException
-	 */
-	public function insertOne($data){
-		$preparedInsert = $this->prepareInsert($data);
-		$sql = 'INSERT INTO `' . $this->tableName.'`'
-				. ' (' . $preparedInsert['placeHolders']['field'] . ')'
-				. ' VALUES (' .$preparedInsert['placeHolders']['value'] . ')';
-		$statement = $this->dbh->prepare($sql);
-		return $statement->execute($preparedInsert['paramValues']);
-	}
-
-	/**
-	 * 更新数据表某条信息
-	 *
-	 * @param string $conditions: 更新条件，一般为unique_id=123形式
-	 * @param array $data: 更新内容
-	 * @return boolean: TRUE, FALSE
-	 * @throw PDOException
-	 */
-	public function updateOne($conditions, array $data){
-		$preparedUpdates = $this->prepareUpdate($data, $conditions);
-
-		$sql = 'UPDATE `' . $this->tableName . '` SET '. $preparedUpdates['placeHolders']
-							. ' WHERE ' . $preparedUpdates['placeHoldersWhere'];
-
-		$statement = $this->dbh->prepare($sql);
-		return $statement->execute($preparedUpdates['paramValues']);
-	}
-
-	/**
-	 * 更新ObjectId对应的数据表同步状态
-	 *
-	 * @param string $status: SYNC_STATUS_QUEUE等
-	 * @return boolean: TRUE, FALSE
-	 * @throw PDOException,DataCheckException
-	 */
-	public function updateSyncStatus($status){
-		$sql = 'UPDATE `'.$this->tableName.'` SET sync_status=:sync_status';
-		$preparedParams = array();
-
-		if(!in_array($status, array(SyncStatus::QUEUE, SyncStatus::RECEIVE,
-				SyncStatus::SYNCED, SyncStatus::ERROR, SyncStatus::RETRY))){
-			throw new DataCheckException('SYNC_STATUS未被允许的同步状态类型::'.$status);
-		} else {
-			$preparedParams[':sync_status'] = $status;
-		}
-
-		$sql .= ' WHERE '.$this->idclickObjectIdField.'=:'.$this->idclickObjectIdField;
-		$preparedParams[':'.$this->idclickObjectIdField] = $object->getId();
-
-		/**
-		if($object instanceof AdwordsBase){
-			$sql .= ' WHERE '.$this->adwordsObjectIdField.'=:'.$this->adwordsObjectIdField;
-			$preparedParams[':'.$this->adwordsObjectIdField] = $object->getId();
-		}*/
-
-		$statement = $this->dbh->prepare($sql);
-		return $statement->execute($preparedParams);
-	}
-
-	/**
-	 * 获取IDCLICK与ADWORDS对照信息
-	 *
-	 * 同时返回同步状态信息，以便后续处理。
-	 *
-	 * @param Base $object: AdwordsObject | IdclickObject
-	 * @return array: NULL | array()
-	 * @throw PDOException
-	 */
-	public function getAdapteInfo(Base $object){
-		if($object instanceof IdclickBase){
-			return $this->getOne($this->adwordsObjectIdField.','.$this->idclickObjectIdField
-						.',sync_status', $this->idclickObjectIdField.'='.$object->getId());
-		}
-		if($object instanceof AdwordsBase){
-			return $this->getOne($this->adwordsObjectIdField.','.$this->idclickObjectIdField
-						.',sync_status', $this->adwordsObjectIdField.'='.$object->getId());
-		}
-	}
-
-	/**
-	 * 在IDCLICK与ADWORDS的ID之间转换
-	 *
-	 * 此方法一般在子类使用，需要子类的adwordsObjectIdField, idclickObjectIdField
-	 * 暂支持IDCLICK到ADWORDS单向转换
-	 *
-	 * @param Base $object: AdwordsObject | IdclickObject
-	 * @return int
-	 */
-	public function getAdaptedId(Base $object){
-		if(!$object instanceof IdclickBase){
-			throw new DataCheckException('尚未支持的objectType类型，返回FALSE。object::'
-														.get_class($object).' METHOD::'.__METHOD__);
-		}
-
-		$row = $this->getAdapteInfo($object);
-		if(!empty($row)){
-			switch($row[$this->fieldSyncStatus]){
-				case SyncStatus::SYNCED:
-					if(empty($row[$this->adwordsObjectIdField])) {
-						throw new SyncStatusException('已同步状态但是没有ADWORDS
-								对应信息IdclickId为'.$object->getId().' 对象：'.get_class($object));
-					}
-					return $row[$this->adwordsObjectIdField];
-					break;
-				case SyncStatus::QUEUE:
-					if(empty($row[$this->adwordsObjectIdField])){
-						//如果获取的ID为空，且状态为QUEUE，则发送一条更新本数据表对应ADWORDS_ID的消息
-					}
-					return TRUE;
-					break;
-				//case SyncStatus::RECEIVE:
-				//case SyncStatus::ERROR:
-				default:
-					throw new SyncStatusException('对象:'.get_class($object).' objectId'.$object->getId());
-			}
-		} else {
-			if($object instanceof Member){
-				return $this->create($object->getId());
-			} else {
-				throw new DependencyException('还没有创建上级依赖，请先创建上级对象:'.get_class($this));
-			}
-		}
+	public function delete($data){
+		//准备数据，检查数据完整性，过滤数据或者进行数据转换
+		//更新数据
+		//发送数据至消息队列
 	}
 
 	/**
@@ -333,7 +79,7 @@ abstract class AdwordsAdapter implements Adapter{
 	protected function generateResult(){
 		if($this->result['status'] == -1){
 			if(ENVIRONMENT == 'development'){
-				Log::write("[ERROR]数据验证失败，返回结果：\n"
+				Log::write("[RESULT_RETURN] Data check failure:\n"
 								. print_r($this->result, TRUE), __METHOD__);
 			}
 			if(RESULT_FORMAT == 'JSON'){
@@ -343,21 +89,9 @@ abstract class AdwordsAdapter implements Adapter{
 			}
 		}
 
-		if(FALSE){
-			if($this->processed == $this->result['success']){
-				$this->result['status'] = 1;
-				$this->result['description'] = self::DESC_DATA_PROCESS_SUCCESS
-										. "，共有{$this->result['success']}条。";
-			} else {
-				$this->result['status'] = 0;
-				$this->result['description'] = self::DESC_DATA_PROCESS_WARNING
-					. "，成功{$this->result['success']}条，失败{$this->result['failure']}条。";
-			}
-		}
-
 		$this->result['status'] = 1;
 		if(ENVIRONMENT == 'development'){
-			Log::write("[NOTICE]执行完成，返回结果：\n"
+			Log::write("[RESULT_RETURN] Processed end with result:\n"
 							. print_r($this->result, TRUE), __METHOD__);
 		}
 		if(RESULT_FORMAT == 'JSON'){
@@ -368,20 +102,20 @@ abstract class AdwordsAdapter implements Adapter{
 	}
 
 	/**
-	 * Check whether the data meets the requirements.
+	 * check whether the data meets the requirements.
 	 *
-	 * According to the current module's dataCheckFilter, verify that the data is valid, while
+	 * according to the current module's datacheckfilter, verify that the data is valid, while
 	 * filtering out the fields prohibited.
 	 *
 	 * @return void.
 	 */
-	protected function checkData(&$data, $action){
-		$filter = $this->dataCheckFilter[$action];
-		foreach($filter['prohibitedFields'] as $item){
+	protected function prepareData(&$data, $action){
+		$filter = $this->datacheckfilter[$action];
+		foreach($filter['prohibitedfields'] as $item){
 			if(isset($data[$item])){
-				if(ENVIRONMENT == 'development'){
-					Log::write('[WARNING] A prohibited fields found, Field #'
-												. $item . ' Value #'. $data[$item], __METHOD__);
+				if(environment == 'development'){
+					Log::write('[SYSTEM_WARNING] a prohibited fields found, field #'
+												. $item . ' value #'. $data[$item], __method__);
 				}
 				unset($data[$item]);
 			}
@@ -389,20 +123,11 @@ abstract class AdwordsAdapter implements Adapter{
 		foreach($filter['requiredFields'] as $item){
 			if(!isset($data[$item])){
 				if(ENVIRONMENT == 'development'){
-					Log::write('[WARNING] Field #' . $item . ' is required.', __METHOD__);
+					Log::write('[SYSTEM_WARNING] Field #' . $item . ' is required.', __METHOD__);
 				}
-				throw new DataCheckException('[WARNING] Field #' . $item . ' is required.');
+				throw new DataCheckException('Field #' . $item . ' is required.');
 				break;
 			}
 		}
-	}
-
-	/**
-	 * Check whether the given primary id is exists in current table.
-	 * @TODO incomplete.
-	 */
-	protected function isExists($primaryId){
-		
-
 	}
 }

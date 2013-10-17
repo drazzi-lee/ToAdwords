@@ -4,14 +4,17 @@ namespace ToAdwords\Model;
 
 use ToAdwords\Model\BaseModel;
 
+/**
+ * AdGroup Ad Model
+ */
 class AdGroupAdModel extends BaseModel{
-	protected $tableName = 'adgroupad';
-	protected $moduleName = 'AdGroupAd';
+	protected static $tableName = 'adgroupad';
+	protected static $moduleName = 'AdGroupAd';
 	
-	protected $adwordsObjectIdField = 'ad_id';
-	protected $idclickObjectIdField = 'idclick_adid';
+	protected static $adwordsObjectIdField = 'ad_id';
+	protected static $idclickObjectIdField = 'idclick_adid';
 	
-	protected $dataCheckFilter = array(
+	protected static $dataCheckFilter = array(
 				'CREATE'	=> array(
 					'requiredFields'	=> array(
 						'idclick_adid','idclick_groupid','ad_status'

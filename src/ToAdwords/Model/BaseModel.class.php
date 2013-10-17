@@ -12,10 +12,12 @@
  */
 namespace ToAdwords\Model;
 
-use ToAdwords\SyncStatus;
+use ToAdwords\CustomerAdapter;
+use ToAdwords\Definition\SyncStatus;
+use ToAdwords\Definition\Operation;
 use ToAdwords\Model\Driver\DbMysql;
 use ToAdwords\Util\Log;
-use ToAdwords\Exceptions\DataCheckException;
+use ToAdwords\Exceptions\ModelException;
 
 use \PDO;
 
@@ -38,21 +40,15 @@ abstract class BaseModel{
 	 */
 	const IS_CHECK_DATA = TRUE;
 
-	/**
-	 * 数据执行动作定义
-	 */
-	const ACTION_CREATE = 'CREATE';
-	const ACTION_UPDATE = 'UPDATE';
-	const ACTION_DELETE = 'DELETE';
+	protected static $tableName;
+	protected static $syncStatusField = 'sync_status';
 
-	protected $tableName;
 	protected $dbh = null;
 	protected $lastSql;
 
 	public function __construct(){
 		$this->dbh = DbMysql::getInstance();
 	}
-
 
 	/**
 	 * Set Last Sql being executed.
@@ -165,7 +161,7 @@ abstract class BaseModel{
 		}
 		if(0 == count($paramValues)){
 			if('ENVIRONMENT' == 'development')
-				throw new DataCheckException('Parsing conditions error, given #' . $conditions);
+				throw new ModelException('Parsing conditions error, given #' . $conditions);
 			return NULL;
 		}
 		return array('placeHolders' => $placeHolders, 'paramValues' => $paramValues);
@@ -221,9 +217,6 @@ abstract class BaseModel{
 	 * @throw PDOException, Datacheckexception;
 	 */
 	public function insertOne($data){
-		if(self::IS_CHECK_DATA){
-			$this->checkData($data, self::ACTION_CREATE);
-		}
 		$preparedInsert = $this->prepareInsert($data);
 		$sql = 'INSERT INTO `' . $this->tableName.'`'
 				. ' (' . $preparedInsert['placeHolders']['field'] . ')'
@@ -242,9 +235,6 @@ abstract class BaseModel{
 	 * @throw PDOException, Datacheckexception;
 	 */
 	public function updateOne($conditions, array $data){
-		if(self::IS_CHECK_DATA){
-			$this->checkData($data, self::ACTION_CREATE);
-		}
 		$preparedUpdates = $this->prepareUpdate($data, $conditions);
 
 		$sql = 'UPDATE `' . $this->tableName . '` SET '. $preparedUpdates['placeHolders']
@@ -263,23 +253,25 @@ abstract class BaseModel{
 	 * @return boolean: TRUE, FALSE
 	 * @throw PDOException
 	 */
-	public function updateSyncStatus($status, Base $object){
+	public function updateSyncStatus($status, $objectId, $isIdclickObject = TRUE){
+		if(empty((int)$objectId)){
+			return FALSE;
+		}
 		$sql = 'UPDATE `'.$this->tableName.'` SET sync_status=:sync_status';
 		$preparedParams = array();
 
-		if(!in_array($status, array('RECEIVE', 'QUEUE', 'SYNCED', 'ERROR', 'RETRY'))){
-			throw new DataCheckException('未定义的同步状态::'.$status);
+		if(!Operation::isValid($status)){
+			throw new ModelException('[Operation::isValid] returns FALSE #'.$status);
 		} else {
-			$preparedParams[':sync_status'] = $status;
+			$preparedParams[':'.self::$syncStatusField] = $status;
 		}
 
-		if($object instanceof IdclickBase){
-			$sql .= ' WHERE '.$this->idclickObjectIdField.'=:'.$this->idclickObjectIdField;
-			$preparedParams[':'.$this->idclickObjectIdField] = $object->getId();
-		}
-		if($object instanceof AdwordsBase){
-			$sql .= ' WHERE '.$this->adwordsObjectIdField.'=:'.$this->adwordsObjectIdField;
-			$preparedParams[':'.$this->adwordsObjectIdField] = $object->getId();
+		if($isIdclickObject){
+			$sql .= ' WHERE '.self::$idclickObjectIdField.'=:'.self::$idclickObjectIdField;
+			$preparedParams[':'.self::$idclickObjectIdField] = $objectId;
+		} else {
+			$sql .= ' WHERE '.self::$adwordsObjectIdField.'=:'.self::$adwordsObjectIdField;
+			$preparedParams[':'.self::$adwordsObjectIdField] = $objectId;
 		}
 
 		$statement = $this->dbh->prepare($sql);
@@ -296,17 +288,50 @@ abstract class BaseModel{
 	 * @return array: NULL | array()
 	 * @throw PDOException
 	 */
-	protected function getAdapteInfo(Base $object){
-		if($object instanceof IdclickBase){
-			return $this->getOne($this->adwordsObjectIdField.','.$this->idclickObjectIdField
-						.',sync_status', $this->idclickObjectIdField.'='.$object->getId());
-		}
-		if($object instanceof AdwordsBase){
-			return $this->getOne($this->adwordsObjectIdField.','.$this->idclickObjectIdField
-						.',sync_status', $this->adwordsObjectIdField.'='.$object->getId());
-		}
+	protected function getAdapteInfo($idclickObjectId){
+		return $this->getOne(self::$adwordsObjectIdField.','.self::$idclickObjectIdField
+						.','.self::$syncStatusField, self::$idclickObjectIdField.'='.$idclickObjectId);
 	}
 
+	public function getAdaptedId($idclickObjectId){
+		$row = $this->getAdapteInfo($idclickObjectId);
+		if(!empty($row)){
+			switch($row[self::$syncStatusField]){
+				case SyncStatus::SYNCED:
+					if(empty($row[self::$adwordsObjectIdField])){
+						Log::write('[SYSTEM_WARNING] An error found, synchronoused but not adwords id：' .
+								'IdclickObjectId #'.$idclickObjectId . ' Object '.get_class($this));
+						return FALSE;
+					} else {
+						return $row[self::$adwordsObjectIdField];
+					}
+					break;
+				case SyncStatus::QUEUE:
+				case SyncStatus::RETRY:
+				case SyncStatus::SENDING:
+					if(empty($row[self::$adwordsObjectIdField])){
+						//@TODO 如果获取的ID为空，且状态为QUEUE，则发送一条更新本数据表对应ADWORDS_ID的消息
+					}
+					return TRUE;
+					break;
+
+				//case SyncStatus::RECEIVE:
+				//case SyncStatus::ERROR:
+				default:
+					Log::write('[SYSTEM_WARNING] An error/receive sync_status found：IdclickObjectId #'.
+							$idclickObjectId . ' Object '.get_class($this));
+					return FALSE;
+			}
+		} else {
+			if($this instanceof CustomerModel){
+				$customerAdapter = new CustomerAdapter();
+				return $customerAdapter->create($idclickObjectId);
+			} else {
+				throw new ModelException('Dependency Error, could not found parent module, current module #'.
+						get_class($this));
+			}
+		}
+	}
 
 	/**
 	 * Join array elements with comma.
@@ -334,11 +359,11 @@ abstract class BaseModel{
 	 * @return void.
 	 */
 	protected function checkData(&$data, $action){
-		$filter = $this->dataCheckFilter[$action];
+		$filter = self::$dataCheckFilter[$action];
 		foreach($filter['prohibitedFields'] as $item){
 			if(isset($data[$item])){
 				if(ENVIRONMENT == 'development'){
-					Log::write('[WARNING] A prohibited fields found, Field #'
+					Log::write('[SYSTEM_WARNING] A prohibited fields found, Field #'
 												. $item . ' Value #'. $data[$item], __METHOD__);
 				}
 				unset($data[$item]);
@@ -347,7 +372,7 @@ abstract class BaseModel{
 		foreach($filter['requiredFields'] as $item){
 			if(!isset($data[$item])){
 				if(ENVIRONMENT == 'development'){
-					Log::write('[WARNING] Field #' . $item . ' is required.', __METHOD__);
+					Log::write('[SYSTEM_WARNING] Field #' . $item . ' is required.', __METHOD__);
 				}
 				throw new DataCheckException('[WARNING] Field #' . $item . ' is required.');
 				break;
@@ -357,7 +382,7 @@ abstract class BaseModel{
 			if(is_array($item)){
 				$data[$key] = $this->arrayToString($item);
 				if(ENVIRONMENT == 'development'){
-					Log::write('[WARNING] Field #' . $item . ' Array to String conversion.', __METHOD__);
+					Log::write('[SYSTEM_WARNING] Field #' . $item . ' Array to String conversion.', __METHOD__);
 				}
 			}
 		}

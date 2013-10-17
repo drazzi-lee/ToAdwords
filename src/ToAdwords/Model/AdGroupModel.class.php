@@ -5,16 +5,16 @@ namespace ToAdwords\Model;
 use ToAdwords\Model\BaseModel;
 
 /**
- * 广告组
+ * AdGroup Model 
  */
 class AdGroupModel extends BaseModel{
-	protected $tableName = 'adgroup';
-	protected $moduleName = 'AdGroup';
+	protected static $tableName = 'adgroup';
+	protected static $moduleName = 'AdGroup';
 	
-	protected $adwordsObjectIdField = 'adgroup_id';
-	protected $idclickObjectIdField = 'idclick_groupid';
+	protected static $adwordsObjectIdField = 'adgroup_id';
+	protected static $idclickObjectIdField = 'idclick_groupid';
 	
-	protected $dataCheckFilter = array(
+	protected static $dataCheckFilter = array(
 				'CREATE'	=> array(
 					'requiredFields'	=> array(
 						'idclick_groupid','idclick_planid','adgroup_name','keywords',
