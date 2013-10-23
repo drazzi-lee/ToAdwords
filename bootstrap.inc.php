@@ -67,11 +67,6 @@ function load($namespace){
 	return false;
 }
 
-function loadPath($absPath){
-	return include_once($absPath);
-}
-
-spl_autoload_unregister('Lite::autoload');
 spl_autoload_register(__NAMESPACE__.'\load');
 
 
