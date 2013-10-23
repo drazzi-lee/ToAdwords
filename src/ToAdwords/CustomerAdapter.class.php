@@ -29,12 +29,11 @@ class CustomerAdapter extends AdwordsAdapter{
 	/**
 	 * Create new user. 
 	 *
-	 * @param string $idclickUid: Idclick user id.
+	 * @param array $data: array('idclick_uid'=> 456). 
 	 * @return boolean: TRUE, FALSE
 	 */
-	protected function create($idclickUid){
+	protected function create($data){
 		try{
-			$data = array(self::$idclickObjectIdField => $idclickUid);
 			$customerModel = new CustomerModel();
 			$customerModel->insertOne($data);
 
@@ -44,7 +43,7 @@ class CustomerAdapter extends AdwordsAdapter{
 			$message->setInformation($data);
 
 			$messageHandler = new MessageHandler();
-		 	$messageHandler->put($message, array($this, 'updateSyncStatus');
+		 	$messageHandler->put($message, array($customerModel, 'updateSyncStatus');
 			return TRUE;
 		} catch (MessageException $e){
 			Log::write('[MESSAGE_ERROR]'.$e->getMessage(), __METHOD__);	

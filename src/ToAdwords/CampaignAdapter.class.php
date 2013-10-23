@@ -5,8 +5,6 @@ namespace ToAdwords;
 use ToAdwords\AdwordsAdapter;
 use ToAdwords\Util\Log;
 use ToAdwords\Util\Message;
-use ToAdwords\Object\Idclick\Member;
-use ToAdwords\Object\Idclick\AdPlan;
 use ToAdwords\Exception\SyncStatusException;
 use ToAdwords\Exception\DataCheckException;
 use ToAdwords\Exception\MessageException;

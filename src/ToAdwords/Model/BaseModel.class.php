@@ -254,7 +254,7 @@ abstract class BaseModel{
 	 * @throw PDOException
 	 */
 	public function updateSyncStatus($status, $objectId, $isIdclickObject = TRUE){
-		if(empty((int)$objectId)){
+		if( 0 === (int)$objectId){
 			return FALSE;
 		}
 		$sql = 'UPDATE `'.$this->tableName.'` SET sync_status=:sync_status';
@@ -293,13 +293,19 @@ abstract class BaseModel{
 						.','.self::$syncStatusField, self::$idclickObjectIdField.'='.$idclickObjectId);
 	}
 
+	/**
+	 * Get adapted Id, $idclickObjectId to $adwordsObjectId.
+	 *
+	 * @param integer $idclickObjectId
+	 * @return boolean.
+	 */
 	public function getAdaptedId($idclickObjectId){
 		$row = $this->getAdapteInfo($idclickObjectId);
 		if(!empty($row)){
 			switch($row[self::$syncStatusField]){
 				case SyncStatus::SYNCED:
 					if(empty($row[self::$adwordsObjectIdField])){
-						Log::write('[SYSTEM_WARNING] An error found, synchronoused but not adwords id：' .
+						Log::write('[WARNING] An error found, synchronoused but adwords id not exists：' .
 								'IdclickObjectId #'.$idclickObjectId . ' Object '.get_class($this));
 						return FALSE;
 					} else {
@@ -318,17 +324,17 @@ abstract class BaseModel{
 				//case SyncStatus::RECEIVE:
 				//case SyncStatus::ERROR:
 				default:
-					Log::write('[SYSTEM_WARNING] An error/receive sync_status found：IdclickObjectId #'.
+					Log::write('[WARNING] An error/receive sync_status found：IdclickObjectId #'.
 							$idclickObjectId . ' Object '.get_class($this));
 					return FALSE;
 			}
 		} else {
 			if($this instanceof CustomerModel){
 				$customerAdapter = new CustomerAdapter();
-				return $customerAdapter->create($idclickObjectId);
+				return $customerAdapter->create(array(self::$idclickObjectIdField => $idclickObjectId));
 			} else {
-				throw new ModelException('Dependency Error, could not found parent module, current module #'.
-						get_class($this));
+				throw new ModelException('Dependency Error, parent module #'.
+						get_class($this). ' not found.');
 			}
 		}
 	}
@@ -363,7 +369,7 @@ abstract class BaseModel{
 		foreach($filter['prohibitedFields'] as $item){
 			if(isset($data[$item])){
 				if(ENVIRONMENT == 'development'){
-					Log::write('[SYSTEM_WARNING] A prohibited fields found, Field #'
+					Log::write('[WARNING] A prohibited fields found, Field #'
 												. $item . ' Value #'. $data[$item], __METHOD__);
 				}
 				unset($data[$item]);
@@ -372,9 +378,9 @@ abstract class BaseModel{
 		foreach($filter['requiredFields'] as $item){
 			if(!isset($data[$item])){
 				if(ENVIRONMENT == 'development'){
-					Log::write('[SYSTEM_WARNING] Field #' . $item . ' is required.', __METHOD__);
+					Log::write('[WARNING] Field #' . $item . ' is required.', __METHOD__);
 				}
-				throw new DataCheckException('[WARNING] Field #' . $item . ' is required.');
+				throw new ModelException('[WARNING] Field #' . $item . ' is required.');
 				break;
 			}
 		}
@@ -382,7 +388,7 @@ abstract class BaseModel{
 			if(is_array($item)){
 				$data[$key] = $this->arrayToString($item);
 				if(ENVIRONMENT == 'development'){
-					Log::write('[SYSTEM_WARNING] Field #' . $item . ' Array to String conversion.', __METHOD__);
+					Log::write('[WARNING] Field #' . $key . ' Array to String conversion.', __METHOD__);
 				}
 			}
 		}

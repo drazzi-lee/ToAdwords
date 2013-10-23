@@ -2,7 +2,8 @@
 
 namespace ToAdwords\Model;
 
-use ToAdwords\BaseModel;
+use ToAdwords\Model\BaseModel;
+use ToAdwords\Exception\ModelExcetpion;
 
 /**
  * CustomerModel 
