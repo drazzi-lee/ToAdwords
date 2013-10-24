@@ -67,7 +67,29 @@ function load($namespace){
 	return false;
 }
 
+function handleException($exception){
+	$result = array(
+		'status'      => -1,
+		'description' => get_class($exception). ' '. $exception->getMessage(),
+		'success'     => 0,
+		'failure'     => 0,
+	);
+	if(ENVIRONMENT == 'development'){
+		Util\Log::write("[RETURN] Data check failure:\n"
+				. print_r($result, TRUE), __METHOD__);
+	}
+	if(ENVIRONMENT == 'development' && $exception instanceof \PDOException){
+		Util\Log::write("[RETURN] Data check failure:\n"
+				. print_r($result, TRUE), __METHOD__);
+	}
+	if(RESULT_FORMAT == 'JSON'){
+		$result = json_encode($result);	
+	}
+	return $result;
+}
+
 spl_autoload_register(__NAMESPACE__.'\load');
+set_exception_handler(__NAMESPACE__.'\handleException');
 
 
 /**

@@ -2,19 +2,30 @@
 
 namespace ToAdwords;
 
-require_once 'Adapter.interface.php';
-
-use ToAdwords\Adapter;
 use ToAdwords\Util\Log;
 use ToAdwords\Util\Message;
 use ToAdwords\CustomerAdapter;
+use ToAdwords\CampaignAdapter;
+use ToAdwords\AdGroupAdapter;
+use ToAdwords\AdGroupAdAdapter;
+//use ToAdwords\Model\CustomerModel;
+//use ToAdwords\Model\CampaignModel;
+//use ToAdwords\Model\AdGroupModel;
+//use ToAdwords\Model\AdGroupAdModel;
 use ToAdwords\Exception\DataCheckException;
 use ToAdwords\MessageHandler;
 use ToAdwords\Definition\SyncStatus;
+use ToAdwords\Definition\Operation;
 
 use \Exception;
 
-abstract class AdwordsAdapter implements Adapter{
+abstract class AdwordsAdapter{
+	protected static $moduleName;
+	protected static $adwordsObjectIdField;
+	protected static $idclickObjectIdField;
+	protected static $currentModelName;
+	protected static $parentModelName;
+	protected static $parentAdapterName;
 
 	/**
 	 * 处理结果
@@ -36,11 +47,53 @@ abstract class AdwordsAdapter implements Adapter{
 			);
 	protected $processed = 0;
 
-	public function create($data){
-		//准备数据，检查数据完整性，过滤数据或者进行数据转换
-		//判断上级信赖是否创建
-		//插入数据
-		//发送数据至消息队列
+	public function run(array $data){
+		if(ENVIRONMENT == 'development'){
+			Log::write("Received new data:\n" . print_r($data, TRUE), __METHOD__);
+		}
+		
+		$currentModel = new self::$currentModelName();
+		if(empty($data[$currentModel::$idclickObjectIdField])){
+			throw new DataCheckException('Field #'.$currentModel::$idclickObjectIdField.' is required.');
+		}
+		$row = $currentModel->getAdapteInfo($data[$currentModel::$idclickObjectIdField]);
+		if(!empty($row)){
+			return $this->update($data);
+		} else {
+			return $this->create($data);
+		}
+	}
+
+	public function create(array $data){
+		self::prepareData($data, Operation::CREATE);
+		$parentModel = new static::$parentModelName();
+		$parentInfo = $parentModel->getAdapteInfo($data[$parentModel::$idclickObjectIdField]);
+		if(empty($parentInfo)){
+			if(static::$parentAdapter == 'CustomerAdapter'){
+				$parentAdapter = new static::$parentAdapterName();	
+				$parentAdapter->create(array($parentModel::$idclickObjectIdField => $data[$parentModel::$idclickObjectIdField]));
+			} else {
+				throw new DependencyException('dependency error, parent module #' . get_class($parentModel) . ' not found.');
+			}
+		} else {
+			if($parentModel->isValidAdwordsId($parentInfo[$parentModel::$adwordsObjectIdField])){
+				$data[$parentModel::$adwordsObjectIdField] = $parentInfo[$parentModel::$adwordsObjectIdField];
+			}
+		}
+		
+		$currentModel = new static::$currentModelName();
+		$currentModel->insertOne($data);
+
+		$message = new Message();
+		$message->setModule(static::$moduleName);
+		$message->setAction(Operation::CREATE);
+
+		$messageHandler = new MessageHandler();
+		$messageHandler->put($message, array($currentModel, 'updateSyncStatus'));
+
+		$this->result['description'] = static::$moduleName . 'create success!';
+
+		return $this->generateResult();
 	}
 
 	public function update($data){
@@ -77,21 +130,9 @@ abstract class AdwordsAdapter implements Adapter{
 	 * Generate process result.
 	 */
 	protected function generateResult(){
-		if($this->result['status'] == -1){
-			if(ENVIRONMENT == 'development'){
-				Log::write("[RESULT_RETURN] Data check failure:\n"
-								. print_r($this->result, TRUE), __METHOD__);
-			}
-			if(RESULT_FORMAT == 'JSON'){
-				return json_encode($this->result);
-			} else {
-				return $this->result;
-			}
-		}
-
 		$this->result['status'] = 1;
 		if(ENVIRONMENT == 'development'){
-			Log::write("[RESULT_RETURN] Processed end with result:\n"
+			Log::write("[RETURN] Processed end with result:\n"
 							. print_r($this->result, TRUE), __METHOD__);
 		}
 		if(RESULT_FORMAT == 'JSON'){
@@ -102,31 +143,48 @@ abstract class AdwordsAdapter implements Adapter{
 	}
 
 	/**
-	 * check whether the data meets the requirements.
+	 * Check whether the data meets the requirements.
 	 *
-	 * according to the current module's datacheckfilter, verify that the data is valid, while
+	 * According to the current module's dataCheckFilter, verify that the data is valid, while
 	 * filtering out the fields prohibited.
 	 *
 	 * @return void.
 	 */
-	protected function prepareData(&$data, $action){
-		$filter = $this->datacheckfilter[$action];
-		foreach($filter['prohibitedfields'] as $item){
+	protected static function prepareData(&$data, $action){
+		$filter = static::$dataCheckFilter[$action];
+		foreach($filter['requiredFields'] as $item){
+			if(!isset($data[$item])){
+				if(ENVIRONMENT == 'development'){
+					Log::write('[ERROR] Field #' . $item . ' is required.', __METHOD__);
+				}
+				throw new DataCheckException('[ERROR] Field #' . $item . ' is required.');
+				break;
+			}
+		}
+		foreach($filter['prohibitedFields'] as $item){
 			if(isset($data[$item])){
-				if(environment == 'development'){
-					Log::write('[SYSTEM_WARNING] a prohibited fields found, field #'
-												. $item . ' value #'. $data[$item], __method__);
+				if(ENVIRONMENT == 'development'){
+					Log::write('[WARNING] A prohibited fields found, Field #'
+												. $item . ' Value #'. $data[$item], __METHOD__);
 				}
 				unset($data[$item]);
 			}
 		}
-		foreach($filter['requiredFields'] as $item){
-			if(!isset($data[$item])){
+		foreach($data as $key => $item){
+			if(is_array($item)){
+				$data[$key] = $this->arrayToString($item);
 				if(ENVIRONMENT == 'development'){
-					Log::write('[SYSTEM_WARNING] Field #' . $item . ' is required.', __METHOD__);
+					Log::write('[WARNING] Field #' . $key . ' Array to String conversion.', __METHOD__);
 				}
-				throw new DataCheckException('Field #' . $item . ' is required.');
-				break;
+			}
+
+			//转换idclick数据格式为adwords数据格式
+			if($key === 'bidding_type'){
+				switch($data['bidding_type']){
+					case '0': $data['bidding_type'] = 'MANUAL_CPC'; break;
+					case '1': $data['bidding_type'] = 'BUDGET_OPTIMIZER'; break;
+					default: throw new DataCheckException('unknown bidding_type ##'.$data['bidding_type']);
+				}
 			}
 		}
 	}

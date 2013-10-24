@@ -1,0 +1,45 @@
+[ 2013-10-24T18:05:18+08:00 ] #ToAdwords\handleException# [RETURN] Data check failure:
+Array
+(
+    [status] => -1
+    [description] => PDOException SQLSTATE[42000]: Syntax error or access violation: 1103 Incorrect table name ''
+    [success] => 0
+    [failure] => 0
+)
+
+[ 2013-10-24T18:06:43+08:00 ] #ToAdwords\handleException# [RETURN] Data check failure:
+Array
+(
+    [status] => -1
+    [description] => PDOException SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '51559-523' for key 'PRIMARY'
+    [success] => 0
+    [failure] => 0
+)
+
+[ 2013-10-24T18:25:49+08:00 ] #ToAdwords\handleException# [RETURN] Data check failure:
+Array
+(
+    [status] => -1
+    [description] => PDOException SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '51559-523' for key 'PRIMARY'
+    [success] => 0
+    [failure] => 0
+)
+
+[ 2013-10-24T18:41:22+08:00 ] #ToAdwords\handleException# [RETURN] Data check failure:
+Array
+(
+    [status] => -1
+    [description] => PDOException SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '51559-523' for key 'PRIMARY'
+    [success] => 0
+    [failure] => 0
+)
+
+[ 2013-10-24T18:41:22+08:00 ] #ToAdwords\handleException# [RETURN] Data check failure:
+Array
+(
+    [status] => -1
+    [description] => PDOException SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '51559-523' for key 'PRIMARY'
+    [success] => 0
+    [failure] => 0
+)
+

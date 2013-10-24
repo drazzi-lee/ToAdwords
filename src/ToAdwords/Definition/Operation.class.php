@@ -1,6 +1,6 @@
 <?php
 
-namespace ToAdwords\Definitions;
+namespace ToAdwords\Definition;
 
 use \ReflectionClass;
 

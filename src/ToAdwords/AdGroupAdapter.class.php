@@ -3,130 +3,31 @@
 namespace ToAdwords;
 
 use ToAdwords\AdwordsAdapter;
-use ToAdwords\CampaignAdapter;
-use ToAdwords\Util\Log;
-use ToAdwords\Object\Idclick\AdPlan;
-use ToAdwords\Object\Idclick\AdGroup;
-use ToAdwords\Exception\DependencyException;
-use ToAdwords\Exception\SyncStatusException;
-use ToAdwords\Exception\DataCheckException;
-use ToAdwords\Exception\MessageException;
-use ToAdwords\Definition\SyncStatus;
-use ToAdwords\Definition\Operation;
-
-use \Exception;
-use \PDOException;
 
 /**
  * 广告组
  */
 class AdGroupAdapter extends AdwordsAdapter{
-	protected $tableName = 'adgroup';
-	protected $moduleName = 'AdGroup';
-	
-	protected $adwordsObjectIdField = 'adgroup_id';
-	protected $idclickObjectIdField = 'idclick_groupid';
-	
-	/**
-	 * 封装update create为run方法供thrift使用
-	 */
-	public function run(array $data){
-		try{
-			if(ENVIRONMENT == 'development'){
-				Log::write("从AMC接口收到数据=========================\n"
-					. print_r($data, TRUE), __METHOD__);
-			}
-			if(empty($data['idclick_groupid']) || empty($data['idclick_planid'])){
-				throw new DataCheckException('基本数据缺失，idclick_planid及idclick_groupid为必需。');
-			}
-			
-			$adGroupRow = $this->getOne('idclick_groupid','idclick_groupid='.$data['idclick_groupid']);
-			if(!empty($adGroupRow)){
-				return $this->update($data);
-			} else {
-				return $this->create($data);
-			}
-		} catch (DataCheckException $e){
-			$this->result['status'] = -1;
-			$this->result['description'] = '数据验证未通过：'.$e->getMessage();
-			return $this->generateResult();
-		}
-	}
-	
-	/**
-	 * 添加广告组
-	 *
-	 * @param array $data: 要添加的数据，数据结构为
-	 * 		$data = array(
-	 *			'idclick_groupid'	=> 123456,
-	 * 			'idclick_planid'	=> 12345,
-	 * 			'idclick_uid'		=> 441,			
-	 *			'adgroup_name'		=> 'group_name',
-	 *			'keywords'			=> array('keywords1', 'keywords2'),
-	 *			'budget_amount'		=> 200.00,	
-	 * 		);
-	 * @return array $result
-	 */
-	public function create($data){
-		try{
-			if(self::IS_CHECK_DATA){
-				$this->checkData($data, Operation::CREATE);
-			}
-			
-			$adGroupRow = $this->getOne('idclick_groupid','idclick_groupid='.$data['idclick_groupid']);
-			if(!empty($adGroupRow)){
-				throw new DataCheckException('广告组已存在，idclick_groupid为'.$data['idclick_groupid']);
-			}
-			
-			$campaignAdapter = new CampaignAdapter();
-			$adPlan = new AdPlan($data['idclick_planid']);			
-			$data['campaign_id'] = $campaignAdapter->getAdaptedId($adPlan);
-			
-			$this->dbh->beginTransaction();
-			$adGroup = new AdGroup($data['idclick_groupid']);
-			if($this->insertOne($data) && $this->createMessageAndPut($data, Operation::CREATE)
-					&& $this->updateSyncStatus(SyncStatus::QUEUE, $adGroup)){
-				$this->dbh->commit();
-				$this->processed++;
-				$this->result['success']++;
-				$this->result['description'] = '广告组添加成功';
-				return $this->generateResult();
-			} else {
-				throw new Exception('顺序执行插表、发送消息、更新同步状态为QUEUE出错。');
-			}
-		} catch (DataCheckException $e){
-			$this->result['status'] = -1;
-			$this->result['description'] = '数据验证未通过：'.$e->getMessage();
-			return $this->generateResult();
-		} catch (DependencyException $e){
-			$this->result['status'] = -1;
-			$this->result['description'] = '依赖关系错误：'.$e->getMessage();
-			return $this->generateResult();		
-		} catch (MessageException $e){
-			$this->result['status'] = -1;
-			$this->result['description'] = '消息过程异常：'.$e->getMessage();
-			return $this->generateResult();
-		} catch (SyncStatusException $e){
-			$this->result['status'] = -1;
-			$this->result['description'] = '异常的同步状态：'.$e->getMessage();
-			return $this->generateResult();
-		}catch (PDOException $e){
-			$this->dbh->rollBack();
-			$this->result['status'] = -1;
-			$this->result['description'] = '数据表新插入一行失败，事务已回滚，idclick_groupid为'.$data['idclick_groupid']
-									.' ==》'.$e->getMessage();
-			Log::write('数据表新插入一行失败，事务已回滚，idclick_groupid为'.$data['idclick_groupid']
-									.' ==》'.$e->getMessage(), __METHOD__);	
-			return $this->generateResult();
-		} catch (Exception $e){
-			if($this->dbh->inTransaction()){
-				$this->dbh->rollBack();
-			}
-			$this->result['status'] = -1;
-			$this->result['description'] = $e->getMessage();
-			return $this->generateResult();
-		}	
-	}
+	protected static $moduleName        = 'AdGroup';
+	protected static $currentModelName  = 'ToAdwords\Model\AdGroupModel';
+	protected static $parentModelName   = 'ToAdwords\Model\CampaignModel';
+	protected static $parentAdapterName = 'ToAdwords\CampaignAdapter';
+	protected static $dataCheckFilter 	= array(
+			'CREATE'	=> array(
+				'requiredFields'	=> array(
+					'idclick_adid','idclick_groupid','ad_status'
+					),
+				'prohibitedFields'	=> array('sync_status', 'ad_id', 'adgroup_id'),
+				),
+			'UPDATE'	=> array(
+				'requiredFields'	=> array('idclick_adid','idclick_groupid','ad_status'),
+				'prohibitedFields'	=> array('sync_status', 'ad_id', 'adgroup_id'),
+				),
+			'DELETE'	=> array(
+				'requiredFields'	=> array('idclick_adid','idclick_groupid','ad_status'),
+				'prohibitedFields'	=> array('sync_status', 'ad_id', 'adgroup_id'),
+				),
+			);
 	
 	/**
 	 * 更新广告组
