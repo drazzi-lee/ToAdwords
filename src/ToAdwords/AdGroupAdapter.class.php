@@ -15,17 +15,17 @@ class AdGroupAdapter extends AdwordsAdapter{
 	protected static $dataCheckFilter 	= array(
 			'CREATE'	=> array(
 				'requiredFields'	=> array(
-					'idclick_adid','idclick_groupid','ad_status'
+					'idclick_planid','idclick_groupid','adgroup_status'
 					),
-				'prohibitedFields'	=> array('sync_status', 'ad_id', 'adgroup_id'),
+				'prohibitedFields'	=> array('sync_status', 'adgroup_id', 'campaign_id'),
 				),
 			'UPDATE'	=> array(
-				'requiredFields'	=> array('idclick_adid','idclick_groupid','ad_status'),
-				'prohibitedFields'	=> array('sync_status', 'ad_id', 'adgroup_id'),
+				'requiredFields'	=> array('idclick_planid','idclick_groupid','adgroup_status'),
+				'prohibitedFields'	=> array('sync_status', 'adgroup_id', 'campaign_id'),
 				),
 			'DELETE'	=> array(
-				'requiredFields'	=> array('idclick_adid','idclick_groupid','ad_status'),
-				'prohibitedFields'	=> array('sync_status', 'ad_id', 'adgroup_id'),
+				'requiredFields'	=> array('idclick_planid','idclick_groupid','adgroup_status'),
+				'prohibitedFields'	=> array('sync_status', 'adgroup_id', 'campaign_id'),
 				),
 			);
 	

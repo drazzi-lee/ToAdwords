@@ -27,7 +27,7 @@ define('TOADWORDS_LOG_RECORD', TRUE);
 //数据库配置
 define('TOADWORDS_DSN', 'mysql:dbname=toadwords;host=127.0.0.1;charset=utf8');
 define('TOADWORDS_USER', 'root');
-define('TOADWORDS_PASS', 'qjklw');
+define('TOADWORDS_PASS', 'qjklw4r');
 
 //消息队列配置
 define('HTTPSQS_HOST', '10.0.2.19');
@@ -67,30 +67,7 @@ function load($namespace){
 	return false;
 }
 
-function handleException($exception){
-	$result = array(
-		'status'      => -1,
-		'description' => get_class($exception). ' '. $exception->getMessage(),
-		'success'     => 0,
-		'failure'     => 0,
-	);
-	if(ENVIRONMENT == 'development'){
-		Util\Log::write("[RETURN] Data check failure:\n"
-				. print_r($result, TRUE), __METHOD__);
-	}
-	if(ENVIRONMENT == 'development' && $exception instanceof \PDOException){
-		Util\Log::write("[RETURN] Data check failure:\n"
-				. print_r($result, TRUE), __METHOD__);
-	}
-	if(RESULT_FORMAT == 'JSON'){
-		$result = json_encode($result);	
-	}
-	return $result;
-}
-
 spl_autoload_register(__NAMESPACE__.'\load');
-set_exception_handler(__NAMESPACE__.'\handleException');
-
 
 /**
  * 笔记：

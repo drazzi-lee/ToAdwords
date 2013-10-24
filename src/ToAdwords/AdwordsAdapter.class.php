@@ -13,6 +13,7 @@ use ToAdwords\AdGroupAdAdapter;
 //use ToAdwords\Model\AdGroupModel;
 //use ToAdwords\Model\AdGroupAdModel;
 use ToAdwords\Exception\DataCheckException;
+use ToAdwords\Exception\DependencyException;
 use ToAdwords\MessageHandler;
 use ToAdwords\Definition\SyncStatus;
 use ToAdwords\Definition\Operation;
@@ -27,18 +28,6 @@ abstract class AdwordsAdapter{
 	protected static $parentModelName;
 	protected static $parentAdapterName;
 
-	/**
-	 * 处理结果
-	 *
-	 * $result = array(
-	 *			'status'	=> 1,	//1：成功；0：失败或者部分失败
-	 *									-1: 提供参数不完整或解析失败
-	 *			'success'	=> 7,	//成功添加的内容计数
-	 *			'failure'	=> 0	//如果status不为1，则failure有计数
-	 *			'description'	=> 文字描述
-	 * 		)
-	 * @var array $result
-	 */
 	protected $result = array(
 				'status'		=> null,
 				'description'	=> null,
@@ -65,35 +54,53 @@ abstract class AdwordsAdapter{
 	}
 
 	public function create(array $data){
-		self::prepareData($data, Operation::CREATE);
-		$parentModel = new static::$parentModelName();
-		$parentInfo = $parentModel->getAdapteInfo($data[$parentModel::$idclickObjectIdField]);
-		if(empty($parentInfo)){
-			if(static::$parentAdapter == 'CustomerAdapter'){
-				$parentAdapter = new static::$parentAdapterName();	
-				$parentAdapter->create(array($parentModel::$idclickObjectIdField => $data[$parentModel::$idclickObjectIdField]));
+		try{
+			self::prepareData($data, Operation::CREATE);
+			$parentModel = new static::$parentModelName();
+			$parentInfo = $parentModel->getAdapteInfo($data[$parentModel::$idclickObjectIdField]);
+			if(empty($parentInfo)){
+				if(static::$parentAdapterName == 'ToAdwords\CustomerAdapter'){
+					$parentAdapter = new static::$parentAdapterName();	
+					$parentAdapter->create(array($parentModel::$idclickObjectIdField => $data[$parentModel::$idclickObjectIdField]));
+				} else {
+					throw new DependencyException('dependency error, parent module #' . get_class($parentModel) . ' not found. parentObjectId #'.$data[$parentModel::$idclickObjectIdField]);
+				}
 			} else {
-				throw new DependencyException('dependency error, parent module #' . get_class($parentModel) . ' not found.');
+				if($parentModel->isValidAdwordsId($parentInfo[$parentModel::$adwordsObjectIdField])){
+					$data[$parentModel::$adwordsObjectIdField] = $parentInfo[$parentModel::$adwordsObjectIdField];
+				}
 			}
-		} else {
-			if($parentModel->isValidAdwordsId($parentInfo[$parentModel::$adwordsObjectIdField])){
-				$data[$parentModel::$adwordsObjectIdField] = $parentInfo[$parentModel::$adwordsObjectIdField];
-			}
+
+			$currentModel = new static::$currentModelName();
+			$currentModel->insertOne($data);
+
+			$message = new Message();
+			$message->setModule(static::$moduleName);
+			$message->setAction(Operation::CREATE);
+			$message->setInformation($data);
+
+			$messageHandler = new MessageHandler();
+			$messageHandler->put($message, array($currentModel, 'updateSyncStatus'));
+			unset($message);
+			unset($messageHandler);
+
+			$this->result['status'] = 1;
+			$this->result['description'] = static::$moduleName . ' create success!';
+			$this->result['success']++;
+			$this->process++;
+
+			return $this->generateResult();
+		} catch (DataCheckException $e){
+			$this->result['status'] = -1;
+			$this->result['description'] = get_class($e) . ' ' . $e->getMessage(); 
+
+			return $this->generateResult();
+		} catch (Exception $e){
+			$this->result['status'] = -1;
+			$this->result['description'] = get_class($e) . ' ' . $e->getMessage(); 
+
+			return $this->generateResult();
 		}
-		
-		$currentModel = new static::$currentModelName();
-		$currentModel->insertOne($data);
-
-		$message = new Message();
-		$message->setModule(static::$moduleName);
-		$message->setAction(Operation::CREATE);
-
-		$messageHandler = new MessageHandler();
-		$messageHandler->put($message, array($currentModel, 'updateSyncStatus'));
-
-		$this->result['description'] = static::$moduleName . 'create success!';
-
-		return $this->generateResult();
 	}
 
 	public function update($data){
@@ -118,11 +125,11 @@ abstract class AdwordsAdapter{
 	 * @param array $array
 	 * @return string
 	 */
-	protected function arrayToString(array $array){
+	protected static function arrayToString(array $array){
 		return implode(',', $array);
 	}
 
-	protected function arrayToSpecialString(array $array){
+	protected static function arrayToSpecialString(array $array){
 		return ':'.implode(',:', $array);
 	}
 
@@ -130,7 +137,6 @@ abstract class AdwordsAdapter{
 	 * Generate process result.
 	 */
 	protected function generateResult(){
-		$this->result['status'] = 1;
 		if(ENVIRONMENT == 'development'){
 			Log::write("[RETURN] Processed end with result:\n"
 							. print_r($this->result, TRUE), __METHOD__);
@@ -172,7 +178,7 @@ abstract class AdwordsAdapter{
 		}
 		foreach($data as $key => $item){
 			if(is_array($item)){
-				$data[$key] = $this->arrayToString($item);
+				$data[$key] = self::arrayToString($item);
 				if(ENVIRONMENT == 'development'){
 					Log::write('[WARNING] Field #' . $key . ' Array to String conversion.', __METHOD__);
 				}

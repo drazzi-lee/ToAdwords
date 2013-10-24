@@ -67,6 +67,22 @@ abstract class BaseModel{
 		}
 	}
 
+	public function beginTransaction(){
+		return $this->dbh->beginTransaction();
+	}
+
+	public function commit(){
+		return $this->dbh->commit();
+	}
+
+	public function rollBack(){
+		return $this->dbh->rollBack();
+	}
+
+	public function inTransaction(){
+		return $this->dbh->inTransaction();
+	}
+
 	public function getLastSql(){
 		return $this->lastSql;
 	}
@@ -214,7 +230,7 @@ abstract class BaseModel{
 	public function insertOne($data){
 		try{
 			$preparedInsert = $this->prepareInsert($data);
-			$sql = 'INSERT INTO `' . static::$tableName. '`'. ' (' . $preparedInsert['placeHolders']['field'] . ')'	. ' VALUES (' .$preparedInsert['placeHolders']['value'] . ')';
+			$sql = 'INSERT INTO `' . static::$tableName . '` (' . $preparedInsert['placeHolders']['field'] . ') VALUES (' . $preparedInsert['placeHolders']['value'] . ')';
 			$statement = $this->dbh->prepare($sql);
 			$this->setLastSql($sql, $preparedInsert['paramValues']);
 			return $statement->execute($preparedInsert['paramValues']);
@@ -309,5 +325,20 @@ abstract class BaseModel{
 
 	protected function arrayToSpecialString(array $array){
 		return ':'.implode(',:', $array);
+	}
+
+	/**
+	 * Check the given AdwordsObjectId is valid or not.
+	 *
+	 * @param integer $adwordsObjectId:
+	 * @return boolean.
+	 * @todo check the sync_status is ok.
+	 */
+	public function isValidAdwordsId($adwordsObjectId){
+		if((int)$adwordsObjectId < 10000){
+			return FALSE;
+		} else {
+			return TRUE;
+		}
 	}
 }

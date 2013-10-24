@@ -8,7 +8,7 @@ use ToAdwords\Object\Adwords\AdGroupAd;
 use ToAdwords\Util\Log;
 use ToAdwords\Util\Message;
 use ToAdwords\Util\Httpsqs;
-use ToAdwords\Exceptions\MessageException;
+use ToAdwords\Exception\MessageException;
 
 /**
  * 消息处理类
@@ -21,9 +21,14 @@ class MessageHandler{
 	private $lastLogPath;
 
 	public function __construct(){
+		try{
 		$this->httpsqs = new Httpsqs(HTTPSQS_HOST, HTTPSQS_PORT, HTTPSQS_AUTH);
 		$this->lastLogPath = Log::getPath();
 		Log::setPath(TOADWORDS_LOG_PATH . 'message' . DIRECTORY_SEPARATOR);
+		} catch(Exception $e){
+			Log::setPath($this->lastLogPath);
+			Log::write('[warning] httpsqs construct error, check your settings.', __METHOD__);
+		}
 	}
 
 	public function handle(Message $message, Httpsqs $httpsqs){
@@ -77,7 +82,7 @@ class MessageHandler{
 	
 	public function put(Message $message, $callback = null, $queueName = HTTPSQS_QUEUE_COMMON){
 		if(!$message->check()){
-			throw new MessageException('消息还未设置完整，不能入队。');
+			throw new MessageException('message incomplete.');
 		}
 		$message_combine = array(
 				'module' 	=> $message->getModule(),
@@ -95,14 +100,14 @@ class MessageHandler{
 						call_user_func_array($callback, array('RETRY'));
 						break;
 					default:
-						throw new MessageException('[ERROR] 消息队列名错误，队列名：'
-								.$queueName.', 消息体：'.$message);
+						Log::write('[warning] queue name error: #'
+								.$queueName.", the message will be ignored:\n".$message, __METHOD__);
 				}
 			}
-			Log::write('[MESSAGE_PUT]「队列」#'.$queueName.' 「内容」#'.$message, __METHOD__);
+			Log::write('[notice] new message put. #'.$queueName." content:\n".$message, __METHOD__);
 			return TRUE;
 		} else {
-			throw new MessageException('[ERROR] 入队失败，请检查HTTPSQS服务器状态及参数配置。');
+			Log::write("[warning] put message into queue failed, daemon process will handle it.\n" . $message, __METHOD__);
 		}
 	}
 

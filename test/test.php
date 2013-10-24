@@ -17,8 +17,8 @@ class TestAction{
 	
 	public function createCampaign(){
 		$data = array(
-				'idclick_planid' => 51559,
-				'idclick_uid' => 523,
+				'idclick_planid' => 61550,
+				'idclick_uid'	=> 498,
 				'campaign_name' => 'campaign_name #' . uniqid(),
 				'areas' => '10031,10032',
 				'languages' => '10031,10032',
@@ -53,11 +53,11 @@ class TestAction{
 	public function createAdgroup(){
 		$data = array(
 	    	'idclick_groupid'	=> 123456,
-			'idclick_planid'	=> 516587,
-			'idclick_uid'		=> 441,			
+			'idclick_planid'	=> 61550,
         	'adgroup_name'		=> 'group_name',
         	'keywords'			=> array('keywords1', 'keywords2'),
         	'budget_amount'		=> 200.00,	
+			'adgroup_status'	=> 'ACTIVE',
         );
 		$group = new GroupModel();
 		var_dump($group->createAdgroup($data));
@@ -85,14 +85,14 @@ class TestAction{
 	
 	public function createAd(){
 		$data = array(
-			'idclick_adid'		=> 12345,
-			'idclick_uid'		=> 441,
+			'idclick_adid'		=> 12347,
 			'idclick_groupid'	=> 123456, 
 			'ad_headline'		=> 'headline',
 			'ad_description1'	=> 'description1',
 			'ad_description2'	=> 'description2',
 			'ad_url'			=> 'http://www.izptec.com/go.php',
 			'ad_displayurl'		=> 'http://www.izptec.com/',
+			'ad_status'			=> 'PAUSE'
 		);
 		$groupAd = new GroupadModel();
 		var_dump($groupAd->createAd($data));
@@ -120,4 +120,5 @@ class TestAction{
 	}
 }
 $testAction = new TestAction();
-$testAction->createCampaign();
+$result = $testAction->createAd();
+var_dump($result);

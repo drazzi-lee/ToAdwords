@@ -1,6 +1,6 @@
 <?php
 
-namespace ToAdwords\Exceptions;
+namespace ToAdwords\Exception;
 
 use \Exception;
 

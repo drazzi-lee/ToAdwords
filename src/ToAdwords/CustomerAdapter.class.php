@@ -3,6 +3,9 @@
 namespace ToAdwords;
 
 use ToAdwords\AdwordsAdapter;
+use ToAdwords\Model\CustomerModel;
+use ToAdwords\Util\Message;
+use ToAdwords\MessageHandler;
 
 /**
  * 用户
