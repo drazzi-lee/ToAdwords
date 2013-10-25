@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2013-10-24 11:12:14
+Date: 2013-10-25 13:12:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,7 +30,13 @@ CREATE TABLE `adgroup` (
   `adgroup_status` enum('ACTIVE','PAUSE','DELETE') NOT NULL DEFAULT 'ACTIVE' COMMENT '广告组状态，默认值为启用',
   `last_action` enum('CREATE','UPDATE','DELETE') NOT NULL DEFAULT 'CREATE' COMMENT '上次操作动作',
   `sync_status` enum('QUEUE','SYNCED','ERROR','RETRY','RECEIVE','SENDING') NOT NULL DEFAULT 'RECEIVE' COMMENT '在队列中，已同步，同步出错，重试中，已收到，发送中',
-  PRIMARY KEY (`id`,`idclick_groupid`,`idclick_planid`)
+  PRIMARY KEY (`id`,`idclick_groupid`),
+  UNIQUE KEY `idclick_groupid` (`idclick_groupid`),
+  UNIQUE KEY `adgroup_id` (`adgroup_id`),
+  KEY `idclick_planid` (`idclick_planid`),
+  KEY `campaign_id` (`campaign_id`),
+  CONSTRAINT `adgroup_ibfk_2` FOREIGN KEY (`campaign_id`) REFERENCES `campaign` (`campaign_id`) ON UPDATE CASCADE,
+  CONSTRAINT `adgroup_ibfk_1` FOREIGN KEY (`idclick_planid`) REFERENCES `campaign` (`idclick_planid`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='此表记录广告组当前状态以及与Google Adwords的对象关系及同步情况。';
 
 -- ----------------------------
@@ -55,7 +61,11 @@ CREATE TABLE `adgroupad` (
   `ad_status` enum('ACTIVE','PAUSE','DELETE') NOT NULL DEFAULT 'PAUSE' COMMENT '广告当前状态，默认值为暂停。',
   `last_action` enum('CREATE','UPDATE','DELETE') NOT NULL DEFAULT 'CREATE' COMMENT '上次操作动作',
   `sync_status` enum('QUEUE','SYNCED','ERROR','RETRY','RECEIVE','SENDING') NOT NULL DEFAULT 'RECEIVE' COMMENT '在队列中，已同步，同步出错，重试中，已收到，发送中',
-  PRIMARY KEY (`id`,`idclick_adid`,`idclick_groupid`)
+  PRIMARY KEY (`id`,`idclick_adid`),
+  KEY `idclick_groupid` (`idclick_groupid`),
+  KEY `adgroup_id` (`adgroup_id`),
+  CONSTRAINT `adgroupad_ibfk_2` FOREIGN KEY (`adgroup_id`) REFERENCES `adgroup` (`adgroup_id`) ON UPDATE CASCADE,
+  CONSTRAINT `adgroupad_ibfk_1` FOREIGN KEY (`idclick_groupid`) REFERENCES `adgroup` (`idclick_groupid`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='此表记录当前广告的信息及与Google Adwords对象的对应关系及同步状态。';
 
 -- ----------------------------
@@ -67,7 +77,7 @@ CREATE TABLE `adgroupad` (
 -- ----------------------------
 DROP TABLE IF EXISTS `campaign`;
 CREATE TABLE `campaign` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键，主要由sync_cache使用，作为通用objectId.',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `idclick_planid` int(10) NOT NULL COMMENT '对象在idclick中的plan_id，广告计划ID。',
   `idclick_uid` int(10) NOT NULL COMMENT '对象在idclick中的uid，用户ID',
   `campaign_id` bigint(10) DEFAULT NULL COMMENT '对象在Google Adwords中的campaignId，广告系列ID',
@@ -82,8 +92,14 @@ CREATE TABLE `campaign` (
   `campaign_status` enum('ACTIVE','PAUSE','DELETE') NOT NULL DEFAULT 'ACTIVE' COMMENT '广告计划状态，默认启用',
   `last_action` enum('CREATE','UPDATE','DELETE') NOT NULL DEFAULT 'CREATE' COMMENT '上次操作动作',
   `sync_status` enum('QUEUE','SYNCED','ERROR','RETRY','RECEIVE','SENDING') NOT NULL DEFAULT 'RECEIVE' COMMENT '在队列中，已同步，同步出错，重试，收到，发送中',
-  PRIMARY KEY (`id`,`idclick_planid`,`idclick_uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='此表用来记录广告计划模型具体信息及与ADWORDS对应关系、同步状态。';
+  PRIMARY KEY (`id`,`idclick_planid`),
+  UNIQUE KEY `idclick_planid` (`idclick_planid`),
+  UNIQUE KEY `campaign_id` (`campaign_id`),
+  KEY `campaign_ibfk_1` (`idclick_uid`),
+  KEY `campaign_ibfk_2` (`customer_id`),
+  CONSTRAINT `campaign_ibfk_1` FOREIGN KEY (`idclick_uid`) REFERENCES `customer` (`idclick_uid`) ON UPDATE CASCADE,
+  CONSTRAINT `campaign_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`adwords_customerid`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='此表用来记录广告计划模型具体信息及与ADWORDS对应关系、同步状态。';
 
 -- ----------------------------
 -- Records of campaign
@@ -94,19 +110,19 @@ CREATE TABLE `campaign` (
 -- ----------------------------
 DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键，主要由sync_cache使用，作为通用objectId.',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `idclick_uid` int(10) NOT NULL COMMENT '对象在idclick中的uid.',
   `adwords_customerid` bigint(10) DEFAULT NULL COMMENT '对象在adwords同的customerId.',
   `last_action` enum('CREATE','UPDATE','DELETE') NOT NULL DEFAULT 'CREATE' COMMENT '上次操作动作',
   `sync_status` enum('QUEUE','SYNCED','ERROR','RETRY','RECEIVE','SENDING') NOT NULL DEFAULT 'RECEIVE' COMMENT '在队列中，已同步，同步出错，重试中，已收到，发送中',
-  PRIMARY KEY (`id`,`idclick_uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='此表用来保存记录当前用户在idclick中的用户状态，以及adwords信息同步情况。';
+  PRIMARY KEY (`id`,`idclick_uid`),
+  UNIQUE KEY `idclick_uid` (`idclick_uid`),
+  UNIQUE KEY `adwords_customerid` (`adwords_customerid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='此表用来保存记录当前用户在idclick中的用户状态，以及adwords信息同步情况。';
 
 -- ----------------------------
 -- Records of customer
 -- ----------------------------
-INSERT INTO customer VALUES ('1', '441', '6026516240', 'CREATE', 'SYNCED');
-INSERT INTO customer VALUES ('2', '978', '5436784026', 'CREATE', 'SYNCED');
 
 -- ----------------------------
 -- Table structure for `sync_cache`
