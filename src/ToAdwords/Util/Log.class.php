@@ -11,7 +11,7 @@ class Log{
 		if(is_file($destination) && floor(2097131) <= filesize($destination))
 			rename($destination, dirname($destination) . DIRECTORY_SEPARATOR 
 									. basename($destination) . '-' . time());
-		error_log("{$now} #{$method}# {$message}\r\n", 3, $destination);
+		error_log("{$now} #{$method}# {$message}\n", 3, $destination);
 	}
 	
 	public static function setPath($path){
