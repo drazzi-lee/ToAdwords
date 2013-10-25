@@ -1,6 +1,8 @@
 <?php
 
-namespace ToAdwords\Definitions;
+namespace ToAdwords\Definition;
+
+use \ReflectionClass;
 
 final class SyncStatus{
 	const RECEIVE = 'RECEIVE';

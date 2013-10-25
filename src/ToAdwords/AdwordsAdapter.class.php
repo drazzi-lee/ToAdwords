@@ -55,10 +55,13 @@ abstract class AdwordsAdapter{
 
 	public function create(array $data){
 		try{
+			if(ENVIRONMENT == 'development'){
+				Log::write("Received new data:\n" . print_r($data, TRUE), __METHOD__);
+			}
 			self::prepareData($data, Operation::CREATE);
 			$parentModel = new static::$parentModelName();
 			$parentInfo = $parentModel->getAdapteInfo($data[$parentModel::$idclickObjectIdField]);
-			if(empty($parentInfo)){
+			if($parentInfo === FALSE){
 				if(static::$parentAdapterName == 'ToAdwords\CustomerAdapter'){
 					$parentAdapter = new static::$parentAdapterName();	
 					$parentAdapter->create(array($parentModel::$idclickObjectIdField => $data[$parentModel::$idclickObjectIdField]));
@@ -104,16 +107,83 @@ abstract class AdwordsAdapter{
 	}
 
 	public function update($data){
-		//准备数据，检查数据完整性，过滤数据或者进行数据转换
-		//更新数据
-		//发送数据至消息队列
+		try{
+			if(ENVIRONMENT == 'development'){
+				Log::write("Received new data:\n" . print_r($data, TRUE), __METHOD__);
+			}
+			self::prepareData($data, Operation::UPDATE);
+
+			$parentModel = new static::$parentModelName();
+			$currentModel = new static::$currentModelName();
+			$currentRow = $currentModel->getOne($currentModel::$idclickObjectIdField . ',' . $parentModel::$idclickObjectIdField, $currentModel::$idclickObjectIdField . '=' . $data[$currentModel::$idclickObjectIdField]);
+			if(empty($currentRow)){
+				throw new DataCheckException(get_class($currentModel) . ' could not find, ' . $currentModel::$idclickObjectIdField . ' #' . $data[$currentModel::$idclickObjectIdField]);
+			} else if($currentRow[$parentModel::$idclickObjectIdField] != $data[$parentModel::$idclickObjectIdField]){
+				throw new DataCheckException('Field #' . $parentModel::$idclickObjectIdField . ' does not match.');
+			}
+
+			$data['last_action'] = isset($data['last_action']) ? $data['last_action'] : Operation::UPDATE;
+			$conditions = $currentModel::$idclickObjectIdField . '=' . $data[$currentModel::$idclickObjectIdField];
+			$conditions .= ' AND ' . $parentModel::$idclickObjectIdField . '=' .$data[$parentModel::$idclickObjectIdField];
+			$conditionsArray = array(
+				$currentModel::$idclickObjectIdField 	=> $data[$currentModel::$idclickObjectIdField],
+				$parentModel::$idclickObjectIdField 	=> $data[$parentModel::$idclickObjectIdField],
+				);
+			$newData = array_diff_key($data, $conditionsArray);
+			$currentModel->updateOne($conditions, $newData);
+
+			$message = new Message();
+			$message->setModule(static::$moduleName);
+			$message->setAction($data['last_action']);
+			$message->setInformation($data);
+
+			$messageHandler = new MessageHandler();
+			$messageHandler->put($message, array($currentModel, 'updateSyncStatus'));
+			unset($message);
+			unset($messageHandler);
+
+			$this->result['status'] = 1;
+			$this->result['description'] = static::$moduleName . ' ' .strtolower($data['last_action']) . ' success!';
+			$this->result['success']++;
+			$this->process++;
+
+			return $this->generateResult();
+		} catch (DataCheckException $e){
+			$this->result['status'] = -1;
+			$this->result['description'] = get_class($e) . ' ' . $e->getMessage(); 
+
+			return $this->generateResult();
+		} catch (Exception $e){
+			$this->result['status'] = -1;
+			$this->result['description'] = get_class($e) . ' ' . $e->getMessage(); 
+
+			return $this->generateResult();
+		}
 
 	}
 
 	public function delete($data){
-		//准备数据，检查数据完整性，过滤数据或者进行数据转换
-		//更新数据
-		//发送数据至消息队列
+		if(ENVIRONMENT == 'development'){
+			Log::write("Received new data:\n" . print_r($data, TRUE), __METHOD__);
+		}
+
+		try{
+			self::prepareData($data, Operation::DELETE);
+		} catch(DataCheckException $e){
+			$this->result['status'] = -1;
+			$this->result['description'] = 'data check failure: ' . $e->getMessage();
+			return $this->generateResult();
+		}
+
+		$currentModel = new static::$currentModelName();
+		$parentModel = new static::$parentModelName();
+		$infoForRemove = array();
+		$infoForRemove['last_action'] = Operation::DELETE;
+		$infoForRemove[$currentModel::$statusField] = 'DELETE';
+		$infoForRemove[$currentModel::$idclickObjectIdField] = $data[$currentModel::$idclickObjectIdField];
+		$infoForRemove[$parentModel::$idclickObjectIdField] = $data[$parentModel::$idclickObjectIdField];
+
+		return $this->update($infoForRemove);
 	}
 
 	/**

@@ -1,0 +1,389 @@
+[ 2013-10-25T11:04:05+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-10-25T11:05:40+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-10-25T11:06:05+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-10-25T11:09:32+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-10-25T11:11:21+08:00 ] #ToAdwords\CustomerAdapter::create# Got dataArray
+(
+    [idclick_uid] => 499
+)
+
+[ 2013-10-25T11:11:21+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-10-25T11:12:31+08:00 ] #ToAdwords\CustomerAdapter::create# Got dataArray
+(
+    [idclick_uid] => 500
+)
+
+[ 2013-10-25T11:12:31+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-10-25T11:14:48+08:00 ] #ToAdwords\CustomerAdapter::create# Got dataArray
+(
+    [idclick_uid] => 501
+)
+
+[ 2013-10-25T11:14:48+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 
+    [description] => 
+    [success] => 0
+    [failure] => 0
+)
+
+[ 2013-10-25T11:14:48+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-10-25T11:19:18+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61627
+    [idclick_uid] => 502
+    [campaign_name] => campaign_name #5269e3366f15d
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-10-25T11:19:18+08:00 ] #ToAdwords\CustomerAdapter::create# Got dataArray
+(
+    [idclick_uid] => 502
+)
+
+[ 2013-10-25T11:19:18+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Customer create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-10-25T11:19:18+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-10-25T11:20:11+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61627
+    [idclick_uid] => 502
+    [campaign_name] => campaign_name #5269e36b3aec4
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-10-25T11:20:11+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-10-25T11:20:18+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61627
+    [idclick_uid] => 502
+    [campaign_name] => campaign_name #5269e3729e7ee
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-10-25T11:20:18+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-10-25T12:44:07+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_groupid] => 123456
+    [idclick_planid] => 61627
+    [adgroup_name] => group_name
+    [keywords] => Array
+        (
+            [0] => keywords1
+            [1] => keywords2
+        )
+
+    [budget_amount] => 200
+    [adgroup_status] => ACTIVE
+)
+
+[ 2013-10-25T12:44:07+08:00 ] #ToAdwords\AdwordsAdapter::prepareData# [WARNING] Field #keywords Array to String conversion.
+[ 2013-10-25T12:44:07+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => AdGroup create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-10-25T12:45:23+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61627
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-10-25T12:45:23+08:00 ] #ToAdwords\AdwordsAdapter::prepareData# [ERROR] Field #idclick_uid is required.
+[ 2013-10-25T12:45:23+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => -1
+    [description] => ToAdwords\Exception\DataCheckException [ERROR] Field #idclick_uid is required.
+    [success] => 0
+    [failure] => 0
+)
+
+[ 2013-10-25T12:45:50+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61627
+    [idclick_uid] => 501
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-10-25T12:46:39+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61627
+    [idclick_uid] => 501
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-10-25T12:46:39+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => -1
+    [description] => ToAdwords\Exception\DataCheckException Field #idclick_uid does not match.
+    [success] => 0
+    [failure] => 0
+)
+
+[ 2013-10-25T12:47:04+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61627
+    [idclick_uid] => 502
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-10-25T12:47:49+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61627
+    [idclick_uid] => 502
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-10-25T12:47:49+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-10-25T12:52:13+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61627
+    [idclick_uid] => 502
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-10-25T12:52:13+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign updatesuccess!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-10-25T12:52:30+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61627
+    [idclick_uid] => 502
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-10-25T12:52:30+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-10-25T12:53:15+08:00 ] #ToAdwords\AdwordsAdapter::delete# Received new data:
+Array
+(
+    [idclick_planid] => 61627
+    [idclick_uid] => 501
+)
+
+[ 2013-10-25T12:53:15+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [last_action] => DELETE
+    [campaign_status] => DELETE
+    [idclick_planid] => 61627
+)
+
+[ 2013-10-25T12:53:15+08:00 ] #ToAdwords\AdwordsAdapter::prepareData# [ERROR] Field #idclick_uid is required.
+[ 2013-10-25T12:53:15+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => -1
+    [description] => ToAdwords\Exception\DataCheckException [ERROR] Field #idclick_uid is required.
+    [success] => 0
+    [failure] => 0
+)
+
+[ 2013-10-25T12:55:41+08:00 ] #ToAdwords\AdwordsAdapter::delete# Received new data:
+Array
+(
+    [idclick_planid] => 61627
+    [idclick_uid] => 501
+)
+
+[ 2013-10-25T12:56:14+08:00 ] #ToAdwords\AdwordsAdapter::delete# Received new data:
+Array
+(
+    [idclick_planid] => 61627
+    [idclick_uid] => 501
+)
+
+[ 2013-10-25T12:56:14+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [last_action] => DELETE
+    [campaign_status] => DELETE
+    [idclick_planid] => 61627
+    [idclick_uid] => 501
+)
+
+[ 2013-10-25T12:56:14+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => -1
+    [description] => ToAdwords\Exception\DataCheckException Field #idclick_uid does not match.
+    [success] => 0
+    [failure] => 0
+)
+
+[ 2013-10-25T12:56:29+08:00 ] #ToAdwords\AdwordsAdapter::delete# Received new data:
+Array
+(
+    [idclick_planid] => 61627
+    [idclick_uid] => 502
+)
+
+[ 2013-10-25T12:56:29+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [last_action] => DELETE
+    [campaign_status] => DELETE
+    [idclick_planid] => 61627
+    [idclick_uid] => 502
+)
+
+[ 2013-10-25T12:56:29+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign delete success!
+    [success] => 1
+    [failure] => 0
+)
+

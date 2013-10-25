@@ -13,4 +13,5 @@ class AdGroupAdModel extends BaseModel{
 
 	public static $adwordsObjectIdField = 'ad_id';
 	public static $idclickObjectIdField = 'idclick_adid';
+	public static $statusField = 'ad_status';
 }

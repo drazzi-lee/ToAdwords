@@ -17,7 +17,7 @@ use ToAdwords\Definition\SyncStatus;
 use ToAdwords\Definition\Operation;
 use ToAdwords\Model\Driver\DbMysql;
 use ToAdwords\Util\Log;
-use ToAdwords\Exceptions\ModelException;
+use ToAdwords\Exception\ModelException;
 
 use \PDO;
 
@@ -97,7 +97,7 @@ abstract class BaseModel{
 	 * @param string $conditions: $conditions = 'id=1234 AND name="Bob"';
 	 * @return array $row
 	 */
-	protected function getOne($fields='*', $conditions){
+	public function getOne($fields='*', $conditions){
 		$statement = $this->select($fields, $conditions, 1);
 		return $statement->fetch(PDO::FETCH_ASSOC);
 	}
@@ -273,18 +273,18 @@ abstract class BaseModel{
 		$sql = 'UPDATE `'.static::$tableName.'` SET sync_status=:sync_status';
 		$preparedParams = array();
 
-		if(!Operation::isValid($status)){
-			throw new ModelException('[Operation::isValid] returns FALSE #'.$status);
+		if(!SyncStatus::isValid($status)){
+			throw new ModelException('[SyncStatus::isValid] returns FALSE #'.$status);
 		} else {
-			$preparedParams[':'.self::$syncStatusField] = $status;
+			$preparedParams[':'.static::$syncStatusField] = $status;
 		}
 
 		if($isIdclickObject){
-			$sql .= ' WHERE '.self::$idclickObjectIdField.'=:'.self::$idclickObjectIdField;
-			$preparedParams[':'.self::$idclickObjectIdField] = $objectId;
+			$sql .= ' WHERE '.static::$idclickObjectIdField.'=:'.static::$idclickObjectIdField;
+			$preparedParams[':'.static::$idclickObjectIdField] = $objectId;
 		} else {
-			$sql .= ' WHERE '.self::$adwordsObjectIdField.'=:'.self::$adwordsObjectIdField;
-			$preparedParams[':'.self::$adwordsObjectIdField] = $objectId;
+			$sql .= ' WHERE '.static::$adwordsObjectIdField.'=:'.static::$adwordsObjectIdField;
+			$preparedParams[':'.static::$adwordsObjectIdField] = $objectId;
 		}
 
 		$statement = $this->dbh->prepare($sql);

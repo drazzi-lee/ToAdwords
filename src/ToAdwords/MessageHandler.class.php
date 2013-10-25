@@ -94,10 +94,10 @@ class MessageHandler{
 			if(is_callable($callback)){
 				switch($queueName){
 					case HTTPSQS_QUEUE_COMMON:
-						call_user_func_array($callback, array('QUEUE'));
+						call_user_func_array($callback, array('QUEUE', $message->getPid()));
 						break;
 					case HTTPSQS_QUEUE_RETRY:
-						call_user_func_array($callback, array('RETRY'));
+						call_user_func_array($callback, array('RETRY', $message->getPid()));
 						break;
 					default:
 						Log::write('[warning] queue name error: #'

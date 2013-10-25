@@ -65,4 +65,25 @@ class Message{
 	public function getNeedRecheck(){
 		return $this->information;
 	}
+
+	public function getPid(){
+		$pid = 0;
+		switch($this->module){
+			case 'Customer':
+				$pid = $this->information['idclick_uid'];
+				break;
+			case 'Campaign':
+				$pid = $this->information['idclick_planid'];
+				break;
+			case 'AdGroup':
+				$pid = $this->information['idclick_groupid'];
+				break;
+			case 'AdGroupAd':
+				$pid = $this->information['idclick_adid'];
+				break;
+			default:
+				throw new MessageException('message parsing error when getpid().');
+		}
+		return $pid;
+	}
 }

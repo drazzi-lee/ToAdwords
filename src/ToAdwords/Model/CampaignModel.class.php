@@ -10,4 +10,5 @@ class CampaignModel extends BaseModel{
 	
 	public static $adwordsObjectIdField = 'campaign_id';
 	public static $idclickObjectIdField = 'idclick_planid';
+	public static $statusField = 'campaign_status';
 }
