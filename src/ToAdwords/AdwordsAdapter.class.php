@@ -8,14 +8,9 @@ use ToAdwords\CustomerAdapter;
 use ToAdwords\CampaignAdapter;
 use ToAdwords\AdGroupAdapter;
 use ToAdwords\AdGroupAdAdapter;
-//use ToAdwords\Model\CustomerModel;
-//use ToAdwords\Model\CampaignModel;
-//use ToAdwords\Model\AdGroupModel;
-//use ToAdwords\Model\AdGroupAdModel;
 use ToAdwords\Exception\DataCheckException;
 use ToAdwords\Exception\DependencyException;
 use ToAdwords\MessageHandler;
-use ToAdwords\Definition\SyncStatus;
 use ToAdwords\Definition\Operation;
 
 use \Exception;

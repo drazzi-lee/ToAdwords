@@ -12,14 +12,13 @@
  */
 namespace ToAdwords\Model;
 
-use ToAdwords\CustomerAdapter;
 use ToAdwords\Definition\SyncStatus;
-use ToAdwords\Definition\Operation;
 use ToAdwords\Model\Driver\DbMysql;
 use ToAdwords\Util\Log;
 use ToAdwords\Exception\ModelException;
 
 use \PDO;
+use \PDOException;
 
 /**
  * BaseModel, A Model Packaging database operations. 
