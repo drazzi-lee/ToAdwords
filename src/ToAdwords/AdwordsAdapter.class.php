@@ -88,11 +88,6 @@ abstract class AdwordsAdapter{
 			$this->process++;
 
 			return $this->generateResult();
-		} catch (DataCheckException $e){
-			$this->result['status'] = -1;
-			$this->result['description'] = get_class($e) . ' ' . $e->getMessage(); 
-
-			return $this->generateResult();
 		} catch (Exception $e){
 			$this->result['status'] = -1;
 			$this->result['description'] = get_class($e) . ' ' . $e->getMessage(); 
@@ -141,11 +136,6 @@ abstract class AdwordsAdapter{
 			$this->result['description'] = static::$moduleName . ' ' .strtolower($data['last_action']) . ' success!';
 			$this->result['success']++;
 			$this->process++;
-
-			return $this->generateResult();
-		} catch (DataCheckException $e){
-			$this->result['status'] = -1;
-			$this->result['description'] = get_class($e) . ' ' . $e->getMessage(); 
 
 			return $this->generateResult();
 		} catch (Exception $e){
