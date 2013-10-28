@@ -242,8 +242,8 @@ abstract class AdwordsAdapter{
 			//转换idclick数据格式为adwords数据格式
 			if($key === 'bidding_type'){
 				switch($data['bidding_type']){
-					case '0': $data['bidding_type'] = 'MANUAL_CPC'; break;
-					case '1': $data['bidding_type'] = 'BUDGET_OPTIMIZER'; break;
+					case '0': $data['bidding_type'] = 'BUDGET_OPTIMIZER'; break;
+					case '1': $data['bidding_type'] = 'MANUAL_CPC'; break;
 					default: throw new DataCheckException('unknown bidding_type ##'.$data['bidding_type']);
 				}
 			}

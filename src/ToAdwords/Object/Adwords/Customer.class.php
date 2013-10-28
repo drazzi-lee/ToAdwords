@@ -4,7 +4,7 @@ namespace ToAdwords\Object\Adwords;
 
 require_once('init.php');
 
-use ToAdwords\CustomerAdapter;
+use ToAdwords\Model\CustomerModel;
 use ToAdwords\Object\Adwords\AdwordsBase;
 use ToAdwords\Object\Idclick\Member;
 
@@ -69,13 +69,13 @@ class Customer extends AdwordsBase{
 			//	$customer->customerId);
 
 			if(!empty($customer->customerId)){
-				$customerAdapter = new CustomerAdapter();
+				$customerModel = new CustomerModel();
 				$member = new Member($data['idclick_uid']);	
 				$dataInsert = array('adwords_customerid' => $customer->customerId);
 				
 				$this->dbh->beginTransaction();
-				$customerAdapter->updateOne('idclick_uid='.$member->getId(), $dataInsert);
-				$customerAdapter->updateSyncStatus(CustomerAdapter::SYNC_STATUS_SYNCED, $member);
+				$customerModel->updateOne('idclick_uid='.$member->getId(), $dataInsert);
+				$customerModel->updateSyncStatus(CustomerAdapter::SYNC_STATUS_SYNCED, $member);
 				$this->dbh->commit();
 				return TRUE;
 				if(ENVIRONMENT == 'development'){
