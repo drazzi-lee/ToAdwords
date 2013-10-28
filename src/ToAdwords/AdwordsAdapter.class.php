@@ -61,9 +61,14 @@ abstract class AdwordsAdapter{
 			if($parentInfo === FALSE){
 				if(static::$parentAdapterName == 'ToAdwords\CustomerAdapter'){
 					$parentAdapter = new static::$parentAdapterName();	
-					$parentAdapter->create(array($parentModel::$idclickObjectIdField => $data[$parentModel::$idclickObjectIdField]));
+					$parentAdapter->create(array(
+								$parentModel::$idclickObjectIdField => 
+									$data[$parentModel::$idclickObjectIdField]
+								));
 				} else {
-					throw new DependencyException('dependency error, parent module #' . get_class($parentModel) . ' not found. parentObjectId #'.$data[$parentModel::$idclickObjectIdField]);
+					throw new DependencyException('dependency error, parent module #' .
+								get_class($parentModel) . ' not found. parentObjectId #' .
+								$data[$parentModel::$idclickObjectIdField]);
 				}
 			} else {
 				if($parentModel->isValidAdwordsId($parentInfo[$parentModel::$adwordsObjectIdField])){
@@ -101,9 +106,15 @@ abstract class AdwordsAdapter{
 			//check whether it exists.
 			$parentModel = new static::$parentModelName();
 			$currentModel = new static::$currentModelName();
-			$currentRow = $currentModel->getOne($currentModel::$idclickObjectIdField . ',' . $parentModel::$idclickObjectIdField, $currentModel::$idclickObjectIdField . '=' . $data[$currentModel::$idclickObjectIdField]);
+			$currentRow = $currentModel->getOne(
+								$currentModel::$idclickObjectIdField .',' . $parentModel::$idclickObjectIdField, 
+								$currentModel::$idclickObjectIdField . '=' . $data[$currentModel::$idclickObjectIdField]
+								);
 			if(empty($currentRow)){
-				throw new DataCheckException(get_class($currentModel) . ' could not found, ' . $currentModel::$idclickObjectIdField . ' #' . $data[$currentModel::$idclickObjectIdField]);
+				throw new DataCheckException(
+								get_class($currentModel) . ' could not found, ' . $currentModel::$idclickObjectIdField .
+								' #' . $data[$currentModel::$idclickObjectIdField]
+								);
 			} else if($currentRow[$parentModel::$idclickObjectIdField] != $data[$parentModel::$idclickObjectIdField]){
 				throw new DataCheckException('Field #' . $parentModel::$idclickObjectIdField . ' does not match.');
 			}
