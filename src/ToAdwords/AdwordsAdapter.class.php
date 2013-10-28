@@ -70,6 +70,7 @@ abstract class AdwordsAdapter{
 					$data[$parentModel::$adwordsObjectIdField] = $parentInfo[$parentModel::$adwordsObjectIdField];
 				}
 			}
+			$data['last_action'] = Operation::CREATE;
 			
 			//create record and send message to queue.
 			$currentModel = new static::$currentModelName();
