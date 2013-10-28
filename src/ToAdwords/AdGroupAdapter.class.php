@@ -20,7 +20,7 @@ class AdGroupAdapter extends AdwordsAdapter{
 				'prohibitedFields'	=> array('sync_status', 'adgroup_id', 'campaign_id'),
 				),
 			'UPDATE'	=> array(
-				'requiredFields'	=> array('idclick_planid','idclick_groupid','adgroup_status'),
+				'requiredFields'	=> array('idclick_planid','idclick_groupid'),
 				'prohibitedFields'	=> array('sync_status', 'adgroup_id', 'campaign_id'),
 				),
 			'DELETE'	=> array(

@@ -25,7 +25,7 @@ class CampaignAdapter extends AdwordsAdapter{
 				'prohibitedFields'	=> array('sync_status','campaign_id','customer_id'),
 				),
 			'DELETE'	=> array(
-				'requiredFields'	=> array('idclick_planid','idclick_uid'),
+				'requiredFields'	=> array('idclick_planid','idclick_uid','campaign_status'),
 				'prohibitedFields'	=> array('sync_status','campaign_id','customer_id'),
 				),
 			);
