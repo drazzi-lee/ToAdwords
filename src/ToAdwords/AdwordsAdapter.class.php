@@ -54,6 +54,8 @@ abstract class AdwordsAdapter{
 				Log::write("Received new data:\n" . print_r($data, TRUE), __METHOD__);
 			}
 			self::prepareData($data, Operation::CREATE);
+			
+			//check parent dependency
 			$parentModel = new static::$parentModelName();
 			$parentInfo = $parentModel->getAdapteInfo($data[$parentModel::$idclickObjectIdField]);
 			if($parentInfo === FALSE){
@@ -68,19 +70,11 @@ abstract class AdwordsAdapter{
 					$data[$parentModel::$adwordsObjectIdField] = $parentInfo[$parentModel::$adwordsObjectIdField];
 				}
 			}
-
+			
+			//create record and send message to queue.
 			$currentModel = new static::$currentModelName();
 			$currentModel->insertOne($data);
-
-			$message = new Message();
-			$message->setModule(static::$moduleName);
-			$message->setAction(Operation::CREATE);
-			$message->setInformation($data);
-
-			$messageHandler = new MessageHandler();
-			$messageHandler->put($message, array($currentModel, 'updateSyncStatus'));
-			unset($message);
-			unset($messageHandler);
+			$this->sendMessage($data, array($currentModel, 'updateSyncStatus'));
 
 			$this->result['status'] = 1;
 			$this->result['description'] = static::$moduleName . ' create success!';
@@ -96,13 +90,14 @@ abstract class AdwordsAdapter{
 		}
 	}
 
-	public function update($data){
+	public function update(array $data){
 		try{
 			if(ENVIRONMENT == 'development'){
 				Log::write("Received new data:\n" . print_r($data, TRUE), __METHOD__);
 			}
 			self::prepareData($data, Operation::UPDATE);
-
+			
+			//check whether it exists.
 			$parentModel = new static::$parentModelName();
 			$currentModel = new static::$currentModelName();
 			$currentRow = $currentModel->getOne($currentModel::$idclickObjectIdField . ',' . $parentModel::$idclickObjectIdField, $currentModel::$idclickObjectIdField . '=' . $data[$currentModel::$idclickObjectIdField]);
@@ -111,7 +106,8 @@ abstract class AdwordsAdapter{
 			} else if($currentRow[$parentModel::$idclickObjectIdField] != $data[$parentModel::$idclickObjectIdField]){
 				throw new DataCheckException('Field #' . $parentModel::$idclickObjectIdField . ' does not match.');
 			}
-
+			
+			//update record and send message to queue.
 			$data['last_action'] = isset($data['last_action']) ? $data['last_action'] : Operation::UPDATE;
 			$conditions = $currentModel::$idclickObjectIdField . '=' . $data[$currentModel::$idclickObjectIdField];
 			$conditions .= ' AND ' . $parentModel::$idclickObjectIdField . '=' .$data[$parentModel::$idclickObjectIdField];
@@ -120,17 +116,8 @@ abstract class AdwordsAdapter{
 				$parentModel::$idclickObjectIdField 	=> $data[$parentModel::$idclickObjectIdField],
 				);
 			$newData = array_diff_key($data, $conditionsArray);
-			$currentModel->updateOne($conditions, $newData);
-
-			$message = new Message();
-			$message->setModule(static::$moduleName);
-			$message->setAction($data['last_action']);
-			$message->setInformation($data);
-
-			$messageHandler = new MessageHandler();
-			$messageHandler->put($message, array($currentModel, 'updateSyncStatus'));
-			unset($message);
-			unset($messageHandler);
+			$currentModel->updateOne($conditions, $newData);			
+			$this->sendMessage($data, array($currentModel, 'updateSyncStatus'));
 
 			$this->result['status'] = 1;
 			$this->result['description'] = static::$moduleName . ' ' .strtolower($data['last_action']) . ' success!';
@@ -147,7 +134,7 @@ abstract class AdwordsAdapter{
 
 	}
 
-	public function delete($data){
+	public function delete(array $data){
 		if(ENVIRONMENT == 'development'){
 			Log::write("Received new data:\n" . print_r($data, TRUE), __METHOD__);
 		}
@@ -169,6 +156,26 @@ abstract class AdwordsAdapter{
 		$infoForRemove[$parentModel::$idclickObjectIdField] = $data[$parentModel::$idclickObjectIdField];
 
 		return $this->update($infoForRemove);
+	}
+	
+	/**
+	 * Build and send message to httpsqs queue.
+	 *
+	 * @param array $data
+	 * @param callback $calback
+	 * @return void.
+	 * @throw MessageException
+	 */
+	protected function sendMessage(array $data, $callback = null){
+		$message = new Message();
+		$message->setModule(static::$moduleName);
+		$message->setAction($data['last_action']);
+		$message->setInformation($data);
+
+		$messageHandler = new MessageHandler();
+		$messageHandler->put($message, $callback);
+		unset($message);
+		unset($messageHandler); //force release for logging path change in __destruct
 	}
 
 	/**
