@@ -36,7 +36,7 @@ abstract class AdwordsAdapter{
 			Log::write("Received new data:\n" . print_r($data, TRUE), __METHOD__);
 		}
 		
-		$currentModel = new self::$currentModelName();
+		$currentModel = new static::$currentModelName();
 		if(empty($data[$currentModel::$idclickObjectIdField])){
 			throw new DataCheckException('Field #'.$currentModel::$idclickObjectIdField.' is required.');
 		}
