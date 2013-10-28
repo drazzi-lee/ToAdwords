@@ -103,7 +103,7 @@ abstract class AdwordsAdapter{
 			$currentModel = new static::$currentModelName();
 			$currentRow = $currentModel->getOne($currentModel::$idclickObjectIdField . ',' . $parentModel::$idclickObjectIdField, $currentModel::$idclickObjectIdField . '=' . $data[$currentModel::$idclickObjectIdField]);
 			if(empty($currentRow)){
-				throw new DataCheckException(get_class($currentModel) . ' could not find, ' . $currentModel::$idclickObjectIdField . ' #' . $data[$currentModel::$idclickObjectIdField]);
+				throw new DataCheckException(get_class($currentModel) . ' could not found, ' . $currentModel::$idclickObjectIdField . ' #' . $data[$currentModel::$idclickObjectIdField]);
 			} else if($currentRow[$parentModel::$idclickObjectIdField] != $data[$parentModel::$idclickObjectIdField]){
 				throw new DataCheckException('Field #' . $parentModel::$idclickObjectIdField . ' does not match.');
 			}
