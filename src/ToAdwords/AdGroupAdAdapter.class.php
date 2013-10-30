@@ -1,12 +1,18 @@
 <?php
 
+/**
+ * AdGroupAdAdapter.class.php
+ *
+ * Defines a class AdGroupAdAdapter, handle relation between idclick advertises and adwords adgroupads.
+ *
+ * @author Li Pengfei
+ * @email drazzi.lee@gmail.com
+ * @version 1.0
+ */
 namespace ToAdwords;
 
 use ToAdwords\AdwordsAdapter;
 
-/**
- * 广告
- */
 class AdGroupAdAdapter extends AdwordsAdapter{
 	protected static $moduleName        = 'AdGroupAd';
 	protected static $currentModelName  = 'ToAdwords\Model\AdGroupAdModel';

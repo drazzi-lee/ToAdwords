@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * CustomerAdapter.class.php
+ *
+ * Defines a class CustomerAdapter, handle relation between idclick members and adwords customers.
+ *
+ * @author Li Pengfei
+ * @email drazzi.lee@gmail.com
+ * @version 1.0
+ */
 namespace ToAdwords;
 
 use ToAdwords\AdwordsAdapter;
@@ -9,9 +18,6 @@ use ToAdwords\MessageHandler;
 use ToAdwords\Definition\Operation;
 use ToAdwords\Util\Log;
 
-/**
- * 用户
- */
 class CustomerAdapter extends AdwordsAdapter{
 	protected static $moduleName = 'Customer';
 	protected static $currentModelName = 'ToAdwords\Model\CustomerModel';

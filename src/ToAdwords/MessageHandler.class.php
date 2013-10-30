@@ -1,4 +1,14 @@
 <?php
+
+/**
+ * MessageHandler.class.php
+ *
+ * Defines a class MessageHandler, handle messages including get & put operations with Httpsqs server.
+ *
+ * @author Li Pengfei
+ * @email drazzi.lee@gmail.com
+ * @version 1.0
+ */
 namespace ToAdwords;
 
 use ToAdwords\Object\Adwords\Customer;
@@ -10,10 +20,6 @@ use ToAdwords\Util\Message;
 use ToAdwords\Util\Httpsqs;
 use ToAdwords\Exception\MessageException;
 
-/**
- * 消息处理类
- *
- */
 class MessageHandler{
 
 	private $httpsqs;

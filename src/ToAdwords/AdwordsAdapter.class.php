@@ -1,13 +1,18 @@
 <?php
 
+/**
+ * AdwordsAdapter.class.php
+ *
+ * Defines an abstract class AdwordsAdapter, parent class of all adapters.
+ *
+ * @author Li Pengfei
+ * @email drazzi.lee@gmail.com
+ * @version 1.0
+ */
 namespace ToAdwords;
 
 use ToAdwords\Util\Log;
 use ToAdwords\Util\Message;
-use ToAdwords\CustomerAdapter;
-use ToAdwords\CampaignAdapter;
-use ToAdwords\AdGroupAdapter;
-use ToAdwords\AdGroupAdAdapter;
 use ToAdwords\Exception\DataCheckException;
 use ToAdwords\Exception\DependencyException;
 use ToAdwords\MessageHandler;
@@ -31,6 +36,9 @@ abstract class AdwordsAdapter{
 			);
 	protected $processed = 0;
 
+	/**
+	 * As an interface for amc thrift.
+	 */
 	public function run(array $data){
 		if(ENVIRONMENT == 'development'){
 			Log::write("Received new data:\n" . print_r($data, TRUE), __METHOD__);
@@ -48,6 +56,12 @@ abstract class AdwordsAdapter{
 		}
 	}
 
+	/**
+	 * Create an relation between idclick object and adwords object.
+	 *
+	 * @param array $data:
+	 * @return string: JSON/Array
+	 */
 	public function create(array $data){
 		try{
 			if(ENVIRONMENT == 'development'){
@@ -96,6 +110,12 @@ abstract class AdwordsAdapter{
 		}
 	}
 
+	/**
+	 * Update relation between idclick object and adwords object.
+	 *
+	 * @param array $data:
+	 * @return string: JSON/Array
+	 */
 	public function update(array $data){
 		try{
 			if(ENVIRONMENT == 'development'){
@@ -146,6 +166,12 @@ abstract class AdwordsAdapter{
 
 	}
 
+	/**
+	 * Remove relation between idclick object and adwords object.
+	 *
+	 * @param array $data:
+	 * @return string: JSON/Array
+	 */
 	public function delete(array $data){
 		if(ENVIRONMENT == 'development'){
 			Log::write("Received new data:\n" . print_r($data, TRUE), __METHOD__);

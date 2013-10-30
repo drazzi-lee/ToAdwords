@@ -1,12 +1,18 @@
 <?php
 
+/**
+ * CampaignAdapter.class.php
+ *
+ * Defines a class CampaignAdapter, handle relation between idclick ad-plans and adwords campaigns.
+ *
+ * @author Li Pengfei
+ * @email drazzi.lee@gmail.com
+ * @version 1.0
+ */
 namespace ToAdwords;
 
 use ToAdwords\AdwordsAdapter;
 
-/**
- * 广告系列
- */
 class CampaignAdapter extends AdwordsAdapter{
 	protected static $moduleName           = 'Campaign';
 	protected static $currentModelName     = 'ToAdwords\Model\CampaignModel';

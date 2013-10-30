@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * BaseModel.class.php
  *
