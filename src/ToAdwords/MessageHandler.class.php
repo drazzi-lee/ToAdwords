@@ -38,6 +38,9 @@ class MessageHandler{
 	}
 
 	public function handle(Message $message, Httpsqs $httpsqs){
+		if(ENVIRONMENT == 'development'){
+			Log::write("Received new data:\n" . $message, __METHOD__);
+		}
 		$module = null;
 		$result = null;
 	
@@ -127,17 +130,17 @@ class MessageHandler{
 		$data = $result['data'];
 
 		if($data != 'HTTPSQS_GET_END' && $data != 'HTTPSQS_ERROR'){
-			Log::write('[MESSAGE_GET] 获取到消息，消息位置:'.$pos, __METHOD__);
+			Log::write('[notice] 获取到消息，消息位置:'.$pos, __METHOD__);
 			$dataDecode = json_decode($data, TRUE);
 			try{
 			$message = new Message();
 			$message->setModule($dataDecode['module']);
 			$message->setAction($dataDecode['action']);
 			$message->setInformation($dataDecode['data']);
-			Log::write('[MESSAGE_GET] 消息有效，「队列」#'.$queueName.' 「内容」#'.$message, __METHOD__);
+			Log::write('[notice] 消息有效，「队列」#'.$queueName.' 「内容」#'.$message, __METHOD__);
 			return $message;
 			} catch(MessageException $e){
-				Log::write('[MESSAGE_GET] 消息无效：'.$e->getMessage(), __METHOD__);		
+				Log::write('[warning] 消息无效：'.$e->getMessage(), __METHOD__);		
 			}
 		} else {
 			return FALSE;
