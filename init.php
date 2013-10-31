@@ -1,10 +1,10 @@
 <?php
 /**
- * Useful constants for the AdWords API.
+ * The common init file for all this example
  *
  * PHP version 5
  *
- * Copyright 2012, Google Inc. All Rights Reserved.
+ * Copyright 2013, Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,35 +19,28 @@
  * limitations under the License.
  *
  * @package    GoogleApiAdsAdWords
- * @subpackage Lib
+ * @subpackage v201306
  * @category   WebServices
- * @copyright  2012, Google Inc. All Rights Reserved.
+ * @copyright  2013, Google Inc. All Rights Reserved.
  * @license    http://www.apache.org/licenses/LICENSE-2.0 Apache License,
  *             Version 2.0
- * @author     Eric Koleda
+ * @author     David Torres
  */
+// Set error reporting levels to highest
+error_reporting(E_STRICT | E_ALL);
 
-/**
- * Useful constants for the AdWords API.
- * @package GoogleApiAdsAdWords
- * @subpackage Lib
- */
-class AdWordsConstants {
-  /**
-   * Recommended page size for most services.
-   * @var int
-   */
-  const RECOMMENDED_PAGE_SIZE = 500;
+$depth = '/../';
+define('SRC_PATH', dirname(__FILE__) . $depth);
+define('LIB_PATH', 'Google/Api/Ads/AdWords/Lib');
+define('UTIL_PATH', 'Google/Api/Ads/Common/Util');
+define('ADWORDS_UTIL_PATH', 'Google/Api/Ads/AdWords/Util');
 
-  /**
-   * The number of micros in a dollar (or equivalent curreny unit).
-   * @var int
-   */
-  const MICROS_PER_DOLLAR = 1000000;
+define('ADWORDS_VERSION', 'v201306');
 
-  /**
-   * The number of micro degrees in a degree.
-   * @var int
-   */
-  const MICRO_DEGREES_PER_DEGREE = 1000000;
-}
+// Configure include path
+ini_set('include_path', implode(array(
+    ini_get('include_path'), PATH_SEPARATOR, SRC_PATH
+)));
+
+// Include the AdWordsUser
+require_once LIB_PATH . '/AdWordsUser.php';
