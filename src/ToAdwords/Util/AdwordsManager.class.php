@@ -145,6 +145,36 @@ class AdwordsManager{
 		}
 	}
 
+	public function updateCampaign($clientCustomerId, $campaignId){
+		try {
+			$this->user->SetClientCustomerId($clientCustomerId);
+			// Get the service, which loads the required classes.
+			$campaignService = $this->user->GetService('CampaignService', ADWORDS_VERSION);
+
+			// Create campaign using an existing ID.
+			$campaign = new \Campaign();
+			$campaign->id = $campaignId;
+			$campaign->status = 'ACTIVE';
+
+			// Create operation.
+			$operation = new \CampaignOperation();
+			$operation->operand = $campaign;
+			$operation->operator = 'SET';
+
+			$operations = array($operation);
+
+			// Make the mutate request.
+			$result = $campaignService->mutate($operations);
+
+			// Display result.
+			$campaign = $result->value[0];
+			printf("Campaign with ID '%s' was paused.\n", $campaign->id);
+
+		} catch (Exception $e) {
+			printf("An error has occurred: %s\n", $e->getMessage());
+		}
+	}
+
 	public function createAdGroup(){
 
 	}
