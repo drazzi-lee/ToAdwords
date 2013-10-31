@@ -1,0 +1,144 @@
+[ 2013-10-31T11:19:34+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Customer | 动作：CREATE | 消息内容：Array
+(
+    [idclick_uid] => 503
+)
+
+[ 2013-10-31T11:19:44+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Customer | 动作：CREATE | 消息内容：Array
+(
+    [idclick_uid] => 503
+)
+
+[ 2013-10-31T11:28:23+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 128
+    [idclick_uid] => 1023
+    [campaign_name] => 云朵手机套餐
+    [areas] => 2156
+    [languages] => 1000,1001,1002,1003,1004,1005,1009
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 75
+    [max_cpc] => 3
+    [last_action] => UPDATE
+)
+
+[ 2013-10-31T11:28:23+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 128
+    [idclick_uid] => 1023
+    [campaign_name] => 云朵手机套餐
+    [areas] => 2156
+    [languages] => 1000
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 75
+    [max_cpc] => 3
+    [last_action] => UPDATE
+)
+
+[ 2013-10-31T11:28:23+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 128
+    [idclick_uid] => 1023
+    [campaign_name] => 云朵手机套餐
+    [areas] => 2156
+    [languages] => 1000
+    [bidding_type] => MANUAL_CPC
+    [budget_amount] => 75
+    [max_cpc] => 0
+    [last_action] => UPDATE
+)
+
+[ 2013-10-31T11:28:23+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 128
+    [idclick_uid] => 1023
+    [campaign_name] => 云朵手机套餐
+    [areas] => 2156
+    [languages] => 1000
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 75
+    [max_cpc] => 0
+    [last_action] => UPDATE
+)
+
+[ 2013-10-31T11:28:23+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 128
+    [idclick_uid] => 1023
+    [campaign_name] => 云朵手机套餐
+    [areas] => 2156
+    [languages] => 1000
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 75
+    [max_cpc] => 10
+    [last_action] => UPDATE
+)
+
+[ 2013-10-31T11:28:23+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 128
+    [idclick_uid] => 1023
+    [campaign_name] => 云朵手机套餐
+    [areas] => 2156
+    [languages] => 1000
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 66
+    [max_cpc] => 10
+    [last_action] => UPDATE
+)
+
+[ 2013-10-31T11:28:23+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 128
+    [idclick_uid] => 1023
+    [campaign_name] => 云朵手机套餐
+    [areas] => 2156
+    [languages] => 1000,1017,1018
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 66
+    [max_cpc] => 10
+    [last_action] => UPDATE
+)
+
+[ 2013-10-31T11:37:23+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61628
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #5271d073111c9
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [customer_id] => 9537363155
+    [last_action] => CREATE
+)
+
+[ 2013-10-31T11:39:20+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61628
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #5271d073111c9
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [customer_id] => 9537363155
+    [last_action] => CREATE
+)
+

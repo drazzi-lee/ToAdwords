@@ -17,8 +17,8 @@ class TestAction{
 	
 	public function createCampaign(){
 		$data = array(
-				'idclick_planid' => 61627,
-				'idclick_uid'	=> 502,
+				'idclick_planid' => 61628,
+				'idclick_uid'	=> 503,
 				'campaign_name' => 'campaign_name #' . uniqid(),
 				'areas' => '10031,10032',
 				'languages' => '10031,10032',
@@ -122,4 +122,4 @@ class TestAction{
 	}
 }
 $testAction = new TestAction();
-$testAction->deleteCampaign();
+$testAction->createCampaign();

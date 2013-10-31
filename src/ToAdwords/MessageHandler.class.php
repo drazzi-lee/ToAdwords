@@ -39,7 +39,7 @@ class MessageHandler{
 
 	public function handle(Message $message, Httpsqs $httpsqs){
 		if(ENVIRONMENT == 'development'){
-			Log::write("Received new data:\n" . $message, __METHOD__);
+			Log::write("[notice] try to handle new data:\n" . $message, __METHOD__);
 		}
 		$module = null;
 		$result = null;

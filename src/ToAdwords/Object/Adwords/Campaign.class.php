@@ -6,9 +6,8 @@ require_once('init.php');
 
 use ToAdwords\CampaignAdapter;
 use ToAdwords\CustomerAdapter;
+use ToAdwords\Model\CustomerModel;
 use ToAdwords\Object\Adwords\AdwordsBase;
-use ToAdwords\Object\Idclick\AdPlan;
-use ToAdwords\Object\Idclick\Member;
 
 use \AdWordsUser;
 
@@ -43,16 +42,23 @@ class Campaign extends AdwordsBase{
 			 * 返回TRUE; 如新建失败，则此次消息执行视为失败，返回FALSE。
 			 * == MessageHandler会将失败消息转入重试队列 ==
 			 */
-			if($this->customerId == 1 || empty($this->customerId)){
-				$customerAdapter = new CustomerAdapter;
-				$member = new Member($this->idclickUid);
-				$this->customerId = $customerAdapter->getAdaptedId($member);		
+			$customerModel = new CustomerModel();
+			if(!$customerModel->isValidAdwordsId($data['customer_id'])){
+				$customerInfo = $customerModel->getAdapteInfo($data['idclick_uid']);
+				$data['adwords_customerid'] = $customerInfo['customer_id'];
+				//need to check adwords_customerid is valid.
+				if(!$customerModel->isValidAdwordsId($data['customer_id'])){
+					return FALSE;
+				}
 			}
 		
 			$user = new AdWordsUser();
 			$user->SetClientCustomerId($clientCustomerId);
 			$user->LogAll();
 		
+		} catch(Exception $e){
+			echo $e->getMessage();
+			return FALSE;
 		}
 	
 	}

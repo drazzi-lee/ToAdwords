@@ -6,7 +6,7 @@ require_once('init.php');
 
 use ToAdwords\Model\CustomerModel;
 use ToAdwords\Object\Adwords\AdwordsBase;
-use ToAdwords\Object\Idclick\Member;
+use ToAdwords\Definition\SyncStatus;
 
 use \AdWordsUser;
 use \ManagedCustomer;
@@ -70,13 +70,10 @@ class Customer extends AdwordsBase{
 
 			if(!empty($customer->customerId)){
 				$customerModel = new CustomerModel();
-				$member = new Member($data['idclick_uid']);	
 				$dataInsert = array('adwords_customerid' => $customer->customerId);
 				
-				$this->dbh->beginTransaction();
-				$customerModel->updateOne('idclick_uid='.$member->getId(), $dataInsert);
-				$customerModel->updateSyncStatus(CustomerAdapter::SYNC_STATUS_SYNCED, $member);
-				$this->dbh->commit();
+				$customerModel->updateOne('idclick_uid='.$data['idclick_uid'], $dataInsert);
+				$customerModel->updateSyncStatus(SyncStatus::SYNCED, $data['idclick_uid']);
 				return TRUE;
 				if(ENVIRONMENT == 'development'){
 					Log::write('[NOTICE] 已成功创建GOOGLE CUSTOMER账户 #'
@@ -84,8 +81,8 @@ class Customer extends AdwordsBase{
 				}
 			}			
 		} catch (PDOException $e){
-			if($this->dbh->inTransaction()){
-				$this->dbh->rollBack();
+			if($customerModel->inTransaction()){
+				$customerModel->rollBack();
 			}
 			Log::write('创建Customer成功，但是数据未插入。消息体：'
 									. $message . ' 错误原因：' . $e->getMessage(), __METHOD__);

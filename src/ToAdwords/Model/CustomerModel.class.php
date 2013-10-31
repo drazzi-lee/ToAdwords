@@ -12,7 +12,7 @@ class CustomerModel extends BaseModel{
 	protected static $moduleName = 'Customer';
 
 	public static $idclickObjectIdField = 'idclick_uid';
-	public static $adwordsObjectIdField = 'adwords_customerid';
+	public static $adwordsObjectIdField = 'customer_id';
 
 	/**
 	 * Check the given customerId is valid or not.
