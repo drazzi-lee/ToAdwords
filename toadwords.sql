@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2013-10-25 13:12:31
+Date: 2013-10-31 15:36:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -98,7 +98,7 @@ CREATE TABLE `campaign` (
   KEY `campaign_ibfk_1` (`idclick_uid`),
   KEY `campaign_ibfk_2` (`customer_id`),
   CONSTRAINT `campaign_ibfk_1` FOREIGN KEY (`idclick_uid`) REFERENCES `customer` (`idclick_uid`) ON UPDATE CASCADE,
-  CONSTRAINT `campaign_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`adwords_customerid`) ON UPDATE CASCADE
+  CONSTRAINT `campaign_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='此表用来记录广告计划模型具体信息及与ADWORDS对应关系、同步状态。';
 
 -- ----------------------------
@@ -112,12 +112,12 @@ DROP TABLE IF EXISTS `customer`;
 CREATE TABLE `customer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idclick_uid` int(10) NOT NULL COMMENT '对象在idclick中的uid.',
-  `adwords_customerid` bigint(10) DEFAULT NULL COMMENT '对象在adwords同的customerId.',
+  `customer_id` bigint(10) DEFAULT NULL COMMENT '对象在adwords同的customerId.',
   `last_action` enum('CREATE','UPDATE','DELETE') NOT NULL DEFAULT 'CREATE' COMMENT '上次操作动作',
   `sync_status` enum('QUEUE','SYNCED','ERROR','RETRY','RECEIVE','SENDING') NOT NULL DEFAULT 'RECEIVE' COMMENT '在队列中，已同步，同步出错，重试中，已收到，发送中',
   PRIMARY KEY (`id`,`idclick_uid`),
   UNIQUE KEY `idclick_uid` (`idclick_uid`),
-  UNIQUE KEY `adwords_customerid` (`adwords_customerid`)
+  UNIQUE KEY `adwords_customerid` (`customer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='此表用来保存记录当前用户在idclick中的用户状态，以及adwords信息同步情况。';
 
 -- ----------------------------
