@@ -212,8 +212,7 @@ abstract class AdwordsAdapter{
 
 		$messageHandler = new MessageHandler();
 		$messageHandler->put($message, $callback);
-		unset($message);
-		unset($messageHandler); //force release for logging path change in __destruct
+		unset($message, $messageHandler);//force release for logging path change in __destruct
 	}
 
 	/**
