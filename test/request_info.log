@@ -1,0 +1,2 @@
+[Nov 01 2013 18:11:38.000000 - INFO] email= effectiveUser= service=TrafficEstimatorService method=get operators={} responseTime=657 requestId=0004ea1acaae3f480a4248640b190519 operations=1 units= server=adwords.google.com isFault=false faultMessage=null
+[Nov 01 2013 18:26:18.000000 - INFO] email= effectiveUser= service=TrafficEstimatorService method=get operators={} responseTime=725 requestId=0004ea1aff22a7280a441b8705bfc9ed operations=1 units= server=adwords.google.com isFault=false faultMessage=null

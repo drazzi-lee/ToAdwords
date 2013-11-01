@@ -1,0 +1,450 @@
+[Nov 01 2013 18:11:37.000000 - INFO] POST /api/adwords/o/v201306/TrafficEstimatorService?access_token=ya29.AHES6ZScl4jAVMvQfB2FBetHhZeA6PULMpvWiuumoMgkm9duhAiFPXs HTTP/1.1
+Host: adwords.google.com
+Connection: Keep-Alive
+User-Agent: PHP-SOAP/5.3.10-1ubuntu3.8, gzip
+Accept-Encoding: gzip, deflate
+Content-Encoding: gzip
+Content-Type: text/xml; charset=utf-8
+SOAPAction: ""
+Content-Length: 602
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://adwords.google.com/api/adwords/cm/v201306" xmlns:ns2="https://adwords.google.com/api/adwords/o/v201306" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SOAP-ENV:Header>
+    <ns2:RequestHeader>
+      <ns1:developerToken>c6cnIFQ6BOI7SKjA0PCUvw</ns1:developerToken>
+      <ns1:userAgent>IZPTEC.COM (AwApi-PHP/4.5.1, Common-PHP/5.0.0, PHP/5.3.10-1ubuntu3.8)</ns1:userAgent>
+    </ns2:RequestHeader>
+  </SOAP-ENV:Header>
+  <SOAP-ENV:Body>
+    <ns2:get>
+      <ns2:selector>
+        <ns2:campaignEstimateRequests>
+          <ns2:adGroupEstimateRequests>
+            <ns2:keywordEstimateRequests>
+              <ns2:keyword>
+                <ns1:text>mars cruise</ns1:text>
+                <ns1:matchType>BROAD</ns1:matchType>
+              </ns2:keyword>
+            </ns2:keywordEstimateRequests>
+            <ns2:keywordEstimateRequests>
+              <ns2:keyword>
+                <ns1:text>cheap cruise</ns1:text>
+                <ns1:matchType>PHRASE</ns1:matchType>
+              </ns2:keyword>
+            </ns2:keywordEstimateRequests>
+            <ns2:keywordEstimateRequests>
+              <ns2:keyword>
+                <ns1:text>cruise</ns1:text>
+                <ns1:matchType>EXACT</ns1:matchType>
+              </ns2:keyword>
+            </ns2:keywordEstimateRequests>
+            <ns2:keywordEstimateRequests>
+              <ns2:keyword>
+                <ns1:text>moon walk</ns1:text>
+                <ns1:matchType>BROAD</ns1:matchType>
+              </ns2:keyword>
+              <ns2:isNegative>true</ns2:isNegative>
+            </ns2:keywordEstimateRequests>
+            <ns2:maxCpc>
+              <ns1:microAmount>1000000</ns1:microAmount>
+            </ns2:maxCpc>
+          </ns2:adGroupEstimateRequests>
+          <ns2:criteria xsi:type="ns1:Location">
+            <ns1:id>2840</ns1:id>
+          </ns2:criteria>
+          <ns2:criteria xsi:type="ns1:Language">
+            <ns1:id>1000</ns1:id>
+          </ns2:criteria>
+        </ns2:campaignEstimateRequests>
+      </ns2:selector>
+    </ns2:get>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=UTF-8
+Content-Encoding: gzip
+Date: Fri, 01 Nov 2013 10:11:37 GMT
+Expires: Fri, 01 Nov 2013 10:11:37 GMT
+Cache-Control: private, max-age=0
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+Content-Length: 876
+Server: GSE
+
+<?xml version="1.0"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <ResponseHeader xmlns:ns2="https://adwords.google.com/api/adwords/cm/v201306" xmlns="https://adwords.google.com/api/adwords/o/v201306">
+      <ns2:requestId>0004ea1acaae3f480a4248640b190519</ns2:requestId>
+      <ns2:serviceName>AccountService</ns2:serviceName>
+      <ns2:methodName>get</ns2:methodName>
+      <ns2:operations>1</ns2:operations>
+      <ns2:responseTime>657</ns2:responseTime>
+    </ResponseHeader>
+  </soap:Header>
+  <soap:Body>
+    <getResponse xmlns:ns2="https://adwords.google.com/api/adwords/cm/v201306" xmlns="https://adwords.google.com/api/adwords/o/v201306">
+      <rval>
+        <campaignEstimates>
+          <Estimate.Type>CampaignEstimate</Estimate.Type>
+          <adGroupEstimates>
+            <Estimate.Type>AdGroupEstimate</Estimate.Type>
+            <keywordEstimates>
+              <Estimate.Type>KeywordEstimate</Estimate.Type>
+              <min>
+                <averageCpc>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>568090</ns2:microAmount>
+                </averageCpc>
+                <averagePosition>3.5661587962532337</averagePosition>
+                <clicksPerDay>141.80557</clicksPerDay>
+                <impressionsPerDay>9.5062496E8</impressionsPerDay>
+                <clickThroughRate>1.34253794921801E-7</clickThroughRate>
+                <totalCost>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>89509208</ns2:microAmount>
+                </totalCost>
+              </min>
+              <max>
+                <averageCpc>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>694332</ns2:microAmount>
+                </averageCpc>
+                <averagePosition>4.358638738689393</averagePosition>
+                <clicksPerDay>173.31793</clicksPerDay>
+                <impressionsPerDay>1.16187494E9</impressionsPerDay>
+                <clickThroughRate>1.640879794744481E-7</clickThroughRate>
+                <totalCost>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>109400152</ns2:microAmount>
+                </totalCost>
+              </max>
+            </keywordEstimates>
+            <keywordEstimates>
+              <Estimate.Type>KeywordEstimate</Estimate.Type>
+              <min>
+                <averageCpc>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>212918</ns2:microAmount>
+                </averageCpc>
+                <averagePosition>4.475068641369376</averagePosition>
+                <clicksPerDay>186.71935</clicksPerDay>
+                <impressionsPerDay>8.9231994E8</impressionsPerDay>
+                <clickThroughRate>1.8832640547734238E-7</clickThroughRate>
+                <totalCost>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>44173048</ns2:microAmount>
+                </totalCost>
+              </min>
+              <max>
+                <averageCpc>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>260233</ns2:microAmount>
+                </averageCpc>
+                <averagePosition>5.46952860289332</averagePosition>
+                <clicksPerDay>228.21254</clicksPerDay>
+                <impressionsPerDay>1.09061325E9</impressionsPerDay>
+                <clickThroughRate>2.3017672889218764E-7</clickThroughRate>
+                <totalCost>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>53989280</ns2:microAmount>
+                </totalCost>
+              </max>
+            </keywordEstimates>
+            <keywordEstimates>
+              <Estimate.Type>KeywordEstimate</Estimate.Type>
+              <min>
+                <averageCpc>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>1103949</ns2:microAmount>
+                </averageCpc>
+                <averagePosition>1.0</averagePosition>
+                <clicksPerDay>42.77944</clicksPerDay>
+                <impressionsPerDay>6.3928845E8</impressionsPerDay>
+                <clickThroughRate>6.022555094960229E-8</clickThroughRate>
+                <totalCost>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>52473676</ns2:microAmount>
+                </totalCost>
+              </min>
+              <max>
+                <averageCpc>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>1349271</ns2:microAmount>
+                </averageCpc>
+                <averagePosition>1.1195045952256066</averagePosition>
+                <clicksPerDay>52.285988</clicksPerDay>
+                <impressionsPerDay>7.8135258E8</impressionsPerDay>
+                <clickThroughRate>7.360901026158568E-8</clickThroughRate>
+                <totalCost>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>64134500</ns2:microAmount>
+                </totalCost>
+              </max>
+            </keywordEstimates>
+            <keywordEstimates>
+              <Estimate.Type>KeywordEstimate</Estimate.Type>
+              <min>
+                <averageCpc>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>0</ns2:microAmount>
+                </averageCpc>
+                <averagePosition>0.0</averagePosition>
+                <clicksPerDay>0.0</clicksPerDay>
+                <impressionsPerDay>0.0</impressionsPerDay>
+                <clickThroughRate>0.0</clickThroughRate>
+                <totalCost>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>0</ns2:microAmount>
+                </totalCost>
+              </min>
+              <max>
+                <averageCpc>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>0</ns2:microAmount>
+                </averageCpc>
+                <averagePosition>0.0</averagePosition>
+                <clicksPerDay>0.0</clicksPerDay>
+                <impressionsPerDay>0.0</impressionsPerDay>
+                <clickThroughRate>0.0</clickThroughRate>
+                <totalCost>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>0</ns2:microAmount>
+                </totalCost>
+              </max>
+            </keywordEstimates>
+          </adGroupEstimates>
+        </campaignEstimates>
+      </rval>
+    </getResponse>
+  </soap:Body>
+</soap:Envelope>
+
+[Nov 01 2013 18:26:18.000000 - INFO] POST /api/adwords/o/v201306/TrafficEstimatorService?access_token=ya29.AHES6ZRbT1lJgDw6BYGFmhCAH2w3AgjWLI21H7EGxkUaGp_EPoUVQAQ HTTP/1.1
+Host: adwords.google.com
+Connection: Keep-Alive
+User-Agent: PHP-SOAP/5.3.10-1ubuntu3.8, gzip
+Accept-Encoding: gzip, deflate
+Content-Encoding: gzip
+Content-Type: text/xml; charset=utf-8
+SOAPAction: ""
+Content-Length: 595
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://adwords.google.com/api/adwords/cm/v201306" xmlns:ns2="https://adwords.google.com/api/adwords/o/v201306" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SOAP-ENV:Header>
+    <ns2:RequestHeader>
+      <ns1:developerToken>c6cnIFQ6BOI7SKjA0PCUvw</ns1:developerToken>
+      <ns1:userAgent>IZPTEC.COM (AwApi-PHP/4.5.1, Common-PHP/5.0.0, PHP/5.3.10-1ubuntu3.8)</ns1:userAgent>
+    </ns2:RequestHeader>
+  </SOAP-ENV:Header>
+  <SOAP-ENV:Body>
+    <ns2:get>
+      <ns2:selector>
+        <ns2:campaignEstimateRequests>
+          <ns2:adGroupEstimateRequests>
+            <ns2:keywordEstimateRequests>
+              <ns2:keyword>
+                <ns1:text>mars cruise</ns1:text>
+                <ns1:matchType>BROAD</ns1:matchType>
+              </ns2:keyword>
+            </ns2:keywordEstimateRequests>
+            <ns2:keywordEstimateRequests>
+              <ns2:keyword>
+                <ns1:text>cheap cruise</ns1:text>
+                <ns1:matchType>BROAD</ns1:matchType>
+              </ns2:keyword>
+            </ns2:keywordEstimateRequests>
+            <ns2:keywordEstimateRequests>
+              <ns2:keyword>
+                <ns1:text>cruise</ns1:text>
+                <ns1:matchType>EXACT</ns1:matchType>
+              </ns2:keyword>
+            </ns2:keywordEstimateRequests>
+            <ns2:keywordEstimateRequests>
+              <ns2:keyword>
+                <ns1:text>moon walk</ns1:text>
+                <ns1:matchType>BROAD</ns1:matchType>
+              </ns2:keyword>
+              <ns2:isNegative>true</ns2:isNegative>
+            </ns2:keywordEstimateRequests>
+            <ns2:maxCpc>
+              <ns1:microAmount>1000000</ns1:microAmount>
+            </ns2:maxCpc>
+          </ns2:adGroupEstimateRequests>
+          <ns2:criteria xsi:type="ns1:Location">
+            <ns1:id>2840</ns1:id>
+          </ns2:criteria>
+          <ns2:criteria xsi:type="ns1:Language">
+            <ns1:id>1000</ns1:id>
+          </ns2:criteria>
+        </ns2:campaignEstimateRequests>
+      </ns2:selector>
+    </ns2:get>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=UTF-8
+Content-Encoding: gzip
+Date: Fri, 01 Nov 2013 10:26:18 GMT
+Expires: Fri, 01 Nov 2013 10:26:18 GMT
+Cache-Control: private, max-age=0
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+Content-Length: 885
+Server: GSE
+
+<?xml version="1.0"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <ResponseHeader xmlns:ns2="https://adwords.google.com/api/adwords/cm/v201306" xmlns="https://adwords.google.com/api/adwords/o/v201306">
+      <ns2:requestId>0004ea1aff22a7280a441b8705bfc9ed</ns2:requestId>
+      <ns2:serviceName>AccountService</ns2:serviceName>
+      <ns2:methodName>get</ns2:methodName>
+      <ns2:operations>1</ns2:operations>
+      <ns2:responseTime>725</ns2:responseTime>
+    </ResponseHeader>
+  </soap:Header>
+  <soap:Body>
+    <getResponse xmlns:ns2="https://adwords.google.com/api/adwords/cm/v201306" xmlns="https://adwords.google.com/api/adwords/o/v201306">
+      <rval>
+        <campaignEstimates>
+          <Estimate.Type>CampaignEstimate</Estimate.Type>
+          <adGroupEstimates>
+            <Estimate.Type>AdGroupEstimate</Estimate.Type>
+            <keywordEstimates>
+              <Estimate.Type>KeywordEstimate</Estimate.Type>
+              <min>
+                <averageCpc>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>190279</ns2:microAmount>
+                </averageCpc>
+                <averagePosition>1.8217906469294576</averagePosition>
+                <clicksPerDay>289.33737</clicksPerDay>
+                <impressionsPerDay>1.33645936E8</impressionsPerDay>
+                <clickThroughRate>1.948458878584479E-6</clickThroughRate>
+                <totalCost>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>61171984</ns2:microAmount>
+                </totalCost>
+              </min>
+              <max>
+                <averageCpc>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>232563</ns2:microAmount>
+                </averageCpc>
+                <averagePosition>2.226633120160386</averagePosition>
+                <clicksPerDay>353.63455</clicksPerDay>
+                <impressionsPerDay>1.6334504E8</impressionsPerDay>
+                <clickThroughRate>2.381449855195551E-6</clickThroughRate>
+                <totalCost>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>74765760</ns2:microAmount>
+                </totalCost>
+              </max>
+            </keywordEstimates>
+            <keywordEstimates>
+              <Estimate.Type>KeywordEstimate</Estimate.Type>
+              <min>
+                <averageCpc>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>168787</ns2:microAmount>
+                </averageCpc>
+                <averagePosition>1.7923045875680543</averagePosition>
+                <clicksPerDay>298.0336</clicksPerDay>
+                <impressionsPerDay>4.22333952E8</impressionsPerDay>
+                <clickThroughRate>6.351140884825881E-7</clickThroughRate>
+                <totalCost>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>55893496</ns2:microAmount>
+                </totalCost>
+              </min>
+              <max>
+                <averageCpc>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>206295</ns2:microAmount>
+                </averageCpc>
+                <averagePosition>2.190594601427307</averagePosition>
+                <clicksPerDay>364.26334</clicksPerDay>
+                <impressionsPerDay>5.16185984E8</impressionsPerDay>
+                <clickThroughRate>7.762505899782255E-7</clickThroughRate>
+                <totalCost>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>68314280</ns2:microAmount>
+                </totalCost>
+              </max>
+            </keywordEstimates>
+            <keywordEstimates>
+              <Estimate.Type>KeywordEstimate</Estimate.Type>
+              <min>
+                <averageCpc>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>401853</ns2:microAmount>
+                </averageCpc>
+                <averagePosition>4.673674411941249</averagePosition>
+                <clicksPerDay>199.29982</clicksPerDay>
+                <impressionsPerDay>1.64222816E8</impressionsPerDay>
+                <clickThroughRate>1.0922346002065393E-6</clickThroughRate>
+                <totalCost>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>88987992</ns2:microAmount>
+                </totalCost>
+              </min>
+              <max>
+                <averageCpc>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>491153</ns2:microAmount>
+                </averageCpc>
+                <averagePosition>5.7122690008395125</averagePosition>
+                <clicksPerDay>243.58867</clicksPerDay>
+                <impressionsPerDay>2.00716768E8</impressionsPerDay>
+                <clickThroughRate>1.3349534645509624E-6</clickThroughRate>
+                <totalCost>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>108763112</ns2:microAmount>
+                </totalCost>
+              </max>
+            </keywordEstimates>
+            <keywordEstimates>
+              <Estimate.Type>KeywordEstimate</Estimate.Type>
+              <min>
+                <averageCpc>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>0</ns2:microAmount>
+                </averageCpc>
+                <averagePosition>0.0</averagePosition>
+                <clicksPerDay>0.0</clicksPerDay>
+                <impressionsPerDay>0.0</impressionsPerDay>
+                <clickThroughRate>0.0</clickThroughRate>
+                <totalCost>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>0</ns2:microAmount>
+                </totalCost>
+              </min>
+              <max>
+                <averageCpc>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>0</ns2:microAmount>
+                </averageCpc>
+                <averagePosition>0.0</averagePosition>
+                <clicksPerDay>0.0</clicksPerDay>
+                <impressionsPerDay>0.0</impressionsPerDay>
+                <clickThroughRate>0.0</clickThroughRate>
+                <totalCost>
+                  <ns2:ComparableValue.Type>Money</ns2:ComparableValue.Type>
+                  <ns2:microAmount>0</ns2:microAmount>
+                </totalCost>
+              </max>
+            </keywordEstimates>
+          </adGroupEstimates>
+        </campaignEstimates>
+      </rval>
+    </getResponse>
+  </soap:Body>
+</soap:Envelope>
+

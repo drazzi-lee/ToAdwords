@@ -500,4 +500,86 @@ class AdwordsManager{
 		} while ($page->totalNumEntries > $selector->paging->startIndex);
 	}
 
+	public function estimateKeywordsTraffic($keywords){
+
+		// Get the service, which loads the required classes.
+		$trafficEstimatorService =
+			$this->user->GetService('TrafficEstimatorService', ADWORDS_VERSION);
+
+		// Create keywords. Up to 2000 keywords can be passed in a single request.
+		$keywords = array();
+		$keywords[] = new \Keyword('mars cruise', 'BROAD');
+		$keywords[] = new \Keyword('cheap cruise', 'BROAD');
+		$keywords[] = new \Keyword('cruise', 'EXACT');
+
+		// Create a keyword estimate request for each keyword.
+		$keywordEstimateRequests = array();
+		foreach ($keywords as $keyword) {
+			$keywordEstimateRequest = new \KeywordEstimateRequest();
+			$keywordEstimateRequest->keyword = $keyword;
+			$keywordEstimateRequests[] = $keywordEstimateRequest;
+		}
+
+		// Create a keyword estimate request for each negative keyword.
+		foreach ($negativeKeywords as $negativeKeyword) {
+			$keywordEstimateRequest = new \KeywordEstimateRequest();
+			$keywordEstimateRequest->keyword = $negativeKeyword;
+			$keywordEstimateRequest->isNegative = TRUE;
+			$keywordEstimateRequests[] = $keywordEstimateRequest;
+		}
+
+		// Create ad group estimate requests.
+		$adGroupEstimateRequest = new \AdGroupEstimateRequest();
+		$adGroupEstimateRequest->keywordEstimateRequests = $keywordEstimateRequests;
+		$adGroupEstimateRequest->maxCpc = new \Money(1000000);
+
+		// Create campaign estimate requests.
+		$campaignEstimateRequest = new \CampaignEstimateRequest();
+		$campaignEstimateRequest->adGroupEstimateRequests[] = $adGroupEstimateRequest;
+
+		// Set targeting criteria. Only locations and languages are supported.
+		$unitedStates = new \Location();
+		$unitedStates->id = 2840;
+		$campaignEstimateRequest->criteria[] = $unitedStates;
+
+		$english = new \Language();
+		$english->id = 1000;
+		$campaignEstimateRequest->criteria[] = $english;
+
+		// Create selector.
+		$selector = new \TrafficEstimatorSelector();
+		$selector->campaignEstimateRequests[] = $campaignEstimateRequest;
+
+		// Make the get request.
+		$result = $trafficEstimatorService->get($selector);
+
+		// Display results.
+		$keywordEstimates =
+			$result->campaignEstimates[0]->adGroupEstimates[0]->keywordEstimates;
+		for ($i = 0; $i < sizeof($keywordEstimates); $i++) {
+			$keywordEstimateRequest = $keywordEstimateRequests[$i];
+			// Skip negative keywords, since they don't return estimates.
+			if (!$keywordEstimateRequest->isNegative) {
+				$keyword = $keywordEstimateRequest->keyword;
+				$keywordEstimate = $keywordEstimates[$i];
+
+				// Find the mean of the min and max values.
+				$meanAverageCpc = ($keywordEstimate->min->averageCpc->microAmount
+						+ $keywordEstimate->max->averageCpc->microAmount) / 2;
+				$meanAveragePosition = ($keywordEstimate->min->averagePosition
+						+ $keywordEstimate->max->averagePosition) / 2;
+				$meanClicks = ($keywordEstimate->min->clicksPerDay
+						+ $keywordEstimate->max->clicksPerDay) / 2;
+				$meanTotalCost = ($keywordEstimate->min->totalCost->microAmount
+						+ $keywordEstimate->max->totalCost->microAmount) / 2;
+
+				printf("Results for the keyword with text '%s' and match type '%s':\n",
+						$keyword->text, $keyword->matchType);
+				printf("  Estimated average CPC in micros: %.0f\n", $meanAverageCpc);
+				printf("  Estimated ad position: %.2f \n", $meanAveragePosition);
+				printf("  Estimated daily clicks: %d\n", $meanClicks);
+				printf("  Estimated daily cost in micros: %.0f\n\n", $meanTotalCost);
+			}
+		}
+	}
 }
