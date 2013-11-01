@@ -1,7 +1,17 @@
 <?php
 
+/**
+ * AdwordsManager.class.php
+ *
+ * Provide methods to operate Google Adwords Object by API.
+ *
+ * @author Li Pengfei
+ * @email drazzi.lee@gmail.com
+ * @version 1.0
+ */
 namespace ToAdwords\Util;
 
+// import init file from google library.
 require_once(TOADWORDS_ADWORDS_INITFILE);
 
 class AdwordsManager{
@@ -44,7 +54,7 @@ class AdwordsManager{
 
 	}
 
-	public function createCampaign($clientCustomerId){
+	public function createCampaign($clientCustomerId, $data){
 		try{
 			$this->user->SetClientCustomerId($clientCustomerId);
 			// Get the BudgetService, which loads the required classes.
@@ -77,7 +87,7 @@ class AdwordsManager{
 			for ($i = 0; $i < $numCampaigns; $i++) {
 				// Create campaign.
 				$campaign = new \Campaign();
-				$campaign->name = 'Interplanetary Cruise #' . uniqid();
+				$campaign->name = $data['campaign_name'];
 
 				// Set shared budget (required).
 				$campaign->budget = new \Budget();

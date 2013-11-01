@@ -91,7 +91,7 @@ class MessageHandler{
 	
 	public function put(Message $message, $callback = null, $queueName = HTTPSQS_QUEUE_COMMON){
 		if(!$message->check()){
-			throw new MessageException('message incomplete.');
+			Log::write("[warning] message incomplete.\n" . $message, __METHOD__);
 		}
 		$message_combine = array(
 				'module' 	=> $message->getModule(),

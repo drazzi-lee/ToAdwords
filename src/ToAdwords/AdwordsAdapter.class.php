@@ -64,9 +64,7 @@ abstract class AdwordsAdapter{
 	 */
 	public function create(array $data){
 		try{
-			if(ENVIRONMENT == 'development'){
-				Log::write("Received new data:\n" . print_r($data, TRUE), __METHOD__);
-			}
+			Log::write("Received new data:\n" . print_r($data, TRUE), __METHOD__);
 			self::prepareData($data, Operation::CREATE);
 			
 			//check parent dependency
@@ -118,9 +116,7 @@ abstract class AdwordsAdapter{
 	 */
 	public function update(array $data){
 		try{
-			if(ENVIRONMENT == 'development'){
-				Log::write("Received new data:\n" . print_r($data, TRUE), __METHOD__);
-			}
+			Log::write("Received new data:\n" . print_r($data, TRUE), __METHOD__);
 			self::prepareData($data, Operation::UPDATE);
 			
 			//check whether it exists.
@@ -173,9 +169,7 @@ abstract class AdwordsAdapter{
 	 * @return string: JSON/Array
 	 */
 	public function delete(array $data){
-		if(ENVIRONMENT == 'development'){
-			Log::write("Received new data:\n" . print_r($data, TRUE), __METHOD__);
-		}
+		Log::write("Received new data:\n" . print_r($data, TRUE), __METHOD__);
 
 		try{
 			self::prepareData($data, Operation::DELETE);
@@ -202,7 +196,6 @@ abstract class AdwordsAdapter{
 	 * @param array $data
 	 * @param callback $calback
 	 * @return void.
-	 * @throw MessageException
 	 */
 	protected function sendMessage(array $data, $callback = null){
 		$message = new Message();
