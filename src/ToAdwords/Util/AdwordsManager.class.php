@@ -50,98 +50,92 @@ class AdwordsManager{
 	}
 
 	public function createCampaign($clientCustomerId, $data){
-		try{
-			$this->user->SetClientCustomerId($clientCustomerId);
-			// Get the BudgetService, which loads the required classes.
-			$budgetService = $this->user->GetService('BudgetService', ADWORDS_VERSION);
+		$this->user->SetClientCustomerId($clientCustomerId);
+		// Get the BudgetService, which loads the required classes.
+		$budgetService = $this->user->GetService('BudgetService', ADWORDS_VERSION);
 
-			// Create the shared budget (required).
-			$budget = new \Budget();
-			$budget->name = 'Budget #' . uniqid();
-			$budget->period = 'DAILY';
-			$budget->amount = new \Money($data['budget_amount'] * 1000000);
-			$budget->deliveryMethod = $data['delivery_method'];
+		// Create the shared budget (required).
+		$budget = new \Budget();
+		$budget->name = 'Budget #' . uniqid();
+		$budget->period = 'DAILY';
+		$budget->amount = new \Money($data['budget_amount'] * 1000000);
+		$budget->deliveryMethod = $data['delivery_method'];
 
-			$operations = array();
+		$operations = array();
 
-			// Create operation.
-			$operation = new \BudgetOperation();
-			$operation->operand = $budget;
-			$operation->operator = 'ADD';
-			$budgetOperations[] = $operation;
+		// Create operation.
+		$operation = new \BudgetOperation();
+		$operation->operand = $budget;
+		$operation->operator = 'ADD';
+		$budgetOperations[] = $operation;
 
-			// Make the mutate request.
-			$result = $budgetService->mutate($budgetOperations);
-			$budget = $result->value[0];
+		// Make the mutate request.
+		$result = $budgetService->mutate($budgetOperations);
+		$budget = $result->value[0];
 
-			// Get the CampaignService, which loads the required classes.
-			$campaignService = $this->user->GetService('CampaignService', ADWORDS_VERSION);
+		// Get the CampaignService, which loads the required classes.
+		$campaignService = $this->user->GetService('CampaignService', ADWORDS_VERSION);
 
-			// Create campaign.
-			$campaign = new \Campaign();
-			$campaign->name = $data['campaign_name'];
+		// Create campaign.
+		$campaign = new \Campaign();
+		$campaign->name = $data['campaign_name'];
 
-			// Set shared budget (required).
-			$campaign->budget = new \Budget();
-			$campaign->budget->budgetId = $budget->budgetId;
+		// Set shared budget (required).
+		$campaign->budget = new \Budget();
+		$campaign->budget->budgetId = $budget->budgetId;
 
-			// Set bidding strategy (required).
-			$biddingStrategyConfiguration = new \BiddingStrategyConfiguration();
-			$biddingStrategyConfiguration->biddingStrategyType = $data['bidding_type'];
+		// Set bidding strategy (required).
+		$biddingStrategyConfiguration = new \BiddingStrategyConfiguration();
+		$biddingStrategyConfiguration->biddingStrategyType = $data['bidding_type'];
 
-			// You can optionally provide a bidding scheme in place of the type.
-			switch($data['bidding_type']){
-				case 'MANUAL_CPC':
-					$biddingScheme = new \ManualCpcBiddingScheme();
-					break;
-				case 'BUDGET_OPTIMIZER':
-					$biddingScheme = new \BudgetOptimizerBiddingScheme();
-					break;
-				default:
-					throw new \Exception('currently not supported bidding_tuype #'.$data['bidding_type']);
-			}
-			$biddingScheme->enhancedCpcEnabled = FALSE;
-			$biddingStrategyConfiguration->biddingScheme = $biddingScheme;
-
-			$campaign->biddingStrategyConfiguration = $biddingStrategyConfiguration;
-
-			// Set keyword matching setting (required).
-			$keywordMatchSetting = new \KeywordMatchSetting();
-			$keywordMatchSetting->optIn = TRUE;
-			$campaign->settings[] = $keywordMatchSetting;
-
-			// Set network targeting (recommended).
-			$networkSetting = new \NetworkSetting();
-			$networkSetting->targetGoogleSearch = TRUE;
-			$campaign->networkSetting = $networkSetting;
-
-			// Set additional settings (optional).
-			$campaign->status = $data['campaign_status'];
-			$campaign->startDate = date('Ymd', strtotime('now'));
-
-			// Set advanced location targeting settings (optional).
-			$geoTargetTypeSetting = new \GeoTargetTypeSetting();
-			$geoTargetTypeSetting->positiveGeoTargetType = 'DONT_CARE';
-			$geoTargetTypeSetting->negativeGeoTargetType = 'DONT_CARE';
-			$campaign->settings[] = $geoTargetTypeSetting;
-
-			// Create operation.
-			$operation = new \CampaignOperation();
-			$operation->operand = $campaign;
-			$operation->operator = 'ADD';
-			$operations[] = $operation;
-
-			// Make the mutate request.
-			$result = $campaignService->mutate($operations);
-
-			// Display results.
-			foreach ($result->value as $campaign) {
-				printf("Campaign with name '%s' and ID '%s' was added.\n", $campaign->name,
-						$campaign->id);
-			}
-		} catch(Exception $e){
-			printf("An error has occurred: %s\n", $e->getMessage());
+		// You can optionally provide a bidding scheme in place of the type.
+		switch($data['bidding_type']){
+			case 'MANUAL_CPC':
+				$biddingScheme = new \ManualCpcBiddingScheme();
+				break;
+			case 'BUDGET_OPTIMIZER':
+				$biddingScheme = new \BudgetOptimizerBiddingScheme();
+				break;
+			default:
+				throw new \Exception('currently not supported bidding_tuype #'.$data['bidding_type']);
 		}
+		$biddingScheme->enhancedCpcEnabled = FALSE;
+		$biddingStrategyConfiguration->biddingScheme = $biddingScheme;
+
+		$campaign->biddingStrategyConfiguration = $biddingStrategyConfiguration;
+
+		// Set keyword matching setting (required).
+		$keywordMatchSetting = new \KeywordMatchSetting();
+		$keywordMatchSetting->optIn = TRUE;
+		$campaign->settings[] = $keywordMatchSetting;
+
+		// Set network targeting (recommended).
+		$networkSetting = new \NetworkSetting();
+		$networkSetting->targetContentNetwork = FALSE;
+		$campaign->networkSetting = $networkSetting;
+
+		// Set additional settings (optional).
+		$campaign->status = $data['campaign_status'];
+		$campaign->startDate = date('Ymd', strtotime('now'));
+
+		// Set advanced location targeting settings (optional).
+		$geoTargetTypeSetting = new \GeoTargetTypeSetting();
+		$geoTargetTypeSetting->positiveGeoTargetType = 'DONT_CARE';
+		$geoTargetTypeSetting->negativeGeoTargetType = 'DONT_CARE';
+		$campaign->settings[] = $geoTargetTypeSetting;
+
+		// Create operation.
+		$operation = new \CampaignOperation();
+		$operation->operand = $campaign;
+		$operation->operator = 'ADD';
+		$operations[] = $operation;
+
+		// Make the mutate request.
+		$result = $campaignService->mutate($operations);
+
+		// Display results.
+		$campaign = $result->value[0];
+		return $campaign->id;
 	}
 
 	public function updateCampaign($clientCustomerId, $campaignId){
