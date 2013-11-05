@@ -284,6 +284,12 @@ abstract class AdwordsAdapter{
 					default: throw new DataCheckException('unknown bidding_type ##'.$data['bidding_type']);
 				}
 			}
+
+			if($key === 'budget_amount'){
+				if($data['budget_amount'] < 1){
+					throw new DataCheckException('budget_amount must greater or equal than 1.');
+				}
+			}
 		}
 	}
 }

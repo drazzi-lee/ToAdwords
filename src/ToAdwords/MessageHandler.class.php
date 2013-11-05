@@ -11,10 +11,10 @@
  */
 namespace ToAdwords;
 
-use ToAdwords\Object\Adwords\Customer;
-use ToAdwords\Object\Adwords\Campaign;
-use ToAdwords\Object\Adwords\AdGroup;
-use ToAdwords\Object\Adwords\AdGroupAd;
+use ToAdwords\CustomerAdapter;
+use ToAdwords\CampaignAdapter;
+use ToAdwords\AdGroupAdapter;
+use ToAdwords\AdGroupAdAdapter;
 use ToAdwords\Util\Log;
 use ToAdwords\Util\Message;
 use ToAdwords\Util\Httpsqs;
@@ -28,9 +28,9 @@ class MessageHandler{
 
 	public function __construct(){
 		try{
-		$this->httpsqs = new Httpsqs(HTTPSQS_HOST, HTTPSQS_PORT, HTTPSQS_AUTH);
-		$this->lastLogPath = Log::getPath();
-		Log::setPath(TOADWORDS_LOG_PATH . 'message' . DIRECTORY_SEPARATOR);
+			$this->httpsqs = new Httpsqs(HTTPSQS_HOST, HTTPSQS_PORT, HTTPSQS_AUTH);
+			$this->lastLogPath = Log::getPath();
+			Log::setPath(TOADWORDS_LOG_PATH . 'message' . DIRECTORY_SEPARATOR);
 		} catch(Exception $e){
 			Log::setPath($this->lastLogPath);
 			Log::write('[warning] httpsqs construct error, check your settings.', __METHOD__);
@@ -46,38 +46,38 @@ class MessageHandler{
 	
 		switch($message->getModule()){
 			case 'Customer':
-				$module = new Customer();	
+				$module = new CustomerAdapter();	
 				break;
 			case 'Campaign':
-				$module = new Campaign();
+				$module = new CampaignAdapter();
 				break;
 			case 'AdGroup':
-				$module = new AdGroup();
+				$module = new AdGroupAdapter();
 				break;
 			case 'AdGroupAd':
-				$module = new AdGroupAd();
+				$module = new AdGroupAdAdapter();
 				break;
 			default:
-				throw new MessageException('解析错误，不能识别的module::'.$message['module']
+				throw new MessageException('解析错误，不能识别的module::'.$message->getModule()
 						.' 消息位置：'.$pos);
 		}
 		
 		switch($message->getAction()){
 			case 'CREATE':
-				$result = $module->create($message->getInformation());
+				$result = $module->createAdwordsObject($message->getInformation());
 				break;
 			case 'UPDATE':
-				$result = $module->update($message->getInformation());
+				$result = $module->updateAdwordsObject($message->getInformation());
 				break;
 			case 'DELETE':
-				$result = $module->delete($message->getInformation());
+				$result = $module->deleteAdwordsObject($message->getInformation());
 				break;
 			default:
-				throw new MessageException('解析错误，不能识别的action::'.$message['action']
+				throw new MessageException('解析错误，不能识别的action::'.$message->getAction()
 						.' 消息位置：'.$pos);
 		}
 		
-		if(!$result){
+		if(FALSE === $result){
 			$message_retry = array(
 				'module'		=> $message->getModule(),
 				'action'		=> $message->getAction(),
