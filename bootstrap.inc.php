@@ -108,4 +108,11 @@ spl_autoload_register(__NAMESPACE__.'\load');
   ###广告组、广告创建时，会对idclick层面的父级ID进行是否添加认证，如果未添加，则会
 	要求添加
  *
+ 
+ 
+ * 2013-11-06 
+ * NOTE: 更新广告计划时，delivery_method和budget_amount有联动关系，需要联合提供。
+ * NOTE: 更新广告计划时，bidding_type和max_cpc有联动关系，当bidding_type为BUDGET_OPTIMIZER时需要提供max_cpc。
+ * NOTE: 广告组和广告在ADWORDS中的状态值分别为ENABLED PAUSED DELETED
+ 
  */

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2013-10-31 15:36:53
+Date: 2013-11-06 18:40:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,7 +26,7 @@ CREATE TABLE `adgroup` (
   `campaign_id` bigint(10) DEFAULT NULL COMMENT '对象在Google Adwords中的父级依赖，CampaignId',
   `adgroup_name` varchar(128) NOT NULL COMMENT '广告组名称',
   `keywords` varchar(200) NOT NULL COMMENT '广告组关键字',
-  `budget_amount` decimal(10,2) NOT NULL COMMENT '广告组预算，以天为单位，adwords需要大于等于1',
+  `max_cpc` decimal(10,2) NOT NULL COMMENT '广告组预算，以天为单位，adwords需要大于等于0.01',
   `adgroup_status` enum('ACTIVE','PAUSE','DELETE') NOT NULL DEFAULT 'ACTIVE' COMMENT '广告组状态，默认值为启用',
   `last_action` enum('CREATE','UPDATE','DELETE') NOT NULL DEFAULT 'CREATE' COMMENT '上次操作动作',
   `sync_status` enum('QUEUE','SYNCED','ERROR','RETRY','RECEIVE','SENDING') NOT NULL DEFAULT 'RECEIVE' COMMENT '在队列中，已同步，同步出错，重试中，已收到，发送中',
@@ -35,8 +35,8 @@ CREATE TABLE `adgroup` (
   UNIQUE KEY `adgroup_id` (`adgroup_id`),
   KEY `idclick_planid` (`idclick_planid`),
   KEY `campaign_id` (`campaign_id`),
-  CONSTRAINT `adgroup_ibfk_2` FOREIGN KEY (`campaign_id`) REFERENCES `campaign` (`campaign_id`) ON UPDATE CASCADE,
-  CONSTRAINT `adgroup_ibfk_1` FOREIGN KEY (`idclick_planid`) REFERENCES `campaign` (`idclick_planid`) ON UPDATE CASCADE
+  CONSTRAINT `adgroup_ibfk_1` FOREIGN KEY (`idclick_planid`) REFERENCES `campaign` (`idclick_planid`) ON UPDATE CASCADE,
+  CONSTRAINT `adgroup_ibfk_2` FOREIGN KEY (`campaign_id`) REFERENCES `campaign` (`campaign_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='此表记录广告组当前状态以及与Google Adwords的对象关系及同步情况。';
 
 -- ----------------------------
@@ -64,8 +64,8 @@ CREATE TABLE `adgroupad` (
   PRIMARY KEY (`id`,`idclick_adid`),
   KEY `idclick_groupid` (`idclick_groupid`),
   KEY `adgroup_id` (`adgroup_id`),
-  CONSTRAINT `adgroupad_ibfk_2` FOREIGN KEY (`adgroup_id`) REFERENCES `adgroup` (`adgroup_id`) ON UPDATE CASCADE,
-  CONSTRAINT `adgroupad_ibfk_1` FOREIGN KEY (`idclick_groupid`) REFERENCES `adgroup` (`idclick_groupid`) ON UPDATE CASCADE
+  CONSTRAINT `adgroupad_ibfk_1` FOREIGN KEY (`idclick_groupid`) REFERENCES `adgroup` (`idclick_groupid`) ON UPDATE CASCADE,
+  CONSTRAINT `adgroupad_ibfk_2` FOREIGN KEY (`adgroup_id`) REFERENCES `adgroup` (`adgroup_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='此表记录当前广告的信息及与Google Adwords对象的对应关系及同步状态。';
 
 -- ----------------------------
@@ -99,11 +99,12 @@ CREATE TABLE `campaign` (
   KEY `campaign_ibfk_2` (`customer_id`),
   CONSTRAINT `campaign_ibfk_1` FOREIGN KEY (`idclick_uid`) REFERENCES `customer` (`idclick_uid`) ON UPDATE CASCADE,
   CONSTRAINT `campaign_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='此表用来记录广告计划模型具体信息及与ADWORDS对应关系、同步状态。';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='此表用来记录广告计划模型具体信息及与ADWORDS对应关系、同步状态。';
 
 -- ----------------------------
 -- Records of campaign
 -- ----------------------------
+INSERT INTO campaign VALUES ('1', '61628', '503', null, '9537363155', 'campaign_name #52734336c270f', '10031,10032', '10031,10032', 'BUDGET_OPTIMIZER', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
 
 -- ----------------------------
 -- Table structure for `customer`
@@ -118,11 +119,20 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`,`idclick_uid`),
   UNIQUE KEY `idclick_uid` (`idclick_uid`),
   UNIQUE KEY `adwords_customerid` (`customer_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='此表用来保存记录当前用户在idclick中的用户状态，以及adwords信息同步情况。';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='此表用来保存记录当前用户在idclick中的用户状态，以及adwords信息同步情况。';
 
 -- ----------------------------
 -- Records of customer
 -- ----------------------------
+INSERT INTO customer VALUES ('1', '503', '9537363155', 'CREATE', 'SYNCED');
+INSERT INTO customer VALUES ('2', '504', '2799322720', 'CREATE', 'SYNCED');
+INSERT INTO customer VALUES ('3', '505', '3410266051', 'CREATE', 'SYNCED');
+INSERT INTO customer VALUES ('4', '506', '6681899922', 'CREATE', 'SYNCED');
+INSERT INTO customer VALUES ('5', '507', '6026516240', 'CREATE', 'SYNCED');
+INSERT INTO customer VALUES ('6', '508', '6787943218', 'CREATE', 'SYNCED');
+INSERT INTO customer VALUES ('7', '509', '3504859751', 'CREATE', 'SYNCED');
+INSERT INTO customer VALUES ('8', '510', '2537965153', 'CREATE', 'SYNCED');
+INSERT INTO customer VALUES ('9', '511', '5436784026', 'CREATE', 'SYNCED');
 
 -- ----------------------------
 -- Table structure for `sync_cache`
