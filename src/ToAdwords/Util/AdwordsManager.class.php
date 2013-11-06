@@ -95,6 +95,9 @@ class AdwordsManager{
 				break;
 			case 'BUDGET_OPTIMIZER':
 				$biddingScheme = new \BudgetOptimizerBiddingScheme();
+				if(isset($data['max_cpc']) && $data['max_cpc'] > 0.01){
+					$biddingScheme->bidCeiling = new \Money($data['max_cpc'] * 1000000);
+				}
 				break;
 			default:
 				throw new \Exception('currently not supported bidding_tuype #'.$data['bidding_type']);
@@ -110,6 +113,7 @@ class AdwordsManager{
 		$campaign->settings[] = $keywordMatchSetting;
 
 		// Set network targeting (recommended).
+		// 目前暂定仅搜索网络
 		$networkSetting = new \NetworkSetting();
 		$networkSetting->targetContentNetwork = FALSE;
 		$campaign->networkSetting = $networkSetting;
@@ -117,12 +121,7 @@ class AdwordsManager{
 		// Set additional settings (optional).
 		$campaign->status = $data['campaign_status'];
 		$campaign->startDate = date('Ymd', strtotime('now'));
-
-		// Set advanced location targeting settings (optional).
-		$geoTargetTypeSetting = new \GeoTargetTypeSetting();
-		$geoTargetTypeSetting->positiveGeoTargetType = 'DONT_CARE';
-		$geoTargetTypeSetting->negativeGeoTargetType = 'DONT_CARE';
-		$campaign->settings[] = $geoTargetTypeSetting;
+		//$campaign->adServingOptimizationStatus = 'UNAVAILABLE';
 
 		// Create operation.
 		$operation = new \CampaignOperation();
@@ -135,37 +134,136 @@ class AdwordsManager{
 
 		// Display results.
 		$campaign = $result->value[0];
+
+		$languages = explode(',', $data['languages']);
+		if(count($languages) > 0){
+			$this->addCampaignTargetingCriteria($clientCustomerId, $campaign->id, $languages, 'LANGUAGE');
+		}
+
+		$locations = explode(',', $data['areas']);
+		if(count($locations) > 0){
+			$this->addCampaignTargetingCriteria($clientCustomerId, $campaign->id, $locations, 'LOCATION');
+		}
+		
 		return $campaign->id;
 	}
 
-	public function updateCampaign($clientCustomerId, $campaignId){
-		try {
-			$this->user->SetClientCustomerId($clientCustomerId);
-			// Get the service, which loads the required classes.
-			$campaignService = $this->user->GetService('CampaignService', ADWORDS_VERSION);
-
-			// Create campaign using an existing ID.
-			$campaign = new \Campaign();
-			$campaign->id = $campaignId;
-			$campaign->status = 'ACTIVE';
-
-			// Create operation.
-			$operation = new \CampaignOperation();
-			$operation->operand = $campaign;
-			$operation->operator = 'SET';
-
-			$operations = array($operation);
-
-			// Make the mutate request.
-			$result = $campaignService->mutate($operations);
-
-			// Display result.
-			$campaign = $result->value[0];
-			printf("Campaign with ID '%s' was paused.\n", $campaign->id);
-
-		} catch (Exception $e) {
-			printf("An error has occurred: %s\n", $e->getMessage());
+	/**
+	 * Add criterias on campaign.
+	 *
+	 * @param string $clientCustomerId:
+	 * @param string $campaignId;
+	 * @param array $criterias: criteria's id array.
+	 * @param string $type:LOCATION/LANGUAGE. 
+	 * @return array: criterias id on campaign.
+	 * @throw Exception
+	 */
+	public function addCampaignTargetingCriteria($clientCustomerId, $campaignId, array $criterias, $type){
+		if(count($criterias) == 0){
+			return NULL;
 		}
+		$this->user->SetClientCustomerId($clientCustomerId);
+		$campaignCriterionService = $this->user->GetService('CampaignCriterionService', ADWORDS_VERSION);
+		$campaignCriteria = array();
+		foreach($criterias as $criteriaId){
+			$criteria = null;
+			switch($type){
+				case 'LOCATION': $criteria = new \Location(); break;
+				case 'LANGUAGE': $criteria = new \Language(); break;
+				default:
+								 throw new \Exception('currently unsupported criteria type #'.$type);
+			}
+			$criteria->id = $criteriaId;
+			$campaignCriteria[] = new \CampaignCriterion($campaignId, null, $criteria);
+		}
+
+		$operations = array();
+		foreach($campaignCriteria as $campaignCriterion){
+			$operations[] = new \CampaignCriterionOperation($campaignCriterion, 'ADD');
+		}
+
+		$result = $campaignCriterionService->mutate($operations);
+
+		$criterionIds = array();
+		foreach($result->value as $campaignCriterion){
+			$criterionIds[] = $campaignCriterion->criterion->id;
+		}
+
+		return $criterionIds;
+	}
+
+	/**
+	 * Set criterias on campaign.
+	 *
+	 * @param string $clientCustomerId:
+	 * @param string $campaignId;
+	 * @param array $criterias: criteria's id array.
+	 * @param string $type:LOCATION/LANGUAGE. 
+	 * @return array: criterias id on campaign.
+	 * @throw Exception
+	 */
+	public function setCampaignTargetingCriteria($clientCustomerId, $campaignId, array $criterias, $type){
+		if(count($criterias) == 0){
+			return NULL;
+		}
+		$this->user->SetClientCustomerId($clientCustomerId);
+		$campaignCriterionService = $this->user->GetService('CampaignCriterionService', ADWORDS_VERSION);
+		$campaignCriteria = array();
+		foreach($criterias as $criteriaId){
+			$criteria = null;
+			switch($type){
+				case 'LOCATION': $criteria = new \Location(); break;
+				case 'LANGUAGE': $criteria = new \Language(); break;
+				default:
+								 throw new \Exception('currently unsupported criteria type #'.$type);
+			}
+			$criteria->id = $criteriaId;
+			$campaignCriteria[] = new \CampaignCriterion($campaignId, null, $criteria);
+		}
+
+		$operations = array();
+		foreach($campaignCriteria as $campaignCriterion){
+			$operations[] = new \CampaignCriterionOperation($campaignCriterion, 'SET');
+		}
+
+		$result = $campaignCriterionService->mutate($operations);
+
+		$criterionIds = array();
+		foreach($result->value as $campaignCriterion){
+			$criterionIds[] = $campaignCriterion->criterion->id;
+		}
+
+		return $criterionIds;
+	}
+
+	public function updateCampaign($clientCustomerId, $campaignId, $data){
+		$this->user->SetClientCustomerId($clientCustomerId);
+		// Get the service, which loads the required classes.
+		$campaignService = $this->user->GetService('CampaignService', ADWORDS_VERSION);
+
+		// Create campaign using an existing ID.
+		$campaign = new \Campaign();
+		$campaign->id = $campaignId;
+
+		if(isset($data['campaign_status']){
+			$campaign->status = $data['campaign_status'];
+		}
+
+		if(isset($data['campaign_name']){
+			$campaign->name = $data['campaign_name'];	
+		}
+
+		// Create operation.
+		$operation = new \CampaignOperation();
+		$operation->operand = $campaign;
+		$operation->operator = 'SET';
+
+		$operations = array($operation);
+
+		// Make the mutate request.
+		$result = $campaignService->mutate($operations);
+		
+		return TRUE;
 	}
 
 	public function createAdGroup(){
