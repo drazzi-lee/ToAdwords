@@ -37,7 +37,9 @@ class AdGroupManager extends AdwordsBase{
 	 * @param array $data: $data of AdGroup.
 	 * @return string: AdGroup's id.
 	 * @throw Exception
-	 * @todo keywords
+	 * @todo keywords 
+	 * @see http://stackoverflow.com/questions/8781850/
+	 * @see https://code.google.com/p/google-api-adwords-php/source/browse/examples/AdWords/v201306/BasicOperations/AddKeywords.php
 	 */
 	public function create($data){
 		if(empty($data['adgroup_name'])){
@@ -73,6 +75,9 @@ class AdGroupManager extends AdwordsBase{
 		// Make the mutate request.
 		$result = $this->adGroupService->mutate($operations);	
 		$adGroup = $result->value[0];
+
+		// Add Keywords on AdGroup
+		$this->addKeywords($adGroupId, explode(',', $data['keywords']));
 		return $adGroup->id;
 	}
 	
@@ -101,6 +106,13 @@ class AdGroupManager extends AdwordsBase{
 		}
 
 		// Update the bid.
+		if(isset($data['max_cpc'])){
+			$bid = new \CpcBid();
+			$bid->bid = new \Money($data['max_cpc'] * self::$moneyMultiples); //default max cpc.
+			$biddingStrategyConfiguration = new \BiddingStrategyConfiguration();
+			$biddingStrategyConfiguration->bids[] = $bid;
+			$adGroup->biddingStrategyConfiguration = $biddingStrategyConfiguration;
+		}
 		// Update Keywords.
 		
 		// Create operation.
@@ -142,6 +154,38 @@ class AdGroupManager extends AdwordsBase{
 		$result = $this->adGroupService->mutate($operations);
 		// Display result.
 		$adGroup = $result->value[0];
+		return TRUE;
+	}
+
+	/**
+	 *
+	 * @param string $adGroupId:
+	 * @param array $keywords:
+	 * @return boolean: TRUE on success
+	 * @throw \Exception;
+	 * @see http://stackoverflow.com/questions/8781850/
+	 */
+	private function addKeywords($adGroupId, $keywords){
+		$adGroupCriterionService = $this->getService('AdGroupCriterionService');
+
+		$operations = array();
+		foreach($keywords as $keyword){
+			$keywordObj = new \Keyword();
+			$keywordObj->text = $keyword;
+			$keywordObj->matchType = 'BROAD';
+
+			$keywordAdGroupCriterion = new \BiddableAdGroupCriterion();
+			$keywordAdGroupCriterion->adGroupId = $adGroupId;
+			$keywordAdGroupCriterion->criterion = $keywordobj;
+
+			$keywordAdGroupCriterionOperation = new \AdGroupCriterionOperation();
+			$keywordAdGroupCriterionOperation->operand = $keywordAdGroupCriterion;
+			$keywordAdGroupCriterionOperation->operator = 'ADD';
+
+			$operations[] = $keywordAdGroupCriterionOperation;
+		}
+		$result = $adGroupCriterionService->mutate($operations);
+
 		return TRUE;
 	}
 }

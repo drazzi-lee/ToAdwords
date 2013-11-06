@@ -130,6 +130,8 @@ class CampaignManager extends AdwordsBase{
 	 * @return string: campaign's id.
 	 * @throw Exception
 	 * @todo Languages & Locations
+	 * @see https://developers.google.com/adwords/api/docs/guides/location-targeting#updating-targets
+	 * @note Need to use the REMOVE + ADD combination when updating geo targets for campaign.
 	 */
 	public function update($data){
 		if(!isset($data['campaign_id'])){
