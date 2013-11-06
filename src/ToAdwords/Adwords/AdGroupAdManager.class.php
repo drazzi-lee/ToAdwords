@@ -63,7 +63,7 @@ class AdGroupAdManager extends AdwordsBase{
 		$adGroupAd->status = $this->mappingStatus($data['ad_status']);
 
 		// Create operation.
-		$operation = new AdGroupAdOperation();
+		$operation = new \AdGroupAdOperation();
 		$operation->operand = $adGroupAd;
 		$operation->operator = 'ADD';
 		$operations[] = $operation;
@@ -117,7 +117,7 @@ class AdGroupAdManager extends AdwordsBase{
 		}
 
 		// Create operation.
-		$operation = new AdGroupAdOperation();
+		$operation = new \AdGroupAdOperation();
 		$operation->operand = $adGroupAd;
 		$operation->operator = 'SET';
 		$operations = array($operation);
@@ -153,7 +153,7 @@ class AdGroupAdManager extends AdwordsBase{
 		$adGroupAd->ad = $textAd;
 		
 		// Create operation.
-		$operation = new AdGroupAdOperation();
+		$operation = new \AdGroupAdOperation();
 		$operation->operand = $adGroupAd;
 		$operation->operator = 'REMOVE';		
 		$operations = array($operation);

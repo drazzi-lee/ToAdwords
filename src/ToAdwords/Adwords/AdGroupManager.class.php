@@ -54,7 +54,7 @@ class AdGroupManager extends AdwordsBase{
 		$adGroup->name = $data['adgroup_name'];
 
 		// Set bids (required).
-		$bid = new CpcBid();
+		$bid = new \CpcBid();
 		$bid->bid = new \Money($data['max_cpc'] * self::$moneyMultiples); //default max cpc.
 		//$bid->contentBid = new \Money($data['max_cpc'] * self::$moneyMultiples); # display network bid.
 		$biddingStrategyConfiguration = new \BiddingStrategyConfiguration();
@@ -65,7 +65,7 @@ class AdGroupManager extends AdwordsBase{
 		$adGroup->status = $this->mappingStatus($data['adgroup_status']);
 
 		// Create operation.
-		$operation = new AdGroupOperation();
+		$operation = new \AdGroupOperation();
 		$operation->operand = $adGroup;
 		$operation->operator = 'ADD';
 		$operations[] = $operation;
@@ -90,7 +90,7 @@ class AdGroupManager extends AdwordsBase{
 		}
 
 		// Create ad group using an existing ID.
-		$adGroup = new AdGroup();
+		$adGroup = new \AdGroup();
 		$adGroup->id = $adGroupId;
 		
 		if(isset($data['adgroup_status'])){
@@ -125,14 +125,14 @@ class AdGroupManager extends AdwordsBase{
 			throw new \Exception('adgroup id is required.');
 		}
 		// Create ad group with DELETED status.
-		$adGroup = new AdGroup();
+		$adGroup = new \AdGroup();
 		$adGroup->id = $data['adgroup_id'];
 		$adGroup->status = 'DELETED';
 		// Rename the ad group as you delete it, to avoid future name conflicts.
 		$adGroup->name = 'Deleted ' . date('Ymd his');
 
 		// Create operations.
-		$operation = new AdGroupOperation();
+		$operation = new \AdGroupOperation();
 		$operation->operand = $adGroup;
 		$operation->operator = 'SET';
 
