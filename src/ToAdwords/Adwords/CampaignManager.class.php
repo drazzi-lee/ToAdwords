@@ -113,11 +113,11 @@ class CampaignManager extends AdwordsBase{
 		//add targeting criteria.
 		$languages = explode(',', $data['languages']);
 		if(count($languages) > 0){
-			$this->addTargetingCriteria($campaign->id, $languages, 'LANGUAGE');
+			$this->addCriteria($campaign->id, $languages, 'LANGUAGE');
 		}
 		$locations = explode(',', $data['areas']);
 		if(count($locations) > 0){
-			$this->addTargetingCriteria($campaign->id, $locations, 'LOCATION');
+			$this->addCriteria($campaign->id, $locations, 'LOCATION');
 		}
 		
 		return $campaign->id;
@@ -129,7 +129,6 @@ class CampaignManager extends AdwordsBase{
 	 * @param array $data: $data of campaign.
 	 * @return string: campaign's id.
 	 * @throw Exception
-	 * @todo Languages & Locations
 	 * @see https://developers.google.com/adwords/api/docs/guides/location-targeting#updating-targets
 	 * @note Need to use the REMOVE + ADD combination when updating geo targets for campaign.
 	 */
@@ -193,6 +192,18 @@ class CampaignManager extends AdwordsBase{
 			$campaign->budget->budgetId = $budget->budgetId;
 		}
 		
+		if(isset($data['languages']) && count(explode($data['languages'])) > 0){
+			$currentLanguages = $this->getCriteria($data['campaign_id'], 'LANGUAGE');
+			$this->delCriteria($data['campaign_id'], $currentLanguages, 'LANGUAGE');
+			$this->addCriteria($data['campaign_id'], explode($data['languages']), 'LANGUAGE');
+		}
+		
+		if(isset($data['locations'])){
+			$currentLocations = $this->getCriteria($data['campaign_id'], 'LOCATION');
+			$this->delCriteria($data['campaign_id'], $currentLocations, 'LOCATION');
+			$this->addCriteria($data['campaign_id'], explode($data['locations']), 'LOCATION');
+		}
+		
 		// Create operation.
 		$operation = new \CampaignOperation();
 		$operation->operand = $campaign;
@@ -246,7 +257,7 @@ class CampaignManager extends AdwordsBase{
 	 * @return array: criterias id on campaign.
 	 * @throw Exception
 	 */
-	private function addTargetingCriteria($campaignId, array $criterias, $type){
+	private function addCriteria($campaignId, array $criterias, $type){
 		if(count($criterias) == 0){
 			return NULL;
 		}
@@ -280,14 +291,14 @@ class CampaignManager extends AdwordsBase{
 		return $criterionIds;
 	}
 	
-	private function delTargetingCriteria($campaignId, array $criterias, $type){
-	
-	}
-	
 	/**
+	 * Get criteria by id in specify type
 	 *
+	 * @param string $campaignId
+	 * @param string $type
+	 * @return array: criteria ids.
 	 */
-	private function getTargetingCriteria($campaignId){
+	private function getCriteria($campaignId, $type){
 		// Get the service, which loads the required classes.
 		$campaignCriterionService = $this->getService('CampaignCriterionService');
 
@@ -297,10 +308,10 @@ class CampaignManager extends AdwordsBase{
 
 		// Create predicates.
 		$selector->predicates[] = new \Predicate('CampaignId', 'IN', array($campaignId));
-		$selector->predicates[] = new \Predicate('CriteriaType', 'IN', array('LANGUAGE', 'LOCATION'));
+		$selector->predicates[] = new \Predicate('CriteriaType', 'IN', array($type));
 
 		// Create paging controls.
-		$selector->paging = new \Paging(0, AdWordsConstants::RECOMMENDED_PAGE_SIZE);
+		$selector->paging = new \Paging(0, \AdWordsConstants::RECOMMENDED_PAGE_SIZE);
 		
 		$criterions = array();
 		do {
@@ -310,19 +321,49 @@ class CampaignManager extends AdwordsBase{
 			// Display results.
 			if (isset($page->entries)) {
 				foreach ($page->entries as $campaignCriterion) {
-				//$cirterions[$campaignCriterion->criterion->CriterionType][] = 
-				printf("Campaign targeting criterion with ID '%s' and type '%s' was "
-					. "found.\n", $campaignCriterion->criterion->id,
-					$campaignCriterion->criterion->CriterionType);
+					criterions[] = $campaignCriterion->criterion->id;
 				}
-			} else {
-				print "No campaign targeting criteria were found.\n";
 			}
 
 			// Advance the paging index.
-			$selector->paging->startIndex += AdWordsConstants::RECOMMENDED_PAGE_SIZE;
+			$selector->paging->startIndex += \AdWordsConstants::RECOMMENDED_PAGE_SIZE;
 		} while ($page->totalNumEntries > $selector->paging->startIndex);
 		
 		return $criterions;
+	}
+	
+	/**
+	 * Delete criteria by id in specify type
+	 *
+	 * @param string $campaignId
+	 * @param array $criterions
+	 * @param string $type
+	 * @return TRUE on success, \Exception on failure.
+	 */
+	private function delCriteria($campaignId, $criterions, $type){
+		// Get the service, which loads the required classes.
+		$campaignCriterionService = $this->getService('CampaignCriterionService');
+		
+		$campaignCriteria = array();
+		if(count($criterions) > 0){
+			$criteria = null;
+			switch($type){
+				case 'LOCATION': $criteria = new \Location(); break;
+				case 'LANGUAGE': $criteria = new \Language(); break;
+				default:
+					throw new \Exception('currently unsupported criteria type #'.$type);
+			}
+			$criteria->id = $criteriaId;
+			$campaignCriteria[] = new \CampaignCriterion($campaignId, null, $criteria);
+		}
+
+		$operations = array();
+		foreach($campaignCriteria as $campaignCriterion){
+			$operations[] = new \CampaignCriterionOperation($campaignCriterion, 'REMOVE');
+		}
+
+		$result = $campaignCriterionService->mutate($operations);
+		
+		return TRUE;
 	}
 }
