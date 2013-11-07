@@ -17,7 +17,7 @@ class TestAction{
 	
 	public function createCampaign(){
 		$data = array(
-				'idclick_planid' => 61628,
+				'idclick_planid' => 61629,
 				'idclick_uid'	=> 503,
 				'campaign_name' => 'campaign_name #' . uniqid(),
 				'areas' => '10031,10032',
@@ -43,8 +43,8 @@ class TestAction{
 	
 	public function updateCampaign(){
 		$data = array (
-				'idclick_planid' => 61627,
-				'idclick_uid'		=> 502,
+				'idclick_planid' => 61629,
+				'idclick_uid'		=> 503,
 				'budget_amount'		=> 32334,
 				'campaign_status'	=> 'ACTIVE',
 		);
@@ -55,10 +55,10 @@ class TestAction{
 	public function createAdgroup(){
 		$data = array(
 	    	'idclick_groupid'	=> 123456,
-			'idclick_planid'	=> 61627,
+			'idclick_planid'	=> 61629,
         	'adgroup_name'		=> 'group_name',
         	'keywords'			=> array('keywords1', 'keywords2'),
-        	'budget_amount'		=> 200.00,	
+        	'max_cpc'		=> 200.00,	
 			'adgroup_status'	=> 'ACTIVE',
         );
 		$group = new GroupModel();
@@ -68,10 +68,10 @@ class TestAction{
 	public function updateAdgroup(){
 		$data = array(
 	    	'idclick_groupid'	=> 123456,
-			'idclick_uid'		=> 441,			
+			'idclick_planid'	=> 61629,
         	'adgroup_name'		=> 'group_name2',
         	'keywords'			=> array('keywords3', 'keywords2', 'keywords1'),
-        	'budget_amount'		=> 201.00,
+        	'max_cpc'		=> 201.00,
         );
 		$group = new GroupModel();
 		var_dump($group->updateAdgroup($data));
@@ -102,12 +102,13 @@ class TestAction{
 	
 	public function updateAd(){
 		$data = array(
-			'idclick_adid'		=> 12345,
+			'idclick_adid'		=> 12347,
 			'idclick_groupid'	=> 123456, 
 			'ad_headline'		=> 'headline——l',
 			'ad_description1'	=> 'description1....',
 			'ad_description2'	=> 'description2....',
 			'ad_url'			=> 'http://www.izptec.com/go1.php',
+			'ad_status'			=> 'ACTIVE',
 		);
 		$groupAd = new GroupadModel();
 		var_dump($groupAd->updateAd($data));
@@ -122,4 +123,4 @@ class TestAction{
 	}
 }
 $testAction = new TestAction();
-$testAction->createCampaign();
+$testAction->updateAd();

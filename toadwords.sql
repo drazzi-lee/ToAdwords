@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2013-11-06 18:40:55
+Date: 2013-11-07 11:56:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,6 +22,7 @@ CREATE TABLE `adgroup` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '当前对象objectId，由sync_cache使用。',
   `idclick_groupid` int(10) NOT NULL COMMENT '对象在idclick中的groupid，广告组ID',
   `idclick_planid` int(10) NOT NULL COMMENT '对象在idclick中的父级依赖，广告组ID',
+  `idclick_uid` int(10) NOT NULL,
   `adgroup_id` bigint(10) DEFAULT NULL COMMENT '对象在Google Adwords中的AdGroupId.',
   `campaign_id` bigint(10) DEFAULT NULL COMMENT '对象在Google Adwords中的父级依赖，CampaignId',
   `adgroup_name` varchar(128) NOT NULL COMMENT '广告组名称',
@@ -35,8 +36,7 @@ CREATE TABLE `adgroup` (
   UNIQUE KEY `adgroup_id` (`adgroup_id`),
   KEY `idclick_planid` (`idclick_planid`),
   KEY `campaign_id` (`campaign_id`),
-  CONSTRAINT `adgroup_ibfk_1` FOREIGN KEY (`idclick_planid`) REFERENCES `campaign` (`idclick_planid`) ON UPDATE CASCADE,
-  CONSTRAINT `adgroup_ibfk_2` FOREIGN KEY (`campaign_id`) REFERENCES `campaign` (`campaign_id`) ON UPDATE CASCADE
+  CONSTRAINT `adgroup_ibfk_1` FOREIGN KEY (`idclick_planid`) REFERENCES `campaign` (`idclick_planid`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='此表记录广告组当前状态以及与Google Adwords的对象关系及同步情况。';
 
 -- ----------------------------
@@ -51,6 +51,7 @@ CREATE TABLE `adgroupad` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '当前对象objectId',
   `idclick_adid` int(10) NOT NULL COMMENT '对象在idclick中的adid，广告ID',
   `idclick_groupid` int(10) NOT NULL COMMENT '对象在idclick中的groupid，广告组ID',
+  `idclick_uid` int(10) NOT NULL,
   `ad_id` bigint(10) DEFAULT NULL COMMENT '对象在Google Adwords中的AdGroupAdId',
   `adgroup_id` bigint(10) DEFAULT NULL COMMENT '对象在Google Adwords中的父级依赖，AdGroupId',
   `ad_headline` varchar(128) NOT NULL COMMENT '广告显示标题',
@@ -64,8 +65,7 @@ CREATE TABLE `adgroupad` (
   PRIMARY KEY (`id`,`idclick_adid`),
   KEY `idclick_groupid` (`idclick_groupid`),
   KEY `adgroup_id` (`adgroup_id`),
-  CONSTRAINT `adgroupad_ibfk_1` FOREIGN KEY (`idclick_groupid`) REFERENCES `adgroup` (`idclick_groupid`) ON UPDATE CASCADE,
-  CONSTRAINT `adgroupad_ibfk_2` FOREIGN KEY (`adgroup_id`) REFERENCES `adgroup` (`adgroup_id`) ON UPDATE CASCADE
+  CONSTRAINT `adgroupad_ibfk_1` FOREIGN KEY (`idclick_groupid`) REFERENCES `adgroup` (`idclick_groupid`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='此表记录当前广告的信息及与Google Adwords对象的对应关系及同步状态。';
 
 -- ----------------------------
@@ -80,8 +80,6 @@ CREATE TABLE `campaign` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idclick_planid` int(10) NOT NULL COMMENT '对象在idclick中的plan_id，广告计划ID。',
   `idclick_uid` int(10) NOT NULL COMMENT '对象在idclick中的uid，用户ID',
-  `campaign_id` bigint(10) DEFAULT NULL COMMENT '对象在Google Adwords中的campaignId，广告系列ID',
-  `customer_id` bigint(10) DEFAULT NULL COMMENT '对象在Google Adwords中的customerId，帐户ID',
   `campaign_name` varchar(128) NOT NULL COMMENT '对象的名字，广告计划名称',
   `languages` varchar(200) NOT NULL COMMENT '投放网页语言，以ID的形式，以逗号分隔',
   `areas` varchar(200) NOT NULL COMMENT '对象的投放地域信息，ID形式，以逗号分隔',
@@ -94,17 +92,14 @@ CREATE TABLE `campaign` (
   `sync_status` enum('QUEUE','SYNCED','ERROR','RETRY','RECEIVE','SENDING') NOT NULL DEFAULT 'RECEIVE' COMMENT '在队列中，已同步，同步出错，重试，收到，发送中',
   PRIMARY KEY (`id`,`idclick_planid`),
   UNIQUE KEY `idclick_planid` (`idclick_planid`),
-  UNIQUE KEY `campaign_id` (`campaign_id`),
   KEY `campaign_ibfk_1` (`idclick_uid`),
-  KEY `campaign_ibfk_2` (`customer_id`),
-  CONSTRAINT `campaign_ibfk_1` FOREIGN KEY (`idclick_uid`) REFERENCES `customer` (`idclick_uid`) ON UPDATE CASCADE,
-  CONSTRAINT `campaign_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON UPDATE CASCADE
+  CONSTRAINT `campaign_ibfk_1` FOREIGN KEY (`idclick_uid`) REFERENCES `customer` (`idclick_uid`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='此表用来记录广告计划模型具体信息及与ADWORDS对应关系、同步状态。';
 
 -- ----------------------------
 -- Records of campaign
 -- ----------------------------
-INSERT INTO campaign VALUES ('1', '61628', '503', null, '9537363155', 'campaign_name #52734336c270f', '10031,10032', '10031,10032', 'BUDGET_OPTIMIZER', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
+INSERT INTO campaign VALUES ('1', '61628', '503', 'campaign_name #52734336c270f', '10031,10032', '10031,10032', 'BUDGET_OPTIMIZER', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'QUEUE');
 
 -- ----------------------------
 -- Table structure for `customer`

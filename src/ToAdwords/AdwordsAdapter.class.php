@@ -18,6 +18,8 @@ use ToAdwords\Exception\DependencyException;
 use ToAdwords\MessageHandler;
 use ToAdwords\Definition\Operation;
 use ToAdwords\Model\CustomerModel;
+use ToAdwords\Model\CampaignModel;
+use ToAdwords\Model\AdGroupModel;
 
 use \Exception;
 
@@ -49,7 +51,10 @@ abstract class AdwordsAdapter{
 		if(empty($data[$currentModel::$idclickObjectIdField])){
 			throw new DataCheckException('Field #'.$currentModel::$idclickObjectIdField.' is required.');
 		}
-		$row = $currentModel->getAdapteInfo($data[$currentModel::$idclickObjectIdField]);
+
+		$idclickField = $currentModel::$idclickObjectIdField;
+		$row = $currentModel->getOne($idclickField, 
+									$idclickField . '=' . $data[$idclickField]);
 		if(!empty($row)){
 			return $this->update($data);
 		} else {
@@ -70,7 +75,9 @@ abstract class AdwordsAdapter{
 			
 			//check parent dependency
 			$parentModel = new static::$parentModelName();
-			$parentInfo = $parentModel->getAdapteInfo($data[$parentModel::$idclickObjectIdField]);
+			$idclickField = $parentModel::$idclickObjectIdField;
+			$parentInfo = $parentModel->getOne($idclickField, 
+									$idclickField . '=' . $data[$idclickField]);
 			if($parentInfo === FALSE){
 				if(static::$parentAdapterName == 'ToAdwords\CustomerAdapter'){
 					$parentAdapter = new static::$parentAdapterName();	
@@ -82,10 +89,6 @@ abstract class AdwordsAdapter{
 					throw new DependencyException('dependency error, parent module #' .
 								get_class($parentModel) . ' not found. parentObjectId #' .
 								$data[$parentModel::$idclickObjectIdField]);
-				}
-			} else {
-				if($parentModel->isValidAdwordsId($parentInfo[$parentModel::$adwordsObjectIdField])){
-					$data[$parentModel::$adwordsObjectIdField] = $parentInfo[$parentModel::$adwordsObjectIdField];
 				}
 			}
 			$data['last_action'] = Operation::CREATE;
@@ -242,7 +245,7 @@ abstract class AdwordsAdapter{
 			$currentModel->updateSyncStatus(SyncStatus::SYNCED, $data[$currentModel::$idclickObjectIdField]);
 			return TRUE;
 		} catch(Exception $e){
-			Log::write("[warning] An error has occurred: {$e->getMessage()}\n"
+			Log::write("[warning] An error has occurred: {$e->getMessage()}\n", __METHOD__);
 			return FALSE;
 		}
 	}
@@ -283,7 +286,7 @@ abstract class AdwordsAdapter{
 			$currentModel->updateSyncStatus(SyncStatus::SYNCED, $data[$currentModel::$idclickObjectIdField]);
 			return TRUE;
 		} catch(Exception $e){
-			Log::write("[warning] An error has occurred: {$e->getMessage()}\n"
+			Log::write("[warning] An error has occurred: {$e->getMessage()}\n", __METHOD__);
 			return FALSE;
 		}
 	}
@@ -325,7 +328,7 @@ abstract class AdwordsAdapter{
 			$currentModel->updateSyncStatus(SyncStatus::SYNCED, $data[$currentModel::$idclickObjectIdField]);
 			return TRUE;
 		} catch(Exception $e){
-			Log::write("[warning] An error has occurred: {$e->getMessage()}\n"
+			Log::write("[warning] An error has occurred: {$e->getMessage()}\n", __METHOD__);
 			return FALSE;
 		}
 	}
@@ -482,6 +485,20 @@ abstract class AdwordsAdapter{
 					throw new DataCheckException('budget_amount must greater or equal than 1.');
 				}
 			}
+		}
+
+		//add idclick_uid
+		if(!isset($data['idclick_uid'])){
+			if(isset($data['idclick_planid'])){
+				$campaignModel = new CampaignModel();
+				$campaignInfo = $campaignModel->getOne('idclick_uid', 'idclick_planid='.$data['idclick_planid']);
+				$data['idclick_uid'] = $campaignInfo['idclick_uid'];
+			} else if(isset($data['idclick_groupid'])){
+				$adGroupModel = new AdGroupModel();
+				$adGroupInfo = $adGroupModel->getOne('idclick_planid', 'idclick_groupid='.$data['idclick_groupid']);
+				$data['idclick_planid'] = $adGroupInfo['idclick_planid'];		
+				self::prepareData($data, $action);
+			} 
 		}
 	}
 }

@@ -34,8 +34,4 @@ class AdGroupAdapter extends AdwordsAdapter{
 				'prohibitedFields'	=> array('sync_status', 'adgroup_id', 'campaign_id'),
 				),
 			);
-
-	public function createAdwordsAdGroup(){
-
-	}
 }
