@@ -15,7 +15,7 @@ class AdGroupManager extends AdwordsBase{
 	private $adGroupService;
 	private $budgetService;
 	
-	private static $statusMap = array(
+	protected static $statusMap = array(
 		'ACTIVE'	=> 'ENABLED',
 		'PAUSE'		=> 'PAUSED',
 		'DELETE'	=> 'DELETED',
@@ -77,7 +77,7 @@ class AdGroupManager extends AdwordsBase{
 		$adGroup = $result->value[0];
 
 		// Add Keywords on AdGroup
-		$this->addKeywords($adGroupId, explode(',', $data['keywords']));
+		$this->addKeywords($adGroup->id, explode(',', $data['keywords']));
 		return $adGroup->id;
 	}
 	
@@ -96,7 +96,7 @@ class AdGroupManager extends AdwordsBase{
 
 		// Create ad group using an existing ID.
 		$adGroup = new \AdGroup();
-		$adGroup->id = $adGroupId;
+		$adGroup->id = $data['adgroup_id'];
 		
 		if(isset($data['adgroup_status'])){
 			$adGroup->status = $this->mappingStatus($data['adgroup_status']);
@@ -176,7 +176,7 @@ class AdGroupManager extends AdwordsBase{
 
 			$keywordAdGroupCriterion = new \BiddableAdGroupCriterion();
 			$keywordAdGroupCriterion->adGroupId = $adGroupId;
-			$keywordAdGroupCriterion->criterion = $keywordobj;
+			$keywordAdGroupCriterion->criterion = $keywordObj;
 
 			$keywordAdGroupCriterionOperation = new \AdGroupCriterionOperation();
 			$keywordAdGroupCriterionOperation->operand = $keywordAdGroupCriterion;

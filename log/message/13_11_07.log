@@ -1,0 +1,1802 @@
+[ 2013-11-07T13:19:08+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b22cc89fdd
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:19:20+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b22cc89fdd
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:22:10+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b2382d1627
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:22:17+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b2382d1627
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:23:22+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b23ca65fc4
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:23:24+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b23ca65fc4
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:24:08+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b23f81fd2b
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:24:12+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b23f81fd2b
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:24:44+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b241c6377e
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:24:47+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b241c6377e
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:24:47+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [warning] An error has occurred: customer has not synced yet.
+
+[ 2013-11-07T13:30:13+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b25651700d
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:30:16+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b25651700d
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:30:16+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [warning] An error has occurred: customer has not synced yet.
+
+[ 2013-11-07T13:30:28+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b25740cf55
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:31:37+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b25740cf55
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:33:16+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b261c7b770
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:33:21+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b261c7b770
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:33:21+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [warning] An error has occurred: customer has not synced yet.
+
+[ 2013-11-07T13:33:45+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b26391ed8d
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:33:47+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b26391ed8d
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:33:48+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [warning] An error has occurred: customer has not synced yet.
+
+[ 2013-11-07T13:34:58+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b2681e4a41
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:35:01+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b2681e4a41
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:35:01+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [warning] An error has occurred: customer has not synced yet.
+
+[ 2013-11-07T13:36:13+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b26cd8060d
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:36:17+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b26cd8060d
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:37:03+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b26ff0fc9e
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:37:17+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b26ff0fc9e
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:37:17+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [warning] An error has occurred: parent has not synced yet.
+
+[ 2013-11-07T13:38:32+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b2757c6e9b
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:38:35+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b2757c6e9b
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:39:36+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b2798c7939
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:39:39+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b2798c7939
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:41:12+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b27f89333f
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:41:16+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b27f89333f
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:42:14+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b28363517b
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:42:16+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b28363517b
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:42:24+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [warning] An error has occurred: [CriterionError.INVALID_CRITERION_ID @ operations[0].operand.criterion; trigger:'10031', CriterionError.INVALID_CRITERION_ID @ operations[1].operand.criterion; trigger:'10032']
+
+[ 2013-11-07T13:45:11+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61630
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b28e787e43
+    [areas] => 2156,2157
+    [languages] => 1017,1018
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:45:14+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61630
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b28e787e43
+    [areas] => 2156,2157
+    [languages] => 1017,1018
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:45:32+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [warning] An error has occurred: [CriterionError.INVALID_CRITERION_ID @ operations[1].operand.criterion; trigger:'2157']
+
+[ 2013-11-07T13:49:22+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61631
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b29e28ae88
+    [areas] => 2156,2157
+    [languages] => 1017,1018
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:49:25+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61631
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b29e28ae88
+    [areas] => 2156,2157
+    [languages] => 1017,1018
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:49:42+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [warning] An error has occurred: [CriterionError.INVALID_CRITERION_ID @ operations[1].operand.criterion; trigger:'2157']
+
+[ 2013-11-07T13:49:42+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61631
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b29e28ae88
+    [areas] => 2156,2157
+    [languages] => 1017,1018
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:50:31+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61632
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b2a27d368b
+    [areas] => 2156
+    [languages] => 1017,1018
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:50:34+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61632
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b2a27d368b
+    [areas] => 2156
+    [languages] => 1017,1018
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:50:50+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [notice] {static::} with customer_id #145257565 was created.
+
+[ 2013-11-07T13:52:27+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61633
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b2a9acbbcb
+    [areas] => 2156
+    [languages] => 1017,1018
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:52:29+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61633
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b2a9acbbcb
+    [areas] => 2156
+    [languages] => 1017,1018
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:52:44+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [notice] {static::} with customer_id #145257685 was created.
+
+[ 2013-11-07T13:54:30+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b2b15e2f0c
+    [areas] => 2156
+    [languages] => 1017,1018
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:54:31+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b2b15e2f0c
+    [areas] => 2156
+    [languages] => 1017,1018
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T13:54:46+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [notice] Campaign with customer_id #145257805 was created.
+
+[ 2013-11-07T13:55:46+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T13:55:52+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T13:57:03+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T13:57:06+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T13:57:06+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [warning] An error has occurred: field #campaign_id is required.
+
+[ 2013-11-07T13:57:06+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:08:10+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:08:14+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:08:14+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [warning] An error has occurred: current model has not synced yet.
+
+[ 2013-11-07T14:08:14+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:08:43+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:08:47+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:08:47+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [warning] An error has occurred: current model has not synced yet.
+
+[ 2013-11-07T14:08:48+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:09:18+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:09:22+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:09:22+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [warning] An error has occurred: current model has not synced yet.
+
+[ 2013-11-07T14:09:22+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:10:44+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:10:46+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:10:46+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [warning] An error has occurred: current model has not synced yet.
+
+[ 2013-11-07T14:10:46+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:11:52+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:11:54+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:11:54+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [warning] An error has occurred: current model has not synced yet.
+
+[ 2013-11-07T14:11:54+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:13:10+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:16:32+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:17:03+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:17:03+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [warning] An error has occurred: current model has not synced yet.
+
+[ 2013-11-07T14:17:03+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:17:03+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:17:03+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [warning] An error has occurred: current model has not synced yet.
+
+[ 2013-11-07T14:17:03+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:17:19+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:17:20+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:17:20+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [warning] An error has occurred: current model has not synced yet.
+
+[ 2013-11-07T14:17:20+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:19:07+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:20:00+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:20:01+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:20:01+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [warning] An error has occurred: current model has not synced yet.
+
+[ 2013-11-07T14:20:01+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:20:01+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:20:01+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [warning] An error has occurred: current model has not synced yet.
+
+[ 2013-11-07T14:20:01+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:21:03+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:21:04+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:21:04+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [warning] An error has occurred: current model has not synced yet.
+
+[ 2013-11-07T14:21:04+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:23:41+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:23:43+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:23:43+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [warning] An error has occurred: current model has not synced yet.
+
+[ 2013-11-07T14:23:43+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:24:43+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:24:44+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:24:44+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [warning] An error has occurred: current model has not synced yet.
+
+[ 2013-11-07T14:24:44+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:25:09+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:25:10+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:25:11+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [warning] An error has occurred: current model has not synced yet.
+
+[ 2013-11-07T14:25:11+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:26:52+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:26:54+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:26:54+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [warning] An error has occurred: current model has not synced yet.
+
+[ 2013-11-07T14:26:54+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:27:51+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:27:53+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:27:53+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [warning] An error has occurred: current model has not synced yet.
+
+[ 2013-11-07T14:27:53+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:28:46+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:28:47+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:28:47+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [warning] An error has occurred: current model has not synced yet.
+
+[ 2013-11-07T14:28:47+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:30:53+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:30:55+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:31:07+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [notice] Campaign with customer_id # was updated.
+
+[ 2013-11-07T14:32:21+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:32:23+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:32:33+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [notice] Campaign with customer_id #9537363155 was updated.
+
+[ 2013-11-07T14:33:59+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 123456
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name
+    [keywords] => keywords1,keywords2
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+    [idclick_uid] => 503
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T14:34:01+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 123456
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name
+    [keywords] => keywords1,keywords2
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+    [idclick_uid] => 503
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T14:36:14+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 123457
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name
+    [keywords] => keywords1,keywords2
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+    [idclick_uid] => 503
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T14:36:16+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 123457
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name
+    [keywords] => keywords1,keywords2
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+    [idclick_uid] => 503
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T14:36:28+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [warning] An error has occurred: [RequiredError.REQUIRED @ operations[0].operand.adGroupId, RequiredError.REQUIRED @ operations[0].operand.criterion, RequiredError.REQUIRED @ operations[1].operand.adGroupId, RequiredError.REQUIRED @ operations[1].operand.criterion]
+
+[ 2013-11-07T14:36:28+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 123457
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name
+    [keywords] => keywords1,keywords2
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+    [idclick_uid] => 503
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T14:37:31+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 123458
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name
+    [keywords] => keywords1,keywords2
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+    [idclick_uid] => 503
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T14:37:33+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 123458
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name
+    [keywords] => keywords1,keywords2
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+    [idclick_uid] => 503
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T14:37:42+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [warning] An error has occurred: [AdGroupServiceError.DUPLICATE_ADGROUP_NAME @ operations[0].operand.name; trigger:'group_name']
+
+[ 2013-11-07T14:37:42+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 123458
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name
+    [keywords] => keywords1,keywords2
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+    [idclick_uid] => 503
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T14:38:41+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 123459
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name123459
+    [keywords] => keywords1,keywords2
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+    [idclick_uid] => 503
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T14:38:43+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 123459
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name123459
+    [keywords] => keywords1,keywords2
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+    [idclick_uid] => 503
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T14:38:55+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [notice] AdGroup with customer_id #10407972805 was created.
+
+[ 2013-11-07T14:40:44+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 123460
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name123460
+    [keywords] => keywords1,keywords2
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+    [idclick_uid] => 503
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T14:40:47+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 123460
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name123460
+    [keywords] => keywords1,keywords2
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+    [idclick_uid] => 503
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T14:41:00+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [notice] AdGroup with adgroup_id #10407975925 was created.
+
+[ 2013-11-07T14:41:31+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：AdGroup | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_groupid] => 123460
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name2602
+    [keywords] => keywords3,keywords2,keywords1
+    [max_cpc] => 201
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:41:32+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroup | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_groupid] => 123460
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name2602
+    [keywords] => keywords3,keywords2,keywords1
+    [max_cpc] => 201
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:41:42+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [warning] An error has occurred: [RequiredError.REQUIRED @ operations[0].operand.id]
+
+[ 2013-11-07T14:41:42+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：AdGroup | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_groupid] => 123460
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name2602
+    [keywords] => keywords3,keywords2,keywords1
+    [max_cpc] => 201
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:42:10+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：AdGroup | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_groupid] => 123460
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name2602
+    [keywords] => keywords3,keywords2,keywords1
+    [max_cpc] => 201
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:42:12+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroup | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_groupid] => 123460
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name2602
+    [keywords] => keywords3,keywords2,keywords1
+    [max_cpc] => 201
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:42:20+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [notice] AdGroup with customer_id #9537363155 was updated.
+
+[ 2013-11-07T14:43:15+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：AdGroupAd | 动作：CREATE | 消息内容：Array
+(
+    [idclick_adid] => 12347
+    [idclick_groupid] => 123459
+    [ad_headline] => headline
+    [ad_description1] => description1
+    [ad_description2] => description2
+    [ad_url] => http://www.izptec.com/go.php
+    [ad_displayurl] => http://www.izptec.com/
+    [ad_status] => PAUSE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T14:43:16+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroupAd | 动作：CREATE | 消息内容：Array
+(
+    [idclick_adid] => 12347
+    [idclick_groupid] => 123459
+    [ad_headline] => headline
+    [ad_description1] => description1
+    [ad_description2] => description2
+    [ad_url] => http://www.izptec.com/go.php
+    [ad_displayurl] => http://www.izptec.com/
+    [ad_status] => PAUSE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T14:44:27+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：AdGroupAd | 动作：CREATE | 消息内容：Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline
+    [ad_description1] => description1
+    [ad_description2] => description2
+    [ad_url] => http://www.izptec.com/go.php
+    [ad_displayurl] => http://www.izptec.com/
+    [ad_status] => PAUSE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T14:44:29+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroupAd | 动作：CREATE | 消息内容：Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline
+    [ad_description1] => description1
+    [ad_description2] => description2
+    [ad_url] => http://www.izptec.com/go.php
+    [ad_displayurl] => http://www.izptec.com/
+    [ad_status] => PAUSE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => CREATE
+)
+
+[ 2013-11-07T14:44:37+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [notice] AdGroupAd with ad_id #32072911045 was created.
+
+[ 2013-11-07T14:45:05+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：AdGroupAd | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:45:07+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroupAd | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:45:14+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [warning] An error has occurred: [RequiredError.REQUIRED @ operations[0].operand.adGroupId]
+
+[ 2013-11-07T14:45:14+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：AdGroupAd | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:46:52+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：AdGroupAd | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:46:53+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroupAd | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:46:56+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [warning] An error has occurred: adgroup_id is required.
+
+[ 2013-11-07T14:46:56+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：AdGroupAd | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:49:22+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：AdGroupAd | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:49:23+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroupAd | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:50:04+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：AdGroupAd | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:50:06+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroupAd | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-07T14:50:14+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [notice] AdGroupAd with customer_id #9537363155 was updated.
+

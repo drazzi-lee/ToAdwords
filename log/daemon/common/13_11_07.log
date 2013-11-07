@@ -1,0 +1,1130 @@
+[ 2013-11-07T13:19:20+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 1
+    [data] => {"module":"Campaign","action":"CREATE","data":{"idclick_planid":61629,"idclick_uid":503,"campaign_name":"campaign_name #527b22cc89fdd","areas":"10031,10032","languages":"10031,10032","bidding_type":"BUDGET_OPTIMIZER","budget_amount":20000,"delivery_method":"ACCELERATED","max_cpc":10,"campaign_status":"ACTIVE","last_action":"CREATE"}}
+)
+
+[ 2013-11-07T13:21:33+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 1
+Get position of queue (1st lap): 1
+Number of unread queue: 0
+
+[ 2013-11-07T13:22:17+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 2
+    [data] => {"module":"Campaign","action":"CREATE","data":{"idclick_planid":61629,"idclick_uid":503,"campaign_name":"campaign_name #527b2382d1627","areas":"10031,10032","languages":"10031,10032","bidding_type":"BUDGET_OPTIMIZER","budget_amount":20000,"delivery_method":"ACCELERATED","max_cpc":10,"campaign_status":"ACTIVE","last_action":"CREATE"}}
+)
+
+[ 2013-11-07T13:23:11+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 2
+Get position of queue (1st lap): 2
+Number of unread queue: 0
+
+[ 2013-11-07T13:23:24+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 3
+    [data] => {"module":"Campaign","action":"CREATE","data":{"idclick_planid":61629,"idclick_uid":503,"campaign_name":"campaign_name #527b23ca65fc4","areas":"10031,10032","languages":"10031,10032","bidding_type":"BUDGET_OPTIMIZER","budget_amount":20000,"delivery_method":"ACCELERATED","max_cpc":10,"campaign_status":"ACTIVE","last_action":"CREATE"}}
+)
+
+[ 2013-11-07T13:23:51+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 3
+Get position of queue (1st lap): 3
+Number of unread queue: 0
+
+[ 2013-11-07T13:24:12+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 4
+    [data] => {"module":"Campaign","action":"CREATE","data":{"idclick_planid":61629,"idclick_uid":503,"campaign_name":"campaign_name #527b23f81fd2b","areas":"10031,10032","languages":"10031,10032","bidding_type":"BUDGET_OPTIMIZER","budget_amount":20000,"delivery_method":"ACCELERATED","max_cpc":10,"campaign_status":"ACTIVE","last_action":"CREATE"}}
+)
+
+[ 2013-11-07T13:24:47+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 5
+    [data] => {"module":"Campaign","action":"CREATE","data":{"idclick_planid":61629,"idclick_uid":503,"campaign_name":"campaign_name #527b241c6377e","areas":"10031,10032","languages":"10031,10032","bidding_type":"BUDGET_OPTIMIZER","budget_amount":20000,"delivery_method":"ACCELERATED","max_cpc":10,"campaign_status":"ACTIVE","last_action":"CREATE"}}
+)
+
+[ 2013-11-07T13:24:47+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b241c6377e
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+ || 已进入重试队列
+[ 2013-11-07T13:24:47+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 5
+Get position of queue (1st lap): 5
+Number of unread queue: 0
+
+[ 2013-11-07T13:30:16+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 6
+    [data] => {"module":"Campaign","action":"CREATE","data":{"idclick_planid":61629,"idclick_uid":503,"campaign_name":"campaign_name #527b25651700d","areas":"10031,10032","languages":"10031,10032","bidding_type":"BUDGET_OPTIMIZER","budget_amount":20000,"delivery_method":"ACCELERATED","max_cpc":10,"campaign_status":"ACTIVE","last_action":"CREATE"}}
+)
+
+[ 2013-11-07T13:30:16+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b25651700d
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+ || 已进入重试队列
+[ 2013-11-07T13:30:16+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 6
+Get position of queue (1st lap): 6
+Number of unread queue: 0
+
+[ 2013-11-07T13:31:37+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 7
+    [data] => {"module":"Campaign","action":"CREATE","data":{"idclick_planid":61629,"idclick_uid":503,"campaign_name":"campaign_name #527b25740cf55","areas":"10031,10032","languages":"10031,10032","bidding_type":"BUDGET_OPTIMIZER","budget_amount":20000,"delivery_method":"ACCELERATED","max_cpc":10,"campaign_status":"ACTIVE","last_action":"CREATE"}}
+)
+
+[ 2013-11-07T13:33:21+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 8
+    [data] => {"module":"Campaign","action":"CREATE","data":{"idclick_planid":61629,"idclick_uid":503,"campaign_name":"campaign_name #527b261c7b770","areas":"10031,10032","languages":"10031,10032","bidding_type":"BUDGET_OPTIMIZER","budget_amount":20000,"delivery_method":"ACCELERATED","max_cpc":10,"campaign_status":"ACTIVE","last_action":"CREATE"}}
+)
+
+[ 2013-11-07T13:33:21+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b261c7b770
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+ || 已进入重试队列
+[ 2013-11-07T13:33:21+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 8
+Get position of queue (1st lap): 8
+Number of unread queue: 0
+
+[ 2013-11-07T13:33:31+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 8
+Get position of queue (1st lap): 8
+Number of unread queue: 0
+
+[ 2013-11-07T13:33:33+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 8
+Get position of queue (1st lap): 8
+Number of unread queue: 0
+
+[ 2013-11-07T13:33:47+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 9
+    [data] => {"module":"Campaign","action":"CREATE","data":{"idclick_planid":61629,"idclick_uid":503,"campaign_name":"campaign_name #527b26391ed8d","areas":"10031,10032","languages":"10031,10032","bidding_type":"BUDGET_OPTIMIZER","budget_amount":20000,"delivery_method":"ACCELERATED","max_cpc":10,"campaign_status":"ACTIVE","last_action":"CREATE"}}
+)
+
+[ 2013-11-07T13:33:48+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b26391ed8d
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+ || 已进入重试队列
+[ 2013-11-07T13:33:48+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 9
+Get position of queue (1st lap): 9
+Number of unread queue: 0
+
+[ 2013-11-07T13:35:01+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 10
+    [data] => {"module":"Campaign","action":"CREATE","data":{"idclick_planid":61629,"idclick_uid":503,"campaign_name":"campaign_name #527b2681e4a41","areas":"10031,10032","languages":"10031,10032","bidding_type":"BUDGET_OPTIMIZER","budget_amount":20000,"delivery_method":"ACCELERATED","max_cpc":10,"campaign_status":"ACTIVE","last_action":"CREATE"}}
+)
+
+[ 2013-11-07T13:35:01+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b2681e4a41
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+ || 已进入重试队列
+[ 2013-11-07T13:35:01+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 10
+Get position of queue (1st lap): 10
+Number of unread queue: 0
+
+[ 2013-11-07T13:36:02+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 10
+Get position of queue (1st lap): 10
+Number of unread queue: 0
+
+[ 2013-11-07T13:36:17+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 11
+    [data] => {"module":"Campaign","action":"CREATE","data":{"idclick_planid":61629,"idclick_uid":503,"campaign_name":"campaign_name #527b26cd8060d","areas":"10031,10032","languages":"10031,10032","bidding_type":"BUDGET_OPTIMIZER","budget_amount":20000,"delivery_method":"ACCELERATED","max_cpc":10,"campaign_status":"ACTIVE","last_action":"CREATE"}}
+)
+
+[ 2013-11-07T13:37:17+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 12
+    [data] => {"module":"Campaign","action":"CREATE","data":{"idclick_planid":61629,"idclick_uid":503,"campaign_name":"campaign_name #527b26ff0fc9e","areas":"10031,10032","languages":"10031,10032","bidding_type":"BUDGET_OPTIMIZER","budget_amount":20000,"delivery_method":"ACCELERATED","max_cpc":10,"campaign_status":"ACTIVE","last_action":"CREATE"}}
+)
+
+[ 2013-11-07T13:37:17+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b26ff0fc9e
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+ || 已进入重试队列
+[ 2013-11-07T13:37:17+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 12
+Get position of queue (1st lap): 12
+Number of unread queue: 0
+
+[ 2013-11-07T13:38:35+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 13
+    [data] => {"module":"Campaign","action":"CREATE","data":{"idclick_planid":61629,"idclick_uid":503,"campaign_name":"campaign_name #527b2757c6e9b","areas":"10031,10032","languages":"10031,10032","bidding_type":"BUDGET_OPTIMIZER","budget_amount":20000,"delivery_method":"ACCELERATED","max_cpc":10,"campaign_status":"ACTIVE","last_action":"CREATE"}}
+)
+
+[ 2013-11-07T13:39:27+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 13
+Get position of queue (1st lap): 13
+Number of unread queue: 0
+
+[ 2013-11-07T13:39:39+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 14
+    [data] => {"module":"Campaign","action":"CREATE","data":{"idclick_planid":61629,"idclick_uid":503,"campaign_name":"campaign_name #527b2798c7939","areas":"10031,10032","languages":"10031,10032","bidding_type":"BUDGET_OPTIMIZER","budget_amount":20000,"delivery_method":"ACCELERATED","max_cpc":10,"campaign_status":"ACTIVE","last_action":"CREATE"}}
+)
+
+[ 2013-11-07T13:41:16+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 15
+    [data] => {"module":"Campaign","action":"CREATE","data":{"idclick_planid":61629,"idclick_uid":503,"campaign_name":"campaign_name #527b27f89333f","areas":"10031,10032","languages":"10031,10032","bidding_type":"BUDGET_OPTIMIZER","budget_amount":20000,"delivery_method":"ACCELERATED","max_cpc":10,"campaign_status":"ACTIVE","last_action":"CREATE"}}
+)
+
+[ 2013-11-07T13:42:16+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 16
+    [data] => {"module":"Campaign","action":"CREATE","data":{"idclick_planid":61629,"idclick_uid":503,"campaign_name":"campaign_name #527b28363517b","areas":"10031,10032","languages":"10031,10032","bidding_type":"BUDGET_OPTIMIZER","budget_amount":20000,"delivery_method":"ACCELERATED","max_cpc":10,"campaign_status":"ACTIVE","last_action":"CREATE"}}
+)
+
+[ 2013-11-07T13:42:24+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b28363517b
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+ || 已进入重试队列
+[ 2013-11-07T13:42:24+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 16
+Get position of queue (1st lap): 16
+Number of unread queue: 0
+
+[ 2013-11-07T13:45:14+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 17
+    [data] => {"module":"Campaign","action":"CREATE","data":{"idclick_planid":61630,"idclick_uid":503,"campaign_name":"campaign_name #527b28e787e43","areas":"2156,2157","languages":"1017,1018","bidding_type":"BUDGET_OPTIMIZER","budget_amount":20000,"delivery_method":"ACCELERATED","max_cpc":10,"campaign_status":"ACTIVE","last_action":"CREATE"}}
+)
+
+[ 2013-11-07T13:45:32+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61630
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b28e787e43
+    [areas] => 2156,2157
+    [languages] => 1017,1018
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+ || 已进入重试队列
+[ 2013-11-07T13:45:32+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 17
+Get position of queue (1st lap): 17
+Number of unread queue: 0
+
+[ 2013-11-07T13:49:24+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 18
+    [data] => {"module":"Campaign","action":"CREATE","data":{"idclick_planid":61631,"idclick_uid":503,"campaign_name":"campaign_name #527b29e28ae88","areas":"2156,2157","languages":"1017,1018","bidding_type":"BUDGET_OPTIMIZER","budget_amount":20000,"delivery_method":"ACCELERATED","max_cpc":10,"campaign_status":"ACTIVE","last_action":"CREATE"}}
+)
+
+[ 2013-11-07T13:49:42+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61631
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b29e28ae88
+    [areas] => 2156,2157
+    [languages] => 1017,1018
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+ || 已进入重试队列
+[ 2013-11-07T13:49:42+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 18
+Get position of queue (1st lap): 18
+Number of unread queue: 0
+
+[ 2013-11-07T13:50:34+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 19
+    [data] => {"module":"Campaign","action":"CREATE","data":{"idclick_planid":61632,"idclick_uid":503,"campaign_name":"campaign_name #527b2a27d368b","areas":"2156","languages":"1017,1018","bidding_type":"BUDGET_OPTIMIZER","budget_amount":20000,"delivery_method":"ACCELERATED","max_cpc":10,"campaign_status":"ACTIVE","last_action":"CREATE"}}
+)
+
+[ 2013-11-07T13:52:29+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 20
+    [data] => {"module":"Campaign","action":"CREATE","data":{"idclick_planid":61633,"idclick_uid":503,"campaign_name":"campaign_name #527b2a9acbbcb","areas":"2156","languages":"1017,1018","bidding_type":"BUDGET_OPTIMIZER","budget_amount":20000,"delivery_method":"ACCELERATED","max_cpc":10,"campaign_status":"ACTIVE","last_action":"CREATE"}}
+)
+
+[ 2013-11-07T13:54:31+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 21
+    [data] => {"module":"Campaign","action":"CREATE","data":{"idclick_planid":61634,"idclick_uid":503,"campaign_name":"campaign_name #527b2b15e2f0c","areas":"2156","languages":"1017,1018","bidding_type":"BUDGET_OPTIMIZER","budget_amount":20000,"delivery_method":"ACCELERATED","max_cpc":10,"campaign_status":"ACTIVE","last_action":"CREATE"}}
+)
+
+[ 2013-11-07T13:54:46+08:00 ] #QueueCommon::Get# [error] try to handle message failed. position: #21
+[ 2013-11-07T13:54:46+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 21
+Get position of queue (1st lap): 21
+Number of unread queue: 0
+
+[ 2013-11-07T13:55:52+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 22
+    [data] => {"module":"Campaign","action":"UPDATE","data":{"idclick_planid":61634,"idclick_uid":503,"budget_amount":32334,"campaign_status":"ACTIVE","last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T13:57:06+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 23
+    [data] => {"module":"Campaign","action":"UPDATE","data":{"idclick_planid":61634,"idclick_uid":503,"budget_amount":32334,"campaign_status":"ACTIVE","last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T13:57:06+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+ || 已进入重试队列
+[ 2013-11-07T13:57:06+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 23
+Get position of queue (1st lap): 23
+Number of unread queue: 0
+
+[ 2013-11-07T13:57:21+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 23
+Get position of queue (1st lap): 23
+Number of unread queue: 0
+
+[ 2013-11-07T14:08:14+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 24
+    [data] => {"module":"Campaign","action":"UPDATE","data":{"idclick_planid":61634,"idclick_uid":503,"budget_amount":32334,"campaign_status":"ACTIVE","last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:08:14+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+ || 已进入重试队列
+[ 2013-11-07T14:08:14+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 24
+Get position of queue (1st lap): 24
+Number of unread queue: 0
+
+[ 2013-11-07T14:08:47+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 25
+    [data] => {"module":"Campaign","action":"UPDATE","data":{"idclick_planid":61634,"idclick_uid":503,"budget_amount":32334,"campaign_status":"ACTIVE","last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:08:48+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+ || 已进入重试队列
+[ 2013-11-07T14:08:48+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 25
+Get position of queue (1st lap): 25
+Number of unread queue: 0
+
+[ 2013-11-07T14:09:08+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 25
+Get position of queue (1st lap): 25
+Number of unread queue: 0
+
+[ 2013-11-07T14:09:22+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 26
+    [data] => {"module":"Campaign","action":"UPDATE","data":{"idclick_planid":61634,"idclick_uid":503,"budget_amount":32334,"campaign_status":"ACTIVE","last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:09:22+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+ || 已进入重试队列
+[ 2013-11-07T14:09:22+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 26
+Get position of queue (1st lap): 26
+Number of unread queue: 0
+
+[ 2013-11-07T14:10:46+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 27
+    [data] => {"module":"Campaign","action":"UPDATE","data":{"idclick_planid":61634,"idclick_uid":503,"budget_amount":32334,"campaign_status":"ACTIVE","last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:10:46+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+ || 已进入重试队列
+[ 2013-11-07T14:10:46+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 27
+Get position of queue (1st lap): 27
+Number of unread queue: 0
+
+[ 2013-11-07T14:11:54+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 28
+    [data] => {"module":"Campaign","action":"UPDATE","data":{"idclick_planid":61634,"idclick_uid":503,"budget_amount":32334,"campaign_status":"ACTIVE","last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:11:54+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+ || 已进入重试队列
+[ 2013-11-07T14:11:54+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 28
+Get position of queue (1st lap): 28
+Number of unread queue: 0
+
+[ 2013-11-07T14:17:03+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 29
+    [data] => {"module":"Campaign","action":"UPDATE","data":{"idclick_planid":61634,"idclick_uid":503,"budget_amount":32334,"campaign_status":"ACTIVE","last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:17:03+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+ || 已进入重试队列
+[ 2013-11-07T14:17:03+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 30
+    [data] => {"module":"Campaign","action":"UPDATE","data":{"idclick_planid":61634,"idclick_uid":503,"budget_amount":32334,"campaign_status":"ACTIVE","last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:17:03+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+ || 已进入重试队列
+[ 2013-11-07T14:17:03+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 30
+Get position of queue (1st lap): 30
+Number of unread queue: 0
+
+[ 2013-11-07T14:17:20+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 31
+    [data] => {"module":"Campaign","action":"UPDATE","data":{"idclick_planid":61634,"idclick_uid":503,"budget_amount":32334,"campaign_status":"ACTIVE","last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:17:20+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+ || 已进入重试队列
+[ 2013-11-07T14:17:20+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 31
+Get position of queue (1st lap): 31
+Number of unread queue: 0
+
+[ 2013-11-07T14:20:01+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 32
+    [data] => {"module":"Campaign","action":"UPDATE","data":{"idclick_planid":61634,"idclick_uid":503,"budget_amount":32334,"campaign_status":"ACTIVE","last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:20:01+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+ || 已进入重试队列
+[ 2013-11-07T14:20:01+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 33
+    [data] => {"module":"Campaign","action":"UPDATE","data":{"idclick_planid":61634,"idclick_uid":503,"budget_amount":32334,"campaign_status":"ACTIVE","last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:20:01+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+ || 已进入重试队列
+[ 2013-11-07T14:20:01+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 33
+Get position of queue (1st lap): 33
+Number of unread queue: 0
+
+[ 2013-11-07T14:21:04+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 34
+    [data] => {"module":"Campaign","action":"UPDATE","data":{"idclick_planid":61634,"idclick_uid":503,"budget_amount":32334,"campaign_status":"ACTIVE","last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:21:04+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+ || 已进入重试队列
+[ 2013-11-07T14:21:04+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 34
+Get position of queue (1st lap): 34
+Number of unread queue: 0
+
+[ 2013-11-07T14:23:43+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 35
+    [data] => {"module":"Campaign","action":"UPDATE","data":{"idclick_planid":61634,"idclick_uid":503,"budget_amount":32334,"campaign_status":"ACTIVE","last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:23:43+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+ || 已进入重试队列
+[ 2013-11-07T14:23:43+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 35
+Get position of queue (1st lap): 35
+Number of unread queue: 0
+
+[ 2013-11-07T14:24:44+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 36
+    [data] => {"module":"Campaign","action":"UPDATE","data":{"idclick_planid":61634,"idclick_uid":503,"budget_amount":32334,"campaign_status":"ACTIVE","last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:24:44+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+ || 已进入重试队列
+[ 2013-11-07T14:24:44+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 36
+Get position of queue (1st lap): 36
+Number of unread queue: 0
+
+[ 2013-11-07T14:25:10+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 37
+    [data] => {"module":"Campaign","action":"UPDATE","data":{"idclick_planid":61634,"idclick_uid":503,"budget_amount":32334,"campaign_status":"ACTIVE","last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:25:11+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+ || 已进入重试队列
+[ 2013-11-07T14:25:11+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 37
+Get position of queue (1st lap): 37
+Number of unread queue: 0
+
+[ 2013-11-07T14:26:54+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 38
+    [data] => {"module":"Campaign","action":"UPDATE","data":{"idclick_planid":61634,"idclick_uid":503,"budget_amount":32334,"campaign_status":"ACTIVE","last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:26:54+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+ || 已进入重试队列
+[ 2013-11-07T14:26:54+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 38
+Get position of queue (1st lap): 38
+Number of unread queue: 0
+
+[ 2013-11-07T14:27:53+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 39
+    [data] => {"module":"Campaign","action":"UPDATE","data":{"idclick_planid":61634,"idclick_uid":503,"budget_amount":32334,"campaign_status":"ACTIVE","last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:27:53+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+ || 已进入重试队列
+[ 2013-11-07T14:27:53+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 39
+Get position of queue (1st lap): 39
+Number of unread queue: 0
+
+[ 2013-11-07T14:28:47+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 40
+    [data] => {"module":"Campaign","action":"UPDATE","data":{"idclick_planid":61634,"idclick_uid":503,"budget_amount":32334,"campaign_status":"ACTIVE","last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:28:47+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+ || 已进入重试队列
+[ 2013-11-07T14:28:47+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 40
+Get position of queue (1st lap): 40
+Number of unread queue: 0
+
+[ 2013-11-07T14:30:55+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 41
+    [data] => {"module":"Campaign","action":"UPDATE","data":{"idclick_planid":61634,"idclick_uid":503,"budget_amount":32334,"campaign_status":"ACTIVE","last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:31:07+08:00 ] #QueueCommon::Get# [error] try to handle message failed. position: #41
+[ 2013-11-07T14:31:07+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 41
+Get position of queue (1st lap): 41
+Number of unread queue: 0
+
+[ 2013-11-07T14:32:23+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 42
+    [data] => {"module":"Campaign","action":"UPDATE","data":{"idclick_planid":61634,"idclick_uid":503,"budget_amount":32334,"campaign_status":"ACTIVE","last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:32:33+08:00 ] #QueueCommon::Get# [error] try to handle message failed. position: #42
+[ 2013-11-07T14:32:33+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 42
+Get position of queue (1st lap): 42
+Number of unread queue: 0
+
+[ 2013-11-07T14:34:01+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 43
+    [data] => {"module":"AdGroup","action":"CREATE","data":{"idclick_groupid":123456,"idclick_planid":61634,"adgroup_name":"group_name","keywords":"keywords1,keywords2","max_cpc":200,"adgroup_status":"ACTIVE","idclick_uid":503,"last_action":"CREATE"}}
+)
+
+[ 2013-11-07T14:36:16+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 44
+    [data] => {"module":"AdGroup","action":"CREATE","data":{"idclick_groupid":123457,"idclick_planid":61634,"adgroup_name":"group_name","keywords":"keywords1,keywords2","max_cpc":200,"adgroup_status":"ACTIVE","idclick_uid":503,"last_action":"CREATE"}}
+)
+
+[ 2013-11-07T14:36:28+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 123457
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name
+    [keywords] => keywords1,keywords2
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+    [idclick_uid] => 503
+    [last_action] => CREATE
+)
+ || 已进入重试队列
+[ 2013-11-07T14:36:28+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 44
+Get position of queue (1st lap): 44
+Number of unread queue: 0
+
+[ 2013-11-07T14:37:33+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 45
+    [data] => {"module":"AdGroup","action":"CREATE","data":{"idclick_groupid":123458,"idclick_planid":61634,"adgroup_name":"group_name","keywords":"keywords1,keywords2","max_cpc":200,"adgroup_status":"ACTIVE","idclick_uid":503,"last_action":"CREATE"}}
+)
+
+[ 2013-11-07T14:37:42+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 123458
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name
+    [keywords] => keywords1,keywords2
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+    [idclick_uid] => 503
+    [last_action] => CREATE
+)
+ || 已进入重试队列
+[ 2013-11-07T14:37:42+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 45
+Get position of queue (1st lap): 45
+Number of unread queue: 0
+
+[ 2013-11-07T14:38:43+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 46
+    [data] => {"module":"AdGroup","action":"CREATE","data":{"idclick_groupid":123459,"idclick_planid":61634,"adgroup_name":"group_name123459","keywords":"keywords1,keywords2","max_cpc":200,"adgroup_status":"ACTIVE","idclick_uid":503,"last_action":"CREATE"}}
+)
+
+[ 2013-11-07T14:38:55+08:00 ] #QueueCommon::Get# [error] try to handle message failed. position: #46
+[ 2013-11-07T14:38:55+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 46
+Get position of queue (1st lap): 46
+Number of unread queue: 0
+
+[ 2013-11-07T14:40:47+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 47
+    [data] => {"module":"AdGroup","action":"CREATE","data":{"idclick_groupid":123460,"idclick_planid":61634,"adgroup_name":"group_name123460","keywords":"keywords1,keywords2","max_cpc":200,"adgroup_status":"ACTIVE","idclick_uid":503,"last_action":"CREATE"}}
+)
+
+[ 2013-11-07T14:41:00+08:00 ] #QueueCommon::Get# [error] try to handle message failed. position: #47
+[ 2013-11-07T14:41:00+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 47
+Get position of queue (1st lap): 47
+Number of unread queue: 0
+
+[ 2013-11-07T14:41:32+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 48
+    [data] => {"module":"AdGroup","action":"UPDATE","data":{"idclick_groupid":123460,"idclick_planid":61634,"adgroup_name":"group_name2602","keywords":"keywords3,keywords2,keywords1","max_cpc":201,"idclick_uid":503,"last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:41:42+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：AdGroup | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_groupid] => 123460
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name2602
+    [keywords] => keywords3,keywords2,keywords1
+    [max_cpc] => 201
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+ || 已进入重试队列
+[ 2013-11-07T14:41:42+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 48
+Get position of queue (1st lap): 48
+Number of unread queue: 0
+
+[ 2013-11-07T14:42:07+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 48
+Get position of queue (1st lap): 48
+Number of unread queue: 0
+
+[ 2013-11-07T14:42:12+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 49
+    [data] => {"module":"AdGroup","action":"UPDATE","data":{"idclick_groupid":123460,"idclick_planid":61634,"adgroup_name":"group_name2602","keywords":"keywords3,keywords2,keywords1","max_cpc":201,"idclick_uid":503,"last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:42:20+08:00 ] #QueueCommon::Get# [error] try to handle message failed. position: #49
+[ 2013-11-07T14:42:20+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 49
+Get position of queue (1st lap): 49
+Number of unread queue: 0
+
+[ 2013-11-07T14:43:16+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 50
+    [data] => {"module":"AdGroupAd","action":"CREATE","data":{"idclick_adid":12347,"idclick_groupid":123459,"ad_headline":"headline","ad_description1":"description1","ad_description2":"description2","ad_url":"http:\/\/www.izptec.com\/go.php","ad_displayurl":"http:\/\/www.izptec.com\/","ad_status":"PAUSE","idclick_planid":61634,"idclick_uid":503,"last_action":"CREATE"}}
+)
+
+[ 2013-11-07T14:44:29+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 51
+    [data] => {"module":"AdGroupAd","action":"CREATE","data":{"idclick_adid":12348,"idclick_groupid":123459,"ad_headline":"headline","ad_description1":"description1","ad_description2":"description2","ad_url":"http:\/\/www.izptec.com\/go.php","ad_displayurl":"http:\/\/www.izptec.com\/","ad_status":"PAUSE","idclick_planid":61634,"idclick_uid":503,"last_action":"CREATE"}}
+)
+
+[ 2013-11-07T14:44:37+08:00 ] #QueueCommon::Get# [error] try to handle message failed. position: #51
+[ 2013-11-07T14:44:37+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 51
+Get position of queue (1st lap): 51
+Number of unread queue: 0
+
+[ 2013-11-07T14:45:07+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 52
+    [data] => {"module":"AdGroupAd","action":"UPDATE","data":{"idclick_adid":12348,"idclick_groupid":123459,"ad_headline":"headline\u2014\u2014l","ad_description1":"description1....","ad_description2":"description2....","ad_url":"http:\/\/www.izptec.com\/go1.php","ad_status":"ACTIVE","idclick_planid":61634,"idclick_uid":503,"last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:45:14+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：AdGroupAd | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+ || 已进入重试队列
+[ 2013-11-07T14:45:14+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 52
+Get position of queue (1st lap): 52
+Number of unread queue: 0
+
+[ 2013-11-07T14:46:53+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 53
+    [data] => {"module":"AdGroupAd","action":"UPDATE","data":{"idclick_adid":12348,"idclick_groupid":123459,"ad_headline":"headline\u2014\u2014l","ad_description1":"description1....","ad_description2":"description2....","ad_url":"http:\/\/www.izptec.com\/go1.php","ad_status":"ACTIVE","idclick_planid":61634,"idclick_uid":503,"last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:46:56+08:00 ] #QueueCommon::Get# [error] ToAdwords\Exception\MessageException 发送消息失败，消息内容：[消息] 模块：AdGroupAd | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+ || 已进入重试队列
+[ 2013-11-07T14:46:56+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 53
+Get position of queue (1st lap): 53
+Number of unread queue: 0
+
+[ 2013-11-07T14:49:23+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 54
+    [data] => {"module":"AdGroupAd","action":"UPDATE","data":{"idclick_adid":12348,"idclick_groupid":123459,"ad_headline":"headline\u2014\u2014l","ad_description1":"description1....","ad_description2":"description2....","ad_url":"http:\/\/www.izptec.com\/go1.php","ad_status":"ACTIVE","idclick_planid":61634,"idclick_uid":503,"last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:50:06+08:00 ] #QueueCommon::Get# [notice] new message: Array
+(
+    [pos] => 55
+    [data] => {"module":"AdGroupAd","action":"UPDATE","data":{"idclick_adid":12348,"idclick_groupid":123459,"ad_headline":"headline\u2014\u2014l","ad_description1":"description1....","ad_description2":"description2....","ad_url":"http:\/\/www.izptec.com\/go1.php","ad_status":"ACTIVE","idclick_planid":61634,"idclick_uid":503,"last_action":"UPDATE"}}
+)
+
+[ 2013-11-07T14:50:14+08:00 ] #QueueCommon::Get# [error] try to handle message failed. position: #55
+[ 2013-11-07T14:50:14+08:00 ] #QueueCommon::Get# [notice] got nothing, current status:
+HTTP Simple Queue Service v1.7
+------------------------------
+Queue Name: common
+Maximum number of queues: 1000000
+Put position of queue (1st lap): 55
+Get position of queue (1st lap): 55
+Number of unread queue: 0
+

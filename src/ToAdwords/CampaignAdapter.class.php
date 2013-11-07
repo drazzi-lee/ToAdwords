@@ -15,8 +15,8 @@ use ToAdwords\AdwordsAdapter;
 use \Exception;
 
 class CampaignAdapter extends AdwordsAdapter{
+	public static $currentModelName     = 'ToAdwords\Model\CampaignModel';
 	protected static $moduleName           = 'Campaign';
-	protected static $currentModelName     = 'ToAdwords\Model\CampaignModel';
 	protected static $currentManagerName   = 'ToAdwords\Adwords\CampaignManager';
 	protected static $parentModelName      = 'ToAdwords\Model\CustomerModel';
 	protected static $parentAdapterName    = 'ToAdwords\CustomerAdapter';

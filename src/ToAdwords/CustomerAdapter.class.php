@@ -24,7 +24,8 @@ use \Exception;
 
 class CustomerAdapter extends AdwordsAdapter{
 	protected static $moduleName = 'Customer';
-	protected static $currentModelName = 'ToAdwords\Model\CustomerModel';
+	public static $currentModelName = 'ToAdwords\Model\CustomerModel';
+	protected static $currentManagerName   = 'ToAdwords\Adwords\CustomerManager';
 
 	/**
 	 * Create new user. 

@@ -15,7 +15,7 @@ class CampaignManager extends AdwordsBase{
 	private $campaignService;
 	private $budgetService;
 	
-	private static $statusMap = array(
+	protected static $statusMap = array(
 		'ACTIVE'	=> 'ACTIVE',
 		'PAUSE'		=> 'PAUSED',
 		'DELETE'	=> 'DELETED',
@@ -105,7 +105,7 @@ class CampaignManager extends AdwordsBase{
 		$operations[] = $operation;
 
 		// Make the mutate request.
-		$result = $campaignService->mutate($operations);
+		$result = $this->campaignService->mutate($operations);
 
 		// Display results.
 		$campaign = $result->value[0];
@@ -142,15 +142,15 @@ class CampaignManager extends AdwordsBase{
 		$campaign = new \Campaign();
 		$campaign->id = $data['campaign_id'];
 
-		if(isset($data['campaign_status']){
+		if(isset($data['campaign_status'])){
 			$campaign->status = $this->mappingStatus($data['campaign_status']);
 		}
 
-		if(isset($data['campaign_name']){
+		if(isset($data['campaign_name'])){
 			$campaign->name = $data['campaign_name'];	
 		}
 		
-		if(isset($data['bidding_type'] && isset($data['max_cpc'])){
+		if(isset($data['bidding_type']) && isset($data['max_cpc'])){
 			// Set bidding strategy (required).
 			$biddingStrategyConfiguration = new \BiddingStrategyConfiguration();
 			$biddingStrategyConfiguration->biddingStrategyType = $data['bidding_type'];

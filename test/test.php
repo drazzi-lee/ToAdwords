@@ -17,11 +17,11 @@ class TestAction{
 	
 	public function createCampaign(){
 		$data = array(
-				'idclick_planid' => 61629,
+				'idclick_planid' => 61634,
 				'idclick_uid'	=> 503,
 				'campaign_name' => 'campaign_name #' . uniqid(),
-				'areas' => '10031,10032',
-				'languages' => '10031,10032',
+				'areas' => '2156',
+				'languages' => '1017,1018',
 				'bidding_type' => 0,
 				'budget_amount' => 20000.00,
 				'delivery_method' => 'ACCELERATED',
@@ -34,7 +34,7 @@ class TestAction{
 	
 	public function deleteCampaign(){
 		$data = array (
-				'idclick_planid' => 61627,
+				'idclick_planid' => 61634,
 				'idclick_uid'		=> 502,
 		);
 		$campaignModel = new CampaignModel();
@@ -43,7 +43,7 @@ class TestAction{
 	
 	public function updateCampaign(){
 		$data = array (
-				'idclick_planid' => 61629,
+				'idclick_planid' => 61634,
 				'idclick_uid'		=> 503,
 				'budget_amount'		=> 32334,
 				'campaign_status'	=> 'ACTIVE',
@@ -54,9 +54,9 @@ class TestAction{
 	
 	public function createAdgroup(){
 		$data = array(
-	    	'idclick_groupid'	=> 123456,
-			'idclick_planid'	=> 61629,
-        	'adgroup_name'		=> 'group_name',
+	    	'idclick_groupid'	=> 123460,
+			'idclick_planid'	=> 61634,
+        	'adgroup_name'		=> 'group_name123460',
         	'keywords'			=> array('keywords1', 'keywords2'),
         	'max_cpc'		=> 200.00,	
 			'adgroup_status'	=> 'ACTIVE',
@@ -67,9 +67,9 @@ class TestAction{
 	
 	public function updateAdgroup(){
 		$data = array(
-	    	'idclick_groupid'	=> 123456,
-			'idclick_planid'	=> 61629,
-        	'adgroup_name'		=> 'group_name2',
+	    	'idclick_groupid'	=> 123460,
+			'idclick_planid'	=> 61634,
+        	'adgroup_name'		=> 'group_name2602',
         	'keywords'			=> array('keywords3', 'keywords2', 'keywords1'),
         	'max_cpc'		=> 201.00,
         );
@@ -87,8 +87,8 @@ class TestAction{
 	
 	public function createAd(){
 		$data = array(
-			'idclick_adid'		=> 12347,
-			'idclick_groupid'	=> 123456, 
+			'idclick_adid'		=> 12348,
+			'idclick_groupid'	=> 123459, 
 			'ad_headline'		=> 'headline',
 			'ad_description1'	=> 'description1',
 			'ad_description2'	=> 'description2',
@@ -102,8 +102,8 @@ class TestAction{
 	
 	public function updateAd(){
 		$data = array(
-			'idclick_adid'		=> 12347,
-			'idclick_groupid'	=> 123456, 
+			'idclick_adid'		=> 12348,
+			'idclick_groupid'	=> 123459, 
 			'ad_headline'		=> 'headline——l',
 			'ad_description1'	=> 'description1....',
 			'ad_description2'	=> 'description2....',

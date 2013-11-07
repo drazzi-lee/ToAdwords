@@ -15,7 +15,8 @@ use ToAdwords\AdwordsAdapter;
 
 class AdGroupAdAdapter extends AdwordsAdapter{
 	protected static $moduleName        = 'AdGroupAd';
-	protected static $currentModelName  = 'ToAdwords\Model\AdGroupAdModel';
+	public static $currentModelName  = 'ToAdwords\Model\AdGroupAdModel';
+	protected static $currentManagerName   = 'ToAdwords\Adwords\AdGroupAdManager';
 	protected static $parentModelName   = 'ToAdwords\Model\AdGroupModel';
 	protected static $parentAdapterName = 'ToAdwords\AdGroupAdapter';
 	protected static $dataCheckFilter   = array(

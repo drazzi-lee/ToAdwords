@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2013-11-07 12:53:47
+Date: 2013-11-07 14:51:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -77,6 +77,7 @@ CREATE TABLE `campaign` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idclick_planid` int(10) NOT NULL COMMENT '对象在idclick中的plan_id，广告计划ID。',
   `idclick_uid` int(10) NOT NULL COMMENT '对象在idclick中的uid，用户ID',
+  `campaign_id` int(10) DEFAULT NULL,
   `campaign_name` varchar(128) NOT NULL COMMENT '对象的名字，广告计划名称',
   `languages` varchar(200) NOT NULL COMMENT '投放网页语言，以ID的形式，以逗号分隔',
   `areas` varchar(200) NOT NULL COMMENT '对象的投放地域信息，ID形式，以逗号分隔',
@@ -91,12 +92,11 @@ CREATE TABLE `campaign` (
   UNIQUE KEY `idclick_planid` (`idclick_planid`),
   KEY `campaign_ibfk_1` (`idclick_uid`),
   CONSTRAINT `campaign_ibfk_1` FOREIGN KEY (`idclick_uid`) REFERENCES `customer` (`idclick_uid`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='此表用来记录广告计划模型具体信息及与ADWORDS对应关系、同步状态。';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='此表用来记录广告计划模型具体信息及与ADWORDS对应关系、同步状态。';
 
 -- ----------------------------
 -- Records of campaign
 -- ----------------------------
-INSERT INTO campaign VALUES ('1', '61628', '503', 'campaign_name #52734336c270f', '10031,10032', '10031,10032', 'BUDGET_OPTIMIZER', '20000.00', 'ACCELERATED', '10.00', 'ACTIVE', 'CREATE', 'RECEIVE');
 
 -- ----------------------------
 -- Table structure for `customer`

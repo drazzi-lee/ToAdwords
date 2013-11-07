@@ -14,7 +14,7 @@ namespace ToAdwords\Adwords;
 class AdGroupAdManager extends AdwordsBase{
 	private $adGroupAdService;
 	
-	private static $statusMap = array(
+	protected static $statusMap = array(
 		'ACTIVE'	=> 'ENABLED',
 		'PAUSE'		=> 'PAUSED',
 		'DELETE'	=> 'DELETED',
@@ -69,7 +69,7 @@ class AdGroupAdManager extends AdwordsBase{
 		$operations[] = $operation;
 
 		// Make the mutate request.
-		$result = $adGroupAdService->mutate($operations);
+		$result = $this->adGroupAdService->mutate($operations);
 		$adGroupAd = $result->value[0];
 		return $adGroupAd->ad->id;
 	}
@@ -85,6 +85,9 @@ class AdGroupAdManager extends AdwordsBase{
 	public function update($data){
 		if(empty($data['ad_id'])){
 			throw new \Exception('ad_id is required.');
+		}
+		if(empty($data['adgroup_id'])){
+			throw new \Exception('adgroup_id is required.');
 		}
 		$operations = array();
 		$textAd = new \TextAd();
@@ -108,7 +111,7 @@ class AdGroupAdManager extends AdwordsBase{
 		
 		// Create ad group ad.
 		$adGroupAd = new \AdGroupAd();
-		$adGroupAd->adGroupId = $adGroupId;
+		$adGroupAd->adGroupId = $data['adgroup_id'];
 		$adGroupAd->ad = $textAd;
 		
 		// Update the status.
@@ -123,7 +126,7 @@ class AdGroupAdManager extends AdwordsBase{
 		$operations = array($operation);
 
 		// Make the mutate request.
-		$result = $adGroupAdService->mutate($operations);
+		$result = $this->adGroupAdService->mutate($operations);
 		$adGroupAd = $result->value[0];
 		return TRUE;
 	}
@@ -159,7 +162,7 @@ class AdGroupAdManager extends AdwordsBase{
 		$operations = array($operation);
 
 		// Make the mutate request.
-		$result = $adGroupAdService->mutate($operations);
+		$result = $this->adGroupAdService->mutate($operations);
 		$adGroupAd = $result->value[0];
 		return TRUE;
 	}

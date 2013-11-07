@@ -37,6 +37,7 @@ define('HTTPSQS_AUTH', '123456');
 define('HTTPSQS_CHARSET', 'utf-8');
 define('HTTPSQS_QUEUE_COMMON', 'common');
 define('HTTPSQS_QUEUE_RETRY', 'retry');
+define('HTTPSQS_QUEUE_DIE', 'die');
 
 //处理结果返回格式
 //define('RESULT_FORMAT', 'ARRAY');

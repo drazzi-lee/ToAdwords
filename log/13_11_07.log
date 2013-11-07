@@ -1,0 +1,1218 @@
+[ 2013-11-07T13:19:08+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b22cc89fdd
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:19:08+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T13:22:10+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b2382d1627
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:22:10+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T13:23:22+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b23ca65fc4
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:23:22+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T13:24:08+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b23f81fd2b
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:24:08+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T13:24:44+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b241c6377e
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:24:44+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T13:30:13+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b25651700d
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:30:13+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T13:30:28+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b25740cf55
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:30:28+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T13:33:16+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b261c7b770
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:33:16+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T13:33:45+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b26391ed8d
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:33:45+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T13:34:57+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b2681e4a41
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:34:58+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T13:36:13+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b26cd8060d
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:36:13+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T13:37:03+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b26ff0fc9e
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:37:03+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T13:38:31+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b2757c6e9b
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:38:32+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T13:39:36+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b2798c7939
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:39:36+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T13:41:12+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b27f89333f
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:41:12+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T13:42:14+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61629
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b28363517b
+    [areas] => 10031,10032
+    [languages] => 10031,10032
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:42:14+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T13:45:11+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61630
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b28e787e43
+    [areas] => 2156,2157
+    [languages] => 1017,1018
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:45:11+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T13:49:22+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61631
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b29e28ae88
+    [areas] => 2156,2157
+    [languages] => 1017,1018
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:49:22+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T13:50:31+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61632
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b2a27d368b
+    [areas] => 2156
+    [languages] => 1017,1018
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:50:31+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T13:52:26+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61633
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b2a9acbbcb
+    [areas] => 2156
+    [languages] => 1017,1018
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:52:27+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T13:54:29+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527b2b15e2f0c
+    [areas] => 2156
+    [languages] => 1017,1018
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:54:30+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T13:55:46+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:55:46+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T13:57:03+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T13:57:03+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:08:10+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T14:08:10+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:08:43+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T14:08:43+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:09:18+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T14:09:18+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:10:43+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T14:10:44+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:11:52+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T14:11:52+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:13:10+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T14:13:10+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:16:32+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T14:16:32+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:17:19+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T14:17:19+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:19:07+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T14:19:07+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:20:00+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T14:20:00+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:21:03+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T14:21:03+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:23:41+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T14:23:41+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:24:42+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T14:24:43+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:25:09+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T14:25:09+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:26:52+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T14:26:52+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:27:51+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T14:27:51+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:28:46+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T14:28:46+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:30:53+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T14:30:54+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:32:21+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 32334
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-07T14:32:21+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:33:59+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_groupid] => 123456
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name
+    [keywords] => Array
+        (
+            [0] => keywords1
+            [1] => keywords2
+        )
+
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+)
+
+[ 2013-11-07T14:33:59+08:00 ] #ToAdwords\AdwordsAdapter::prepareData# [WARNING] Field #keywords Array to String conversion.
+[ 2013-11-07T14:33:59+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => AdGroup create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:35:42+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_groupid] => 123456
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name
+    [keywords] => Array
+        (
+            [0] => keywords1
+            [1] => keywords2
+        )
+
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+)
+
+[ 2013-11-07T14:35:42+08:00 ] #ToAdwords\AdwordsAdapter::prepareData# [WARNING] Field #keywords Array to String conversion.
+[ 2013-11-07T14:35:42+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => -1
+    [description] => ToAdwords\Exception\ModelException INSERT INTO `adgroup` (idclick_groupid,idclick_planid,adgroup_name,keywords,max_cpc,adgroup_status,idclick_uid,last_action) VALUES (123456,61634,'group_name','keywords1,keywords2',200,'ACTIVE',503,'CREATE') ErrorInfo:SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '123456' for key 'idclick_groupid'
+    [success] => 0
+    [failure] => 0
+)
+
+[ 2013-11-07T14:36:13+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_groupid] => 123457
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name
+    [keywords] => Array
+        (
+            [0] => keywords1
+            [1] => keywords2
+        )
+
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+)
+
+[ 2013-11-07T14:36:13+08:00 ] #ToAdwords\AdwordsAdapter::prepareData# [WARNING] Field #keywords Array to String conversion.
+[ 2013-11-07T14:36:14+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => AdGroup create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:37:31+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_groupid] => 123458
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name
+    [keywords] => Array
+        (
+            [0] => keywords1
+            [1] => keywords2
+        )
+
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+)
+
+[ 2013-11-07T14:37:31+08:00 ] #ToAdwords\AdwordsAdapter::prepareData# [WARNING] Field #keywords Array to String conversion.
+[ 2013-11-07T14:37:31+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => AdGroup create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:38:41+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_groupid] => 123459
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name123459
+    [keywords] => Array
+        (
+            [0] => keywords1
+            [1] => keywords2
+        )
+
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+)
+
+[ 2013-11-07T14:38:41+08:00 ] #ToAdwords\AdwordsAdapter::prepareData# [WARNING] Field #keywords Array to String conversion.
+[ 2013-11-07T14:38:41+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => AdGroup create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:40:44+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_groupid] => 123460
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name123460
+    [keywords] => Array
+        (
+            [0] => keywords1
+            [1] => keywords2
+        )
+
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+)
+
+[ 2013-11-07T14:40:44+08:00 ] #ToAdwords\AdwordsAdapter::prepareData# [WARNING] Field #keywords Array to String conversion.
+[ 2013-11-07T14:40:44+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => AdGroup create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:41:31+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_groupid] => 123460
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name2602
+    [keywords] => Array
+        (
+            [0] => keywords3
+            [1] => keywords2
+            [2] => keywords1
+        )
+
+    [max_cpc] => 201
+)
+
+[ 2013-11-07T14:41:31+08:00 ] #ToAdwords\AdwordsAdapter::prepareData# [WARNING] Field #keywords Array to String conversion.
+[ 2013-11-07T14:41:31+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => AdGroup update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:42:10+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_groupid] => 123460
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name2602
+    [keywords] => Array
+        (
+            [0] => keywords3
+            [1] => keywords2
+            [2] => keywords1
+        )
+
+    [max_cpc] => 201
+)
+
+[ 2013-11-07T14:42:10+08:00 ] #ToAdwords\AdwordsAdapter::prepareData# [WARNING] Field #keywords Array to String conversion.
+[ 2013-11-07T14:42:10+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => AdGroup update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:43:14+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_adid] => 12347
+    [idclick_groupid] => 123459
+    [ad_headline] => headline
+    [ad_description1] => description1
+    [ad_description2] => description2
+    [ad_url] => http://www.izptec.com/go.php
+    [ad_displayurl] => http://www.izptec.com/
+    [ad_status] => PAUSE
+)
+
+[ 2013-11-07T14:43:15+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => AdGroupAd create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:44:27+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline
+    [ad_description1] => description1
+    [ad_description2] => description2
+    [ad_url] => http://www.izptec.com/go.php
+    [ad_displayurl] => http://www.izptec.com/
+    [ad_status] => PAUSE
+)
+
+[ 2013-11-07T14:44:27+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => AdGroupAd create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:45:04+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+)
+
+[ 2013-11-07T14:45:05+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => AdGroupAd update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:46:52+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+)
+
+[ 2013-11-07T14:46:52+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => AdGroupAd update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:49:21+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+)
+
+[ 2013-11-07T14:49:22+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => AdGroupAd update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-07T14:50:04+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+)
+
+[ 2013-11-07T14:50:04+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => AdGroupAd update success!
+    [success] => 1
+    [failure] => 0
+)
+

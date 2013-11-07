@@ -34,7 +34,7 @@ use \PDOException;
  */
 abstract class BaseModel{
 	protected static $tableName;
-	protected static $syncStatusField = 'sync_status';
+	public static $syncStatusField = 'sync_status';
 
 	protected $dbh = null;
 	protected $lastSql;

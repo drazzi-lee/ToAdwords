@@ -19,6 +19,7 @@ use ToAdwords\Util\Log;
 use ToAdwords\Util\Message;
 use ToAdwords\Util\Httpsqs;
 use ToAdwords\Exception\MessageException;
+use ToAdwords\Definition\SyncStatus;
 
 class MessageHandler{
 
@@ -41,12 +42,13 @@ class MessageHandler{
 		if(ENVIRONMENT == 'development'){
 			Log::write("[notice] try to handle new data:\n" . $message, __METHOD__);
 		}
+		
 		$module = null;
 		$result = null;
 	
 		switch($message->getModule()){
 			case 'Customer':
-				$module = new CustomerAdapter();	
+				$module = new CustomerAdapter();				
 				break;
 			case 'Campaign':
 				$module = new CampaignAdapter();
@@ -62,15 +64,26 @@ class MessageHandler{
 						.' 消息位置：'.$pos);
 		}
 		
+		$currentModel = new $module::$currentModelName();
+		
+		//enter retry times greater than 5.
+		if($message->errorCount > 5){
+			$this->put($message, array($currentModel, 'updateSyncStatus'), HTTPSQS_QUEUE_DIE);			
+			throw new MessageException('[DIE]发送消息失败，消息内容：'.$message.' || 不再重试。');
+		}
+		
+		$information = $message->getInformation();
+		$currentModel->updateSyncStatus(SyncStatus::SENDING, $information[$currentModel::$idclickObjectIdField]);
+		
 		switch($message->getAction()){
 			case 'CREATE':
-				$result = $module->createAdwordsObject($message->getInformation());
+				$result = $module->createAdwordsObject($information);
 				break;
 			case 'UPDATE':
-				$result = $module->updateAdwordsObject($message->getInformation());
+				$result = $module->updateAdwordsObject($information);
 				break;
 			case 'DELETE':
-				$result = $module->deleteAdwordsObject($message->getInformation());
+				$result = $module->deleteAdwordsObject($information);
 				break;
 			default:
 				throw new MessageException('解析错误，不能识别的action::'.$message->getAction()
@@ -78,13 +91,8 @@ class MessageHandler{
 		}
 		
 		if(FALSE === $result){
-			$message_retry = array(
-				'module'		=> $message->getModule(),
-				'action'		=> $message->getAction(),
-				'data'			=> $message->getInformation(),
-				'error_count'	=> 1,
-			);
-			$httpsqs->put(HTTPSQS_QUEUE_RETRY, json_encode($message_retry));			
+			$message->errorCount++;
+			$this->put($message, array($currentModel, 'updateSyncStatus'), HTTPSQS_QUEUE_RETRY);			
 			throw new MessageException('发送消息失败，消息内容：'.$message.' || 已进入重试队列');
 		}
 	}
@@ -107,6 +115,9 @@ class MessageHandler{
 						break;
 					case HTTPSQS_QUEUE_RETRY:
 						call_user_func_array($callback, array('RETRY', $message->getPid()));
+						break;
+					case HTTPSQS_QUEUE_DIE:
+						call_user_func_array($callback, array('ERROR', $message->getPid()));
 						break;
 					default:
 						Log::write('[warning] queue name error: #'
