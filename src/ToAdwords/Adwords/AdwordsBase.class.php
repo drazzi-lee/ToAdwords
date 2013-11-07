@@ -20,7 +20,9 @@ class AdwordsBase{
 		// import init file from google library.
 		require_once(TOADWORDS_ADWORDS_INITFILE);
 		$this->user = new \AdWordsUser();
-		$this->user->LogAll();
+		if(ENVIRONMENT == 'development'){
+			$this->user->LogAll();
+		}
 	}
 	
 	protected function getService($serviceName){

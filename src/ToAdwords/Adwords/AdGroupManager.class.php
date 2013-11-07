@@ -87,7 +87,11 @@ class AdGroupManager extends AdwordsBase{
 	 * @param array $data: $data of AdGroup.
 	 * @return boolean: TRUE on success, FALSE on failure.
 	 * @throw Exception
-	 * @todo keywords,max_cpc
+	 *
+	 * have to delete the keyword and add a new one with modified text. 
+	 * AdWords doesn't allow keyword text to be updated once it is created
+	 * @see https://groups.google.com/forum/#!topic/adwords-api/orHKi0tox1Q
+	 * @see https://code.google.com/p/google-api-adwords-php/source/browse/examples/AdWords/v201306/BasicOperations/UpdateAdGroup.php
 	 */
 	public function update($data){
 		if(empty($data['adgroup_id'])){
@@ -113,7 +117,12 @@ class AdGroupManager extends AdwordsBase{
 			$biddingStrategyConfiguration->bids[] = $bid;
 			$adGroup->biddingStrategyConfiguration = $biddingStrategyConfiguration;
 		}
-		// Update Keywords.
+		// Update Keywords. remove all then add.
+		if(isset($data['keywords'])){
+			$keywordIds = $this->getKeywords($data['adgroup_id']);
+			$this->delKeywords($data['adgroup_id'], $keywordIds);
+			$this->addKeywords($adGroup->id, explode(',', $data['keywords']));
+		}
 		
 		// Create operation.
 		$operation = new \AdGroupOperation();
@@ -183,6 +192,77 @@ class AdGroupManager extends AdwordsBase{
 			$keywordAdGroupCriterionOperation->operator = 'ADD';
 
 			$operations[] = $keywordAdGroupCriterionOperation;
+		}
+		$result = $adGroupCriterionService->mutate($operations);
+
+		return TRUE;
+	}
+	
+	/**
+	 * Get criterion Id of keywords
+	 *
+	 * @param string $adGroupId:
+	 * @return array: criterionIds of keywords
+	 * @throw \Exception;
+	 * @see http://stackoverflow.com/questions/8781850/
+	 */
+	private function getKeywords($adGroupId){	
+		$adGroupCriterionService = $this->getService('AdGroupCriterionService');
+		
+		// Create selector.
+		$selector = new \Selector();
+		$selector->fields = array('KeywordText', 'KeywordMatchType', 'Id');
+		$selector->ordering[] = new \OrderBy('KeywordText', 'ASCENDING');
+
+		// Create predicates.
+		$selector->predicates[] = new \Predicate('AdGroupId', 'IN', array($adGroupId));
+		$selector->predicates[] =
+				new \Predicate('CriteriaType', 'IN', array('KEYWORD'));
+
+		// Create paging controls.
+		$selector->paging = new Paging(0, \AdWordsConstants::RECOMMENDED_PAGE_SIZE);
+		
+		$criterionIds = array();
+		do {
+			$page = $adGroupCriterionService->get($selector);
+			if (isset($page->entries)) {
+				foreach ($page->entries as $adGroupCriterion) {
+					$criterionIds[] = $adGroupCriterion->criterion->id;
+				}
+			}
+			$selector->paging->startIndex += \AdWordsConstants::RECOMMENDED_PAGE_SIZE;
+		} while ($page->totalNumEntries > $selector->paging->startIndex);
+		
+		return $criterionIds;
+	}
+	
+	/**
+	 * Remove keywords by id.
+	 *
+	 * @param string $adGroupId:
+	 * @param array $criterionIds: criterionIds of keywords
+	 * @return boolean: TRUE on success
+	 * @throw \Exception;
+	 */
+	private function delKeywords($adGroupId, $criterionIds){
+		$adGroupCriterionService = $this->getService('AdGroupCriterionService');
+
+		$operations = array();
+		foreach($criterionIds as $criterionId){
+			$criterion = new \Criterion();
+			$criterion->id = $criterionId;
+			
+			// Create ad group criterion.
+			$adGroupCriterion = new \AdGroupCriterion();
+			$adGroupCriterion->adGroupId = $adGroupId;
+			$adGroupCriterion->criterion = new \Criterion($criterionId);
+
+			// Create operation.
+			$operation = new \AdGroupCriterionOperation();
+			$operation->operand = $adGroupCriterion;
+			$operation->operator = 'REMOVE';
+
+			$operations[] = $operation;
 		}
 		$result = $adGroupCriterionService->mutate($operations);
 
