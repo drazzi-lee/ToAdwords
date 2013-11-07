@@ -17,6 +17,7 @@ use ToAdwords\Exception\DataCheckException;
 use ToAdwords\Exception\DependencyException;
 use ToAdwords\MessageHandler;
 use ToAdwords\Definition\Operation;
+use ToAdwords\Model\CustomerModel;
 
 use \Exception;
 
@@ -191,6 +192,185 @@ abstract class AdwordsAdapter{
 	}
 	
 	/**
+	 * Create Adwords Object 
+	 *
+	 * Call AdwordsManager to create an adwords Object on specify customer's account.
+	 *
+	 * @param array $data: 
+	 * @return boolean: TRUE on success, FALSE on failure.
+	 */
+	public function createAdwordsObject(array $data){
+		try{
+			$currentModel = new static::$currentModelName();
+			$parentModel = new static::$parentModelName();
+			$customerModel = new CustomerModel();
+			
+			//check required fields.
+			$requiredFields = array(
+				$customerModel::$idclickObjectIdField,
+				$currentModel::$idclickObjectIdField,
+				$parentModel::$idclickObjectIdField,
+			);
+			$this->checkFieldExists($requiredFields, $data);
+			
+			//get customer id.
+			$data[$customerModel::$adwordsObjectIdField] =
+						$this->getAdwordsCustomerId($data[$customerModel::$idclickObjectIdField]);
+			if(empty($data[$customerModel::$adwordsObjectIdField]) || 
+					$data[$customerModel::$adwordsObjectIdField] === FALSE){
+				throw new Exception('customer has not synced yet.');	
+			}
+			
+			//get parent adwords object id.
+			$data[$parentModel::$adwordsObjectIdField] = 
+						$this->getParentAdwordsObjectId($data[$parentModel::$idclickObjectIdField]);
+			if(empty($data[$parentModel::$adwordsObjectIdField]) || 
+					$data[$parentModel::$adwordsObjectIdField] === FALSE){
+				throw new Exception('parent has not synced yet.');	
+			}
+			
+			//call manager to create.
+			$currentManager = new static::$currentManagerName($data[$customerModel::$adwordsObjectIdField]);
+			$currentAdwordsObjectId = $currentManager->create($data);
+			Log::write("[notice] {static::$modelName} with {$customerModel::$adwordsObjectIdField}". 
+											" #{$currentAdwordsObjectId} was created.\n", __METHOD__);
+			
+			//update current sync status.
+			$currentModel = new self::$currentModelName();
+			$currentModel->updateOne($currentModel::$idclickObjectIdField . '=' . $data[$currentModel::$idclickObjectIdField],
+												array($currentModel::$adwordsObjectIdField	=> $currentAdwordsObjectId));
+			$currentModel->updateSyncStatus(SyncStatus::SYNCED, $data[$currentModel::$idclickObjectIdField]);
+			return TRUE;
+		} catch(Exception $e){
+			Log::write("[warning] An error has occurred: {$e->getMessage()}\n"
+			return FALSE;
+		}
+	}
+	
+	/**
+	 * Update Adwords Object 
+	 *
+	 * Call AdwordsManager to update an adwords Object on specify customer's account.
+	 *
+	 * @param array $data: 
+	 * @return boolean: TRUE on success, FALSE on failure.
+	 */
+	public function updateAdwordsObject(array $data){
+		try{
+			$currentModel = new static::$currentModelName();
+			$customerModel = new CustomerModel();
+			
+			//check required fields.
+			$requiredFields = array(
+				$customerModel::$idclickObjectIdField,
+				$currentModel::$idclickObjectIdField,
+				$currentModel::$adwordsObjectIdField,
+			);
+			$this->checkFieldExists($requiredFields, $data);
+
+			//get customer id.
+			$data[$customerModel::$adwordsObjectIdField] =
+						$this->getAdwordsCustomerId($data[$customerModel::$idclickObjectIdField]);
+			if(empty($data[$customerModel::$adwordsObjectIdField]) || 
+					$data[$customerModel::$adwordsObjectIdField] === FALSE){
+				throw new Exception('customer has not synced yet.');	
+			}
+			
+			$currentManager = new static::$currentManagerName($data[$customerModel::$adwordsObjectIdField]);
+			$result = $currentManager->update($data);
+			Log::write("[notice] {static::$modelName} with {$customerModel::$adwordsObjectIdField}". 
+											" #{$currentAdwordsObjectId} was updated.\n", __METHOD__);
+			$currentModel->updateSyncStatus(SyncStatus::SYNCED, $data[$currentModel::$idclickObjectIdField]);
+			return TRUE;
+		} catch(Exception $e){
+			Log::write("[warning] An error has occurred: {$e->getMessage()}\n"
+			return FALSE;
+		}
+	}
+	
+	/**
+	 * Delete Adwords Object 
+	 *
+	 * Call AdwordsManager to update an adwords Object on specify customer's account.
+	 *
+	 * @param array $data: 
+	 * @return boolean: TRUE on success, FALSE on failure.
+	 */
+	public function deleteAdwordsObject(array $data){
+		try{
+			$currentModel = new static::$currentModelName();
+			$customerModel = new CustomerModel();
+			
+			//check required fields.
+			$requiredFields = array(
+				$customerModel::$idclickObjectIdField,
+				$currentModel::$idclickObjectIdField,
+				$currentModel::$adwordsObjectIdField,
+			);
+			$this->checkFieldExists($requiredFields, $data);		
+			
+			//get customer id.
+			$data[$customerModel::$adwordsObjectIdField] =
+						$this->getAdwordsCustomerId($data[$customerModel::$idclickObjectIdField]);
+			if(empty($data[$customerModel::$adwordsObjectIdField]) || 
+					$data[$customerModel::$adwordsObjectIdField] === FALSE){
+				throw new Exception('customer with idclick_uid #'
+							. $data[$customerModel::$idclickObjectIdField] .' has not synced yet.');	
+			}
+			
+			$currentManager = new static::$currentManagerName($data[$customerModel::$adwordsObjectIdField]);
+			$result = $currentManager->delete($data);
+			Log::write("[notice] {static::$modelName} with {$customerModel::$adwordsObjectIdField}". 
+											" #{$currentAdwordsObjectId} was updated.\n", __METHOD__);
+			$currentModel->updateSyncStatus(SyncStatus::SYNCED, $data[$currentModel::$idclickObjectIdField]);
+			return TRUE;
+		} catch(Exception $e){
+			Log::write("[warning] An error has occurred: {$e->getMessage()}\n"
+			return FALSE;
+		}
+	}
+	
+	/**
+	 * Get adwords customer id by idclick_uid
+	 *
+	 * @param integer $idclickUid
+	 * @return integer on success, FALSE on failure
+	 */
+	protected function getAdwordsCustomerId($idclickUid){
+		$customerModel = new CustomerModel();
+		$customerInfo = $customerModel->getAdapteInfo($idclickUid);
+		if($customerInfo === FALSE){
+			return FALSE;
+		} else {
+			if($customerInfo[$customerModel::$syncStatusField] !== SyncStatus::SYNCED &&
+					$customerModel->isValidAdwordsId($customerInfo[$customerModel::$adwordsObjectIdField])){
+				return $customerInfo[$customerModel::$adwordsObjectIdField];
+			}
+		}
+	}
+	
+	/**
+	 * Get parent adwords object id
+	 *
+	 * @param integer $parentIdclickObjectId
+	 * @return integer on success, FALSE on failure
+	 */
+	protected function getParentAdwordsObjectId($parentIdclickObjectId){
+		$parentModel = new static::$parentModelName();
+		$parentInfo = $parentModel->getAdapteInfo($parentIdclickObjectId);
+		if($parentInfo === FALSE){
+			return FALSE;
+		} else {
+			if($parentInfo[$parentModel::$syncStatusField] !== SyncStatus::SYNCED && 
+					$parentModel->isValidAdwordsId($parentInfo[$parentModel::$adwordsObjectIdField])){
+				return $parentInfo[$parentModel::$adwordsObjectIdField];
+			} else {
+				return FALSE;
+			}
+		}
+	}
+	
+	/**
 	 * Build and send message to httpsqs queue.
 	 *
 	 * @param array $data
@@ -240,6 +420,18 @@ abstract class AdwordsAdapter{
 		}
 	}
 
+	/**
+	 * Check whether the $data array has all fields required.
+	 */
+	protected function checkFieldExists($requiredFields, array $data){
+		foreach($requiredFields as $requiredField){
+			if(empty($data[$requiredField])){
+				throw new Expception('field #'.$requiredField.' is required.');
+			}
+		}
+		return TRUE;
+	}
+	
 	/**
 	 * Check whether the data meets the requirements.
 	 *

@@ -279,5 +279,50 @@ class CampaignManager extends AdwordsBase{
 
 		return $criterionIds;
 	}
+	
+	private function delTargetingCriteria($campaignId, array $criterias, $type){
+	
+	}
+	
+	/**
+	 *
+	 */
+	private function getTargetingCriteria($campaignId){
+		// Get the service, which loads the required classes.
+		$campaignCriterionService = $this->getService('CampaignCriterionService');
 
+		// Create selector.
+		$selector = new \Selector();
+		$selector->fields = array('Id', 'CriteriaType');
+
+		// Create predicates.
+		$selector->predicates[] = new \Predicate('CampaignId', 'IN', array($campaignId));
+		$selector->predicates[] = new \Predicate('CriteriaType', 'IN', array('LANGUAGE', 'LOCATION'));
+
+		// Create paging controls.
+		$selector->paging = new \Paging(0, AdWordsConstants::RECOMMENDED_PAGE_SIZE);
+		
+		$criterions = array();
+		do {
+			// Make the get request.
+			$page = $campaignCriterionService->get($selector);
+
+			// Display results.
+			if (isset($page->entries)) {
+				foreach ($page->entries as $campaignCriterion) {
+				//$cirterions[$campaignCriterion->criterion->CriterionType][] = 
+				printf("Campaign targeting criterion with ID '%s' and type '%s' was "
+					. "found.\n", $campaignCriterion->criterion->id,
+					$campaignCriterion->criterion->CriterionType);
+				}
+			} else {
+				print "No campaign targeting criteria were found.\n";
+			}
+
+			// Advance the paging index.
+			$selector->paging->startIndex += AdWordsConstants::RECOMMENDED_PAGE_SIZE;
+		} while ($page->totalNumEntries > $selector->paging->startIndex);
+		
+		return $criterions;
+	}
 }

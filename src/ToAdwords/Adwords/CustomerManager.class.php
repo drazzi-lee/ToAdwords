@@ -17,7 +17,6 @@ class CustomerManager extends AdwordsBase{
 	
 	public function __construct(){
 		parent::__construct();
-		$this->user->SetClientCustomerId($customerId);
 		$this->managedCustomerService = $this->getService('ManagedCustomerService');
 		//$this->budgetService = $this->getService('BudgetService');
 	}

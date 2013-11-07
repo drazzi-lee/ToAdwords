@@ -18,6 +18,7 @@ use ToAdwords\MessageHandler;
 use ToAdwords\Definition\Operation;
 use ToAdwords\Definition\SyncStatus;
 use ToAdwords\Util\Log;
+use ToAdwords\Adwords\CustomerManager;
 
 use \Exception;
 
@@ -71,8 +72,8 @@ class CustomerAdapter extends AdwordsAdapter{
 			if(!isset($data['idclick_uid'])){
 				throw new Exception('idclick uid not found.');
 			}
-			$adwordsManager = new AdwordsManager();
-			$customerId = $adwordsManager->createCustomer();
+			$customerManager = new CustomerManager();
+			$customerId = $customerManager->createCustomer();
 			Log::write("[notice] Account with customer_id #{$customerId} was created.\n", __METHOD__);
 			$customerModel = new self::$currentModelName();
 			$customerModel->updateSyncStatus(SyncStatus::SYNCED, $data['idclick_uid']);
