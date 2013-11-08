@@ -95,6 +95,8 @@ class MessageHandler{
 			$this->put($message, array($currentModel, 'updateSyncStatus'), HTTPSQS_QUEUE_RETRY);			
 			throw new MessageException('发送消息失败，消息内容：'.$message.' || 已进入重试队列');
 		}
+		
+		return $result;
 	}
 	
 	public function put(Message $message, $callback = null, $queueName = HTTPSQS_QUEUE_COMMON){
