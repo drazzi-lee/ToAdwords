@@ -220,7 +220,7 @@ class AdGroupManager extends AdwordsBase{
 				new \Predicate('CriteriaType', 'IN', array('KEYWORD'));
 
 		// Create paging controls.
-		$selector->paging = new Paging(0, \AdWordsConstants::RECOMMENDED_PAGE_SIZE);
+		$selector->paging = new \Paging(0, \AdWordsConstants::RECOMMENDED_PAGE_SIZE);
 		
 		$criterionIds = array();
 		do {

@@ -192,16 +192,16 @@ class CampaignManager extends AdwordsBase{
 			$campaign->budget->budgetId = $budget->budgetId;
 		}
 		
-		if(isset($data['languages']) && count(explode($data['languages'])) > 0){
+		if(isset($data['languages']) && count(explode(',', $data['languages'])) > 0){
 			$currentLanguages = $this->getCriteria($data['campaign_id'], 'LANGUAGE');
 			$this->delCriteria($data['campaign_id'], $currentLanguages, 'LANGUAGE');
-			$this->addCriteria($data['campaign_id'], explode($data['languages']), 'LANGUAGE');
+			$this->addCriteria($data['campaign_id'], explode(',', $data['languages']), 'LANGUAGE');
 		}
 		
-		if(isset($data['locations'])){
+		if(isset($data['locations']) && count(explode(',', $data['locations'])) > 0){
 			$currentLocations = $this->getCriteria($data['campaign_id'], 'LOCATION');
 			$this->delCriteria($data['campaign_id'], $currentLocations, 'LOCATION');
-			$this->addCriteria($data['campaign_id'], explode($data['locations']), 'LOCATION');
+			$this->addCriteria($data['campaign_id'], explode(',', $data['locations']), 'LOCATION');
 		}
 		
 		// Create operation.
@@ -321,7 +321,7 @@ class CampaignManager extends AdwordsBase{
 			// Display results.
 			if (isset($page->entries)) {
 				foreach ($page->entries as $campaignCriterion) {
-					criterions[] = $campaignCriterion->criterion->id;
+					$criterions[] = $campaignCriterion->criterion->id;
 				}
 			}
 
@@ -346,15 +346,17 @@ class CampaignManager extends AdwordsBase{
 		
 		$campaignCriteria = array();
 		if(count($criterions) > 0){
-			$criteria = null;
-			switch($type){
-				case 'LOCATION': $criteria = new \Location(); break;
-				case 'LANGUAGE': $criteria = new \Language(); break;
-				default:
-					throw new \Exception('currently unsupported criteria type #'.$type);
+			foreach($criterions as $criteriaId){
+				$criteria = null;
+				switch($type){
+					case 'LOCATION': $criteria = new \Location(); break;
+					case 'LANGUAGE': $criteria = new \Language(); break;
+					default:
+						throw new \Exception('currently unsupported criteria type #'.$type);
+				}
+				$criteria->id = $criteriaId;
+				$campaignCriteria[] = new \CampaignCriterion($campaignId, null, $criteria);
 			}
-			$criteria->id = $criteriaId;
-			$campaignCriteria[] = new \CampaignCriterion($campaignId, null, $criteria);
 		}
 
 		$operations = array();

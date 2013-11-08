@@ -536,8 +536,12 @@ abstract class AdwordsAdapter{
 			} else if(isset($data['idclick_groupid'])){
 				$adGroupModel = new AdGroupModel();
 				$adGroupInfo = $adGroupModel->getOne('idclick_planid', 'idclick_groupid='.$data['idclick_groupid']);
-				$data['idclick_planid'] = $adGroupInfo['idclick_planid'];		
-				self::prepareData($data, $action);
+				$data['idclick_planid'] = $adGroupInfo['idclick_planid'];
+				if((isset($data['idclick_planid']))){
+					self::prepareData($data, $action);
+				} else {
+					throw new DataCheckException('idclick_planid could not be found with group_id #'.$data['idclick_groupid']);
+				}
 			} 
 		}
 	}

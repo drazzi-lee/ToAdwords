@@ -1,0 +1,342 @@
+[ 2013-11-08T10:20:52+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527c4a8439e34
+    [areas] => 2156
+    [languages] => 1017,1018
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T10:21:08+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527c4a8439e34
+    [areas] => 2156
+    [languages] => 1017,1018
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T10:22:13+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527c4ad5882c0
+    [areas] => 2156
+    [languages] => 1017,1018
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T10:22:16+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527c4ad5882c0
+    [areas] => 2156
+    [languages] => 1017,1018
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T10:22:35+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [notice] Campaign with campaign_id #145416445 was created.
+
+[ 2013-11-08T10:27:05+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 1000
+    [max_cpc] => 23
+    [delivery_method] => STANDARD
+    [bidding_type] => MANUAL_CPC
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-08T10:27:12+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 1000
+    [max_cpc] => 23
+    [delivery_method] => STANDARD
+    [bidding_type] => MANUAL_CPC
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-08T10:27:21+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [notice] Campaign with customer_id #9537363155 was updated.
+
+[ 2013-11-08T10:28:26+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 1000
+    [max_cpc] => 23
+    [delivery_method] => STANDARD
+    [bidding_type] => MANUAL_CPC
+    [languages] => 1017
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-08T10:28:29+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 1000
+    [max_cpc] => 23
+    [delivery_method] => STANDARD
+    [bidding_type] => MANUAL_CPC
+    [languages] => 1017
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-08T10:28:38+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [notice] Campaign with customer_id #9537363155 was updated.
+
+[ 2013-11-08T10:30:07+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 1000
+    [max_cpc] => 23
+    [delivery_method] => STANDARD
+    [bidding_type] => MANUAL_CPC
+    [languages] => 1017
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-08T10:30:14+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 1000
+    [max_cpc] => 23
+    [delivery_method] => STANDARD
+    [bidding_type] => MANUAL_CPC
+    [languages] => 1017
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-08T10:30:26+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [warning] An error has occurred: [RequiredError.REQUIRED @ operations[0].operand.criterion.id]
+
+[ 2013-11-08T10:30:26+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 1000
+    [max_cpc] => 23
+    [delivery_method] => STANDARD
+    [bidding_type] => MANUAL_CPC
+    [languages] => 1017
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-08T10:31:38+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 1000
+    [max_cpc] => 23
+    [delivery_method] => STANDARD
+    [bidding_type] => MANUAL_CPC
+    [languages] => 1017
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-08T10:31:42+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 1000
+    [max_cpc] => 23
+    [delivery_method] => STANDARD
+    [bidding_type] => MANUAL_CPC
+    [languages] => 1017
+    [campaign_status] => ACTIVE
+    [last_action] => UPDATE
+)
+
+[ 2013-11-08T10:31:57+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [notice] Campaign with customer_id #9537363155 was updated.
+
+[ 2013-11-08T10:33:53+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 123460
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name123460
+    [keywords] => keywords1,keywords2
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+    [idclick_uid] => 503
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T10:34:11+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 123460
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name123460
+    [keywords] => keywords1,keywords2
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+    [idclick_uid] => 503
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T10:34:26+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [notice] AdGroup with adgroup_id #10428795685 was created.
+
+[ 2013-11-08T10:35:18+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：AdGroup | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_groupid] => 123460
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name2602
+    [keywords] => keywords3,keywords2,keywords1
+    [max_cpc] => 201
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-08T10:35:21+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroup | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_groupid] => 123460
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name2602
+    [keywords] => keywords3,keywords2,keywords1
+    [max_cpc] => 201
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-08T10:37:14+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：AdGroup | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_groupid] => 123460
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name2602
+    [keywords] => keywords3,keywords2,keywords1
+    [max_cpc] => 201
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-08T10:37:17+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroup | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_groupid] => 123460
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name2602
+    [keywords] => keywords3,keywords2,keywords1
+    [max_cpc] => 201
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-08T10:37:35+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [notice] AdGroup with customer_id #9537363155 was updated.
+
+[ 2013-11-08T10:46:49+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：AdGroupAd | 动作：CREATE | 消息内容：Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123460
+    [ad_headline] => headline
+    [ad_description1] => description1
+    [ad_description2] => description2
+    [ad_url] => http://www.izptec.com/go.php
+    [ad_displayurl] => http://www.izptec.com/
+    [ad_status] => PAUSE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T10:46:53+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroupAd | 动作：CREATE | 消息内容：Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123460
+    [ad_headline] => headline
+    [ad_description1] => description1
+    [ad_description2] => description2
+    [ad_url] => http://www.izptec.com/go.php
+    [ad_displayurl] => http://www.izptec.com/
+    [ad_status] => PAUSE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T10:47:01+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [notice] AdGroupAd with ad_id #32115782125 was created.
+
+[ 2013-11-08T10:48:11+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：AdGroupAd | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123460
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-08T10:48:14+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroupAd | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123460
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-08T10:48:22+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [notice] AdGroupAd with customer_id #9537363155 was updated.
+

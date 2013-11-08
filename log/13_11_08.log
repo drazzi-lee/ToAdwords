@@ -1,0 +1,385 @@
+[ 2013-11-08T10:20:52+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527c4a8439e34
+    [areas] => 2156
+    [languages] => 1017,1018
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-08T10:20:52+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-08T10:22:13+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [campaign_name] => campaign_name #527c4ad5882c0
+    [areas] => 2156
+    [languages] => 1017,1018
+    [bidding_type] => 0
+    [budget_amount] => 20000
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 10
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-08T10:22:13+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-08T10:25:44+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 1000
+    [max_cpc] => 23
+    [delivery_method] => STANDARD
+    [bidding_type] => MANUAL_CPC
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-08T10:25:44+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => -1
+    [description] => ToAdwords\Exception\DataCheckException unknown bidding_type ##MANUAL_CPC
+    [success] => 0
+    [failure] => 0
+)
+
+[ 2013-11-08T10:27:05+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 1000
+    [max_cpc] => 23
+    [delivery_method] => STANDARD
+    [bidding_type] => 1
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-08T10:27:05+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-08T10:28:26+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 1000
+    [max_cpc] => 23
+    [delivery_method] => STANDARD
+    [bidding_type] => 1
+    [languages] => 1017
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-08T10:28:26+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-08T10:30:07+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 1000
+    [max_cpc] => 23
+    [delivery_method] => STANDARD
+    [bidding_type] => 1
+    [languages] => 1017
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-08T10:30:07+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-08T10:31:38+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [budget_amount] => 1000
+    [max_cpc] => 23
+    [delivery_method] => STANDARD
+    [bidding_type] => 1
+    [languages] => 1017
+    [campaign_status] => ACTIVE
+)
+
+[ 2013-11-08T10:31:38+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => Campaign update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-08T10:33:53+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_groupid] => 123460
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name123460
+    [keywords] => Array
+        (
+            [0] => keywords1
+            [1] => keywords2
+        )
+
+    [max_cpc] => 200
+    [adgroup_status] => ACTIVE
+)
+
+[ 2013-11-08T10:33:53+08:00 ] #ToAdwords\AdwordsAdapter::prepareData# [WARNING] Field #keywords Array to String conversion.
+[ 2013-11-08T10:33:53+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => AdGroup create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-08T10:35:18+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_groupid] => 123460
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name2602
+    [keywords] => Array
+        (
+            [0] => keywords3
+            [1] => keywords2
+            [2] => keywords1
+        )
+
+    [max_cpc] => 201
+)
+
+[ 2013-11-08T10:35:18+08:00 ] #ToAdwords\AdwordsAdapter::prepareData# [WARNING] Field #keywords Array to String conversion.
+[ 2013-11-08T10:35:18+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => AdGroup update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-08T10:37:14+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_groupid] => 123460
+    [idclick_planid] => 61634
+    [adgroup_name] => group_name2602
+    [keywords] => Array
+        (
+            [0] => keywords3
+            [1] => keywords2
+            [2] => keywords1
+        )
+
+    [max_cpc] => 201
+)
+
+[ 2013-11-08T10:37:14+08:00 ] #ToAdwords\AdwordsAdapter::prepareData# [WARNING] Field #keywords Array to String conversion.
+[ 2013-11-08T10:37:14+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => AdGroup update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-08T10:38:26+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline
+    [ad_description1] => description1
+    [ad_description2] => description2
+    [ad_url] => http://www.izptec.com/go.php
+    [ad_displayurl] => http://www.izptec.com/
+    [ad_status] => PAUSE
+)
+
+[ 2013-11-08T10:40:07+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline
+    [ad_description1] => description1
+    [ad_description2] => description2
+    [ad_url] => http://www.izptec.com/go.php
+    [ad_displayurl] => http://www.izptec.com/
+    [ad_status] => PAUSE
+)
+
+[ 2013-11-08T10:41:15+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline
+    [ad_description1] => description1
+    [ad_description2] => description2
+    [ad_url] => http://www.izptec.com/go.php
+    [ad_displayurl] => http://www.izptec.com/
+    [ad_status] => PAUSE
+)
+
+[ 2013-11-08T10:41:56+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline
+    [ad_description1] => description1
+    [ad_description2] => description2
+    [ad_url] => http://www.izptec.com/go.php
+    [ad_displayurl] => http://www.izptec.com/
+    [ad_status] => PAUSE
+)
+
+[ 2013-11-08T10:42:30+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline
+    [ad_description1] => description1
+    [ad_description2] => description2
+    [ad_url] => http://www.izptec.com/go.php
+    [ad_displayurl] => http://www.izptec.com/
+    [ad_status] => PAUSE
+)
+
+[ 2013-11-08T10:46:35+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline
+    [ad_description1] => description1
+    [ad_description2] => description2
+    [ad_url] => http://www.izptec.com/go.php
+    [ad_displayurl] => http://www.izptec.com/
+    [ad_status] => PAUSE
+)
+
+[ 2013-11-08T10:46:35+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => -1
+    [description] => ToAdwords\Exception\DataCheckException idclick_planid could not be found with group_id #123459
+    [success] => 0
+    [failure] => 0
+)
+
+[ 2013-11-08T10:46:49+08:00 ] #ToAdwords\AdwordsAdapter::create# Received new data:
+Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123460
+    [ad_headline] => headline
+    [ad_description1] => description1
+    [ad_description2] => description2
+    [ad_url] => http://www.izptec.com/go.php
+    [ad_displayurl] => http://www.izptec.com/
+    [ad_status] => PAUSE
+)
+
+[ 2013-11-08T10:46:49+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => AdGroupAd create success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-08T10:47:40+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123459
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+)
+
+[ 2013-11-08T10:47:40+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => -1
+    [description] => ToAdwords\Exception\DataCheckException idclick_planid could not be found with group_id #123459
+    [success] => 0
+    [failure] => 0
+)
+
+[ 2013-11-08T10:48:11+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123460
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+)
+
+[ 2013-11-08T10:48:11+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => AdGroupAd update success!
+    [success] => 1
+    [failure] => 0
+)
+

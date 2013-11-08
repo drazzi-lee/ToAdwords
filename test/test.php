@@ -35,7 +35,7 @@ class TestAction{
 	public function deleteCampaign(){
 		$data = array (
 				'idclick_planid' => 61634,
-				'idclick_uid'		=> 502,
+				'idclick_uid'		=> 503,
 		);
 		$campaignModel = new CampaignModel();
 		var_dump($campaignModel->deleteCampaign($data));
@@ -45,7 +45,11 @@ class TestAction{
 		$data = array (
 				'idclick_planid' => 61634,
 				'idclick_uid'		=> 503,
-				'budget_amount'		=> 32334,
+				'budget_amount'		=> 1000,
+				'max_cpc'			=> 23,
+				'delivery_method' => 'STANDARD',
+				'bidding_type'		=> 1,
+				'languages' => '1017',
 				'campaign_status'	=> 'ACTIVE',
 		);
 		$campaignModel = new CampaignModel();
@@ -88,7 +92,7 @@ class TestAction{
 	public function createAd(){
 		$data = array(
 			'idclick_adid'		=> 12348,
-			'idclick_groupid'	=> 123459, 
+			'idclick_groupid'	=> 123460, 
 			'ad_headline'		=> 'headline',
 			'ad_description1'	=> 'description1',
 			'ad_description2'	=> 'description2',
@@ -103,7 +107,7 @@ class TestAction{
 	public function updateAd(){
 		$data = array(
 			'idclick_adid'		=> 12348,
-			'idclick_groupid'	=> 123459, 
+			'idclick_groupid'	=> 123460, 
 			'ad_headline'		=> 'headline——l',
 			'ad_description1'	=> 'description1....',
 			'ad_description2'	=> 'description2....',
@@ -123,4 +127,9 @@ class TestAction{
 	}
 }
 $testAction = new TestAction();
+//$testAction->createCampaign();
+//$testAction->updateCampaign();
+//$testAction->createAdgroup();
+//$testAction->updateAdgroup();
+//$testAction->createAd();
 $testAction->updateAd();
