@@ -56,12 +56,14 @@ class AdGroupManager extends AdwordsBase{
 		$adGroup->name = $data['adgroup_name'];
 
 		// Set bids (required).
-		$bid = new \CpcBid();
-		$bid->bid = new \Money($data['max_cpc'] * self::$moneyMultiples); //default max cpc.
-		//$bid->contentBid = new \Money($data['max_cpc'] * self::$moneyMultiples); # display network bid.
-		$biddingStrategyConfiguration = new \BiddingStrategyConfiguration();
-		$biddingStrategyConfiguration->bids[] = $bid;
-		$adGroup->biddingStrategyConfiguration = $biddingStrategyConfiguration;
+		if($data['max_cpc'] >= 0.01){
+			$bid = new \CpcBid();
+			$bid->bid = new \Money($data['max_cpc'] * self::$moneyMultiples); //default max cpc.
+			//$bid->contentBid = new \Money($data['max_cpc'] * self::$moneyMultiples); # display network bid.
+			$biddingStrategyConfiguration = new \BiddingStrategyConfiguration();
+			$biddingStrategyConfiguration->bids[] = $bid;
+			$adGroup->biddingStrategyConfiguration = $biddingStrategyConfiguration;
+		}
 
 		// Set additional settings (optional).
 		$adGroup->status = $this->mappingStatus($data['adgroup_status']);
@@ -77,7 +79,10 @@ class AdGroupManager extends AdwordsBase{
 		$adGroup = $result->value[0];
 
 		// Add Keywords on AdGroup
-		$this->addKeywords($adGroup->id, explode(',', $data['keywords']));
+		$keywordsArray = explode(',', $data['keywords']);
+		if(count($keywordsArray) > 0){
+			$this->addKeywords($adGroup->id, $keywordsArray);
+		}
 		return $adGroup->id;
 	}
 	
@@ -121,7 +126,10 @@ class AdGroupManager extends AdwordsBase{
 		if(isset($data['keywords'])){
 			$keywordIds = $this->getKeywords($data['adgroup_id']);
 			$this->delKeywords($data['adgroup_id'], $keywordIds);
-			$this->addKeywords($adGroup->id, explode(',', $data['keywords']));
+			$keywordsArray = explode(',', $data['keywords']);
+			if(count($keywordsArray) > 0){
+				$this->addKeywords($adGroup->id, $keywordsArray);
+			}
 		}
 		
 		// Create operation.

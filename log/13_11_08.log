@@ -383,3 +383,45 @@ Array
     [failure] => 0
 )
 
+[ 2013-11-08T11:08:35+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123460
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+)
+
+[ 2013-11-08T11:08:35+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => AdGroupAd update success!
+    [success] => 1
+    [failure] => 0
+)
+
+[ 2013-11-08T18:46:57+08:00 ] #ToAdwords\AdwordsAdapter::update# Received new data:
+Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123460
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+)
+
+[ 2013-11-08T18:46:57+08:00 ] #ToAdwords\AdwordsAdapter::generateResult# [RETURN] Processed end with result:
+Array
+(
+    [status] => 1
+    [description] => AdGroupAd update success!
+    [success] => 1
+    [failure] => 0
+)
+

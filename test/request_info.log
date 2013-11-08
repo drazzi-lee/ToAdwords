@@ -1,0 +1,2 @@
+[Nov 08 2013 11:08:51.000000 - INFO] email= effectiveUser=9537363155 service=AdGroupAdService method=mutate operators={SET: 1} responseTime=337 requestId=0004eaa1b032fb400a429e6500004098 operations=1 units= server=adwords.google.com isFault=false faultMessage=null
+[Nov 08 2013 18:47:10.000000 - INFO] email= effectiveUser=9537363155 service=AdGroupAdService method=mutate operators={SET: 1} responseTime=384 requestId=0004eaa8174b2e780a429e6500004098 operations=1 units= server=adwords.google.com isFault=false faultMessage=null

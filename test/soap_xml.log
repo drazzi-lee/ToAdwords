@@ -1,0 +1,164 @@
+[Nov 08 2013 11:08:51.000000 - INFO] POST /api/adwords/cm/v201306/AdGroupAdService?access_token=ya29.AHES6ZTMYRifWxkr-vX5p8HEOfkvd5_-1A2zW1ZAD6EXQKK2iGEriuY HTTP/1.1
+Host: adwords.google.com
+Connection: Keep-Alive
+User-Agent: PHP-SOAP/5.4.16, gzip
+Accept-Encoding: gzip, deflate
+Content-Encoding: gzip
+Content-Type: text/xml; charset=utf-8
+SOAPAction: ""
+Content-Length: 504
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://adwords.google.com/api/adwords/cm/v201306" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SOAP-ENV:Header>
+    <ns1:RequestHeader>
+      <ns1:clientCustomerId>9537363155</ns1:clientCustomerId>
+      <ns1:developerToken>c6cnIFQ6BOI7SKjA0PCUvw</ns1:developerToken>
+      <ns1:userAgent>IZPTEC.COM (AwApi-PHP/4.5.1, Common-PHP/5.0.0, PHP/5.4.16)</ns1:userAgent>
+    </ns1:RequestHeader>
+  </SOAP-ENV:Header>
+  <SOAP-ENV:Body>
+    <ns1:mutate>
+      <ns1:operations>
+        <ns1:operator>SET</ns1:operator>
+        <ns1:operand>
+          <ns1:adGroupId>10428795685</ns1:adGroupId>
+          <ns1:ad xsi:type="ns1:TextAd">
+            <ns1:id>32115782125</ns1:id>
+            <ns1:headline>http://www.izptec.com/go1.php</ns1:headline>
+          </ns1:ad>
+          <ns1:status>ENABLED</ns1:status>
+        </ns1:operand>
+      </ns1:operations>
+    </ns1:mutate>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=UTF-8
+Content-Encoding: gzip
+Date: Fri, 08 Nov 2013 03:07:53 GMT
+Expires: Fri, 08 Nov 2013 03:07:53 GMT
+Cache-Control: private, max-age=0
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+Content-Length: 498
+Server: GSE
+
+<?xml version="1.0"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <ResponseHeader xmlns="https://adwords.google.com/api/adwords/cm/v201306">
+      <requestId>0004eaa1b032fb400a429e6500004098</requestId>
+      <serviceName>AdGroupAdService</serviceName>
+      <methodName>mutate</methodName>
+      <operations>1</operations>
+      <responseTime>337</responseTime>
+    </ResponseHeader>
+  </soap:Header>
+  <soap:Body>
+    <mutateResponse xmlns="https://adwords.google.com/api/adwords/cm/v201306">
+      <rval>
+        <ListReturnValue.Type>AdGroupAdReturnValue</ListReturnValue.Type>
+        <value>
+          <adGroupId>10428795685</adGroupId>
+          <ad xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TextAd">
+            <id>32115782125</id>
+            <url>http://www.izptec.com/go.php</url>
+            <displayUrl>www.izptec.com/</displayUrl>
+            <Ad.Type>TextAd</Ad.Type>
+            <headline>headline</headline>
+            <description1>description1</description1>
+            <description2>description2</description2>
+          </ad>
+          <status>ENABLED</status>
+          <approvalStatus>DISAPPROVED</approvalStatus>
+        </value>
+      </rval>
+    </mutateResponse>
+  </soap:Body>
+</soap:Envelope>
+
+[Nov 08 2013 18:47:10.000000 - INFO] POST /api/adwords/cm/v201306/AdGroupAdService?access_token=ya29.AHES6ZQJUipyERdB1daQNRSZ2r8brrGm-IeMS_98KVv7WaoBWB1rBn4 HTTP/1.1
+Host: adwords.google.com
+Connection: Keep-Alive
+User-Agent: PHP-SOAP/5.4.16, gzip
+Accept-Encoding: gzip, deflate
+Content-Encoding: gzip
+Content-Type: text/xml; charset=utf-8
+SOAPAction: ""
+Content-Length: 504
+
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="https://adwords.google.com/api/adwords/cm/v201306" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SOAP-ENV:Header>
+    <ns1:RequestHeader>
+      <ns1:clientCustomerId>9537363155</ns1:clientCustomerId>
+      <ns1:developerToken>c6cnIFQ6BOI7SKjA0PCUvw</ns1:developerToken>
+      <ns1:userAgent>IZPTEC.COM (AwApi-PHP/4.5.1, Common-PHP/5.0.0, PHP/5.4.16)</ns1:userAgent>
+    </ns1:RequestHeader>
+  </SOAP-ENV:Header>
+  <SOAP-ENV:Body>
+    <ns1:mutate>
+      <ns1:operations>
+        <ns1:operator>SET</ns1:operator>
+        <ns1:operand>
+          <ns1:adGroupId>10428795685</ns1:adGroupId>
+          <ns1:ad xsi:type="ns1:TextAd">
+            <ns1:id>32115782125</ns1:id>
+            <ns1:headline>http://www.izptec.com/go1.php</ns1:headline>
+          </ns1:ad>
+          <ns1:status>ENABLED</ns1:status>
+        </ns1:operand>
+      </ns1:operations>
+    </ns1:mutate>
+  </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
+
+HTTP/1.1 200 OK
+Content-Type: text/xml; charset=UTF-8
+Content-Encoding: gzip
+Date: Fri, 08 Nov 2013 10:46:13 GMT
+Expires: Fri, 08 Nov 2013 10:46:13 GMT
+Cache-Control: private, max-age=0
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+Content-Length: 498
+Server: GSE
+
+<?xml version="1.0"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <ResponseHeader xmlns="https://adwords.google.com/api/adwords/cm/v201306">
+      <requestId>0004eaa8174b2e780a429e6500004098</requestId>
+      <serviceName>AdGroupAdService</serviceName>
+      <methodName>mutate</methodName>
+      <operations>1</operations>
+      <responseTime>384</responseTime>
+    </ResponseHeader>
+  </soap:Header>
+  <soap:Body>
+    <mutateResponse xmlns="https://adwords.google.com/api/adwords/cm/v201306">
+      <rval>
+        <ListReturnValue.Type>AdGroupAdReturnValue</ListReturnValue.Type>
+        <value>
+          <adGroupId>10428795685</adGroupId>
+          <ad xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TextAd">
+            <id>32115782125</id>
+            <url>http://www.izptec.com/go.php</url>
+            <displayUrl>www.izptec.com/</displayUrl>
+            <Ad.Type>TextAd</Ad.Type>
+            <headline>headline</headline>
+            <description1>description1</description1>
+            <description2>description2</description2>
+          </ad>
+          <status>ENABLED</status>
+          <approvalStatus>DISAPPROVED</approvalStatus>
+        </value>
+      </rval>
+    </mutateResponse>
+  </soap:Body>
+</soap:Envelope>
+

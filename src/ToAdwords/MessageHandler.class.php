@@ -80,6 +80,7 @@ class MessageHandler{
 				$result = $module->createAdwordsObject($information);
 				break;
 			case 'UPDATE':
+				// @todo filter the unchanged data to optimize runtime.
 				$result = $module->updateAdwordsObject($information);
 				break;
 			case 'DELETE':

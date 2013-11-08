@@ -340,3 +340,303 @@
 
 [ 2013-11-08T10:48:22+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [notice] AdGroupAd with customer_id #9537363155 was updated.
 
+[ 2013-11-08T11:08:35+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：AdGroupAd | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123460
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-08T11:08:41+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroupAd | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123460
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-08T11:08:51+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [notice] AdGroupAd with customer_id #9537363155 was updated.
+
+[ 2013-11-08T18:46:57+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #common content:
+[消息] 模块：AdGroupAd | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123460
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-08T18:47:01+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 125
+    [idclick_planid] => 138
+    [adgroup_name] => 天天广告组001
+    [keywords] => 手机,智能手机,上网手机,手机特惠,无敌手机
+    [budget_amount] => 
+    [adgroup_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T18:47:01+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [warning] An error has occurred: field #idclick_uid is required.
+
+[ 2013-11-08T18:47:01+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 125
+    [idclick_planid] => 138
+    [adgroup_name] => 天天广告组001
+    [keywords] => 手机,智能手机,上网手机,手机特惠,无敌手机
+    [budget_amount] => 
+    [adgroup_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T18:47:01+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroupAd | 动作：CREATE | 消息内容：Array
+(
+    [idclick_adid] => 374
+    [idclick_groupid] => 125
+    [ad_headline] => 天天广告001广告
+    [ad_description1] => 天天广告第一行
+    [ad_description2] => 天天广告第二行
+    [ad_url] => http:// http:// www.baidu.com
+    [ad_displayurl] => http://www.baidu.com
+    [ad_status] => PAUSE
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T18:47:01+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [warning] An error has occurred: field #idclick_uid is required.
+
+[ 2013-11-08T18:47:01+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：AdGroupAd | 动作：CREATE | 消息内容：Array
+(
+    [idclick_adid] => 374
+    [idclick_groupid] => 125
+    [ad_headline] => 天天广告001广告
+    [ad_description1] => 天天广告第一行
+    [ad_description2] => 天天广告第二行
+    [ad_url] => http:// http:// www.baidu.com
+    [ad_displayurl] => http://www.baidu.com
+    [ad_status] => PAUSE
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T18:47:01+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 148
+    [idclick_uid] => 1023
+    [campaign_name] => 绿绿广告计划
+    [areas] => 2156
+    [languages] => 1017
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 63.5
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 1.3
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T18:47:01+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [warning] An error has occurred: customer has not synced yet.
+
+[ 2013-11-08T18:47:01+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 148
+    [idclick_uid] => 1023
+    [campaign_name] => 绿绿广告计划
+    [areas] => 2156
+    [languages] => 1017
+    [bidding_type] => BUDGET_OPTIMIZER
+    [budget_amount] => 63.5
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 1.3
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T18:47:01+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 126
+    [idclick_planid] => 148
+    [adgroup_name] => 绿绿广告组1
+    [keywords] => 花花绿绿,广告,广告牌,绿绿广告
+    [budget_amount] => 
+    [adgroup_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T18:47:01+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [warning] An error has occurred: field #idclick_uid is required.
+
+[ 2013-11-08T18:47:02+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 126
+    [idclick_planid] => 148
+    [adgroup_name] => 绿绿广告组1
+    [keywords] => 花花绿绿,广告,广告牌,绿绿广告
+    [budget_amount] => 
+    [adgroup_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T18:47:02+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroupAd | 动作：CREATE | 消息内容：Array
+(
+    [idclick_adid] => 375
+    [idclick_groupid] => 126
+    [ad_headline] => 绿绿广告1广告
+    [ad_description1] => 绿绿广告描述第一行
+    [ad_description2] => 绿绿广告描述第二行
+    [ad_url] => http:// http:// www.baidu.com
+    [ad_displayurl] => http://www.baidu.com
+    [ad_status] => PAUSE
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T18:47:02+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [warning] An error has occurred: field #idclick_uid is required.
+
+[ 2013-11-08T18:47:02+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：AdGroupAd | 动作：CREATE | 消息内容：Array
+(
+    [idclick_adid] => 375
+    [idclick_groupid] => 126
+    [ad_headline] => 绿绿广告1广告
+    [ad_description1] => 绿绿广告描述第一行
+    [ad_description2] => 绿绿广告描述第二行
+    [ad_url] => http:// http:// www.baidu.com
+    [ad_displayurl] => http://www.baidu.com
+    [ad_status] => PAUSE
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T18:47:02+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 149
+    [idclick_uid] => 1023
+    [campaign_name] => 红红广告计划
+    [areas] => 2156
+    [languages] => 1017
+    [bidding_type] => MANUAL_CPC
+    [budget_amount] => 63.6
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 0
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T18:47:02+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [warning] An error has occurred: customer has not synced yet.
+
+[ 2013-11-08T18:47:02+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：Campaign | 动作：CREATE | 消息内容：Array
+(
+    [idclick_planid] => 149
+    [idclick_uid] => 1023
+    [campaign_name] => 红红广告计划
+    [areas] => 2156
+    [languages] => 1017
+    [bidding_type] => MANUAL_CPC
+    [budget_amount] => 63.6
+    [delivery_method] => ACCELERATED
+    [max_cpc] => 0
+    [campaign_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T18:47:02+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 127
+    [idclick_planid] => 149
+    [adgroup_name] => 我的广告组2013-11-08-404
+    [keywords] => 广告,广告牌,广告费
+    [budget_amount] => 6.3
+    [adgroup_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T18:47:02+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [warning] An error has occurred: field #idclick_uid is required.
+
+[ 2013-11-08T18:47:02+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：AdGroup | 动作：CREATE | 消息内容：Array
+(
+    [idclick_groupid] => 127
+    [idclick_planid] => 149
+    [adgroup_name] => 我的广告组2013-11-08-404
+    [keywords] => 广告,广告牌,广告费
+    [budget_amount] => 6.3
+    [adgroup_status] => ACTIVE
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T18:47:02+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroupAd | 动作：CREATE | 消息内容：Array
+(
+    [idclick_adid] => 376
+    [idclick_groupid] => 127
+    [ad_headline] => 红红广告1广告
+    [ad_description1] => 红红广告描述第一行
+    [ad_description2] => 红红广告描述第一行
+    [ad_url] => http:// http:// www.sina.com
+    [ad_displayurl] => http://www.sina.com
+    [ad_status] => PAUSE
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T18:47:02+08:00 ] #ToAdwords\AdwordsAdapter::createAdwordsObject# [warning] An error has occurred: field #idclick_uid is required.
+
+[ 2013-11-08T18:47:02+08:00 ] #ToAdwords\MessageHandler::put# [notice] new message put. #retry content:
+[消息] 模块：AdGroupAd | 动作：CREATE | 消息内容：Array
+(
+    [idclick_adid] => 376
+    [idclick_groupid] => 127
+    [ad_headline] => 红红广告1广告
+    [ad_description1] => 红红广告描述第一行
+    [ad_description2] => 红红广告描述第一行
+    [ad_url] => http:// http:// www.sina.com
+    [ad_displayurl] => http://www.sina.com
+    [ad_status] => PAUSE
+    [last_action] => CREATE
+)
+
+[ 2013-11-08T18:47:02+08:00 ] #ToAdwords\MessageHandler::handle# [notice] try to handle new data:
+[消息] 模块：AdGroupAd | 动作：UPDATE | 消息内容：Array
+(
+    [idclick_adid] => 12348
+    [idclick_groupid] => 123460
+    [ad_headline] => headline——l
+    [ad_description1] => description1....
+    [ad_description2] => description2....
+    [ad_url] => http://www.izptec.com/go1.php
+    [ad_status] => ACTIVE
+    [idclick_planid] => 61634
+    [idclick_uid] => 503
+    [last_action] => UPDATE
+)
+
+[ 2013-11-08T18:47:10+08:00 ] #ToAdwords\AdwordsAdapter::updateAdwordsObject# [notice] AdGroupAd with customer_id #9537363155 was updated.
+

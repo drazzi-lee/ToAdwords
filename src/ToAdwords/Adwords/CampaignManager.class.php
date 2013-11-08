@@ -192,16 +192,22 @@ class CampaignManager extends AdwordsBase{
 			$campaign->budget->budgetId = $budget->budgetId;
 		}
 		
-		if(isset($data['languages']) && count(explode(',', $data['languages'])) > 0){
+		if(isset($data['languages'])){
+			$languageIds = explode(',', $data['languages']);
 			$currentLanguages = $this->getCriteria($data['campaign_id'], 'LANGUAGE');
 			$this->delCriteria($data['campaign_id'], $currentLanguages, 'LANGUAGE');
-			$this->addCriteria($data['campaign_id'], explode(',', $data['languages']), 'LANGUAGE');
+			if(count($languageIds) > 0){
+				$this->addCriteria($data['campaign_id'], $languageIds, 'LANGUAGE');
+			}
 		}
 		
-		if(isset($data['locations']) && count(explode(',', $data['locations'])) > 0){
+		if(isset($data['locations'])){
+			$locationIds = explode(',', $data['locations']);
 			$currentLocations = $this->getCriteria($data['campaign_id'], 'LOCATION');
 			$this->delCriteria($data['campaign_id'], $currentLocations, 'LOCATION');
-			$this->addCriteria($data['campaign_id'], explode(',', $data['locations']), 'LOCATION');
+			if(count($locationIds) > 0){				
+				$this->addCriteria($data['campaign_id'], $locationIds, 'LOCATION');
+			}
 		}
 		
 		// Create operation.
@@ -267,8 +273,16 @@ class CampaignManager extends AdwordsBase{
 		foreach($criterias as $criteriaId){
 			$criteria = null;
 			switch($type){
-				case 'LOCATION': $criteria = new \Location(); break;
-				case 'LANGUAGE': $criteria = new \Language(); break;
+				case 'LOCATION':
+					if(!$this->isValidLocationId($criteriaId))
+						continue 2;
+					$criteria = new \Location();
+					break;
+				case 'LANGUAGE':
+					if(!$this->isValidLocationId($criteriaId))
+						continue 2;
+					$criteria = new \Language();
+					break;
 				default:
 					throw new \Exception('currently unsupported criteria type #'.$type);
 			}

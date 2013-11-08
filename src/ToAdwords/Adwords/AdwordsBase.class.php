@@ -32,4 +32,12 @@ class AdwordsBase{
 	protected function mappingStatus($status){
 		return static::$statusMap[$status];
 	}
+	
+	protected function isValidLanguageId($languageId){
+		return $languageId >= 1000 && $languageId <= 1044;
+	}
+	
+	protected function isValidLocationId($locationId){
+		return $locationId >= 2004 && $locationId <= 9060922;
+	}
 }
