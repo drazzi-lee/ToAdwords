@@ -279,7 +279,7 @@ class CampaignManager extends AdwordsBase{
 					$criteria = new \Location();
 					break;
 				case 'LANGUAGE':
-					if(!$this->isValidLocationId($criteriaId))
+					if(!$this->isValidLanguageId($criteriaId))
 						continue 2;
 					$criteria = new \Language();
 					break;
