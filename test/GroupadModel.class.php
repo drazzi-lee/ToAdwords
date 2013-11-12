@@ -87,4 +87,8 @@ class GroupadModel{
 	public function deleteAd(array $data){
 		return $this->adGroupAdAdapter->delete($data);
 	}
+
+	public function runAd(array $data){
+		return $this->adGroupAdAdapter->run($data);
+	}
 }

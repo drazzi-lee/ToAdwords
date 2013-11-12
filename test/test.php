@@ -17,7 +17,7 @@ class TestAction{
 	
 	public function createCampaign(){
 		$data = array(
-				'idclick_planid' => 61634,
+				'idclick_planid' => 66166,
 				'idclick_uid'	=> 503,
 				'campaign_name' => 'campaign_name #' . uniqid(),
 				'areas' => '2156',
@@ -106,18 +106,17 @@ class TestAction{
 	
 	public function updateAd(){
 		$data = array(
-			'idclick_adid'		=> 12348,
-			'idclick_groupid'	=> 123460, 
-			'ad_headline'		=> 'headline——l',
-			'ad_description1'	=> 'description1....',
-			'ad_description2'	=> 'description2....',
-			'ad_url'			=> 'http://www.izptec.com/go1.php',
-			'ad_status'			=> 'ACTIVE',
+			'idclick_adid'		=> 3,
+			'idclick_groupid'	=> 3, 
+			'ad_headline'		=> 'tx cent su rs',
+			'ad_description1'	=> '第一行描述',
+			'ad_description2'	=> '第二行描述',
+			'ad_status'		=> 'ACTIVE',
 		);
 		$groupAd = new GroupadModel();
-		var_dump($groupAd->updateAd($data));
+		var_dump($groupAd->runAd($data));
 	}
-	
+
 	public function deleteAd(){
 		$data = array(
 			'idclick_adid'		=> 12345,
