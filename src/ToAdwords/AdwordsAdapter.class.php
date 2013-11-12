@@ -521,8 +521,23 @@ abstract class AdwordsAdapter{
 			}
 
 			if($key === 'budget_amount'){
-				if($data['budget_amount'] < 1){
-					throw new DataCheckException('budget_amount must greater or equal than 1.');
+				if($data['budget_amount'] < 0.01){
+					throw new DataCheckException('budget_amount must greater or equal than 0.01');
+				}
+			}
+			
+			if($key === 'ad_url' || $key === 'ad_displayurl'){
+				if(preg_match('/\s/',$data[$key])){
+					throw new DataCheckException('[ad_url & ad_displayurl] should be a string has no whitespace.');
+				}
+			}
+			
+			if($key == 'ad_description1' || $key == 'ad_description2'){
+				if(preg_match('/第一/', $data[$key]) || preg_match('/Best/', $data[$key])
+					|| preg_match('/#1/', $data[$key]) || preg_match('/First/', $data[$key])
+					|| preg_match('/No.1/', $data[$key]) || preg_match('/first/', $data[$key]) ){
+					throw new DataCheckException('[ad_description1 & ad_displayurl] ad content> can not contain "Best"
+									(best) or "# 1" (first) and other comparative or subjective phrases meaning');
 				}
 			}
 		}

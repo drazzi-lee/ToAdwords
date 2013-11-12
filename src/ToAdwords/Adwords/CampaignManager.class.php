@@ -113,11 +113,19 @@ class CampaignManager extends AdwordsBase{
 		//add targeting criteria.
 		$languages = explode(',', $data['languages']);
 		if(count($languages) > 0){
-			$this->addCriteria($campaign->id, $languages, 'LANGUAGE');
+			try{
+				$this->addCriteria($campaign->id, $languages, 'LANGUAGE');
+			} catch(\Exception $e){
+				Log::write('[warning] try to add languages on campaign campaign_id#'.$campaign->id.' error :'. $e->getMessage(), __METHOD__);
+			}
 		}
 		$locations = explode(',', $data['areas']);
 		if(count($locations) > 0){
-			$this->addCriteria($campaign->id, $locations, 'LOCATION');
+			try{
+				$this->addCriteria($campaign->id, $locations, 'LOCATION');
+			} catch(\Exception $e){
+				Log::write('[warning] try to add locations on campaign campaign_id#'.$campaign->id.' error :'. $e->getMessage(), __METHOD__);
+			}
 		}
 		
 		return $campaign->id;
@@ -194,19 +202,27 @@ class CampaignManager extends AdwordsBase{
 		
 		if(isset($data['languages'])){
 			$languageIds = explode(',', $data['languages']);
-			$currentLanguages = $this->getCriteria($data['campaign_id'], 'LANGUAGE');
-			$this->delCriteria($data['campaign_id'], $currentLanguages, 'LANGUAGE');
-			if(count($languageIds) > 0){
-				$this->addCriteria($data['campaign_id'], $languageIds, 'LANGUAGE');
+			try{
+				$currentLanguages = $this->getCriteria($data['campaign_id'], 'LANGUAGE');
+				$this->delCriteria($data['campaign_id'], $currentLanguages, 'LANGUAGE');
+				if(count($languageIds) > 0){
+					$this->addCriteria($data['campaign_id'], $languageIds, 'LANGUAGE');
+				}
+			} catch(\Exception $e){
+				Log::write('[warning] try to update languages on campaign campaign_id#'.$data['campaign_id'].' error :'. $e->getMessage(), __METHOD__);
 			}
 		}
 		
 		if(isset($data['locations'])){
 			$locationIds = explode(',', $data['locations']);
-			$currentLocations = $this->getCriteria($data['campaign_id'], 'LOCATION');
-			$this->delCriteria($data['campaign_id'], $currentLocations, 'LOCATION');
-			if(count($locationIds) > 0){				
-				$this->addCriteria($data['campaign_id'], $locationIds, 'LOCATION');
+			try{
+				$currentLocations = $this->getCriteria($data['campaign_id'], 'LOCATION');
+				$this->delCriteria($data['campaign_id'], $currentLocations, 'LOCATION');
+				if(count($locationIds) > 0){				
+					$this->addCriteria($data['campaign_id'], $locationIds, 'LOCATION');
+				}
+			} catch(\Exception $e){
+				Log::write('[warning] try to update locations on campaign campaign_id#'.$data['campaign_id'].' error :'. $e->getMessage(), __METHOD__);
 			}
 		}
 		
@@ -277,17 +293,23 @@ class CampaignManager extends AdwordsBase{
 					if(!$this->isValidLocationId($criteriaId))
 						continue 2;
 					$criteria = new \Location();
+					$criteria->id = $criteriaId;
+					$campaignCriteria[] = new \CampaignCriterion($campaignId, null, $criteria);
 					break;
 				case 'LANGUAGE':
 					if(!$this->isValidLanguageId($criteriaId))
 						continue 2;
 					$criteria = new \Language();
+					$criteria->id = $criteriaId;
+					$campaignCriteria[] = new \CampaignCriterion($campaignId, null, $criteria);
 					break;
 				default:
 					throw new \Exception('currently unsupported criteria type #'.$type);
 			}
-			$criteria->id = $criteriaId;
-			$campaignCriteria[] = new \CampaignCriterion($campaignId, null, $criteria);
+		}
+		
+		if(count($campaignCriteria) < 1){
+			return NULL;
 		}
 
 		$operations = array();
@@ -363,14 +385,28 @@ class CampaignManager extends AdwordsBase{
 			foreach($criterions as $criteriaId){
 				$criteria = null;
 				switch($type){
-					case 'LOCATION': $criteria = new \Location(); break;
-					case 'LANGUAGE': $criteria = new \Language(); break;
+					case 'LOCATION':
+						if(!$this->isValidLocationId($criteriaId))
+							continue 2;
+						$criteria = new \Location();
+						$criteria->id = $criteriaId;
+						$campaignCriteria[] = new \CampaignCriterion($campaignId, null, $criteria);
+						break;
+					case 'LANGUAGE':
+						if(!$this->isValidLanguageId($criteriaId))
+							continue 2;
+						$criteria = new \Language();
+						$criteria->id = $criteriaId;
+						$campaignCriteria[] = new \CampaignCriterion($campaignId, null, $criteria);
+						break;
 					default:
 						throw new \Exception('currently unsupported criteria type #'.$type);
-				}
-				$criteria->id = $criteriaId;
-				$campaignCriteria[] = new \CampaignCriterion($campaignId, null, $criteria);
+				}				
 			}
+		}
+		
+		if(count($campaignCriteria) < 1){
+			return TRUE;
 		}
 
 		$operations = array();

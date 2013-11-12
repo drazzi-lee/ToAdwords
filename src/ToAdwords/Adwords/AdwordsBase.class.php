@@ -12,6 +12,8 @@
 
 namespace ToAdwords\Adwords;
 
+use ToAdwords\Util\Log;
+
 class AdwordsBase{
 	protected $user;
 	protected static $moneyMultiples = 1000000;

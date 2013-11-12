@@ -173,7 +173,16 @@ class Httpsqs
 			return false;
 		}
         return $result;
-    }	
+    }
+	
+	public function get_pos($queue_name, $pos)
+    {
+    	$result = $this->http_get("/?auth=".$this->httpsqs_auth."&charset=".$this->httpsqs_charset."&name=".$queue_name."&pos=".$pos."&opt=view");
+		if ($result == false || $result["data"] == "HTTPSQS_ERROR" || $result["data"] == false) {
+			return false;
+		}
+        return $result;
+    }
 	
     public function status($queue_name)
     {

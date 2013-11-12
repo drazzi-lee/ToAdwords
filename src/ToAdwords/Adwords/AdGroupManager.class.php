@@ -81,7 +81,11 @@ class AdGroupManager extends AdwordsBase{
 		// Add Keywords on AdGroup
 		$keywordsArray = explode(',', $data['keywords']);
 		if(count($keywordsArray) > 0){
-			$this->addKeywords($adGroup->id, $keywordsArray);
+			try{
+				$this->addKeywords($adGroup->id, $keywordsArray);
+			} catch(\Exception $e){
+				Log::write('[warning] try to add keywords on AdGroup adgroup_id#'.$adGroup->id.' error :'. $e->getMessage(), __METHOD__);
+			}
 		}
 		return $adGroup->id;
 	}
@@ -124,11 +128,15 @@ class AdGroupManager extends AdwordsBase{
 		}
 		// Update Keywords. remove all then add.
 		if(isset($data['keywords'])){
-			$keywordIds = $this->getKeywords($data['adgroup_id']);
-			$this->delKeywords($data['adgroup_id'], $keywordIds);
-			$keywordsArray = explode(',', $data['keywords']);
-			if(count($keywordsArray) > 0){
-				$this->addKeywords($adGroup->id, $keywordsArray);
+			try{
+				$keywordIds = $this->getKeywords($data['adgroup_id']);
+				$this->delKeywords($data['adgroup_id'], $keywordIds);
+				$keywordsArray = explode(',', $data['keywords']);
+				if(count($keywordsArray) > 0){
+					$this->addKeywords($adGroup->id, $keywordsArray);
+				}
+			} catch(\Exception $e){
+				Log::write('[warning] try to update keywords on AdGroup adgroup_id#'.$data['adgroup_id'].' error :'. $e->getMessage(), __METHOD__);
 			}
 		}
 		
