@@ -105,9 +105,10 @@ class MessageHandler{
 			Log::write("[warning] message incomplete.\n" . $message, __METHOD__);
 		}
 		$message_combine = array(
-				'module' 	=> $message->getModule(),
-				'action' 	=> $message->getAction(),
-				'data' 		=> $message->getInformation(),
+				'module' 		=> $message->getModule(),
+				'action' 		=> $message->getAction(),
+				'data' 			=> $message->getInformation(),
+				'errorCount' 	=> $message->errorCount,
 				);
 		$messagePrepared = json_encode($message_combine);
 		if($this->httpsqs->put($queueName, $messagePrepared)){
