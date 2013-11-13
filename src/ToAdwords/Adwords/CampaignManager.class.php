@@ -11,6 +11,8 @@
  */
 namespace ToAdwords\Adwords;
 
+use ToAdwords\Util\Log;
+
 class CampaignManager extends AdwordsBase{
 	private $campaignService;
 	private $budgetService;
