@@ -532,13 +532,19 @@ abstract class AdwordsAdapter{
 				}
 			}
 			
-			if($key == 'ad_description1' || $key == 'ad_description2'){
+			if($key === 'ad_description1' || $key === 'ad_description2'){
 				if(preg_match('/第一/', $data[$key]) || preg_match('/Best/', $data[$key])
 					|| preg_match('/#1/', $data[$key]) || preg_match('/First/', $data[$key])
 					|| preg_match('/No.1/', $data[$key]) || preg_match('/first/', $data[$key]) ){
 					throw new DataCheckException('[ad_description1 & ad_displayurl] ad content> can not contain "Best"
 									(best) or "# 1" (first) and other comparative or subjective phrases meaning');
 				}
+			}
+			
+			if($key === 'budget_amount' || $key === 'max_cpc'){
+				if(!preg_match('/^\d+\.?\d{1,2}$/', $data[$key])){
+					throw new DataCheckException("field {$key} #{$data[$key]} is not number of currency.");
+				}			
 			}
 		}
 
