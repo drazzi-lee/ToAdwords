@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2013-11-07 14:51:46
+Date: 2013-11-13 11:00:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,6 +30,7 @@ CREATE TABLE `adgroup` (
   `adgroup_status` enum('ACTIVE','PAUSE','DELETE') NOT NULL DEFAULT 'ACTIVE' COMMENT '广告组状态，默认值为启用',
   `last_action` enum('CREATE','UPDATE','DELETE') NOT NULL DEFAULT 'CREATE' COMMENT '上次操作动作',
   `sync_status` enum('QUEUE','SYNCED','ERROR','RETRY','RECEIVE','SENDING') NOT NULL DEFAULT 'RECEIVE' COMMENT '在队列中，已同步，同步出错，重试中，已收到，发送中',
+  `last_edit_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`,`idclick_groupid`),
   UNIQUE KEY `idclick_groupid` (`idclick_groupid`),
   UNIQUE KEY `adgroup_id` (`adgroup_id`),
@@ -60,6 +61,7 @@ CREATE TABLE `adgroupad` (
   `ad_status` enum('ACTIVE','PAUSE','DELETE') NOT NULL DEFAULT 'PAUSE' COMMENT '广告当前状态，默认值为暂停。',
   `last_action` enum('CREATE','UPDATE','DELETE') NOT NULL DEFAULT 'CREATE' COMMENT '上次操作动作',
   `sync_status` enum('QUEUE','SYNCED','ERROR','RETRY','RECEIVE','SENDING') NOT NULL DEFAULT 'RECEIVE' COMMENT '在队列中，已同步，同步出错，重试中，已收到，发送中',
+  `last_edit_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`,`idclick_adid`),
   KEY `idclick_groupid` (`idclick_groupid`),
   CONSTRAINT `adgroupad_ibfk_1` FOREIGN KEY (`idclick_groupid`) REFERENCES `adgroup` (`idclick_groupid`) ON UPDATE CASCADE
@@ -88,6 +90,7 @@ CREATE TABLE `campaign` (
   `campaign_status` enum('ACTIVE','PAUSE','DELETE') NOT NULL DEFAULT 'ACTIVE' COMMENT '广告计划状态，默认启用',
   `last_action` enum('CREATE','UPDATE','DELETE') NOT NULL DEFAULT 'CREATE' COMMENT '上次操作动作',
   `sync_status` enum('QUEUE','SYNCED','ERROR','RETRY','RECEIVE','SENDING') NOT NULL DEFAULT 'RECEIVE' COMMENT '在队列中，已同步，同步出错，重试，收到，发送中',
+  `last_edit_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`,`idclick_planid`),
   UNIQUE KEY `idclick_planid` (`idclick_planid`),
   KEY `campaign_ibfk_1` (`idclick_uid`),
@@ -108,6 +111,7 @@ CREATE TABLE `customer` (
   `customer_id` bigint(10) DEFAULT NULL COMMENT '对象在adwords同的customerId.',
   `last_action` enum('CREATE','UPDATE','DELETE') NOT NULL DEFAULT 'CREATE' COMMENT '上次操作动作',
   `sync_status` enum('QUEUE','SYNCED','ERROR','RETRY','RECEIVE','SENDING') NOT NULL DEFAULT 'RECEIVE' COMMENT '在队列中，已同步，同步出错，重试中，已收到，发送中',
+  `last_edit_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`,`idclick_uid`),
   UNIQUE KEY `idclick_uid` (`idclick_uid`),
   UNIQUE KEY `adwords_customerid` (`customer_id`)
@@ -116,15 +120,15 @@ CREATE TABLE `customer` (
 -- ----------------------------
 -- Records of customer
 -- ----------------------------
-INSERT INTO customer VALUES ('1', '503', '9537363155', 'CREATE', 'SYNCED');
-INSERT INTO customer VALUES ('2', '504', '2799322720', 'CREATE', 'SYNCED');
-INSERT INTO customer VALUES ('3', '505', '3410266051', 'CREATE', 'SYNCED');
-INSERT INTO customer VALUES ('4', '506', '6681899922', 'CREATE', 'SYNCED');
-INSERT INTO customer VALUES ('5', '507', '6026516240', 'CREATE', 'SYNCED');
-INSERT INTO customer VALUES ('6', '508', '6787943218', 'CREATE', 'SYNCED');
-INSERT INTO customer VALUES ('7', '509', '3504859751', 'CREATE', 'SYNCED');
-INSERT INTO customer VALUES ('8', '510', '2537965153', 'CREATE', 'SYNCED');
-INSERT INTO customer VALUES ('9', '511', '5436784026', 'CREATE', 'SYNCED');
+INSERT INTO customer VALUES ('1', '503', '9537363155', 'CREATE', 'SYNCED', '0000-00-00 00:00:00');
+INSERT INTO customer VALUES ('2', '504', '2799322720', 'CREATE', 'SYNCED', '0000-00-00 00:00:00');
+INSERT INTO customer VALUES ('3', '505', '3410266051', 'CREATE', 'SYNCED', '0000-00-00 00:00:00');
+INSERT INTO customer VALUES ('4', '506', '6681899922', 'CREATE', 'SYNCED', '0000-00-00 00:00:00');
+INSERT INTO customer VALUES ('5', '507', '6026516240', 'CREATE', 'SYNCED', '0000-00-00 00:00:00');
+INSERT INTO customer VALUES ('6', '508', '6787943218', 'CREATE', 'SYNCED', '0000-00-00 00:00:00');
+INSERT INTO customer VALUES ('7', '509', '3504859751', 'CREATE', 'SYNCED', '0000-00-00 00:00:00');
+INSERT INTO customer VALUES ('8', '510', '2537965153', 'CREATE', 'SYNCED', '0000-00-00 00:00:00');
+INSERT INTO customer VALUES ('9', '511', '5436784026', 'CREATE', 'SYNCED', '0000-00-00 00:00:00');
 
 -- ----------------------------
 -- Table structure for `sync_cache`

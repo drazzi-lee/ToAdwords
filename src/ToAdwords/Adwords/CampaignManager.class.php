@@ -213,8 +213,8 @@ class CampaignManager extends AdwordsBase{
 			}
 		}
 		
-		if(isset($data['locations'])){
-			$locationIds = explode(',', $data['locations']);
+		if(isset($data['areas'])){
+			$locationIds = explode(',', $data['areas']);
 			try{
 				$currentLocations = $this->getCriteria($data['campaign_id'], 'LOCATION');
 				$this->delCriteria($data['campaign_id'], $currentLocations, 'LOCATION');

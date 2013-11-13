@@ -17,7 +17,7 @@ class AdGroupAdManager extends AdwordsBase{
 	protected static $statusMap = array(
 		'ACTIVE'	=> 'ENABLED',
 		'PAUSE'		=> 'PAUSED',
-		'DELETE'	=> 'DELETED',
+		'DELETE'	=> 'DISABLED',
 	);
 	
 	public function __construct($customerId){
