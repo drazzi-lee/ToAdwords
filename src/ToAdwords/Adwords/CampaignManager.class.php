@@ -12,6 +12,7 @@
 namespace ToAdwords\Adwords;
 
 use ToAdwords\Util\Log;
+use ToAdwords\Model\CampaignModel;
 
 class CampaignManager extends AdwordsBase{
 	private $campaignService;
@@ -183,13 +184,13 @@ class CampaignManager extends AdwordsBase{
 			$campaign->biddingStrategyConfiguration = $biddingStrategyConfiguration;
 		}
 		
-		if(isset($data['budget_amount']) && isset($data['delivery_method'])){
+		if(isset($data['budget_amount'])){
 			$budget = new \Budget();
 			$budget->name = 'Budget #' . uniqid();
 			$budget->period = 'DAILY';
 			$budget->amount = new \Money($data['budget_amount'] * self::$moneyMultiples);
 			
-			$budget->deliveryMethod = $data['delivery_method'];
+			$budget->deliveryMethod = $this->getSetting('delivery_method', $data['idclick_planid']);
 
 			$operations = array();
 			$operation = new \BudgetOperation();
@@ -419,5 +420,11 @@ class CampaignManager extends AdwordsBase{
 		$result = $campaignCriterionService->mutate($operations);
 		
 		return TRUE;
+	}
+	
+	public function getSetting($field, $planId){
+		$campaignModel = new CampaignModel();
+		$campaignRow = $campaignModel->getOne($field,'idclick_planid='.$planId);
+		return $campaignRow[$field];
 	}
 }
