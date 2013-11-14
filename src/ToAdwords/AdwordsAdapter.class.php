@@ -542,9 +542,9 @@ abstract class AdwordsAdapter{
 			}
 			
 			if($key === 'budget_amount' || $key === 'max_cpc'){
-				if($data[$key] != 0 && !preg_match('/^\d+\.?\d{1,2}$/', $data[$key])){
+				if(!preg_match('/^\d+(\.?\d{1,2})?$/', $data[$key])){
 					throw new DataCheckException("field {$key} #{$data[$key]} is not a number of currency.");
-				}			
+				}
 			}
 		}
 
