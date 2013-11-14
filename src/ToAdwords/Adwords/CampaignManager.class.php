@@ -1,9 +1,9 @@
 <?php
 
 /**
- * AdwordsBase.class.php
+ * CampaignManager.class.php
  *
- * Base Object to classes who operate Google Adwords Object by API.
+ * Define a class who operate campaigns on Google Adwords by API.
  *
  * @author Li Pengfei
  * @email drazzi.lee@gmail.com
@@ -422,7 +422,7 @@ class CampaignManager extends AdwordsBase{
 		return TRUE;
 	}
 	
-	public function getSetting($field, $planId){
+	private function getSetting($field, $planId){
 		$campaignModel = new CampaignModel();
 		$campaignRow = $campaignModel->getOne($field,'idclick_planid='.$planId);
 		return $campaignRow[$field];
