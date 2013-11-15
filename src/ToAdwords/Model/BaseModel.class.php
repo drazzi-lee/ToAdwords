@@ -42,10 +42,6 @@ abstract class BaseModel{
 	public function __construct(){
 		$this->dbh = DbMysql::getInstance();
 	}
-	
-	public function __destruct(){
-		$this->dbh = null;
-	}
 
 	/**
 	 * Set Last Sql being executed.

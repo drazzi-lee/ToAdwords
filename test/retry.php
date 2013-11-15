@@ -6,6 +6,7 @@ use ToAdwords\Util\Httpsqs;
 use ToAdwords\Util\Message;
 use ToAdwords\MessageHandler;
 use ToAdwords\Exceptions\MessageException;
+use ToAdwords\Model\Driver\DbMysql;
 
 use \Exception;
 
@@ -66,9 +67,10 @@ if($pid === -1){
 				unset($message, $messageHandler);
 				Log::write('[error] ' . get_class($e) . ' ' . $e->getMessage(), 'QueueCommon::Get');
 			}
+			DbMysql::close();
 		} else {
 			if(ENVIRONMENT == 'development'){
-				Log::write("[notice] got nothing, current status:\n" . print_r($httpsqs->status($queueName), TRUE), 'QueueCommon::Get');
+				//Log::write("[notice] got nothing, current status:\n" . print_r($httpsqs->status($queueName), TRUE), 'QueueCommon::Get');
 			}
 			unset($result, $position, $data);
 			sleep(30);

@@ -47,6 +47,13 @@ class DbMysql{
 		return self::$objInstance; 
 
 	} # end method 
+	
+	/**
+	 * Release pdo connection to mysql.
+	 */
+	public static function close() {
+		self::$objInstance = null;
+	} # end method 
 
 	/* 
 	 * Passes on any static calls to this class onto the singleton PDO instance 
