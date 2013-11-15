@@ -541,9 +541,27 @@ abstract class AdwordsAdapter{
 				}
 			}
 			
+			if($key === 'ad_url'){
+				if(strlen($item) > 2047){
+					throw new DataCheckException("invalid adgroup name, length must be not greater than 2047 bytes.");
+				}
+			}
+			
 			if($key === 'budget_amount' || $key === 'max_cpc'){
 				if(!preg_match('/^\d+(\.?\d{1,2})?$/', $data[$key])){
 					throw new DataCheckException("field {$key} #{$data[$key]} is not a number of currency.");
+				}
+			}
+			
+			if($key === 'campaign_name'){
+				if(strlen($item) > 128){
+					throw new DataCheckException("invalid campaign name, length must be not greater than 128 bytes.");
+				}
+			}
+			
+			if($key === 'adgroup_name' || $key === 'ad_displayurl'){
+				if(strlen($item) > 255){
+					throw new DataCheckException("invalid {$key}, length must be not greater than 255 bytes.");
 				}
 			}
 		}

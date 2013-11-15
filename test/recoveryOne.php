@@ -15,7 +15,7 @@ Log::setPath(TOADWORDS_LOG_PATH . 'daemon/'.$queueName . DIRECTORY_SEPARATOR);
 
 
 
-$data = '{"module":"Campaign","action":"UPDATE","data":{"idclick_planid":"42","idclick_uid":"1026","campaign_name":"\u6211\u7684\u5e7f\u544a\u8ba1\u5212 2013-11-14-688","areas":"0","languages":"1000","bidding_type":"BUDGET_OPTIMIZER","budget_amount":"123","max_cpc":"23.2","campaign_status":"ACTIVE","last_action":"UPDATE"},"errorCount":0}';
+$data     = '{"module":"AdGroupAd","action":"CREATE","data":{"idclick_adid":"32","idclick_groupid":"28","ad_headline":"123\u5e7f\u544a","ad_description1":"11111111111","ad_description2":"22222222222222","ad_url":"http:\/\/www.baidu.com","ad_displayurl":"www.baidu.com","ad_status":"PAUSE","idclick_planid":"29","idclick_uid":"1026","last_action":"CREATE"},"errorCount":0}';
 if($data != 'HTTPSQS_GET_END' && $data != 'HTTPSQS_ERROR'){
 	$dataDecode = json_decode($data, TRUE);
 	if($dataDecode === NULL){
