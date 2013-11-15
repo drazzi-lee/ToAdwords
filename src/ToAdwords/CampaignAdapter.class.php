@@ -26,15 +26,15 @@ class CampaignAdapter extends AdwordsAdapter{
 					'idclick_planid','idclick_uid','campaign_name','languages',
 					'areas','bidding_type','budget_amount','max_cpc','campaign_status'
 					),
-				'prohibitedFields'	=> array('sync_status','campaign_id','customer_id'),
+				'prohibitedFields'	=> array('sync_status','campaign_id'),
 				),
 			'UPDATE'	=> array(
 				'requiredFields'	=> array('idclick_planid','idclick_uid'),
-				'prohibitedFields'	=> array('sync_status','campaign_id','customer_id'),
+				'prohibitedFields'	=> array('sync_status','campaign_id'),
 				),
 			'DELETE'	=> array(
 				'requiredFields'	=> array('idclick_planid','idclick_uid','campaign_status'),
-				'prohibitedFields'	=> array('sync_status','campaign_id','customer_id'),
+				'prohibitedFields'	=> array('sync_status','campaign_id'),
 				),
 			);
 }
