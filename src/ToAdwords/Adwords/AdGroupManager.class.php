@@ -119,7 +119,7 @@ class AdGroupManager extends AdwordsBase{
 		}
 
 		// Update the bid.
-		if(isset($data['max_cpc'])){
+		if(isset($data['max_cpc']) && $data['max_cpc'] >= 0.01){
 			$bid = new \CpcBid();
 			$bid->bid = new \Money($data['max_cpc'] * self::$moneyMultiples); //default max cpc.
 			$biddingStrategyConfiguration = new \BiddingStrategyConfiguration();
