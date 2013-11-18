@@ -74,7 +74,7 @@ class CustomerAdapter extends AdwordsAdapter{
 				throw new Exception('idclick uid not found.');
 			}
 			$customerManager = new CustomerManager();
-			$customerId = $customerManager->create();
+			$customerId = $customerManager->create($data);
 			Log::write("[notice] Account with customer_id #{$customerId} was created.\n", __METHOD__);
 			$customerModel = new self::$currentModelName();
 			$customerModel->updateSyncStatus(SyncStatus::SYNCED, $data['idclick_uid']);
