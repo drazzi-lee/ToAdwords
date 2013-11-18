@@ -11,6 +11,8 @@
  */
 namespace ToAdwords\Adwords;
 
+use ToAdwords\Util\Log;
+
 class AdGroupManager extends AdwordsBase{
 	private $adGroupService;
 	private $budgetService;

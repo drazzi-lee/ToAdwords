@@ -68,7 +68,7 @@ class CustomerAdapter extends AdwordsAdapter{
 	 * @param array $data: default NULL
 	 * @return boolean: TRUE on success, FALSE on failure.
 	 */
-	public function createAdwordsObject($data){
+	public function createAdwordsObject(array $data){
 		try{
 			if(!isset($data['idclick_uid'])){
 				throw new Exception('idclick uid not found.');
@@ -85,12 +85,12 @@ class CustomerAdapter extends AdwordsAdapter{
 		}
 	}
 
-	public function updateAdwordsObject(){
+	public function updateAdwordsObject(array $data){
 		Log::write("Method does not supported.\n", __METHOD__);
 		return FALSE;
 	}
 
-	public function deleteAdwordsObject(){
+	public function deleteAdwordsObject(array $data){
 		Log::write("Method does not supported.\n", __METHOD__);
 		return FALSE;
 	}
