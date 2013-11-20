@@ -75,12 +75,12 @@ class AdGroupAdManager extends AdwordsBase{
 	}
 	
 	/**
-	 * Update AdGroupAd on Adwords Customer Account.
+	 * Update AdGroupAd status on Adwords Customer Account.
 	 *
 	 * @param array $data: $data of AdGroupAd.
 	 * @return string: AdGroupAd's id.
 	 * @throw Exception
-	 * @todo keywords
+	 * @see https://groups.google.com/forum/#!topic/adwords-api/ZGiRT2IlpsM
 	 */
 	public function update($data){
 		if(empty($data['ad_id'])){
@@ -89,35 +89,18 @@ class AdGroupAdManager extends AdwordsBase{
 		if(empty($data['adgroup_id'])){
 			throw new \Exception('adgroup_id is required.');
 		}
+		if(empty($data['ad_status'])){
+			throw new \Exception('adgroup_id is required.');
+		}
 		$operations = array();
 		$textAd = new \TextAd();
 		$textAd->id = $data['ad_id'];
 		
-		if(isset($data['ad_headline'])){
-			$textAd->headline = $data['ad_headline'];
-		}
-		if(isset($data['ad_description1'])){
-			$textAd->headline = $data['ad_description1'];
-		}
-		if(isset($data['ad_description2'])){
-			$textAd->headline = $data['ad_description2'];
-		}
-		if(isset($data['ad_displayurl'])){
-			$textAd->headline = $data['ad_displayurl'];
-		}
-		if(isset($data['ad_url'])){
-			$textAd->headline = $data['ad_url'];
-		}
-		
-		// Create ad group ad.
+		// update TextAd status.
 		$adGroupAd = new \AdGroupAd();
 		$adGroupAd->adGroupId = $data['adgroup_id'];
 		$adGroupAd->ad = $textAd;
-		
-		// Update the status.
-		if(isset($data['ad_status'])){
-			$adGroupAd->status = $this->mappingStatus($data['ad_status']);
-		}
+		$adGroupAd->status = $this->mappingStatus($data['ad_status']);
 
 		// Create operation.
 		$operation = new \AdGroupAdOperation();
