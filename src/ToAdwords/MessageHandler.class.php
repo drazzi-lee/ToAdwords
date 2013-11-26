@@ -161,6 +161,27 @@ class MessageHandler{
 			return FALSE;
 		}
 	}
+	
+	private function callDaemon($queueName){
+		//check the process of given queueName is running, if not run it.
+		$key = null;
+		switch($queueName){
+			case HTTPSQS_QUEUE_COMMON:
+				$key = 'HTTPSQS_QUEUE_COMMON_PROCESS';
+				break;
+			case HTTPSQS_QUEUE_RETRY:
+				$key = 'HTTPSQS_QUEUE_RETRY_PROCESS';
+				break;
+			case HTTPSQS_QUEUE_DIE:
+				$key = 'HTTPSQS_QUEUE_DIE_PROCESS';
+				break;
+			default:
+				Log::write('[warning] queue name error: #'
+						.$queueName.", call Daemon will be ignored:\n".$message, __METHOD__);
+		}
+		$sysStatusModel = new SysStatusModel();
+		$sysStatusModel->getValue('HTTPSQS_QUEUE_COMMON_PROCESS');
+	}
 
 	public function __destruct(){
 		Log::setPath($this->lastLogPath);

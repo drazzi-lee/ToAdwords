@@ -5,7 +5,6 @@ use ToAdwords\Util\Log;
 use ToAdwords\Util\Httpsqs;
 use ToAdwords\Util\Message;
 use ToAdwords\MessageHandler;
-use ToAdwords\Exceptions\MessageException;
 
 use \Exception;
 

@@ -240,7 +240,6 @@ abstract class AdwordsAdapter{
 											" #{$currentAdwordsObjectId} was created.\n", __METHOD__);
 			
 			//update current sync status.
-			$currentModel = new static::$currentModelName();
 			$currentModel->updateOne($currentModel::$idclickObjectIdField . '=' . $data[$currentModel::$idclickObjectIdField],
 												array($currentModel::$adwordsObjectIdField	=> $currentAdwordsObjectId));
 			$currentModel->updateSyncStatus(SyncStatus::SYNCED, $data[$currentModel::$idclickObjectIdField]);
@@ -345,7 +344,7 @@ abstract class AdwordsAdapter{
 			$currentManager = new static::$currentManagerName($data[$customerModel::$adwordsObjectIdField]);
 			$result = $currentManager->delete($data);
 			Log::write("[notice] " . static::$moduleName . " with {$customerModel::$adwordsObjectIdField}". 
-											" #{$currentAdwordsObjectId} was updated.\n", __METHOD__);
+											" #{$data[$customerModel::$adwordsObjectIdField]} was updated.\n", __METHOD__);
 			$currentModel->updateSyncStatus(SyncStatus::SYNCED, $data[$currentModel::$idclickObjectIdField]);
 			return TRUE;
 		} catch(Exception $e){
