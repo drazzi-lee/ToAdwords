@@ -44,22 +44,29 @@ abstract class AdwordsAdapter{
 	 * As an interface for amc thrift.
 	 */
 	public function run(array $data){
-		if(ENVIRONMENT == 'development'){
-			Log::write("Received new data:\n" . print_r($data, TRUE), __METHOD__);
-		}
-		
-		$currentModel = new static::$currentModelName();
-		if(empty($data[$currentModel::$idclickObjectIdField])){
-			throw new DataCheckException('Field #'.$currentModel::$idclickObjectIdField.' is required.');
-		}
+		try{
+			if(ENVIRONMENT == 'development'){
+				Log::write("Received new data:\n" . print_r($data, TRUE), __METHOD__);
+			}
 
-		$idclickField = $currentModel::$idclickObjectIdField;
-		$row = $currentModel->getOne($idclickField, 
-									$idclickField . '=' . $data[$idclickField]);
-		if(!empty($row)){
-			return $this->update($data);
-		} else {
-			return $this->create($data);
+			$currentModel = new static::$currentModelName();
+			if(empty($data[$currentModel::$idclickObjectIdField])){
+				throw new DataCheckException('Field #'.$currentModel::$idclickObjectIdField.' is required.');
+			}
+
+			$idclickField = $currentModel::$idclickObjectIdField;
+			$row = $currentModel->getOne($idclickField,
+										$idclickField . '=' . $data[$idclickField]);
+			if(!empty($row)){
+				return $this->update($data);
+			} else {
+				return $this->create($data);
+			}
+		} catch (Exception $e){
+			$this->result['status'] = -1;
+			$this->result['description'] = get_class($e) . ' ' . $e->getMessage();
+
+			return $this->generateResult();
 		}
 	}
 
@@ -73,17 +80,17 @@ abstract class AdwordsAdapter{
 		try{
 			Log::write("Received new data:\n" . print_r($data, TRUE), __METHOD__);
 			self::prepareData($data, Operation::CREATE);
-			
+
 			//check parent dependency
 			$parentModel = new static::$parentModelName();
 			$idclickField = $parentModel::$idclickObjectIdField;
-			$parentInfo = $parentModel->getOne($idclickField, 
+			$parentInfo = $parentModel->getOne($idclickField,
 									$idclickField . '=' . $data[$idclickField]);
 			if($parentInfo === FALSE){
 				if(static::$parentAdapterName == 'ToAdwords\CustomerAdapter'){
-					$parentAdapter = new static::$parentAdapterName();	
+					$parentAdapter = new static::$parentAdapterName();
 					$parentAdapter->create(array(
-								$parentModel::$idclickObjectIdField => 
+								$parentModel::$idclickObjectIdField =>
 									$data[$parentModel::$idclickObjectIdField]
 								));
 				} else {
@@ -93,7 +100,7 @@ abstract class AdwordsAdapter{
 				}
 			}
 			$data['last_action'] = Operation::CREATE;
-			
+
 			//create record and send message to queue.
 			$currentModel = new static::$currentModelName();
 			$currentModel->insertOne($data);
@@ -107,7 +114,7 @@ abstract class AdwordsAdapter{
 			return $this->generateResult();
 		} catch (Exception $e){
 			$this->result['status'] = -1;
-			$this->result['description'] = get_class($e) . ' ' . $e->getMessage(); 
+			$this->result['description'] = get_class($e) . ' ' . $e->getMessage();
 
 			return $this->generateResult();
 		}
@@ -123,12 +130,12 @@ abstract class AdwordsAdapter{
 		try{
 			Log::write("Received new data:\n" . print_r($data, TRUE), __METHOD__);
 			self::prepareData($data, Operation::UPDATE);
-			
+
 			//check whether it exists.
 			$parentModel = new static::$parentModelName();
 			$currentModel = new static::$currentModelName();
 			$currentRow = $currentModel->getOne(
-								$currentModel::$idclickObjectIdField .',' . $parentModel::$idclickObjectIdField, 
+								$currentModel::$idclickObjectIdField .',' . $parentModel::$idclickObjectIdField,
 								$currentModel::$idclickObjectIdField . '=' . $data[$currentModel::$idclickObjectIdField]
 								);
 			if(empty($currentRow)){
@@ -139,7 +146,7 @@ abstract class AdwordsAdapter{
 			} else if($currentRow[$parentModel::$idclickObjectIdField] != $data[$parentModel::$idclickObjectIdField]){
 				throw new DataCheckException('Field #' . $parentModel::$idclickObjectIdField . ' does not match.');
 			}
-			
+
 			//update record and send message to queue.
 			$data['last_action'] = isset($data['last_action']) ? $data['last_action'] : Operation::UPDATE;
 			$conditions = $currentModel::$idclickObjectIdField . '=' . $data[$currentModel::$idclickObjectIdField];
@@ -149,7 +156,7 @@ abstract class AdwordsAdapter{
 				$parentModel::$idclickObjectIdField 	=> $data[$parentModel::$idclickObjectIdField],
 				);
 			$newData = array_diff_key($data, $conditionsArray);
-			$currentModel->updateOne($conditions, $newData);			
+			$currentModel->updateOne($conditions, $newData);
 			$this->sendMessage($data, array($currentModel, 'updateSyncStatus'));
 
 			$this->result['status'] = 1;
@@ -160,7 +167,7 @@ abstract class AdwordsAdapter{
 			return $this->generateResult();
 		} catch (Exception $e){
 			$this->result['status'] = -1;
-			$this->result['description'] = get_class($e) . ' ' . $e->getMessage(); 
+			$this->result['description'] = get_class($e) . ' ' . $e->getMessage();
 
 			return $this->generateResult();
 		}
@@ -194,13 +201,13 @@ abstract class AdwordsAdapter{
 
 		return $this->update($infoForRemove);
 	}
-	
+
 	/**
-	 * Create Adwords Object 
+	 * Create Adwords Object
 	 *
 	 * Call AdwordsManager to create an adwords Object on specify customer's account.
 	 *
-	 * @param array $data: 
+	 * @param array $data:
 	 * @return boolean: TRUE on success, FALSE on failure.
 	 */
 	public function createAdwordsObject(array $data){
@@ -208,7 +215,7 @@ abstract class AdwordsAdapter{
 			$currentModel = new static::$currentModelName();
 			$parentModel = new static::$parentModelName();
 			$customerModel = new CustomerModel();
-			
+
 			//check required fields.
 			$requiredFields = array(
 				$customerModel::$idclickObjectIdField,
@@ -216,29 +223,29 @@ abstract class AdwordsAdapter{
 				$parentModel::$idclickObjectIdField,
 			);
 			$this->checkFieldExists($requiredFields, $data);
-			
+
 			//get customer id.
 			$data[$customerModel::$adwordsObjectIdField] =
 						$this->getAdwordsCustomerId($data[$customerModel::$idclickObjectIdField]);
-			if(empty($data[$customerModel::$adwordsObjectIdField]) || 
+			if(empty($data[$customerModel::$adwordsObjectIdField]) ||
 					$data[$customerModel::$adwordsObjectIdField] === FALSE){
-				throw new Exception('customer has not synced yet.');	
+				throw new Exception('customer has not synced yet.');
 			}
-			
+
 			//get parent adwords object id.
-			$data[$parentModel::$adwordsObjectIdField] = 
+			$data[$parentModel::$adwordsObjectIdField] =
 						$this->getParentAdwordsObjectId($data[$parentModel::$idclickObjectIdField]);
-			if(empty($data[$parentModel::$adwordsObjectIdField]) || 
+			if(empty($data[$parentModel::$adwordsObjectIdField]) ||
 					$data[$parentModel::$adwordsObjectIdField] === FALSE){
-				throw new Exception('parent has not synced yet.');	
+				throw new Exception('parent has not synced yet.');
 			}
-			
+
 			//call manager to create.
 			$currentManager = new static::$currentManagerName($data[$customerModel::$adwordsObjectIdField]);
 			$currentAdwordsObjectId = $currentManager->create($data);
-			Log::write("[notice] " . static::$moduleName . " with {$currentModel::$adwordsObjectIdField}". 
+			Log::write("[notice] " . static::$moduleName . " with {$currentModel::$adwordsObjectIdField}".
 											" #{$currentAdwordsObjectId} was created.\n", __METHOD__);
-			
+
 			//update current sync status.
 			$currentModel->updateOne($currentModel::$idclickObjectIdField . '=' . $data[$currentModel::$idclickObjectIdField],
 												array($currentModel::$adwordsObjectIdField	=> $currentAdwordsObjectId));
@@ -249,13 +256,13 @@ abstract class AdwordsAdapter{
 			return FALSE;
 		}
 	}
-	
+
 	/**
-	 * Update Adwords Object 
+	 * Update Adwords Object
 	 *
 	 * Call AdwordsManager to update an adwords Object on specify customer's account.
 	 *
-	 * @param array $data: 
+	 * @param array $data:
 	 * @return boolean: TRUE on success, FALSE on failure.
 	 */
 	public function updateAdwordsObject(array $data){
@@ -263,7 +270,7 @@ abstract class AdwordsAdapter{
 			$currentModel = new static::$currentModelName();
 			$parentModel = new static::$parentModelName();
 			$customerModel = new CustomerModel();
-			
+
 			//check required fields.
 			$requiredFields = array(
 				$customerModel::$idclickObjectIdField,
@@ -274,34 +281,34 @@ abstract class AdwordsAdapter{
 			//get customer id.
 			$data[$customerModel::$adwordsObjectIdField] =
 						$this->getAdwordsCustomerId($data[$customerModel::$idclickObjectIdField]);
-			if(empty($data[$customerModel::$adwordsObjectIdField]) || 
+			if(empty($data[$customerModel::$adwordsObjectIdField]) ||
 					$data[$customerModel::$adwordsObjectIdField] === FALSE){
-				throw new Exception('customer has not synced yet.');	
+				throw new Exception('customer has not synced yet.');
 			}
-			
+
 			//get current adwords object id if null
 			if(empty($data[$currentModel::$adwordsObjectIdField])){
 				$data[$currentModel::$adwordsObjectIdField] =
 						$this->getCurrentAdwordsObjectId($data[$currentModel::$idclickObjectIdField]);
-				if(empty($data[$currentModel::$adwordsObjectIdField]) || 
+				if(empty($data[$currentModel::$adwordsObjectIdField]) ||
 						$data[$currentModel::$adwordsObjectIdField] === FALSE){
-					throw new Exception('current model has not synced yet.');	
+					throw new Exception('current model has not synced yet.');
 				}
 			}
-			
+
 			//get parent adwords object id.
 			if(empty($data[$parentModel::$adwordsObjectIdField])){
-				$data[$parentModel::$adwordsObjectIdField] = 
+				$data[$parentModel::$adwordsObjectIdField] =
 						$this->getParentAdwordsObjectId($data[$parentModel::$idclickObjectIdField]);
-				if(empty($data[$parentModel::$adwordsObjectIdField]) || 
+				if(empty($data[$parentModel::$adwordsObjectIdField]) ||
 						$data[$parentModel::$adwordsObjectIdField] === FALSE){
-					throw new Exception('parent has not synced yet.');	
+					throw new Exception('parent has not synced yet.');
 				}
 			}
-			
+
 			$currentManager = new static::$currentManagerName($data[$customerModel::$adwordsObjectIdField]);
 			$result = $currentManager->update($data);
-			Log::write("[notice] " . static::$moduleName . " with {$customerModel::$adwordsObjectIdField}". 
+			Log::write("[notice] " . static::$moduleName . " with {$customerModel::$adwordsObjectIdField}".
 							" #{$data[$customerModel::$adwordsObjectIdField]} was updated.\n", __METHOD__);
 			$currentModel->updateSyncStatus(SyncStatus::SYNCED, $data[$currentModel::$idclickObjectIdField]);
 			return TRUE;
@@ -310,40 +317,40 @@ abstract class AdwordsAdapter{
 			return FALSE;
 		}
 	}
-	
+
 	/**
-	 * Delete Adwords Object 
+	 * Delete Adwords Object
 	 *
 	 * Call AdwordsManager to update an adwords Object on specify customer's account.
 	 *
-	 * @param array $data: 
+	 * @param array $data:
 	 * @return boolean: TRUE on success, FALSE on failure.
 	 */
 	public function deleteAdwordsObject(array $data){
 		try{
 			$currentModel = new static::$currentModelName();
 			$customerModel = new CustomerModel();
-			
+
 			//check required fields.
 			$requiredFields = array(
 				$customerModel::$idclickObjectIdField,
 				$currentModel::$idclickObjectIdField,
 				$currentModel::$adwordsObjectIdField,
 			);
-			$this->checkFieldExists($requiredFields, $data);		
-			
+			$this->checkFieldExists($requiredFields, $data);
+
 			//get customer id.
 			$data[$customerModel::$adwordsObjectIdField] =
 						$this->getAdwordsCustomerId($data[$customerModel::$idclickObjectIdField]);
-			if(empty($data[$customerModel::$adwordsObjectIdField]) || 
+			if(empty($data[$customerModel::$adwordsObjectIdField]) ||
 					$data[$customerModel::$adwordsObjectIdField] === FALSE){
 				throw new Exception('customer with idclick_uid #'
-							. $data[$customerModel::$idclickObjectIdField] .' has not synced yet.');	
+							. $data[$customerModel::$idclickObjectIdField] .' has not synced yet.');
 			}
-			
+
 			$currentManager = new static::$currentManagerName($data[$customerModel::$adwordsObjectIdField]);
 			$result = $currentManager->delete($data);
-			Log::write("[notice] " . static::$moduleName . " with {$customerModel::$adwordsObjectIdField}". 
+			Log::write("[notice] " . static::$moduleName . " with {$customerModel::$adwordsObjectIdField}".
 											" #{$data[$customerModel::$adwordsObjectIdField]} was updated.\n", __METHOD__);
 			$currentModel->updateSyncStatus(SyncStatus::SYNCED, $data[$currentModel::$idclickObjectIdField]);
 			return TRUE;
@@ -352,7 +359,7 @@ abstract class AdwordsAdapter{
 			return FALSE;
 		}
 	}
-	
+
 	/**
 	 * Get adwords customer id by idclick_uid
 	 *
@@ -371,7 +378,7 @@ abstract class AdwordsAdapter{
 			}
 		}
 	}
-	
+
 	/**
 	 * Get parent adwords object id
 	 *
@@ -391,7 +398,7 @@ abstract class AdwordsAdapter{
 			}
 		}
 	}
-	
+
 	/**
 	 * Get current adwords object id
 	 *
@@ -411,7 +418,7 @@ abstract class AdwordsAdapter{
 			}
 		}
 	}
-	
+
 	/**
 	 * Build and send message to httpsqs queue.
 	 *
@@ -473,7 +480,7 @@ abstract class AdwordsAdapter{
 		}
 		return TRUE;
 	}
-	
+
 	/**
 	 * Check whether the data meets the requirements.
 	 *
@@ -524,13 +531,13 @@ abstract class AdwordsAdapter{
 					throw new DataCheckException('budget_amount must greater or equal than 0.01');
 				}
 			}
-			
+
 			if($key === 'ad_url' || $key === 'ad_displayurl'){
 				if(preg_match('/\s/',$data[$key])){
 					throw new DataCheckException('[ad_url & ad_displayurl] should be a string has no whitespace.');
 				}
 			}
-			
+
 			if($key === 'ad_description1' || $key === 'ad_description2'){
 				if(preg_match('/第一/', $data[$key]) || preg_match('/Best/', $data[$key])
 					|| preg_match('/#1/', $data[$key]) || preg_match('/First/', $data[$key])
@@ -539,25 +546,25 @@ abstract class AdwordsAdapter{
 									(best) or "# 1" (first) and other comparative or subjective phrases meaning');
 				}
 			}
-			
+
 			if($key === 'ad_url'){
 				if(strlen($item) > 2047){
 					throw new DataCheckException("invalid adgroup name, length must be not greater than 2047 bytes.");
 				}
 			}
-			
+
 			if($key === 'budget_amount' || $key === 'max_cpc'){
 				if(!preg_match('/^\d+(\.?\d{1,2})?$/', $data[$key])){
 					throw new DataCheckException("field {$key} #{$data[$key]} is not a number of currency.");
 				}
 			}
-			
+
 			if($key === 'campaign_name'){
 				if(strlen($item) > 128){
 					throw new DataCheckException("invalid campaign name, length must be not greater than 128 bytes.");
 				}
 			}
-			
+
 			if($key === 'adgroup_name' || $key === 'ad_displayurl'){
 				if(strlen($item) > 255){
 					throw new DataCheckException("invalid {$key}, length must be not greater than 255 bytes.");
@@ -580,7 +587,7 @@ abstract class AdwordsAdapter{
 				} else {
 					throw new DataCheckException('idclick_planid could not be found with group_id #'.$data['idclick_groupid']);
 				}
-			} 
+			}
 		}
 	}
 }

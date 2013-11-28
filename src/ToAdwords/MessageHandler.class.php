@@ -38,17 +38,25 @@ class MessageHandler{
 		}
 	}
 
+	/**
+	 * 调用Google AdWords接口执行消息体
+	 *
+	 * @param \ToAdwords\Util\Message $message: 消息
+	 * @param \ToAdwords\Util\Httpsqs $httpsqs: Httpsqs消息队列
+	 * @return boolean
+	 * @throws MessageException
+	 */
 	public function handle(Message $message, Httpsqs $httpsqs){
 		if(ENVIRONMENT == 'development'){
 			Log::write("[notice] try to handle new data:\n" . $message, __METHOD__);
 		}
-		
+
 		$module = null;
 		$result = null;
-	
+
 		switch($message->getModule()){
 			case 'Customer':
-				$module = new CustomerAdapter();				
+				$module = new CustomerAdapter();
 				break;
 			case 'Campaign':
 				$module = new CampaignAdapter();
@@ -63,18 +71,18 @@ class MessageHandler{
 				throw new MessageException('解析错误，不能识别的module::'.$message->getModule()
 						.' 消息位置：'.$pos);
 		}
-		
+
 		$currentModel = new $module::$currentModelName();
-		
+
 		//enter retry times greater than 5.
 		if($message->errorCount > 5){
-			$this->put($message, array($currentModel, 'updateSyncStatus'), HTTPSQS_QUEUE_DIE);			
+			$this->put($message, array($currentModel, 'updateSyncStatus'), HTTPSQS_QUEUE_DIE);
 			throw new MessageException('[DIE]发送消息失败，消息内容：'.$message.' || 不再重试。');
 		}
-		
+
 		$information = $message->getInformation();
 		$currentModel->updateSyncStatus(SyncStatus::SENDING, $information[$currentModel::$idclickObjectIdField]);
-		
+
 		switch($message->getAction()){
 			case 'CREATE':
 				$result = $module->createAdwordsObject($information);
@@ -90,16 +98,25 @@ class MessageHandler{
 				throw new MessageException('解析错误，不能识别的action::'.$message->getAction()
 						.' 消息位置：'.$pos);
 		}
-		
+
 		if(FALSE === $result){
 			$message->errorCount++;
-			$this->put($message, array($currentModel, 'updateSyncStatus'), HTTPSQS_QUEUE_RETRY);			
+			$this->put($message, array($currentModel, 'updateSyncStatus'), HTTPSQS_QUEUE_RETRY);
 			throw new MessageException('发送消息失败，消息内容：'.$message.' || 已进入重试队列');
 		}
-		
+
 		return $result;
 	}
-	
+
+	/**
+	 * 把消息放入指定的消息队列名，并执行回调方法
+	 *
+	 * @param \ToAdwords\Util\Message $message： 需要入队的消息
+	 * @param type $callback： 回调函数
+	 * @param type $queueName: 消息队列名称
+	 * @return boolean
+	 * @todo 在1.1版本中，计划添加消息至队列成功时，通过守护进程去启动这一功能。
+	 */
 	public function put(Message $message, $callback = null, $queueName = HTTPSQS_QUEUE_COMMON){
 		if(!$message->check()){
 			Log::write("[warning] message incomplete.\n" . $message, __METHOD__);
@@ -135,6 +152,13 @@ class MessageHandler{
 		}
 	}
 
+	/**
+	 * 从指定的消息队列中取出一条消息。
+	 *
+	 * @param type $callback: 回调函数名
+	 * @param type $queueName: 消息队列名
+	 * @return \ToAdwords\Util\Message|boolean
+	 */
 	public function get($callback = null, $queueName = HTTPSQS_QUEUE_COMMON){
 		if(is_callable($callback)){
 			call_user_func_array($callback, array('SENDING'));
@@ -155,13 +179,21 @@ class MessageHandler{
 			Log::write('[notice] 消息有效，「队列」#'.$queueName.' 「内容」#'.$message, __METHOD__);
 			return $message;
 			} catch(MessageException $e){
-				Log::write('[warning] 消息无效：'.$e->getMessage(), __METHOD__);		
+				Log::write('[warning] 消息无效：'.$e->getMessage(), __METHOD__);
 			}
 		} else {
 			return FALSE;
 		}
 	}
-	
+
+	/**
+	 * 呼叫发送消息的守护进程，如果守护进程不存在，则启动它
+	 *
+	 * @param type $queueName: 收到新消息的队列名。
+	 * @return void.
+	 * @note 计划在后续1.1版本中加入，暂不使用。
+	 * @todo 本方法还未开发完成。
+	 */
 	private function callDaemon($queueName){
 		//check the process of given queueName is running, if not run it.
 		$key = null;
@@ -183,6 +215,9 @@ class MessageHandler{
 		$sysStatusModel->getValue('HTTPSQS_QUEUE_COMMON_PROCESS');
 	}
 
+	/**
+	 * 设置日志路径为原路径。
+	 */
 	public function __destruct(){
 		Log::setPath($this->lastLogPath);
 	}
