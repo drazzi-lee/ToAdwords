@@ -14,12 +14,11 @@ Log::setPath(TOADWORDS_LOG_PATH . 'daemon/'.$queueName . DIRECTORY_SEPARATOR);
 
 
 
-$data     = '{"module":"AdGroupAd","action":"CREATE","data":{"idclick_adid":"32","idclick_groupid":"28","ad_headline":"123\u5e7f\u544a","ad_description1":"11111111111","ad_description2":"22222222222222","ad_url":"http:\/\/www.baidu.com","ad_displayurl":"www.baidu.com","ad_status":"PAUSE","idclick_planid":"29","idclick_uid":"1026","last_action":"CREATE"},"errorCount":0}';
+$data = '{"module":"AdGroupAd","action":"CREATE","data":{"idclick_adid":"32","idclick_groupid":"28","ad_headline":"123\u5e7f\u544a","ad_description1":"11111111111","ad_description2":"22222222222222","ad_url":"http:\/\/www.baidu.com","ad_displayurl":"www.baidu.com","ad_status":"PAUSE","idclick_planid":"29","idclick_uid":"1026","last_action":"CREATE"},"errorCount":0}';
 if($data != 'HTTPSQS_GET_END' && $data != 'HTTPSQS_ERROR'){
 	$dataDecode = json_decode($data, TRUE);
 	if($dataDecode === NULL){
 		Log::write("[warning] message not valid:\n" . print_r($result, TRUE), 'QueueCommon::Get');
-		continue;
 	} else {
 		Log::write('[notice] new message: ' . print_r($dataDecode, TRUE), 'QueueCommon::Get');
 	}
@@ -33,7 +32,7 @@ if($data != 'HTTPSQS_GET_END' && $data != 'HTTPSQS_ERROR'){
 		$handle_result = $messageHandler->handle($message, $httpsqs);
 		unset($dataDecode, $message, $messageHandler);
 		if(TRUE === $handle_result){
-			Log::write('[notice] handle message success. position: #'.$position, 'QueueCommon::Get');	
+			Log::write('[notice] handle message success. position: #'.$position, 'QueueCommon::Get');
 		} else {
 			Log::write('[error] try to handle message failed. position: #'.$position, 'QueueCommon::Get');
 		}
@@ -47,5 +46,4 @@ if($data != 'HTTPSQS_GET_END' && $data != 'HTTPSQS_ERROR'){
 		Log::write("[notice] got nothing, current status:\n" . print_r($httpsqs->status($queueName), TRUE), 'QueueCommon::Get');
 	}
 	unset($result, $position, $data);
-	break; //use CuteDaemon to wake up later.
 }

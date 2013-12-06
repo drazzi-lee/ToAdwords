@@ -4,7 +4,7 @@
  * bootstrap.inc.php
  *
  * 配置ToAdwords模块初始选项
- * 
+ *
  * Li Pengfei <lipengfei@izptec.com>
  */
 namespace ToAdwords;
@@ -39,6 +39,10 @@ define('HTTPSQS_QUEUE_COMMON', 'common');
 define('HTTPSQS_QUEUE_RETRY', 'retry');
 define('HTTPSQS_QUEUE_DIE', 'die');
 
+//Google AdWords相关
+define('TOADWORDS_PARENT_MCC', '0000000000');
+define('TOADWORDS_TOKEN_MCC', '0000000000');
+
 //处理结果返回格式
 //define('RESULT_FORMAT', 'ARRAY');
 define('RESULT_FORMAT', 'JSON');
@@ -62,7 +66,7 @@ function load($namespace){
 		}
 	}
 	if (!$firstword) {
-		$fullpath = $path . DIRECTORY_SEPARATOR 
+		$fullpath = $path . DIRECTORY_SEPARATOR
 				. $name . '.class.php';
 		return include_once($fullpath);
 	}

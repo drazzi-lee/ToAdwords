@@ -5,7 +5,6 @@ use ToAdwords\Util\Log;
 use ToAdwords\Util\Httpsqs;
 use ToAdwords\Util\Message;
 use ToAdwords\MessageHandler;
-use ToAdwords\Exceptions\MessageException;
 use ToAdwords\Model\Driver\DbMysql;
 
 use \Exception;
@@ -26,7 +25,7 @@ if($pid === -1){
 	//Parent return.
 	Log::write('[notice] Parent process exit.', 'Retry::Parent');
 	print("[notice] Retry::Parent process exit.\n");
-	return TRUE;                        
+	return TRUE;
 } else {
 	Log::write('[notice] Retry::Child process begin to run.', 'Retry::Child');
 	print("[notice] Retry::Child process begin to run.\n");
@@ -58,7 +57,7 @@ if($pid === -1){
 				$handle_result = $messageHandler->handle($message, $httpsqs);
 				unset($dataDecode, $message, $messageHandler);
 				if(TRUE === $handle_result){
-					Log::write('[notice] handle message success. position: #'.$position, 'QueueCommon::Get');	
+					Log::write('[notice] handle message success. position: #'.$position, 'QueueCommon::Get');
 				} else {
 					Log::write('[error] try to handle message failed. position: #'.$position, 'QueueCommon::Get');
 				}

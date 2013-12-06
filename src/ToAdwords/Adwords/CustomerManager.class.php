@@ -39,7 +39,7 @@ class CustomerManager extends AdwordsBase{
 		$operations = array($operation);
 
 		// Make the mutate request.
-		$result = $managedCustomerService->mutate($operations);
+		$result = $this->managedCustomerService->mutate($operations);
 
 		// Handle result.
 		$customer = $result->value[0];

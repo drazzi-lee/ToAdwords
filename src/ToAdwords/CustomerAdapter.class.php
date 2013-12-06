@@ -28,9 +28,9 @@ class CustomerAdapter extends AdwordsAdapter{
 	protected static $currentManagerName   = 'ToAdwords\Adwords\CustomerManager';
 
 	/**
-	 * Create new user. 
+	 * Create new user.
 	 *
-	 * @param array $data: array('idclick_uid'=> 456). 
+	 * @param array $data: array('idclick_uid'=> 456).
 	 * @return boolean: TRUE, FALSE
 	 */
 	public function create(array $data){
@@ -77,7 +77,12 @@ class CustomerAdapter extends AdwordsAdapter{
 			$customerId = $customerManager->create($data);
 			Log::write("[notice] Account with customer_id #{$customerId} was created.\n", __METHOD__);
 			$customerModel = new self::$currentModelName();
+			$customerModel->updateOne($customerModel::$idclickObjectIdField . '=' . $data[$customerModel::$idclickObjectIdField],
+												array($customerModel::$adwordsObjectIdField	=> $customerId));
 			$customerModel->updateSyncStatus(SyncStatus::SYNCED, $data['idclick_uid']);
+
+			//link customer to specify mcc.
+			$customerManager->linkManager($customerId);
 			return TRUE;
 		} catch(Exception $e){
 			Log::write("[warning] An error has occurred: {$e->getMessage()}\n", __METHOD__);
