@@ -5,7 +5,7 @@
  *
  * 配置ToAdwords模块初始选项
  *
- * Li Pengfei <lipengfei@izptec.com>
+ * Li Pengfei <drazzi.lee@gmail.com>
  */
 namespace ToAdwords;
 
